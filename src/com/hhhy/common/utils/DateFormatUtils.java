@@ -6,7 +6,8 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 public class DateFormatUtils {
-    private static final Logger logger = Logger.getLogger(DateFormatUtils.class);
+    private static final Logger logger = Logger
+            .getLogger(DateFormatUtils.class);
     public static final String yyyyMMddhhmmss = "yyyy-MM-dd hh:mm:ss";
     public static final String yyyyMMdd = "yyyy-MM-dd";
 
@@ -15,7 +16,7 @@ public class DateFormatUtils {
         sdf.applyPattern(pattern);
         return sdf.format(time);
     }
-    
+
     public static String getTodayFormat(final String pattern) {
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern(pattern);
@@ -27,6 +28,8 @@ public class DateFormatUtils {
      */
     public static void main(String[] args) {
         logger.info(getTodayFormat(DateFormatUtils.yyyyMMddhhmmss));
+        String s = "sdfsd&nbspdsfsdf";
+        logger.info(s.replaceAll("&nbsp", ""));
     }
 
 }
