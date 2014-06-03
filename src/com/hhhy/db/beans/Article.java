@@ -7,12 +7,12 @@ package com.hhhy.db.beans;
  * 
  */
 public class Article {
-    private String title;
-    private String summary;
-    private String content;
-    private String time;
-    private String url;
-    private String website;
+    private String title;//not null
+    private String summary;//may be null
+    private String content;//may be null
+    private String time;//not null
+    private String url;//not null
+    private String website;//name of the website
 
     public String getTitle() {
         return title;
