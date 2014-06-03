@@ -12,7 +12,6 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.classpath
 .settings/
 .loadpath
 
@@ -23,7 +22,6 @@ local.properties
 *.launch
 
 # CDT-specific
-.cproject
 
 # PDT-specific
 .buildpath
