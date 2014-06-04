@@ -9,10 +9,24 @@ package com.hhhy.db.beans;
 public class Article {
     private String title;//not null
     private String summary;//may be null
-    private String content;//may be null
-    private String time;//not null
+    private String content;//not null
+    private String time;//may be null
     private String url;//not null
     private String website;//name of the website
+
+    
+    
+    public Article(String title, String content, String url, String website) {
+        this.title = title;
+        this.content = content;
+        this.url = url;
+        this.website = website;
+    }
+    
+    public Article() {
+    }
+
+
 
     public String getTitle() {
         return title;
