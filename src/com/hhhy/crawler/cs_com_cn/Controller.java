@@ -29,7 +29,7 @@ public class Controller {
         lasttime = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            lasttime = sdf.parse("2014-05-30 07:51:00");
+            lasttime = sdf.parse("2014-06-03 07:51:00");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,8 @@ public class Controller {
             e.printStackTrace();
         }
         for(String keyWord:keyWordsList){
-
+            //Todo
+            parseBoard(keyWord,BASE_URL);
         }
     }
 
@@ -61,6 +62,7 @@ public class Controller {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        System.out.println(keyWord);
 
         String url = "http://search.cs.com.cn/newsSimpleSearch.do?searchword="+transKey+"&time=2&contentType=Content";
         String html = GetHTML.getHtml(url, "UTF-8");
@@ -69,7 +71,7 @@ public class Controller {
         Element tableEles = document.select("table").last();
         String flag = tableEles.text();
         if(flag.contains("[没有检索到任何结果]")){
-
+            //Todo ??
         }
         else{
             boolean stop = false;
@@ -132,7 +134,6 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-        parseBoard("股票价格", "");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

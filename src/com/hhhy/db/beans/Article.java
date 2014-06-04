@@ -9,7 +9,7 @@ package com.hhhy.db.beans;
 public class Article {
     private String title;//not null
     private String summary;//may be null
-    private String content;//not null
+    private String content;//may be null,given url instead in some cases...
     private String time;//may be null
     private String url;//not null
     private String website;//name of the website
