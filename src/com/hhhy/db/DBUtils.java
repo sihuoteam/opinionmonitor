@@ -14,7 +14,8 @@ import com.hhhy.db.beans.Article;
  */
 public class DBUtils {
     private static final Logger logger = Logger.getLogger(DBUtils.class);
-    private static final String ARTICLE_TABLE = "webpage";
+    private static final String ARTICLE_TABLE = "a_webpage";
+    private static final String ADMIN_TABLE = "a_admin";
 
     public static boolean insertArticle(Article article) throws SQLException {
         String sql = "insert into " + ARTICLE_TABLE + " values(?,?,?,?,?,?)";
