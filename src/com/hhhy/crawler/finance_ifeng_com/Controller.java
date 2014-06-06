@@ -1,4 +1,4 @@
-package com.hhhy.crawler.www_ftchinese_com;
+package com.hhhy.crawler.finance_ifeng_com;
 
 import com.hhhy.crawler.util.ContentFilter;
 import com.hhhy.crawler.util.FormatTime;
@@ -12,32 +12,22 @@ import org.jsoup.select.Elements;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Ghost
- * Date: 14-6-4
- * Time: 下午6:38
+ * Date: 14-6-6
+ * Time: 下午3:12
  * To change this template use File | Settings | File Templates.
  */
-
-class Tupple{
-    public Element h3;
-    public Element rl;
-    public Element rb;
-}
 public class Controller {
-
-    /**
-     * Created with IntelliJ IDEA.
-     * User: Ghost
-     * Date: 14-6-3
-     * Time: 下午5:12
-     * To change this template use File | Settings | File Templates.
-     */
-
-    private final String BASE_URL = "http://www.ftchinese.com/search/?keys=";
+    private final String BASE_URL = "http://search.ifeng.com/sofeng/search.action?";
     private final String keyWordsLocation = "./keyWords.txt";
     private static ArrayList<String> spyHistory = new ArrayList<String>();//the history record got earlier in today.
    /* private static String lastTime;
@@ -80,45 +70,37 @@ public class Controller {
             e.printStackTrace();
         }
 
-        String html = GetHTML.getHtml("http://www.ftchinese.com/search/?keys="+transKey, "UTF-8");
-
+        String html = GetHTML.getHtml("http://search.ifeng.com/sofeng/search.action?q="+transKey+"&c=1","UTF-8");
         html = html.replaceAll("&nbsp;","");
         Document document = Jsoup.parse(html);
 
-        String flag = document.select("div#bodywrapper").select("div#body-content-col").select("div.columncontent").text();
-        if(flag.contains("对不起，我们的搜索引擎没有找到完全符合您的搜索条件的结果，您可以更换一下关键词")){
+        String flag = document.select("div.mainContent").select("div.mainM").select("h1").text();
+        if(flag.equals("找不到和您的")){
             //Todo ??
-            System.out.println("duibuqi ");
+            System.out.println("没找到");
         }
         else{
-            Element tableEles = document.select("div#bodywrapper").select("div#body-content-col").select("div.columncontent").first();
-            ArrayList<Tupple> tableList = new ArrayList<Tupple>();
-            Elements h3 = tableEles.select("h3.rh");
-            Elements rl = tableEles.select("p.rl");
-            Elements rb = tableEles.select("p.rb");
-            for(int i=0;i<h3.size();i++){
-                Tupple tmpT = new Tupple();
-                tmpT.h3 = h3.get(i);
-                tmpT.rl = rl.get(i);
-                tmpT.rb = rb.get(i);
-                tableList.add(tmpT);
+            Elements tableEles = document.select("div.mainContent").select("div.mainM").select("div.searchResults");
+            ArrayList<Element> tableList = new ArrayList<Element>();
+            for(Element ele:tableEles){
+                tableList.add(ele);
             }
-            parsePages(tableList);            //分别将三个ele组合成Temp。。。
+            parsePages(tableList);
         }
     }
-    public static void parsePages(ArrayList< Tupple > tableList){
-        for(Tupple tupple:tableList){
-            String title =tupple.h3.select("a").text();
-            if(!ContentFilter.redundant(spyHistory, title)){
-                String time = tupple.rb.select("a").last().text();
-                String summary = tupple.rl.text();
-                String url = "http://www.ftchinese.com"+tupple.h3.select("a").attr("href");
-                System.out.println("----------------");
+    public static void parsePages(ArrayList< Element > tableList){
+        for(Element ele:tableList){
+            String title = ele.select("p").first().text();
+            if(!ContentFilter.redundant(spyHistory,title)){
+                String orgTime = ele.select("p").get(2).text();
+                String time = tool.getTimeStr(orgTime);
+                String summary = ele.select("p").get(1).text();
+                String url = ele.select("p").first().select("a").attr("href");
                 System.out.println("title:"+title);
                 System.out.println("url:"+url);
                 System.out.println("time:"+time);
                 System.out.println("summary:"+summary);
-                System.out.println("website:"+"21世纪经济报道 ");
+                System.out.println("website:"+"凤凰财经");
                 System.out.println("----------------");
                 spyHistory.add(title);
                 //调接口~~~~~
@@ -126,7 +108,14 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-        parseBoard("绿茶婊","");
+        parseBoard("二战老兵","");
+       /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
+        Document document = Jsoup.parse(html);
+        Elements tables = document.select("div:has(div.hei12)");
+        for(Element ele:tables){
+            System.out.println(ele);
+        }*/
+        // System.out.println(java.net.URLEncoder.encode("投资基金", "UTF-8"));
     }
 }
 
