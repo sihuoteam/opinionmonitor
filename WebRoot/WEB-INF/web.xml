@@ -34,10 +34,32 @@
     <servlet-name>KeyWordServlet</servlet-name>
     <servlet-class>com.hhhy.web.servlet.KeyWordServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserRegister</servlet-name>
+    <servlet-class>com.hhhy.web.servlet.UserRegister</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>com.hhhy.web.servlet.UserLogin</servlet-class>
+  </servlet>
+
+
 
   <servlet-mapping>
     <servlet-name>KeyWordServlet</servlet-name>
     <url-pattern>/servlet/dml</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserRegister</servlet-name>
+    <url-pattern>/servlet/UserRegister</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/servlet/UserLogin</url-pattern>
   </servlet-mapping>
 	
   <welcome-file-list>

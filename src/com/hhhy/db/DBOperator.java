@@ -101,7 +101,7 @@ public class DBOperator {
      * @return
      * @throws SQLException
      */
-    public static Long insert(String sql, java.lang.Object... params)
+    public static long insert(String sql, java.lang.Object... params)
             throws SQLException {
         QueryRunner qr = new QueryRunner(pool);
         boolean result = (qr.update(sql, params) == 1);
@@ -109,12 +109,7 @@ public class DBOperator {
         if (result == false) {
             return -1L;
         } else {
-            return (Long) qr.query(pool.getConnection(),
-                    "SELECT LAST_INSERT_ID()", new ScalarHandler(1));
+            return (Long)qr.query("select LAST_INSERT_ID()", new ScalarHandler(1));
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 }
