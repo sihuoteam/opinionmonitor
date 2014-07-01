@@ -15,18 +15,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div id="chartcontainer">正在产生图标</div>
     <script type="text/javascript">
-        var myDate= new Array([10,20],[15,10],[20,30],[25,10],[30,5]);
-        var myChart = new JSChart('chartcontainer',"line");
-        myChart.setDateArray(myDate);
+        var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
+        var myChart = new JSChart('chartcontainer', 'line');
+        myChart.setDataArray(myData);
         myChart.draw();
     </script>
     hahaf
   </body>
-  <script type="text/javascript">
-      var myDate= new Array([10,20],[15,10],[20,30],[25,10],[30,5]);
-      var myChart = new JSChart('chartcontainer',"line");
-      myChart.setDateArray(myDate);
-      
-      myChart.draw();
-  </script>
 </html>
