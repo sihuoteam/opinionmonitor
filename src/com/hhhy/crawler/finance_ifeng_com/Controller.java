@@ -108,7 +108,7 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-        parseBoard("二战老兵","");
+        parseBoard("逃出生天","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");
