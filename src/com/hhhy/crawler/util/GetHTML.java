@@ -31,7 +31,8 @@ public class GetHTML {
         HttpPost httpPost = null;
         httpPost = new HttpPost(url);
         httpPost.setHeader("User-Agent",
-                "Mozilla/5.0 (Windows; U; Windows NT 5.2) Gecko/2008070208 Firefox/3.0.1");
+                "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
+
         return httpPost;
     }
 
@@ -101,9 +102,9 @@ public class GetHTML {
             else
                 back = "error";
         } catch (ClientProtocolException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         return back;
     }
