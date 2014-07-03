@@ -1,5 +1,7 @@
 package com.hhhy.crawler.util;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -12,12 +14,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Created with IntelliJ IDEA.
@@ -107,6 +109,46 @@ public class GetHTML {
             e.printStackTrace();
         }
         return back;
+    }
+    public static String getHtmlGzip(String url,String charSet) throws IOException {
+        HttpClient httpClient = new HttpClient();
+        GetMethod getMethod = new GetMethod(url);
+        getMethod.setRequestHeader("Connection", "Keep-Alive");
+        getMethod.setRequestHeader("Accept", "*/*");
+        getMethod.setRequestHeader("From", "goolebot@googlebot.com");
+        getMethod.setRequestHeader("User-Agent",
+                "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)");
+        getMethod.setRequestHeader("Accept-Encoding", "gzip");
+        int stateCode = httpClient.executeMethod(getMethod);
+        String acceptEncoding = "";
+        if(getMethod.getResponseHeader("Content-Encoding")!=null){
+            acceptEncoding = getMethod.getResponseHeader("Content-Encoding").getValue();
+            if(acceptEncoding.toLowerCase().contains("gzip")){
+                GZIPInputStream gzipin = new GZIPInputStream(getMethod.getResponseBodyAsStream());
+                BufferedReader br = new BufferedReader(new InputStreamReader(gzipin,charSet));
+                String line = "";
+                String html = "";
+                while((line = br.readLine())!=null)
+                    html += line+"\r\n";
+                getMethod.releaseConnection();
+                return html;
+              /*  InputStream is = getMethod.getResponseBodyAsStream();
+                GZIPInputStream gzin = new GZIPInputStream(is);
+                InputStreamReader isr = new InputStreamReader(gzin, charSet); // 设置读取流的编码格式，自定义编码
+                java.io.BufferedReader br = new java.io.BufferedReader(isr);
+                String tempbf;
+                while ((tempbf = br.readLine()) != null) {
+                    sb.append(tempbf);
+                    sb.append("\r\n");
+                }
+                isr.close();
+                gzin.close();
+                getMethod.abort();
+                getMethod.releaseConnection();
+                return sb.toString();*/
+            }
+        }
+        return null;
     }
     public static void main(String[] args){
 
