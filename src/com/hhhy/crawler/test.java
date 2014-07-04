@@ -11,6 +11,8 @@ import java.net.URLEncoder;
  * To change this template use File | Settings | File Templates.
  */
 public class test {
+
+	
     public static void main(String[] args) throws UnsupportedEncodingException {
         String transKey = URLEncoder.encode("金融","gb2312");
         System.out.println(transKey);
