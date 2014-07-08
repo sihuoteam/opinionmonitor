@@ -132,20 +132,7 @@ public class GetHTML {
                     html += line+"\r\n";
                 getMethod.releaseConnection();
                 return html;
-              /*  InputStream is = getMethod.getResponseBodyAsStream();
-                GZIPInputStream gzin = new GZIPInputStream(is);
-                InputStreamReader isr = new InputStreamReader(gzin, charSet); // 设置读取流的编码格式，自定义编码
-                java.io.BufferedReader br = new java.io.BufferedReader(isr);
-                String tempbf;
-                while ((tempbf = br.readLine()) != null) {
-                    sb.append(tempbf);
-                    sb.append("\r\n");
-                }
-                isr.close();
-                gzin.close();
-                getMethod.abort();
-                getMethod.releaseConnection();
-                return sb.toString();*/
+
             }
         }
         return null;
