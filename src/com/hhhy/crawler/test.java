@@ -11,6 +11,8 @@ import java.net.URLEncoder;
  * To change this template use File | Settings | File Templates.
  */
 public class test {
+
+	
     public static void main(String[] args) throws UnsupportedEncodingException {
         String transKey = URLEncoder.encode("周鸿祎","utf-8");
         System.out.println(transKey);
