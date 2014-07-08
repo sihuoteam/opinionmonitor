@@ -12,7 +12,7 @@ import java.net.URLEncoder;
  */
 public class test {
     public static void main(String[] args) throws UnsupportedEncodingException {
-        String transKey = URLEncoder.encode("金融","gb2312");
+        String transKey = URLEncoder.encode("周鸿祎","utf-8");
         System.out.println(transKey);
     }
 }
