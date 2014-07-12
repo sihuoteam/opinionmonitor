@@ -1,7 +1,5 @@
 package com.hhhy.crawler.cs_com_cn;
 
-import com.hhhy.crawler.bbs_hexun_com.Controller;
-
 import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,9 +12,9 @@ import java.util.TimerTask;
  * To change this template use File | Settings | File Templates.
  */
 public class Tiimer extends TimerTask {
-    com.hhhy.crawler.bbs_hexun_com.Controller controller;
+    Controller controller;
 
-    public Tiimer(com.hhhy.crawler.bbs_hexun_com.Controller controller) {
+    public Tiimer(Controller controller) {
         this.controller = controller;
     }
 
@@ -37,13 +35,11 @@ public class Tiimer extends TimerTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(String keyWord:controller.keyWordsList){
-            //Todo
-            controller.parseBoard(keyWord,"");
-        }
+        Timer timer = new Timer();
+        timer.schedule(new TimerParse(this.controller),0,5*60*1000);
     }
     public static void main(String[] args){
         Timer hexunTimer = new Timer();
-        hexunTimer.schedule(new Tiimer(new Controller()),0,60000);
+        hexunTimer.schedule(new Tiimer(new Controller()),0,24*60*60000);
     }
 }

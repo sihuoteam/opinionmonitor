@@ -50,7 +50,15 @@ public class FormatTime {
         else
             return true;
     }
+    public static boolean isAfterToday(Date Time){
+        String today = getCurrentFormatTime().split(" ")[0]+" 00:00:00";
+        Date Today = getDate(today);
 
+        if(Time.before(Today))
+            return false;
+        else
+            return true;
+    }
     public static void main(String[] args){
         System.out.println(getFormatTimeAfterXDays(1));
     }

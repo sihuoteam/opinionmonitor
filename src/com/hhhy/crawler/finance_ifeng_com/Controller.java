@@ -30,17 +30,6 @@ public class Controller {
     private final String BASE_URL = "http://search.ifeng.com/sofeng/search.action?";
     private final String keyWordsLocation = "./keyWords.txt";
     private static ArrayList<String> spyHistory = new ArrayList<String>();//the history record got earlier in today.
-   /* private static String lastTime;
-    private static Date lasttime;
-    static{
-        lasttime = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            lasttime = sdf.parse("2014-06-03 07:51:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     private ArrayList<String> keyWordsList = new ArrayList<String>();
     Controller(){
