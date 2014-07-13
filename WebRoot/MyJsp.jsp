@@ -23,6 +23,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <h1>This is my JSP page. <br></h1>
+    <% String s = "haha"; %>
+    <h2> name is <%=request.getAttribute("name") %></h2>
+    <h2> password is <%=request.getAttribute("password") %></h2>
+    <script type="text/javascript">
+    	var s = "<%=request.getAttribute("name") %>"
+    	alert(s)
+    </script>
   </body>
 </html>

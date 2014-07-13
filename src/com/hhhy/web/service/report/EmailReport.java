@@ -165,7 +165,7 @@ public class EmailReport {
 //        entry.ccAddresses = new String[] { "zhouxuan@neotel.com.cn",
 //                "shanjie@neotel.com.cn" };
         entry.subject = "邮件模块测试";
-        entry.text = "正文";
+        entry.text = "正文<br>hehe";
         entry.toAddresses = "chenlingpeng@neotel.com.cn";
         try {
             EmailReport.sendMail(entry);
