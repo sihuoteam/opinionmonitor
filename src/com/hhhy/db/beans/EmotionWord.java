@@ -3,7 +3,7 @@ package com.hhhy.db.beans;
 public class EmotionWord {
     private int id;
     private String word;
-    private String val;
+    private int val;
 
     public EmotionWord() {
     }
@@ -24,11 +24,11 @@ public class EmotionWord {
         this.word = word;
     }
 
-    public String getVal() {
+    public int getVal() {
         return val;
     }
 
-    public void setVal(String val) {
+    public void setVal(int val) {
         this.val = val;
     }
 

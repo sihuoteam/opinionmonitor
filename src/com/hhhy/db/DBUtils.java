@@ -25,12 +25,12 @@ public class DBUtils {
     private static final String KEYWORD_TABLE = "a_keyword";
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
 
-    public static boolean insertArticle(Article article) throws SQLException {
+    public static long insertArticle(Article article) throws SQLException {
         String sql = "insert into " + ARTICLE_TABLE + " values(?,?,?,?,?,?,?)";
         Object[] params = { article.getTitle(), article.getSummary(),
                 article.getContent(), article.getTime(), article.getUrl(),
                 article.getWebsite(),article.getType() };
-        return DBOperator.update(sql, params);
+        return DBOperator.insert(sql, params);
     }
 
     public static long createUser(User user) throws SQLException {
