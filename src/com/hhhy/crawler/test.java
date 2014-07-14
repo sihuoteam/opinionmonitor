@@ -18,8 +18,8 @@ public class test {
     public static void main(String[] args) throws UnsupportedEncodingException {
      /*   String transKey = URLEncoder.encode("股票价格","gb2312");
         System.out.println(transKey);*/
-
+/*
         String html = GetHTML.getHtml("http://www.ymt360.com/shuju","utf-8");
-        System.out.println(html);
+        System.out.println(html);*/
     }
 }
