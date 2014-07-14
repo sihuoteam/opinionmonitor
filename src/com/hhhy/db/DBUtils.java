@@ -26,10 +26,10 @@ public class DBUtils {
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
 
     public static boolean insertArticle(Article article) throws SQLException {
-        String sql = "insert into " + ARTICLE_TABLE + " values(?,?,?,?,?,?)";
+        String sql = "insert into " + ARTICLE_TABLE + " values(?,?,?,?,?,?,?)";
         Object[] params = { article.getTitle(), article.getSummary(),
                 article.getContent(), article.getTime(), article.getUrl(),
-                article.getWebsite() };
+                article.getWebsite(),article.getType() };
         return DBOperator.update(sql, params);
     }
 
