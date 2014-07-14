@@ -13,6 +13,10 @@ tmp/
 local.properties
 .settings/
 .loadpath
+*.class
+WebRoot/WEB-INF/classes/*/
+classes/
+
 
 # External tool builders
 .externalToolBuilders/

@@ -1,5 +1,7 @@
 package com.hhhy.db.beans;
 
+import com.hhhy.db.beans.item.SrcType;
+
 /**
  * 网页文章
  * 
@@ -13,6 +15,20 @@ public class Article {
     private String time;//may be null
     private String url;//not null
     private String website;//name of the website
+//    private SrcType type;
+    private int type;
+    
+    
+    
+    
+
+
+
+    public static void main(String[] args){
+        SrcType t=SrcType.elePaper;
+        System.out.println(t.getName());
+        System.out.println(t.getIndex());
+    }
 
     
     
@@ -76,10 +92,20 @@ public class Article {
         this.website = website;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Article [content=" + content + ", summary=" + summary
-                + ", time=" + time + ", title=" + title + ", url=" + url
-                + ", website=" + website + "]";
+                + ", time=" + time + ", title=" + title + ", type=" + type
+                + ", url=" + url + ", website=" + website + "]";
     }
+
+    
 }
