@@ -1,7 +1,5 @@
 package com.hhhy.crawler.finance_qq_com;
 
-import com.hhhy.crawler.finance_ifeng_com.Controller;
-
 import java.util.TimerTask;
 
 /**
@@ -12,7 +10,7 @@ import java.util.TimerTask;
  * To change this template use File | Settings | File Templates.
  */
 public class TimerParse extends TimerTask {
-    com.hhhy.crawler.finance_ifeng_com.Controller controller;
+    Controller controller;
     public TimerParse(Controller controller) {
         this.controller = controller;
     }
@@ -20,7 +18,7 @@ public class TimerParse extends TimerTask {
     public void run() {
         System.out.println("a new round");
         for(String keyWord:controller.keyWordsList){
-            controller.parseBoard(keyWord,"");
+            this.controller.parseBoard(keyWord,"");
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.hhhy.crawler.guba_sina_com_cn;
 
+import com.hhhy.crawler.util.FormatTime;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,14 +14,13 @@ import java.util.regex.Pattern;
  */
 public class Subutils {
     public static String getTime(String txt){
-        String regex = "\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}";
-        Pattern pattern  = Pattern.compile(regex,Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(txt);
-        if(matcher.find()){
-            String time = matcher.group();
-            return time;
+        if(txt.contains("今天") || txt.contains("分钟前"))
+            return FormatTime.getCurrentFormatTime();
+        else{
+            return null;
+
         }
-        return null;
+
     }
     public static void main(String[] args){
         System.out.println(getTime("2020-11-11 12:22:32 woshaif  dska "));

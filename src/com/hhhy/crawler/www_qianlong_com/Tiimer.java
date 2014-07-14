@@ -1,7 +1,5 @@
 package com.hhhy.crawler.www_qianlong_com;
 
-import com.hhhy.crawler.www_cnstock_com.Controller;
-
 import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;

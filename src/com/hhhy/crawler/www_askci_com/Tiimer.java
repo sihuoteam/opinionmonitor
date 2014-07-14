@@ -1,7 +1,5 @@
 package com.hhhy.crawler.www_askci_com;
 
-import com.hhhy.crawler.www_55188_com.Controller;
-
 import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;

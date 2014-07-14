@@ -1,6 +1,5 @@
 package com.hhhy.crawler.bbs_hexun_com;
 
-import com.hhhy.crawler.util.ContentFilter;
 import com.hhhy.crawler.util.FormatTime;
 import com.hhhy.crawler.util.GetHTML;
 import com.hhhy.crawler.util.MyLog;
@@ -63,7 +62,7 @@ public class Controller {
             String title = ele.select("td.f14").select("a").text();
             String time = "20"+ele.select("td").last().select("p").text()+":00";
             if(FormatTime.isAfterToday(time)){
-                if(!ContentFilter.redundant(this.spyHistory, title)){
+                if(!this.spyHistory.contains(title)){
 
                     String summary = "";
                     String url = ele.select("td.f14").select("a").attr("href");

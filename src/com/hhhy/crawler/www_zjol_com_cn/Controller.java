@@ -1,7 +1,7 @@
 package com.hhhy.crawler.www_zjol_com_cn;
 
 
-import com.hhhy.crawler.util.ContentFilter;
+
 import com.hhhy.crawler.util.FormatTime;
 import com.hhhy.crawler.util.GetHTML;
 import org.jsoup.Jsoup;
@@ -23,42 +23,16 @@ import java.util.HashMap;
  */
 public class Controller {
 
-    private final String BASE_URL = "http://search.zjol.com.cn/";
-    private final String keyWordsLocation = "./keyWords.txt";
-    private static ArrayList<String> spyHistory = new ArrayList<String>();//the history record got earlier in today.
-   /* private static String lastTime;
-    private static Date lasttime;
-    static{
-        lasttime = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            lasttime = sdf.parse("2014-06-03 07:51:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    private ArrayList<String> keyWordsList = new ArrayList<String>();
+    public final String BASE_URL = "http://search.zjol.com.cn/";
+    public final String keyWordsLocation = "./keyWords.txt";
+    public ArrayList<String> spyHistory;//the history record got earlier in today.
+    public ArrayList<String> keyWordsList;
     Controller(){
-        File keyFile = new File(keyWordsLocation);
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(keyFile));
-            String line = "";
-            while((line = br.readLine())!=null){
-                keyWordsList.add(line);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for(String keyWord:keyWordsList){
-            //Todo
-            parseBoard(keyWord,BASE_URL);
-        }
+        spyHistory = new ArrayList<String>();
+        keyWordsList = new ArrayList<String>();
     }
 
-    public static void parseBoard(String keyWord,String BASE_URL){
+    public void parseBoard(String keyWord,String BASE_URL){
         String transKey = "";
         try {
             transKey = URLEncoder.encode(keyWord, "utf-8");
@@ -87,10 +61,10 @@ public class Controller {
             parsePages(tableList);
         }
     }
-    public static void parsePages(ArrayList<Element> tableList){
+    public void parsePages(ArrayList<Element> tableList){
         for(Element ele:tableList){
             String title = ele.select("a.dTit").text();
-            if(!ContentFilter.redundant(spyHistory, title)){
+            if(!this.spyHistory.contains(title)){
                 String time = FormatTime.getCurrentFormatTime();
                 String summary = ele.select("p.ddpCon").text();
                 String url = ele.select("a.dTit").attr("href");
@@ -106,7 +80,7 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-        parseBoard("习近平","");
+       // parseBoard("习近平","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

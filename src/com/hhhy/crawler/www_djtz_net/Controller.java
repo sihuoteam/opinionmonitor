@@ -1,6 +1,6 @@
 package com.hhhy.crawler.www_djtz_net;
 
-import com.hhhy.crawler.util.ContentFilter;
+
 import com.hhhy.crawler.util.FormatTime;
 import com.hhhy.crawler.util.GetHTML;
 import org.jsoup.Jsoup;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class Controller {
-    private final String BASE_URL = "http://search.discuz.qq.com/f/search?q=%E8%82%A1%E7%A5%A8%E4%BB%B7%E6%A0%BC&sId=5407638&ts=1405320195&mySign=9f5d7f39&menu=1&orderField=default&rfh=1&qs=txt.shome.a";
+    private final String BASE_URL = "http://search.discuz.qq.com/f/discuz?mod=forum&formhash=4c7b8745&srchtype=title&srhfid=0&srhlocality=portal%3A%3Aindex&sId=20541128&ts=1405322218&cuId=0&cuName=&gId=7&agId=0&egIds=&fmSign=&ugSign7=&sign=4b6eeca00d0cce45b5df4253fbb9ffc7&charset=gbk&source=discuz&fId=0&q="+"&srchtxt=%CD%B6%D7%CA&searchsubmit=true";
     public final String keyWordsLocation = "./keyWords.txt";
     public ArrayList<String> spyHistory;
     public ArrayList<String> keyWordsList ;
@@ -32,11 +32,11 @@ public class Controller {
     public void parseBoard(String keyWord,String BASE_URL){
         String transKey = "";
         try {
-            transKey = URLEncoder.encode(keyWord, "utf-8");
+            transKey = URLEncoder.encode(keyWord, "gbk");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String html = GetHTML.getHtml("http://search.discuz.qq.com/f/search?q="+transKey+"&sId=5407638&ts=1405320195&mySign=9f5d7f39&menu=1&orderField=default&rfh=1&qs=txt.shome.a", "utf-8");
+        String html = GetHTML.getHtml("http://search.discuz.qq.com/f/discuz?mod=forum&formhash=4c7b8745&srchtype=title&srhfid=0&srhlocality=portal%3A%3Aindex&sId=20541128&ts=1405322218&cuId=0&cuName=&gId=7&agId=0&egIds=&fmSign=&ugSign7=&sign=4b6eeca00d0cce45b5df4253fbb9ffc7&charset=gbk&source=discuz&fId=0&q="+transKey+"&srchtxt=%CD%B6%D7%CA&searchsubmit=true", "utf-8");
 
         html = html.replaceAll("&nbsp;","");
         Document document = Jsoup.parse(html);
@@ -62,7 +62,7 @@ public class Controller {
             String title = ele.select("h3.title").select("a").text();
             String time = Subutils.getTime(ele.select("p.meta").last().text());
             if(FormatTime.isAfterToday("2015-11-11 00:00:00")){//"2015-11-11 00:00:00"
-                if(!ContentFilter.redundant(this.spyHistory, title)){
+                if(!this.spyHistory.contains(title)){
 
                     String summary = ele.select("p.content").text();
                     String url = ele.select("h3.title").select("a").attr("href");
@@ -70,7 +70,7 @@ public class Controller {
                     System.out.println("url:" + url);
                     System.out.println("time:" + time);
                     System.out.println("summary:" + summary);
-                    System.out.println("website:" + "全景社区");
+                    System.out.println("website:" + "点金投资");
                     System.out.println("----------------");
                     spyHistory.add(title);
                     //调接口~~~~~
@@ -80,7 +80,7 @@ public class Controller {
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
         Controller controller = new Controller();
-        controller.parseBoard("股票价格", "");
+        controller.parseBoard("天空", "");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

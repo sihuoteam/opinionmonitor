@@ -1,7 +1,5 @@
 package com.hhhy.crawler.www_cnfol_com;
 
-import com.hhhy.crawler.www_chinanews_com.Controller;
-
 import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;

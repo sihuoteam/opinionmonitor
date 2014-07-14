@@ -1,6 +1,5 @@
 package com.hhhy.crawler.finance_ifeng_com;
 
-import com.hhhy.crawler.util.ContentFilter;
 import com.hhhy.crawler.util.FormatTime;
 import com.hhhy.crawler.util.GetHTML;
 import com.hhhy.crawler.util.GetSubString;
@@ -27,31 +26,17 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class Controller {
-    private final String BASE_URL = "http://search.ifeng.com/sofeng/search.action?";
-    private final String keyWordsLocation = "./keyWords.txt";
-    private static ArrayList<String> spyHistory = new ArrayList<String>();//the history record got earlier in today.
+    public final String BASE_URL = "http://search.ifeng.com/sofeng/search.action?";
+    public final String keyWordsLocation = "./keyWords.txt";
+    public ArrayList<String> spyHistory;//the history record got earlier in today.
 
-    private ArrayList<String> keyWordsList = new ArrayList<String>();
+    public ArrayList<String> keyWordsList;
     Controller(){
-        File keyFile = new File(keyWordsLocation);
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(keyFile));
-            String line = "";
-            while((line = br.readLine())!=null){
-                keyWordsList.add(line);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for(String keyWord:keyWordsList){
-            //Todo
-            parseBoard(keyWord,BASE_URL);
-        }
+        this.spyHistory = new ArrayList<String>();
+        this.keyWordsList = new ArrayList<String>();
     }
 
-    public static void parseBoard(String keyWord,String BASE_URL){
+    public void parseBoard(String keyWord,String BASE_URL){
         String transKey = "";
         try {
             transKey = URLEncoder.encode(keyWord, "UTF-8");
@@ -77,27 +62,30 @@ public class Controller {
             parsePages(tableList);
         }
     }
-    public static void parsePages(ArrayList< Element > tableList){
+    public void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
             String title = ele.select("p").first().text();
-            if(!ContentFilter.redundant(spyHistory,title)){
-                String orgTime = ele.select("p").get(2).text();
-                String time = tool.getTimeStr(orgTime);
-                String summary = ele.select("p").get(1).text();
-                String url = ele.select("p").first().select("a").attr("href");
-                System.out.println("title:"+title);
-                System.out.println("url:"+url);
-                System.out.println("time:"+time);
-                System.out.println("summary:"+summary);
-                System.out.println("website:"+"凤凰财经");
-                System.out.println("----------------");
-                spyHistory.add(title);
-                //调接口~~~~~
+            String orgTime = ele.select("p").get(2).text();
+            String time = tool.getTimeStr(orgTime);
+            if(FormatTime.isAfterToday(time)){
+                if(!spyHistory.contains(title)){
+                    String summary = ele.select("p").get(1).text();
+                    String url = ele.select("p").first().select("a").attr("href");
+                    System.out.println("title:"+title);
+                    System.out.println("url:"+url);
+                    System.out.println("time:"+time);
+                    System.out.println("summary:"+summary);
+                    System.out.println("website:"+"凤凰财经");
+                    System.out.println("----------------");
+                    spyHistory.add(title);
+                    //调接口~~~~~
+                }
             }
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-        parseBoard("逃出生天","");
+        Controller controller = new Controller();
+        controller.parseBoard("财经新闻","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,6 +43,11 @@ public class FormatTime {
     }
 
     public static boolean isAfterToday(String time){
+        if(time==null){
+            return false;
+        }
+        else if(time.contains("小时前"))
+            return true;
         String today = getCurrentFormatTime().split(" ")[0]+" 00:00:00";
         Date Today = getDate(today);
         Date Time = getDate(time);
@@ -59,7 +66,17 @@ public class FormatTime {
         else
             return true;
     }
+    public static String getTime(String txt,String regex){
+        Pattern pattern  = Pattern.compile(regex,Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(txt);
+        if (matcher.find()){
+            String time = matcher.group();
+            return time;
+        }
+        return null;
+    }
     public static void main(String[] args){
-        System.out.println(getFormatTimeAfterXDays(1));
+      //  System.out.println(getTime("http://news.hebei.com.cn/system/2014/07/14/013669577.shtml    &nbsp2014-07-14", "\\d{4}-\\d{2}-\\d{2}"));
+        System.out.println(isAfterToday("2014-07-14 00:00:00"));
     }
 }

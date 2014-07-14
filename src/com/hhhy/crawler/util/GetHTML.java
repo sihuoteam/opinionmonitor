@@ -110,7 +110,7 @@ public class GetHTML {
         }
         return back;
     }
-    public static String getHtmlGzip(String url,String charSet) throws IOException {
+    public static String getHtmlGzip(String url,String charSet){
         HttpClient httpClient = new HttpClient();
         GetMethod getMethod = new GetMethod(url);
         getMethod.setRequestHeader("Connection", "Keep-Alive");
@@ -119,20 +119,29 @@ public class GetHTML {
         getMethod.setRequestHeader("User-Agent",
                 "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)");
         getMethod.setRequestHeader("Accept-Encoding", "gzip");
-        int stateCode = httpClient.executeMethod(getMethod);
         String acceptEncoding = "";
+        try {
+            httpClient.executeMethod(getMethod);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if(getMethod.getResponseHeader("Content-Encoding")!=null){
             acceptEncoding = getMethod.getResponseHeader("Content-Encoding").getValue();
             if(acceptEncoding.toLowerCase().contains("gzip")){
-                GZIPInputStream gzipin = new GZIPInputStream(getMethod.getResponseBodyAsStream());
-                BufferedReader br = new BufferedReader(new InputStreamReader(gzipin,charSet));
-                String line = "";
-                String html = "";
-                while((line = br.readLine())!=null)
-                    html += line+"\r\n";
-                getMethod.releaseConnection();
-                return html;
-
+                try{
+                    GZIPInputStream gzipin = new GZIPInputStream(getMethod.getResponseBodyAsStream());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(gzipin,charSet));
+                    String line = "";
+                    String html = "";
+                    while((line = br.readLine())!=null)
+                        html += line+"\r\n";
+                    getMethod.releaseConnection();
+                    return html;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return null;

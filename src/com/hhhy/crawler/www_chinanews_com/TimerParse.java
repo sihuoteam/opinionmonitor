@@ -1,7 +1,5 @@
 package com.hhhy.crawler.www_chinanews_com;
 
-import com.hhhy.crawler.www_chinacenn_com.Controller;
-
 import java.util.TimerTask;
 
 /**
@@ -12,7 +10,7 @@ import java.util.TimerTask;
  * To change this template use File | Settings | File Templates.
  */
 public class TimerParse extends TimerTask {
-    com.hhhy.crawler.www_chinacenn_com.Controller controller;
+    Controller controller;
     public TimerParse(Controller controller) {
         this.controller = controller;
     }

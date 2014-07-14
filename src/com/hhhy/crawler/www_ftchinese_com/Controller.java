@@ -1,16 +1,13 @@
 package com.hhhy.crawler.www_ftchinese_com;
 
-import com.hhhy.crawler.util.ContentFilter;
-import com.hhhy.crawler.util.FormatTime;
+
 import com.hhhy.crawler.util.GetHTML;
-import com.hhhy.crawler.util.GetSubString;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -37,42 +34,16 @@ public class Controller {
      * To change this template use File | Settings | File Templates.
      */
 
-    private final String BASE_URL = "http://www.ftchinese.com/search/?keys=";
-    private final String keyWordsLocation = "./keyWords.txt";
-    private static ArrayList<String> spyHistory = new ArrayList<String>();//the history record got earlier in today.
-   /* private static String lastTime;
-    private static Date lasttime;
-    static{
-        lasttime = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            lasttime = sdf.parse("2014-06-03 07:51:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    private ArrayList<String> keyWordsList = new ArrayList<String>();
+    public final String BASE_URL = "http://www.ftchinese.com/search/?keys=";
+    public final String keyWordsLocation = "./keyWords.txt";
+    public ArrayList<String> spyHistory;//the history record got earlier in today.
+    public ArrayList<String> keyWordsList;
     Controller(){
-        File keyFile = new File(keyWordsLocation);
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(keyFile));
-            String line = "";
-            while((line = br.readLine())!=null){
-                keyWordsList.add(line);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for(String keyWord:keyWordsList){
-            //Todo
-            parseBoard(keyWord,BASE_URL);
-        }
+        spyHistory = new ArrayList<String>();
+        keyWordsList = new ArrayList<String>();
     }
 
-    public static void parseBoard(String keyWord,String BASE_URL){
+    public void parseBoard(String keyWord,String BASE_URL){
         String transKey = "";
         try {
             transKey = URLEncoder.encode(keyWord, "UTF-8");
@@ -106,10 +77,10 @@ public class Controller {
             parsePages(tableList);            //分别将三个ele组合成Temp。。。
         }
     }
-    public static void parsePages(ArrayList< Tupple > tableList){
+    public void parsePages(ArrayList< Tupple > tableList){
         for(Tupple tupple:tableList){
             String title =tupple.h3.select("a").text();
-            if(!ContentFilter.redundant(spyHistory, title)){
+            if(!this.spyHistory.contains(title)){
                 String time = tupple.rb.select("a").last().text();
                 String summary = tupple.rl.text();
                 String url = "http://www.ftchinese.com"+tupple.h3.select("a").attr("href");
@@ -126,7 +97,6 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-        parseBoard("绿茶婊","");
     }
 }
 

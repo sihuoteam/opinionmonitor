@@ -1,7 +1,5 @@
 package com.hhhy.crawler.www_zjol_com_cn;
 
-import com.hhhy.crawler.www_xde6_net.Controller;
-
 import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,9 +12,9 @@ import java.util.TimerTask;
  * To change this template use File | Settings | File Templates.
  */
 public class Tiimer extends TimerTask {
-    com.hhhy.crawler.www_xde6_net.Controller controller;
+    Controller controller;
 
-    public Tiimer(com.hhhy.crawler.www_xde6_net.Controller controller) {
+    public Tiimer(Controller controller) {
         this.controller = controller;
     }
 
