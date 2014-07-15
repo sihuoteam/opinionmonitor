@@ -9,6 +9,7 @@ import com.hhhy.db.beans.item.SrcType;
  * 
  */
 public class Article {
+    private long id;
     private String title;//not null
     private String summary;//may be null
     private String content;//may be null,given url instead in some cases...
@@ -17,6 +18,7 @@ public class Article {
     private String website;//name of the website
 //    private SrcType type;
     private int type;
+    private int emotion;
     
     
     
@@ -40,6 +42,30 @@ public class Article {
     }
     
     public Article() {
+    }
+
+
+
+    public long getId() {
+        return id;
+    }
+
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+
+    public int getEmotion() {
+        return emotion;
+    }
+
+
+
+    public void setEmotion(int emotion) {
+        this.emotion = emotion;
     }
 
 
