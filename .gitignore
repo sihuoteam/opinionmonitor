@@ -16,7 +16,7 @@ local.properties
 *.class
 WebRoot/WEB-INF/classes/*/
 classes/
-
+logs/
 
 # External tool builders
 .externalToolBuilders/
