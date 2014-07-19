@@ -1,7 +1,7 @@
 package com.hhhy.crawler.www_eeo_com_cn;
 
 import com.hhhy.crawler.finance_ifeng_com.tool;
-import com.hhhy.crawler.util.ContentFilter;
+
 import com.hhhy.crawler.util.GetHTML;
 import org.jsoup.nodes.Element;
 
@@ -61,7 +61,7 @@ public class Controller {
     public void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
             String title = ele.select("p").first().text();
-            if(!ContentFilter.redundant(spyHistory, title)){
+            if(!this.spyHistory.contains(title)){
                 String orgTime = ele.select("p").get(2).text();
                 String time = tool.getTimeStr(orgTime);
                 String summary = ele.select("p").get(1).text();
