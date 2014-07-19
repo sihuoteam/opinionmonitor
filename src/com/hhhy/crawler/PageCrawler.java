@@ -1,6 +1,8 @@
 package com.hhhy.crawler;
 
 import com.hhhy.crawler.util.GetHTML;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import sun.misc.BASE64Decoder;
 
 import java.io.IOException;
@@ -10,8 +12,16 @@ import java.net.URLEncoder;
 
 public class PageCrawler {
     /**
-     * @param args
+     * @param charSet
+     * @param url
+     * @param tag
      */
+    public String getContent(String tag,String url,String charSet){
+        String html = GetHTML.getHtml(url,charSet);
+        Document document = Jsoup.parse(html);
+        String content = document.select(tag).text();
+        return content;
+    }
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
       /*  String transKey = URLEncoder.encode("王小川", "utf-8");

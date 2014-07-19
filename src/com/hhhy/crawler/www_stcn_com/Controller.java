@@ -65,8 +65,8 @@ public class Controller {
     public void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
             String title = ele.select("dt").select("a").text();
+            String time = ele.select("dd").last().select("span").first().text()+":00";
             if(!this.spyHistory.contains(title)){
-                String time = ele.select("dd").last().select("span").first().text()+":00";
                 String summary = ele.select("dd.info").text();
                 String url = ele.select("dt").select("a").attr("href");
                 System.out.println("title:"+title);
@@ -81,6 +81,8 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
+        Controller controller = new Controller();
+        controller.parseBoard("股票","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

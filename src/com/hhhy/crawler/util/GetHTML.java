@@ -2,19 +2,22 @@ package com.hhhy.crawler.util;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.conn.params.ConnRouteParams;
+import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.protocol.HTTP;
 
 import java.io.*;
+import java.net.CookiePolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +31,38 @@ import java.util.zip.GZIPInputStream;
  * Time: 下午4:20
  * To change this template use File | Settings | File Templates.
  */
+
 public class GetHTML {
+    private static ArrayList<String> proxy = new ArrayList<String>();
+    static{
+        try{
+            if (proxy.size() == 0) {
+                BufferedReader br = new BufferedReader(new FileReader("./proxy.txt"));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    proxy.add(line);
+                }
+                br.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static DefaultHttpClient getHttpClient(){
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        String p = proxy.get(((int) (10000 * Math.random())) % proxy.size());
+        String proxy = p.split(":")[0];
+        Integer port = Integer.parseInt(p.split(":")[1]);
+        HttpHost Proxy = new HttpHost(proxy, port);
+        httpClient.getParams().setParameter(ConnRouteParams.DEFAULT_PROXY, Proxy);
+        httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
+        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
+        return httpClient;
+    }
     private static HttpPost setHttpPost(String url){
         HttpPost httpPost = null;
         httpPost = new HttpPost(url);
@@ -88,17 +122,26 @@ public class GetHTML {
         return httpPost;
     }
     public static String getHtml(String url,String charSet){
+        //DefaultHttpClient httpClient = getHttpClient();
         DefaultHttpClient httpClient = new DefaultHttpClient();
+        //httpClient.getCookieSpecs().register("easy",csf);
         HttpGet httpGet = setHttpGet(url);
         String back = "";
         try {
+           // httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,);
             HttpResponse response = httpClient.execute(httpGet);
+
             if (response != null) {
                 int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == HttpStatus.SC_OK) { // 2XX状态码
                     HttpEntity entity = response.getEntity();
                     String html = InputStreamUtils.inputStream2String(entity.getContent(),charSet);
-                    back = html;
+                    if (html.contains("</html>")){
+                        System.out.println(url + " contains </html>");
+                        back = html;
+                        return html;
+                    } else
+                        back = "error";
                 }
             }
             else
@@ -147,6 +190,6 @@ public class GetHTML {
         return null;
     }
     public static void main(String[] args){
-
+            System.out.println(getHtml("http://so.cnfol.com/cse/search?q=%E5%9F%BA%E9%87%91&s=12596448179979580087","UTF-8"));
     }
 }

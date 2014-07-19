@@ -53,45 +53,55 @@ public class Controller {
             e.printStackTrace();
         }
 
-        String html = GetHTML.getHtml("http://sou.chinanews.com/search.do?q=" + transKey, "UTF-8");
-
-        html = html.replaceAll("&nbsp;","");
-        Document document = Jsoup.parse(html);
-
-        String flag = document.select("table[style]").first().select("tbody").select("div#news_list").select("span").text() ;
-        if(flag.contains("对不起，没有找到相关内容，请更换关键字后重试")){
-            //Todo ??
-            System.out.println("nothing have found...");
+        String html = "error";
+        int i=0;
+        for (i = 0; i < 5 && html.equals("error"); i++) {
+            html = GetHTML.getHtml("http://sou.chinanews.com/search.do?q=" + transKey, "UTF-8");
         }
-        else{
-            Elements tableEles = document.select("table[style]").first().select("tbody").select("div#news_list").select("table");
-            ArrayList<Element> tableList = new ArrayList<Element>();
-            for(Element ele:tableEles){
-                tableList.add(ele);
+        if(i<5){
+            html = html.replaceAll("&nbsp;","");
+            Document document = Jsoup.parse(html);
+
+            String flag = document.select("table[style]").first().select("tbody").select("div#news_list").select("span").text() ;
+            if(flag.contains("对不起，没有找到相关内容，请更换关键字后重试")){
+                //Todo ??
+                System.out.println("nothing have found...");
             }
-            parsePages(tableList);
+            else{
+                Elements tableEles = document.select("table[style]").first().select("tbody").select("div#news_list").select("table");
+                ArrayList<Element> tableList = new ArrayList<Element>();
+                for(Element ele:tableEles){
+                    tableList.add(ele);
+                }
+                parsePages(tableList);
+            }
         }
+
     }
     public void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
             String title = ele.select("li.news_title").select("a").text();
-            if(!this.spyHistory.contains(title)){
-                String time = FormatTime.getCurrentFormatTime();
-                String summary = ele.select("li.news_content").text();
-                String url = ele.select("li.news_title").select("a").attr("href");
-                System.out.println("title:"+title);
-                System.out.println("url:"+url);
-                System.out.println("time:"+time);
-                System.out.println("summary:"+summary);
-                System.out.println("website:"+"中国企业新闻");
-                System.out.println("----------------");
-                spyHistory.add(title);
-                //调接口~~~~~
+            String time = FormatTime.getTime(ele.select("li.news_other").text(),"\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}");
+            if(FormatTime.isAfterToday(time)){
+                if(!this.spyHistory.contains(title)){
+
+                    String summary = ele.select("li.news_content").text();
+                    String url = ele.select("li.news_title").select("a").attr("href");
+                    System.out.println("title:"+title);
+                    System.out.println("url:"+url);
+                    System.out.println("time:"+time);
+                    System.out.println("summary:"+summary);
+                    System.out.println("website:"+"中国企业新闻");
+                    System.out.println("----------------");
+                    spyHistory.add(title);
+                    //调接口~~~~~
+                }
             }
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-      //  parseBoard("习近平","");
+      Controller controller = new Controller();
+        controller.parseBoard("习近平","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

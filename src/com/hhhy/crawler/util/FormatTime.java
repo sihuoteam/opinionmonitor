@@ -48,6 +48,13 @@ public class FormatTime {
         }
         else if(time.contains("小时前"))
             return true;
+        else if(time.split(" ").length==1)
+            time = time+" 00:00:00";
+        else if(time.split(" ").length==2){
+            if(time.split(" ")[1].split(":").length==2){
+                time+=":00";
+            }
+        }
         String today = getCurrentFormatTime().split(" ")[0]+" 00:00:00";
         Date Today = getDate(today);
         Date Time = getDate(time);

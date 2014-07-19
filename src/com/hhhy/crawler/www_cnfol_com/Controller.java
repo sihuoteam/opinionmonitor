@@ -58,7 +58,8 @@ public class Controller {
             //Todo ??
         }
         else{
-            Elements tableEles = document.select("div#wrap").select("div#container").select("div#center").select("div#results").select("div");
+            Elements tableEles = document.select("div#wrap").select("div#container").select("div#center").select("div#results").select("div.result");
+
             ArrayList<Element> tableList = new ArrayList<Element>();
             for(Element ele:tableEles){
                 tableList.add(ele);
@@ -69,22 +70,26 @@ public class Controller {
     public void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
             String title = ele.select("h3.c-title").select("a").text();
-            if(!this.spyHistory.contains(title)){
-                String time = FormatTime.getCurrentFormatTime();
-                String summary = ele.select("div").select("div.c-content").select("div.c-abstract").text();
-                String url = ele.select("h3.c-title").select("a").attr("href");
-                System.out.println("title:"+title);
-                System.out.println("url:"+url);
-                System.out.println("time:"+time);
-                System.out.println("summary:"+summary);
-                System.out.println("website:"+"中金在线");
-                System.out.println("----------------");
-                spyHistory.add(title);
-                //调接口~~~~~
+            String time = FormatTime.getTime(ele.select("span.c-showurl").text(),"\\d+-\\d+-\\d+");
+            if(FormatTime.isAfterToday(time)){
+                if(!this.spyHistory.contains(title)){
+                    String summary = ele.select("div").select("div.c-content").select("div.c-abstract").text();
+                    String url = ele.select("h3.c-title").select("a").attr("href");
+                    System.out.println("title:"+title);
+                    System.out.println("url:"+url);
+                    System.out.println("time:"+time);
+                    System.out.println("summary:"+summary);
+                    System.out.println("website:"+"中金在线");
+                    System.out.println("----------------");
+                    spyHistory.add(title);
+                    //调接口~~~~~
+                }
             }
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
+        Controller controller = new Controller();
+        controller.parseBoard("基金","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

@@ -61,7 +61,7 @@ public class Controller {
         for(Element ele:tableList){
             String title = ele.select("h3.title").select("a").text();
             String time = Subutils.getTime(ele.select("p.meta").last().text());
-            if(FormatTime.isAfterToday("2015-11-11 00:00:00")){//"2015-11-11 00:00:00"
+            if(FormatTime.isAfterToday(time)){//"2015-11-11 00:00:00"
                 if(!this.spyHistory.contains(title)){
 
                     String summary = ele.select("p.content").text();
