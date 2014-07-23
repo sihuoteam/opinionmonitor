@@ -1,6 +1,6 @@
 package com.hhhy.crawler.www_chinairn_com;
 
-import com.hhhy.crawler.util.ContentFilter;
+
 import com.hhhy.crawler.util.FormatTime;
 import com.hhhy.crawler.util.GetHTML;
 import org.jsoup.Jsoup;
@@ -88,7 +88,7 @@ public class Controller {
     public static void parsePages(ArrayList<Element> tableList){
         for(Element ele:tableList){
             String title =  "";
-            if(!ContentFilter.redundant(spyHistory, title)){
+            if(!this.spyHistory.contains(title)){
                 String time = FormatTime.getCurrentFormatTime();
                 String summary = "";
                 String url = "";
@@ -96,7 +96,7 @@ public class Controller {
                 System.out.println("url:"+url);
                 System.out.println("time:"+time);
                 System.out.println("summary:"+summary);
-                System.out.println("website:"+"同花顺金融服务网");
+                System.out.println("website:"+"中国行业研究网");
                 System.out.println("----------------");
                 spyHistory.add(title);
                 //调接口~~~~~

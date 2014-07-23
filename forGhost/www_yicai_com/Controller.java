@@ -1,6 +1,6 @@
 package com.hhhy.crawler.www_yicai_com;
 
-import com.hhhy.crawler.util.ContentFilter;
+
 import com.hhhy.crawler.util.FormatTime;
 import com.hhhy.crawler.util.GetHTML;
 import org.jsoup.Jsoup;
@@ -87,7 +87,7 @@ public class Controller {
     public static void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
             String title = ele.select("h2").select("a").text();
-            if(!ContentFilter.redundant(spyHistory, title)){
+            if(!this.spyHistory.contains(title)){
                 String time = FormatTime.getCurrentFormatTime();
                 String summary = ele.select("p").text();
                 String url = ele.select("h2").select("a").attr("href");
