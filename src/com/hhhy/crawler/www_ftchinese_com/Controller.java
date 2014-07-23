@@ -1,6 +1,7 @@
 package com.hhhy.crawler.www_ftchinese_com;
 
 
+import com.hhhy.crawler.util.FormatTime;
 import com.hhhy.crawler.util.GetHTML;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -80,23 +81,28 @@ public class Controller {
     public void parsePages(ArrayList< Tupple > tableList){
         for(Tupple tupple:tableList){
             String title =tupple.h3.select("a").text();
-            if(!this.spyHistory.contains(title)){
-                String time = tupple.rb.select("a").last().text();
-                String summary = tupple.rl.text();
-                String url = "http://www.ftchinese.com"+tupple.h3.select("a").attr("href");
-                System.out.println("----------------");
-                System.out.println("title:"+title);
-                System.out.println("url:"+url);
-                System.out.println("time:"+time);
-                System.out.println("summary:"+summary);
-                System.out.println("website:"+"21世纪经济报道 ");
-                System.out.println("----------------");
-                spyHistory.add(title);
-                //调接口~~~~~
+            String time = tupple.rb.select("a").last().text();
+            if(FormatTime.isAfterToday("2014-07-20")){
+                if(!this.spyHistory.contains(title)){
+
+                    String summary = tupple.rl.text();
+                    String url = "http://www.ftchinese.com"+tupple.h3.select("a").attr("href");
+                    System.out.println("----------------");
+                    System.out.println("title:"+title);
+                    System.out.println("url:"+url);
+                    System.out.println("time:"+time);
+                    System.out.println("summary:"+summary);
+                    System.out.println("website:"+"21世纪经济报道 ");
+                    System.out.println("----------------");
+                    spyHistory.add(title);
+                    //调接口~~~~~
+                }
             }
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
+        Controller controller = new Controller();
+        controller.parseBoard("股票","");
     }
 }
 

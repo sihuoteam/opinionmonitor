@@ -59,6 +59,7 @@ public class Controller {
     public void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
             String title = ele.select("h3.res-title").select("a").text();
+<<<<<<< HEAD
             if(!this.spyHistory.contains(title)){
                 String time = FormatTime.getCurrentFormatTime();
                 String summary = ele.select("h3.res-title + div").text();
@@ -71,6 +72,22 @@ public class Controller {
                 System.out.println("----------------");
                 spyHistory.add(title);
                 //调接口~~~~~
+=======
+            String time = FormatTime.getTime(ele.select("p.res-linkinfo").select("cite").text(),"\\d+-\\d+-\\d+");
+            if(FormatTime.isAfterToday(time)){
+                if(!this.spyHistory.contains(title)){
+                    String summary = ele.select("h3.res-title + div").text();
+                    String url = ele.select("h3.res-title").select("a").attr("href");
+                    System.out.println("title:"+title);
+                    System.out.println("url:"+url);
+                    System.out.println("time:"+time);
+                    System.out.println("summary:"+summary);
+                    System.out.println("website:"+"中国经济网");
+                    System.out.println("----------------");
+                    spyHistory.add(title);
+                    //调接口~~~~~
+                }
+>>>>>>> 2a70bb43dff7ff3bf2a1edbc50cee2db2f1ba9a1
             }
         }
     }

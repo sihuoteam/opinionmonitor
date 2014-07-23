@@ -68,18 +68,19 @@ public class Controller {
         for(Element ele:tableList){
             String title = ele.select("h3.t").text();
             String time = FormatTime.getTime(ele.select("p.link").select("span").text(),"\\d+-\\d+-\\d+- \\d+:\\d+");
-            if(FormatTime.isAfterToday("2015-11-11 11:11:11"))
-            if(!spyHistory.contains(title)){
-                String summary = ele.select("p.des").text();
-                String url = ele.select("h3.t").select("a").attr("href");
-                System.out.println("title:"+title);
-                System.out.println("url:"+url);
-                System.out.println("time:"+time);
-                System.out.println("summary:"+summary);
-                System.out.println("website:"+"上海证券");
-                System.out.println("----------------");
-                spyHistory.add(title);
-                //调接口~~~~~
+            if(FormatTime.isAfterToday(time)){
+                if(!spyHistory.contains(title)){
+                    String summary = ele.select("p.des").text();
+                    String url = ele.select("h3.t").select("a").attr("href");
+                    System.out.println("title:"+title);
+                    System.out.println("url:"+url);
+                    System.out.println("time:"+time);
+                    System.out.println("summary:"+summary);
+                    System.out.println("website:"+"上海证券");
+                    System.out.println("----------------");
+                    spyHistory.add(title);
+                    //调接口~~~~~
+                }
             }
         }
     }
