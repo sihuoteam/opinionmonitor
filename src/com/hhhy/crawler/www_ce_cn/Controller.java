@@ -61,7 +61,7 @@ public class Controller {
             String title = ele.select("h3.res-title").select("a").text();
             if(!this.spyHistory.contains(title)){
                 String time = FormatTime.getCurrentFormatTime();
-                String summary = ele.select("p.res-desc").first().text();
+                String summary = ele.select("h3.res-title + div").text();
                 String url = ele.select("h3.res-title").select("a").attr("href");
                 System.out.println("title:"+title);
                 System.out.println("url:"+url);
@@ -75,7 +75,8 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
-       //parseBoard("习近平","");
+       Controller controller = new Controller();
+        controller.parseBoard("全友家私","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

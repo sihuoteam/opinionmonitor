@@ -12,11 +12,11 @@ import java.util.regex.Pattern;
  */
 public class Subutils {
     public static String getTime(String txt){
-        String regex = "(\\d{4})年(\\d{2})月(\\d{2})日";
+        String regex = "\\d{4}-\\d{2}-\\d{2}";
         Pattern pattern  = Pattern.compile(regex,Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(txt);
         if(matcher.find()){
-            String time = matcher.group(1)+"-"+matcher.group(2)+"-"+matcher.group(3);
+            String time = matcher.group();
             return time;
         }
         return null;

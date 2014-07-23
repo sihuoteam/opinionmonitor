@@ -30,55 +30,58 @@ public class Controller {
         keyWordsList = new ArrayList<String>();
     }
 
-    public void parseBoard(ArrayList keyWordsList,String BASE_URL){
-
+    public void parseBoard(String keyWord,String BASE_URL){
+        String transKey = "";
+        try {
+            transKey = URLEncoder.encode(keyWord,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String html = null;
-        html = GetHTML.getHtmlGzip("http://search.caijing.com.cn/search.jsp", "utf-8");
+        html = GetHTML.getHtmlGzip("http://app.caijing.com.cn/?wd="+transKey+"&app=search&controller=index&action=search&type=all", "utf-8");
 
         html = html.replaceAll("&nbsp;","");
         Document document = Jsoup.parse(html);
         /*
         搜索关键词是否存在
          */
-        Elements flag = document.select("div.yaowen").select("li");
+        Elements flag = document.select("div.searchtext").select("ul").select("li");
         if(flag.size()==0){
             //Todo ??
             System.out.println("nothing to found.....");
         }
         else{
-            Elements tableEles = document.select("div.yaowen").select("li");
+            Elements tableEles = document.select("div.searchtext").select("ul").select("li").select("div.searchxt");
             ArrayList<Element> tableList = new ArrayList<Element>();
             for(Element ele:tableEles){
                 tableList.add(ele);
             }
-            parsePages(tableList,keyWordsList);
+            parsePages(tableList);
         }
     }
-    public void parsePages(ArrayList<Element> tableList,ArrayList<String> keyWordsList){
+    public void parsePages(ArrayList<Element> tableList){
         for(Element ele:tableList){
             String title = ele.select("a").text();
-            if(!this.spyHistory.contains(title)){
-
-                for(String keyWord:keyWordsList){
-                    if(title.contains(keyWord)){
-                        String time = FormatTime.getCurrentFormatTime();
-                        String summary = "";
-                        String url = ele.select("a").attr("href");
-                        System.out.println("title:"+title);
-                        System.out.println("url:"+url);
-                        System.out.println("time:"+time);
-                        System.out.println("summary:"+summary);
-                        System.out.println("website:"+"财经网");
-                        System.out.println("----------------");
-                        spyHistory.add(title);
-                        //调接口~~~~~
-                        break;
-                    }
+            String time = Subutils.getTime(ele.select("span").text());
+            if(FormatTime.isAfterToday(time)){
+                if(!this.spyHistory.contains(title)){
+                    String summary = ele.select("p").text();
+                    String url = ele.select("a").attr("href");
+                    System.out.println("title:"+title);
+                    System.out.println("url:"+url);
+                    System.out.println("time:"+time);
+                    System.out.println("summary:"+summary);
+                    System.out.println("website:"+"财经网");
+                    System.out.println("----------------");
+                    spyHistory.add(title);
+                    //调接口~~~~~
                 }
             }
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
+        Controller controller = new Controller();
+        controller.parseBoard("股票","");
        /* ArrayList<String> list = new ArrayList<String>();
         list.add("习近平");
         list.add("青岛");

@@ -17,6 +17,7 @@ public class TimerParse extends TimerTask {
     @Override
     public void run() {
         System.out.println("a new round");
-        this.controller.parseBoard(this.controller.keyWordsList,"");
+        for(String keyWord:this.controller.keyWordsList)
+            this.controller.parseBoard(keyWord,"");
     }
 }

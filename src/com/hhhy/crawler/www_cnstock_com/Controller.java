@@ -44,32 +44,34 @@ public class Controller {
             e.printStackTrace();
         }
 
-        String html = GetHTML.getHtml("http://search.cnstock.com/go.aspx?q="+transKey+"&searchChange=&c=39","UTF-8");
+        String html = GetHTML.getHtml("http://search.cnstock.com/search/result?k="+transKey,"UTF-8");    //  http://search.cnstock.com/search/result?k=%E8%82%A1%E7%A5%A8
 
         html = html.replaceAll("&nbsp;","");
         Document document = Jsoup.parse(html);
 
-        String flag = document.select("form#form1").attr("action");
-        if(flag.equals("SearchNotFound.aspx")){
+        Elements flag = document.select("div.result-article");
+        if(flag.size()==0){
             //Todo ??
+            System.out.println("nothing to show");
         }
         else{
-            Elements tableEles = document.select("form#form1").select("table[border]").select("div[style]");
+            Elements tableEles = document.select("div.result-article");
             ArrayList<Element> tableList = new ArrayList<Element>();
             for(Element ele:tableEles){
                 tableList.add(ele);
             }
+            System.out.println(tableEles.size());
             parsePages(tableList);
         }
     }
     public void parsePages(ArrayList< Element > tableList){
         for(Element ele:tableList){
-            String title = ele.select("a[id]").first().text();
+            String title = ele.select("h3.t").text();
+            String time = FormatTime.getTime(ele.select("p.link").select("span").text(),"\\d+-\\d+-\\d+- \\d+:\\d+");
+            if(FormatTime.isAfterToday("2015-11-11 11:11:11"))
             if(!spyHistory.contains(title)){
-                String time = FormatTime.getCurrentFormatTime();
-                String summary = ele.select("div").get(2).select("span[id]").text();
-                String orgUrl = ele.select("div").first().select("a[id]").first().attr("href");
-                String url = GetSubString.getSubString("url=",false,".html",true,URLDecoder.decode(orgUrl));
+                String summary = ele.select("p.des").text();
+                String url = ele.select("h3.t").select("a").attr("href");
                 System.out.println("title:"+title);
                 System.out.println("url:"+url);
                 System.out.println("time:"+time);
@@ -82,6 +84,8 @@ public class Controller {
         }
     }
     public static void main(String[] args) throws UnsupportedEncodingException {
+        Controller controller = new Controller();
+        controller.parseBoard("投资","");
        /* String html = GetHTML.getHtml("http://search.cs.com.cn/newsSimpleSearch.do?searchword=%E8%B4%B7%E6%AC%BE&time=2&contentType=Content&pn=1","UTF-8");
         Document document = Jsoup.parse(html);
         Elements tables = document.select("div:has(div.hei12)");

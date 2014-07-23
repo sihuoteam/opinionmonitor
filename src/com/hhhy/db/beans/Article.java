@@ -17,7 +17,7 @@ public class Article {
     private String url;//not null
     private String website;//name of the website
 //    private SrcType type;
-    private int type;
+    private int type;   //currently ,spider hasn't find a way to find type.
     private int emotion;
     
     
