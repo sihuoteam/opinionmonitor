@@ -4,7 +4,7 @@ import com.hhhy.db.beans.Article;
 
 /**
  * 关键词各项统计
- * 
+ * 暂时不需要
  * @author chenlingpeng
  * 
  */

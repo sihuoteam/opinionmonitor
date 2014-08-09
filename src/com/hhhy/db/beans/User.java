@@ -1,5 +1,11 @@
 package com.hhhy.db.beans;
 
+/**
+ * 用户类
+ * 对应a_admin表
+ * @author chenlingpeng
+ *
+ */
 public class User {
     private String id;
     private String nickname;
