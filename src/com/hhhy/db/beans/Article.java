@@ -21,8 +21,8 @@ public class Article {
     private int emotion;
 
     // 因为哪个关键词得到这篇文章
-    private String keyword;
-    private long ctime;// 获取网页时间
+    private String keyword;  //一个文章可能对于多个关键词，所以存在数据库中可能无效
+//    private long ctime;// 获取网页时间
     
     public String getKeyword() {
         return keyword;

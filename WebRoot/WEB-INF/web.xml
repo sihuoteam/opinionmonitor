@@ -55,6 +55,18 @@
     <servlet-name>UserLogin</servlet-name>
     <url-pattern>/servlet/UserLogin</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Summarize</servlet-name>
+    <servlet-class>com.hhhy.web.servlet.SummarizeServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Summarize</servlet-name>
+    <url-pattern>/servlet/summarize</url-pattern>
+  </servlet-mapping>
+  
+  
 
   <welcome-file-list>
     <welcome-file>sentimentSummarize.jsp</welcome-file>

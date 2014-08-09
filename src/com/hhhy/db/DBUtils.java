@@ -1,6 +1,7 @@
 package com.hhhy.db;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class DBUtils {
     private static final String KEYWORD_TABLE = "a_keyword";
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
     private static final String USERKEYWORD_TABLE = "a_userkeyword";
+    private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
 
     public static long insertArticle(Article article) throws SQLException {
         String sql = "insert into " + ARTICLE_TABLE + " values(?,?,?,?,?,?,?)";
@@ -123,70 +125,99 @@ public class DBUtils {
         return DBOperator.update(sql, new Object[] { userid, keyword });
     }
 
+    public static List<Article> getNegArticles(int kid) throws SQLException {
+        String sql = "select pageid from " + KEYWORDPAGE_TABLE
+                + " where emotion<0 and kid=? limit 10";
+        List<Long> pagesid = DBOperator.select(sql, new BeanListHandler<Long>(
+                Long.class), new Object[] { kid });
+        List<Article> arts = new ArrayList<Article>();
+        sql = "select * from " + ARTICLE_TABLE + " where id=?";
+        for (long pageid : pagesid) {
+            Article art = DBOperator.select(sql, new BeanHandler<Article>(
+                    Article.class), new Object[] { pageid });
+            if(art!=null && art.getTitle()!=null && !"".equals(art.getTitle())){
+                art.setContent(""); // 内容置空，减少存储消耗
+                art.setSummary("");
+                arts.add(art);
+            }
+        }
+        return arts;
+    }
+
     /*************************** 关键词处理部分结束 **************************/
 
-    /*************************** 关键词统计部分  **************************/
+    /*************************** 关键词统计部分 **************************/
 
     /**
      * 媒体来源统计
      */
-    public static Map<String, Integer> getMediaSourceStatis(String keyword) throws SQLException {
-        String sql = "select website from " + ARTICLE_TABLE
-                + " where keyword=?";
-        List<String> websites = DBOperator.select(sql,
-                new BeanListHandler<String>(String.class),
-                new Object[] { keyword });
+    public static Map<String, Integer> getMediaSourceStatis(int kid)
+            throws SQLException {
+        // String sql0 = "select website from "+KEYWORDPAGE_TABLE
+        // +" where kid=?";
+        // List<Integer> websites =
+        String sql = "select website from " + KEYWORDPAGE_TABLE
+                + " where kid=?";
+        List<String> websites = DBOperator
+                .select(sql, new BeanListHandler<String>(String.class),
+                        new Object[] { kid });
         Map<String, Integer> res = new HashMap<String, Integer>();
-        for(String website:websites){
+        for (String website : websites) {
             int count = MapUtils.getInteger(res, website, 0);
-            res.put(website, count+1);
+            res.put(website, count + 1);
         }
         return res;
     }
-    
+
     /**
      * 来源类型统计
+     * 
      * @param keyword
      * @return
      * @throws SQLException
      */
-    public static Map<String, Integer> getSourceTypeStatis(String keyword) throws SQLException {
-        String sql = "select type from " + ARTICLE_TABLE
-                + " where keyword=?";
+    public static Map<String, Integer> getSourceTypeStatis(int kid)
+            throws SQLException {
+        String sql = "select type from " + KEYWORDPAGE_TABLE + " where kid=?";
         List<Integer> types = DBOperator.select(sql,
                 new BeanListHandler<Integer>(Integer.class),
-                new Object[] { keyword });
+                new Object[] { kid });
         Map<String, Integer> res = new HashMap<String, Integer>();
-        for(Integer type:types){
+        for (Integer type : types) {
             String stype = SrcType.getName(type);
             int count = MapUtils.getInteger(res, stype, 0);
-            res.put(stype, count+1);
+            res.put(stype, count + 1);
         }
         return res;
     }
-    
+
     /**
      * 获取正负
+     * 
      * @param keyword
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static Pair<Map<String, Integer>> getEmotionTrendStatis(String keyword) throws SQLException{
-        String sql = "select emotion,ctime from "+ ARTICLE_TABLE + " where keyword=?";
-        List<Object[]> emotions = DBOperator.selectArrayList(sql, new Object[]{keyword});
+    public static Pair<Map<String, Integer>> getEmotionTrendStatis(int kid)
+            throws SQLException {
+        String sql = "select emotion,ctime from " + KEYWORDPAGE_TABLE
+                + " where kid=?";
+        List<Object[]> emotions = DBOperator.selectArrayList(sql,
+                new Object[] { kid });
         Map<String, Integer> posMap = new HashMap<String, Integer>();
         Map<String, Integer> negMap = new HashMap<String, Integer>();
-        for(Object[] emotion:emotions){
-            int emotionV = (Integer)emotion[0];
-            long ctimeV = (Long)emotion[1];
-            String time = DateFormatUtils.formatTime(ctimeV, DateFormatUtils.yyyyMMdd);
-            if(emotionV>0){
+        for (Object[] emotion : emotions) {
+            int emotionV = (Integer) emotion[0];
+            long ctimeV = (Long) emotion[1];
+            String time = DateFormatUtils.formatTime(ctimeV,
+                    DateFormatUtils.yyyyMMdd);
+            if (emotionV > 0) {
                 int count = MapUtils.getInteger(posMap, time, 0);
-                posMap.put(time, count+1);
+                posMap.put(time, count + 1);
             }
-            if(emotionV<0){
+            if (emotionV < 0) {
                 int count = MapUtils.getInteger(negMap, time, 0);
-                negMap.put(time, count+1);
+                negMap.put(time, count + 1);
             }
         }
         Pair<Map<String, Integer>> pair = new Pair<Map<String, Integer>>();
@@ -194,25 +225,27 @@ public class DBUtils {
         pair.setSecond(negMap);
         return pair;
     }
-    
+
     /**
      * 获取 正负平 情感的统计量
+     * 
      * @param keyword
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static int[] getEmotionStatisCount(String keyword) throws SQLException{
-        String sql = "select emotion from "+ ARTICLE_TABLE + " where keyword=?";
+    public static int[] getEmotionStatisCount(int kid) throws SQLException {
+        String sql = "select emotion from " + KEYWORDPAGE_TABLE
+                + " where keyword=?";
         int[] counts = new int[3];
         List<Integer> emotions = DBOperator.select(sql,
                 new BeanListHandler<Integer>(Integer.class),
-                new Object[] { keyword });
-        for(Integer emotion:emotions){
-            if(emotion>0){
+                new Object[] { kid });
+        for (Integer emotion : emotions) {
+            if (emotion > 0) {
                 counts[0]++;
-            }else if(emotion<0){
+            } else if (emotion < 0) {
                 counts[1]++;
-            }else{
+            } else {
                 counts[2]++;
             }
         }

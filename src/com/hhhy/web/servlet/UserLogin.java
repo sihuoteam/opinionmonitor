@@ -12,7 +12,8 @@ public class UserLogin extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.getSession().setAttribute("name", "chenlingpeng");
+        request.getSession().setAttribute("password", "password");
         request.setAttribute("name", "chenlingpeng");
         request.setAttribute("password", "password");
         request.getRequestDispatcher("/MyJsp.jsp").forward(request, response);
