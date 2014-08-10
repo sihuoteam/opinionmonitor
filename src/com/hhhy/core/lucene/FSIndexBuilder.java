@@ -3,6 +3,8 @@ package com.hhhy.core.lucene;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.ansj.lucene4.AnsjAnalysis;
 import org.apache.log4j.Logger;
@@ -32,14 +34,22 @@ import com.hhhy.db.beans.Article;
 
 public class FSIndexBuilder implements IndexBuilder {
     private static final Logger logger = Logger.getLogger(FSIndexBuilder.class);
+    private static final int CACHE_SIZE = 100;
+    private static final long MERGE_INTERVAL = 1000*60*60*24*7; // 一周merge一次
     private Analyzer ansjHeightAnalyzer = new AnsjAnalysis();
     private String indexDir;
     private Directory directory;
     private IndexWriter iWriter;
     private Analyzer analyzer;
+    private List<Document> documentsCache;
+    private long lastMerge;
+//    private boolean firstCommit;
 
     public FSIndexBuilder(String indexDir) {
         this.indexDir = indexDir;
+        this.lastMerge = -1l;
+        documentsCache = new ArrayList<Document>(CACHE_SIZE);
+//        this.firstCommit = true;
         try {
             this.directory = new SimpleFSDirectory(new File(indexDir));
             analyzer = new AnsjAnalysis(StopWordsUtils.getStopWords(), false);
@@ -57,11 +67,29 @@ public class FSIndexBuilder implements IndexBuilder {
         Document doc = new Document();
         Field f = new TextField("text", content, Field.Store.YES);
         doc.add(f);
-        try {
-            this.iWriter.addDocument(doc);
-            iWriter.commit();
-        } catch (IOException e) {
-            logger.warn(e.getMessage());
+        synchronized (this) {
+            addDoc(doc);
+        }
+    }
+    
+    private void addDoc(Document doc){
+        this.documentsCache.add(doc);
+        if(this.documentsCache.size()>=FSIndexBuilder.CACHE_SIZE){
+            try {
+                this.iWriter.addDocuments(this.documentsCache);
+                this.iWriter.commit();
+            } catch (IOException e) {
+                logger.warn(e.getMessage());
+            } finally{
+                this.documentsCache.clear();
+            }
+            if(this.lastMerge<0){
+                // first commit
+                this.lastMerge = System.currentTimeMillis();
+            } else if(System.currentTimeMillis()-this.lastMerge>MERGE_INTERVAL){
+                // TODO: merge here
+            }
+            
         }
     }
 
