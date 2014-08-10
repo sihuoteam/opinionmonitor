@@ -51,6 +51,7 @@ li.pop {
 
 	</head>
 	<body>
+	<br><br><br>
 		<!--  <div class="pop_abs" id="center">
 <div class="hidden-phone menu" style="display: block;">   
 -->
@@ -63,12 +64,26 @@ li.pop {
 
 				<li class="menu-list menu-general active ">
 					<a href="" class="menu-title"><i></i><span><%=keyword.getWord() %></span></a>
-				</li>
-				<% } %>
-				
-
+					<form action="/" method="POST">    
+                    	<input value="Delete" type="submit">                     
+					</form>
+				</li>				
+				<% } %>				
 			</ul>
 			<% } %>
+			
+			
+			<br><br><br><br>
+			<h2>添加关键词</h2>
+				<form action="/tasks" method="POST"> 
+					<dl class=" " id="label_field">
+						
+						<dd><input id="label" name="label" type="text"></dd>
+     					
+     
+					</dl>
+					<input value="添加" type="submit">
+         		</form>
 		</div>
 	</body>
 </html>
