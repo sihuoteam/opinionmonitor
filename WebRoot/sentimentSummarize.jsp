@@ -2,7 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-Integer userid = (Integer)session.getAttribute("userid");
+Long userid = (Long)session.getAttribute("userid");
 if(userid==null){
 	response.sendRedirect("./loginWeb.jsp");
 	return;

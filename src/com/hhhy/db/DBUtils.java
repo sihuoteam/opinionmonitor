@@ -55,9 +55,9 @@ public class DBUtils {
 
     public static boolean checkUserExist(String email) throws SQLException {
         String sql = "select * from " + ADMIN_TABLE + " where email=?";
-        User users = DBOperator.select(sql, new BeanHandler<User>(User.class),
+        User user = DBOperator.select(sql, new BeanHandler<User>(User.class),
                 new Object[] { email });
-        return users != null;
+        return user != null && user.getId()>0;
     }
 
     public static long loginCheck(String email, String password)

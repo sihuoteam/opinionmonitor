@@ -5,7 +5,7 @@
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
-    Integer userid = (Integer) session.getAttribute("userid");
+    Long userid = (Long) session.getAttribute("userid");
     if (userid == null) {
         response.sendRedirect("./loginWeb.jsp");
         return;
@@ -63,9 +63,9 @@ li.pop {
 				<% for(KeyWord keyword:keywords){ %>
 
 				<li class="menu-list menu-general active ">
-					<a href="" class="menu-title"><i></i><span><%=keyword.getWord() %></span></a>
-					<form action="/" method="POST">    
-                    	<input value="Delete" type="submit">                     
+					<a href="./statis?kid=<%=keyword.getId() %>" class="menu-title"><i></i><span><%=keyword.getWord() %></span></a>
+					<form action="deletekeyword" method="POST">    
+                    	<input value=删除 type="submit">                     
 					</form>
 				</li>				
 				<% } %>				
