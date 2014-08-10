@@ -18,7 +18,7 @@ public class Article {
     private String website;// name of the website
     // private SrcType type;
     private int type;
-    private int emotion;
+//    private int emotion;
 
     // 因为哪个关键词得到这篇文章
     private String keyword;  //一个文章可能对于多个关键词，所以存在数据库中可能无效
@@ -57,13 +57,13 @@ public class Article {
         this.id = id;
     }
 
-    public int getEmotion() {
-        return emotion;
-    }
-
-    public void setEmotion(int emotion) {
-        this.emotion = emotion;
-    }
+//    public int getEmotion() {
+//        return emotion;
+//    }
+//
+//    public void setEmotion(int emotion) {
+//        this.emotion = emotion;
+//    }
 
     public String getTitle() {
         return title;
