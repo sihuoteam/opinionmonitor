@@ -1,5 +1,12 @@
 package com.hhhy.db.beans;
 
+
+/**
+ * 情感词表
+ * 对应a_emotionword表
+ * @author chenlingpeng
+ *
+ */
 public class EmotionWord {
     private int id;
     private String word;

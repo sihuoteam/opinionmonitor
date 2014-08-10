@@ -31,6 +31,8 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/lucene-highlighter-4.9.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/lucene-queryparser-4.9.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/lucene-queries-4.9.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/thrift-0.9.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

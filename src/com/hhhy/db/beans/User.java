@@ -1,23 +1,33 @@
 package com.hhhy.db.beans;
 
+/**
+ * 用户类
+ * 对应a_admin表
+ * @author chenlingpeng
+ *
+ */
 public class User {
-    private String id;
+    private long id;
     private String nickname;
     private String email;
     private String password;
+    
+    public User(){
+        this.id = -1l;
+    }
 
     public User(String nickname, String email, String password) {
-        this.id = null;
+        this.id = -1l;
         this.nickname = nickname;
         this.email = email;
         this.password = password;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -2,13 +2,30 @@ package com.hhhy.db.beans;
 
 /**
  * 关键词类
- * 
+ * 对应a_keyword表
  * @author chenlingpeng
  * 
  */
 public class KeyWord {
+    private int id;
+    private int uid;
     private String word;
-    private long createTime;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 
     public String getWord() {
         return word;
@@ -16,14 +33,6 @@ public class KeyWord {
 
     public void setWord(String word) {
         this.word = word;
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
     }
 
 }

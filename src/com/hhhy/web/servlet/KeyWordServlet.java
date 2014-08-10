@@ -6,9 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpUtils;
 
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -30,11 +28,19 @@ public class KeyWordServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp) throws ServletException,
             IOException {
+        // 有一个隐藏域是type
+//        http://bbs.csdn.net/topics/390586006
         String type = req.getParameter("type");
         if (type == null) {
             logger.error("type missing");
         } else {
-
+            if(type.equals("add")){
+//                TODO: 添加关键词，然后列出现有关键词
+            }else if(type.equals("delete")){
+//                TODO: 删除关键词，然后列出现有关键词
+            }else if(type.equals("list")){
+//                TODO: 列出关键词
+            }
         }
     }
 
@@ -43,14 +49,6 @@ public class KeyWordServlet extends HttpServlet {
             final HttpServletResponse resp) throws ServletException,
             IOException {
         doGet(req, resp);
-    }
-
-    @Override
-    public void init() throws ServletException {
-        String path = getInitParameter("log4j.properties");
-        path = getServletContext().getRealPath(path);
-        PropertyConfigurator.configure(path);
-        System.out.println(path);
     }
 
 }
