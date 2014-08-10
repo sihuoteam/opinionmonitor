@@ -11,7 +11,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>login</title>
+		<title>LoginWeb</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -64,20 +64,6 @@
 			</div>
 
 		</form>
-
-		<script type="text/javascript" src="./登陆界面_files/jquery-1.8.2.min.js"></script>
-
-
-<!-- <script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"><\/script>')</script><script type="text/javascript" src="./��½����_files/jquery-1.8.2.min.js"></script>
- 
-<script type="text/javascript" src="./js/sentimentSummarize/jquery.simInput.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $('[data-toggle="checkbox"]').simInput();
-        });
- 
-    </script>
-    -->
 <style> 
 .login-error li { padding-left: 0px; }
 </style>
