@@ -62,9 +62,10 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 				</div>
 			</div>
 			<ul class="topnav pull-right inline">
+				
 				<li>
 					<a href="" class="top-opt" data-toggle="tooltip"
-						data-placement="bottom"><i></i> 设置</a>
+						data-placement="bottom"><i></i> 关键词设置</a>
 				</li>
 				<li>
 					<a href="" class="top-logout" data-toggle="tooltip"
