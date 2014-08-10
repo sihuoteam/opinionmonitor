@@ -62,7 +62,7 @@ if(userid==null){
         </div>
     </div>
     <ul class="topnav pull-right inline">
-        <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 设置</a></li>
+        <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 关键词设置</a></li>
         <li><a href="" class="top-logout" data-toggle="tooltip" data-placement="bottom"><i></i> 退出</a></li>
     </ul>
 
