@@ -10,7 +10,6 @@ import com.hhhy.db.beans.item.SrcType;
  */
 public class Article {
     private long id;
-<<<<<<< HEAD
     private String title;//not null
     private String summary;//may be null
     private String content;//may be null,given url instead in some cases...
@@ -22,20 +21,6 @@ public class Article {
     private int emotion;
     
     
-    
-    
-=======
-    private String title;// not null
-    private String summary;// may be null
-    private String content;// may be null,given url instead in some cases...
-    private String time;// may be null, 网页上文章时间
-    private String url;// not null
-    private String website;// name of the website
-    // private SrcType type;
-    private int type;
-//    private int emotion;
->>>>>>> 17fcf6b3273e92d58e83157969841c837b18be9e
-
     // 因为哪个关键词得到这篇文章
     private String keyword;  //一个文章可能对于多个关键词，所以存在数据库中可能无效
 //    private long ctime;// 获取网页时间

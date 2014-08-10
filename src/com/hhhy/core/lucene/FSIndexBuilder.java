@@ -49,7 +49,7 @@ public class FSIndexBuilder implements IndexBuilder {
         this.indexDir = indexDir;
         this.lastMerge = -1l;
         documentsCache = new ArrayList<Document>(CACHE_SIZE);
-//        this.firstCommit = true;
+        this.indexDir = indexDir;
         try {
             this.directory = new SimpleFSDirectory(new File(indexDir));
             analyzer = new AnsjAnalysis(StopWordsUtils.getStopWords(), false);
@@ -89,7 +89,6 @@ public class FSIndexBuilder implements IndexBuilder {
             } else if(System.currentTimeMillis()-this.lastMerge>MERGE_INTERVAL){
                 // TODO: merge here
             }
-            
         }
     }
 
