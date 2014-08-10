@@ -4,7 +4,8 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Integer userid = (Integer)session.getAttribute("userid");
 if(userid==null){
-	response.sendRedirect("./login.jsp");
+	response.sendRedirect("./loginWeb.jsp");
+	return;
 }
 Integer poscount = (Integer)request.getAttribute("poscount");
 Integer negcount = (Integer)request.getAttribute("negcount");
