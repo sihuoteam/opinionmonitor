@@ -105,21 +105,29 @@ public class DBUtils {
     }
 
     // 不同用户返回不同关键词, 用户信息存放session中
-    public static List<KeyWord> getUserKeyWord(int userid) throws SQLException {
+    public static List<KeyWord> getUserKeyWord(long userid) throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE + " where uid=?";
         List<KeyWord> keywords = DBOperator.select(sql,
                 new BeanListHandler<KeyWord>(KeyWord.class),
                 new Object[] { userid });
         return keywords;
     }
+    
+    public static List<String> getUserKeyWordStr(long userid) throws SQLException {
+        String sql = "select * from " + KEYWORD_TABLE + " where uid=?";
+        List<String> keywords = DBOperator.select(sql,
+                new BeanListHandler<String>(String.class),
+                new Object[] { userid });
+        return keywords;
+    }
 
-    public static boolean deleteUserKeyWord(int userid, int keywordid)
+    public static boolean deleteUserKeyWord(long userid, int keywordid)
             throws SQLException {
         String sql = "delete from " + KEYWORD_TABLE + " where uid=? and id=?";
         return DBOperator.update(sql, new Object[] { userid, keywordid });
     }
 
-    public static boolean addUserKeyWord(int userid, String keyword)
+    public static boolean addUserKeyWord(long userid, String keyword)
             throws SQLException {
         String sql = "insert into " + KEYWORD_TABLE
                 + "(uid,keyword) values(?,?)";
