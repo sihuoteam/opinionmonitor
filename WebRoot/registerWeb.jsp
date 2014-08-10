@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'registerWeb.jsp' starting page</title>
+    <title>RegisterWeb</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -40,21 +40,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="login-form">
 					<ul>
 						<li class="user">
-							<input placeholder="ÓÃ»§Ãû»òÓÊÏä" name="username"
+							<input placeholder="ç”¨æˆ·åæˆ–é‚®ç®±" name="username"
 								id="register_username" type="text">
 						</li>
 						<li class="pwd">
-							<input placeholder="ÃÜÂë" name="password" id="register_password"
+							<input placeholder="å¯†ç " name="password" id="register_password"
 								type="password">
 						</li>
 						<li class="pwd">
-							<input placeholder="ÃÜÂë" name="rePassword" id="register_rePassword"
+							<input placeholder="ç¡®è®¤å¯†ç " name="rePassword" id="register_rePassword"
 								type="password">
 						</li>
 					</ul>
 
 					<div class="login-opt clearfix">
-						<input class="login-btn" type="submit" name="register" value="×¢²á">
+						<input class="login-btn" type="submit" name="register" value="æ³¨å†Œ">
 						<label class="remember-me">
 							<%-- <% String loginerror = (String)session.getAttribute("loginerror"); %>
 							<% if(loginerror!=null){ %>
