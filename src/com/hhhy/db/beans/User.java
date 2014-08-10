@@ -11,6 +11,10 @@ public class User {
     private String nickname;
     private String email;
     private String password;
+    
+    public User(){
+        this.id = -1l;
+    }
 
     public User(String nickname, String email, String password) {
         this.id = -1l;

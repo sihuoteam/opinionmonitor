@@ -67,7 +67,7 @@ public class DBUtils {
                 new Object[] { email });
         if (user != null) {
             logger.info(user.getId());
-            if (user.getPassword().equals(DigestUtils.md5Hex(password)))
+            if (user.getPassword().equals(password))
                 return user.getId();
         }
         return -1l;
