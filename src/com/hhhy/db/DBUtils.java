@@ -60,16 +60,17 @@ public class DBUtils {
         return users != null;
     }
 
-    public static boolean loginCheck(String email, String password)
+    public static long loginCheck(String email, String password)
             throws SQLException {
         String sql = "select * from " + ADMIN_TABLE + " where email=?";
         User user = DBOperator.select(sql, new BeanHandler<User>(User.class),
                 new Object[] { email });
         if (user != null) {
             logger.info(user.getId());
-            return user.getPassword().equals(DigestUtils.md5Hex(password));
+            if (user.getPassword().equals(DigestUtils.md5Hex(password)))
+                return user.getId();
         }
-        return false;
+        return -1l;
     }
 
     /*************************** 账号管理部分结束 **************************/

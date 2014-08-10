@@ -51,12 +51,4 @@ public class KeyWordServlet extends HttpServlet {
         doGet(req, resp);
     }
 
-    @Override
-    public void init() throws ServletException {
-        String path = getInitParameter("log4j.properties");
-        path = getServletContext().getRealPath(path);
-        PropertyConfigurator.configure(path);
-        System.out.println(path);
-    }
-
 }
