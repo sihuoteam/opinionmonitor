@@ -68,7 +68,7 @@
 		<script type="text/javascript" src="./ç™»é™†ç•Œé¢_files/jquery-1.8.2.min.js"></script>
 
 <<<<<<< HEAD
-<!-- <script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"><\/script>')</script><script type="text/javascript" src="./µÇÂ½½çÃæ_files/jquery-1.8.2.min.js"></script>
+<!-- <script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"><\/script>')</script><script type="text/javascript" src="./ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½_files/jquery-1.8.2.min.js"></script>
  
 <script type="text/javascript" src="./js/sentimentSummarize/jquery.simInput.js"></script>
     <script type="text/javascript">
@@ -80,19 +80,6 @@
     -->
 <style> 
 .login-error li { padding-left: 0px; }
-=======
-		<script type="text/javascript"
-			src="./js/sentimentSummarize/jquery.simInput.js"></script>
-		<script type="text/javascript">
-	$(function() {
-		$('[data-toggle="checkbox"]').simInput();
-	});
-</script>
-		<style>
-.login-error li {
-	padding-left: 0px;
-}
->>>>>>> FETCH_HEAD
 </style>
 	</body>
 </html>
