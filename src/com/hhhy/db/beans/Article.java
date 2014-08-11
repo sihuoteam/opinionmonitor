@@ -124,6 +124,14 @@ public class Article {
 
     
     
+    public int getEmotion() {
+        return emotion;
+    }
+
+    public void setEmotion(int emotion) {
+        this.emotion = emotion;
+    }
+
     @Override
     public String toString() {
         return "Article [content=" + content + ", summary=" + summary

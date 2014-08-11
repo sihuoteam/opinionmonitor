@@ -24,6 +24,7 @@ public class SummarizeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String kid = (String)request.getParameter("kid");
+        logger.info("will summarize for kid: "+kid);
         if(kid==null || "".equals(kid)) response.sendRedirect("login.jsp");
         try {
             int[] counts = DBUtils.getEmotionStatisCount(Integer.parseInt(kid));

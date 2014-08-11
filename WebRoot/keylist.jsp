@@ -63,9 +63,15 @@ li.pop {
 				<% for(KeyWord keyword:keywords){ %>
 
 				<li class="menu-list menu-general active ">
-					<a href="./statis?kid=<%=keyword.getId() %>" class="menu-title"><i></i><span><%=keyword.getWord() %></span></a>
+					<a href="./summarize?kid=<%=keyword.getId() %>" class="menu-title">
+					<i></i>
+					<span>
+					<%=keyword.getKeyword() %>
+					</span>
+					</a>
 					<form action="deletekeyword" method="POST">    
-                    	<input value=删除 type="submit">                     
+                    	<input value=删除 type="submit">    
+                    	<input type='hidden' name='kid' value="<%=keyword.getId() %>">
 					</form>
 				</li>				
 				<% } %>				
@@ -75,10 +81,10 @@ li.pop {
 			
 			<br><br><br><br>
 			<h2>添加关键词</h2>
-				<form action="/tasks" method="POST"> 
+				<form action="addkeyword" method="POST"> 
 					<dl class=" " id="label_field">
 						
-						<dd><input id="label" name="label" type="text"></dd>
+						<dd><input id="label" name="keyword" type="text"></dd>
      					
      
 					</dl>

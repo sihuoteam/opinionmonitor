@@ -8,8 +8,10 @@ package com.hhhy.db.beans;
  */
 public class KeyWord {
     private int id;
-    private int uid;
-    private String word;
+    private long uid;
+    private String keyword;
+
+    public KeyWord(){}
 
     public int getId() {
         return id;
@@ -19,20 +21,22 @@ public class KeyWord {
         this.id = id;
     }
 
-    public int getUid() {
+    public long getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(long uid) {
         this.uid = uid;
     }
 
-    public String getWord() {
-        return word;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
+
+    
 
 }

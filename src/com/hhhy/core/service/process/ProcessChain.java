@@ -20,11 +20,11 @@ public class ProcessChain {
         int titleScore = EmotionAnalysisProcessor.emotionParser(titleWords);
         int contentScore = EmotionAnalysisProcessor.emotionParser(contentWords);
 
-//        if (titleScore < 0) {
-//            art.setEmotion(titleScore);
-//        } else {
-//            art.setEmotion(titleScore + contentScore);
-//        }
+        if (titleScore < 0) {
+            art.setEmotion(titleScore);
+        } else {
+            art.setEmotion(titleScore + contentScore);
+        }
 
         StatisticsProcessor.statistics(art);
         IndexProcessor.addIndex(art, titleWords, contentWords);

@@ -12,6 +12,7 @@ public class KeyWordPage {
     private int type;
     private String website;
     private long ctime;
+    private String url;
 
     public int getKid() {
         return kid;
@@ -19,6 +20,14 @@ public class KeyWordPage {
 
     public void setKid(int kid) {
         this.kid = kid;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public int getEmotion() {

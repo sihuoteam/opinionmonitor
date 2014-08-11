@@ -120,8 +120,15 @@ public class DBUtils {
                 new Object[] { userid });
         return keywords;
     }
+    
+    public static int getKeyWordId(String keyword) throws SQLException{
+        String sql = "select id from "+KEYWORD_TABLE +" where keyword=?";
+        Integer kid = DBOperator.select(sql, new BeanHandler<Integer>(Integer.class), new Object[]{keyword});
+        if(kid!=null) return kid;
+        else return -1;
+    }
 
-    public static boolean deleteUserKeyWord(long userid, int keywordid)
+     public static boolean deleteUserKeyWord(long userid, int keywordid)
             throws SQLException {
         String sql = "delete from " + KEYWORD_TABLE + " where uid=? and id=?";
         return DBOperator.update(sql, new Object[] { userid, keywordid });
@@ -272,7 +279,11 @@ public class DBUtils {
         // logger.info("..." + createUser(user));
         // logger.info(checkUserExist("email2"));
         // logger.info(loginCheck("email3","password13"));
-        logger.info(getEmotionWords().get(0).getWord());
+//        logger.info(getEmotionWords().get(0).getWord());
+        logger.info(getUserKeyWord(9l).size());
+        logger.info(getUserKeyWord(9l).get(0).getId());
+        logger.info(getUserKeyWord(9l).get(0).getUid());
+        logger.info(getUserKeyWord(9l).get(0).getKeyword());
     }
 
 }

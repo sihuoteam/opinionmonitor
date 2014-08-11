@@ -22,17 +22,28 @@
 
 	<servlet-mapping>
 		<servlet-name>StatisKeyWord</servlet-name>
-		<url-pattern>/statis</url-pattern>
+		<url-pattern>/StatisKeyWord</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>KeyWordServlet</servlet-name>
-		<servlet-class>com.hhhy.web.servlet.KeyWordServlet</servlet-class>
+		<servlet-name>KeyWordAddServlet</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.KeyWordAddServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>KeyWordServlet</servlet-name>
-		<url-pattern>/dml</url-pattern>
+		<servlet-name>KeyWordAddServlet</servlet-name>
+		<url-pattern>/addkeyword</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>KeyWordDelServlet</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.KeyWordDelServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>KeyWordDelServlet</servlet-name>
+		<url-pattern>/deletekeyword</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
