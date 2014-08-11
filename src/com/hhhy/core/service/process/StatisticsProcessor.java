@@ -1,6 +1,8 @@
 package com.hhhy.core.service.process;
 
 import java.sql.SQLException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
@@ -15,6 +17,7 @@ import com.hhhy.db.beans.KeyWordTrend;
  */
 public class StatisticsProcessor {
     private static final Logger logger = Logger.getLogger(StatisticsProcessor.class);
+    private static Map<String, Integer> keywordsCache = new ConcurrentHashMap<String, Integer>();
 
     public static void statistics(Article art) {
 //        statisticsOpinionType(art);
@@ -22,7 +25,12 @@ public class StatisticsProcessor {
 //        statisticsMediaType(art);
         String keyword = art.getKeyword();
         try {
-            int kid = DBUtils.getKeyWordId(keyword);
+            // int kid = DBUtils.getKeyWordId(keyword);
+            Integer kid = keywordsCache.get(keyword);
+            if(kid==null){
+                kid = DBUtils.getKeyWordId(keyword);
+                keywordsCache.put(keyword,kid);
+            }
             KeyWordTrend trend = new KeyWordTrend();
             trend.setCtime(System.currentTimeMillis());
             trend.setEmotion(art.getEmotion());

@@ -13,11 +13,14 @@ import com.hhhy.web.service.thrift.gencode.HhhyService;
  */
 public class ThriftRequireHandler implements HhhyService.Iface{
     private static final Logger logger = Logger.getLogger(ThriftRequireHandler.class);
+
     @Override
     public void addArticle(String jsonString) throws TException {
+        logger.info("receive json Object, will process...");
         Article art = JsonUtils.fromJson(jsonString, Article.class);
-        // TODO: 
+        // TODO: tread running using thread pool?
         ProcessChain.process(art);
+        logger.info(art.getUrl() + " process over");
     }
 
     @Override

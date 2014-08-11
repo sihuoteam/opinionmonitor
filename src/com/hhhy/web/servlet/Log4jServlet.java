@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.PropertyConfigurator;
 
+import com.hhhy.web.service.thrift.ThriftServer;
+
 /**
  * 
  * @author chenlingpeng
@@ -40,6 +42,7 @@ public class Log4jServlet extends HttpServlet {
         path = getServletContext().getRealPath(path);
         PropertyConfigurator.configure(path);
         System.out.println(path);
+        ThriftServer.start();
     }
 
 }

@@ -21,6 +21,7 @@ public class ThriftServer {
         start();
     }
 
+    // will start in Log4jServlet when web start
     public static void start() {
         ThriftRequireHandler handler = new ThriftRequireHandler();
         processor = new HhhyService.Processor(handler);
@@ -45,7 +46,7 @@ public class ThriftServer {
             args.minWorkerThreads(1);
             args.maxWorkerThreads(256);
             server = new TThreadPoolServer(args);
-            System.out.println("Starting the TThreadPoolServer server...");
+            logger.info("Starting the TThreadPoolServer server...");
             server.serve();
         } catch (TTransportException e) {
             logger.error(e.getMessage());
