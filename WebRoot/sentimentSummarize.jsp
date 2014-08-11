@@ -206,7 +206,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 								<dl class="trend-box clearfix">
 									<dt>
 										<p>
-											<img src="">
+											<img src="./images/sentimentSummarize/yuqingzongliang.png">
 										</p>
 										<!--<p class="color-green">
                         +200%</p>-->
@@ -227,7 +227,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 								<dl class="trend-box clearfix">
 									<dt>
 										<p>
-											<img src="">
+											<img src="./images/sentimentSummarize/zhengmian.png">
 										</p>
 										<!--<p class="color-green">
                         +-</p>-->
@@ -243,15 +243,15 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 								</dl>
 							</div>
 						</div>
-						<div class="span3 mglf20">
+						<!-- <div class="span3 mglf20">
 							<div class="widget">
 								<dl class="trend-box clearfix">
 									<dt>
 										<p>
-											<img src="">
+											<img src="./images/sentimentSummarize/zhongli.png">
 										</p>
-										<!--<p class="color-green">
-                        +50%</p>-->
+										<p class="color-green">
+                        +50%</p>
 									</dt>
 									<dd>
 										<h5>
@@ -263,13 +263,13 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 									</dd>
 								</dl>
 							</div>
-						</div>
+						</div> -->
 						<div class="span3 mglf20">
 							<div class="widget">
 								<dl class="trend-box clearfix">
 									<dt>
 										<p>
-											<img src="">
+											<img src="./images/sentimentSummarize/fumian.png">
 										</p>
 										<!--<p class="color-green">
                         +-</p>-->
