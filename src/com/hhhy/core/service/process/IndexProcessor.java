@@ -10,6 +10,10 @@ public class IndexProcessor {
 
     }
 
+    public static void addIndex(Article art) {
+
+    }
+
     public static List<Long> query() {
         // TODO
         return null;

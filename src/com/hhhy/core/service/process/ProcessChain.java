@@ -2,15 +2,29 @@ package com.hhhy.core.service.process;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.hhhy.db.beans.Article;
 
 public class ProcessChain {
+    private static final Logger logger = Logger.getLogger(ProcessChain.getClass());
 
     public static void process(Article art) {
-        long id = StorageProcessor.storage(art);
-        art.setId(id);
+        long id = -1l;
+         try {
+            id = DBUtils.isArticleExist(art.getUrl());
+            if(id<0){
+                id = DBUtils.insertArticle(art);
+                art.setId(id);
+                //no need for repeat index if url already exist
+                IndexProcessor.addIndex(art);
+            }
+        } catch (SQLException e) {
+            logger.warn("can't insert article with url: "+art.getUrl());
+            logger.warn(e);
+        }
 
-        if (id < 0) {
+        if (id <= 0) {
             return;
         }
 
@@ -27,7 +41,6 @@ public class ProcessChain {
         }
 
         StatisticsProcessor.statistics(art);
-        IndexProcessor.addIndex(art, titleWords, contentWords);
     }
 
 }

@@ -6,12 +6,10 @@ import org.apache.log4j.Logger;
 
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
-import com.hhhy.db.beans.KeyWordPage;
 import com.hhhy.db.beans.KeyWordTrend;
 
 /**
  * 关键词各项统计
- * 暂时不需要
  * @author chenlingpeng
  * 
  */
@@ -25,13 +23,14 @@ public class StatisticsProcessor {
         String keyword = art.getKeyword();
         try {
             int kid = DBUtils.getKeyWordId(keyword);
-            KeyWordPage trend = new KeyWordPage();
+            KeyWordTrend trend = new KeyWordTrend();
             trend.setCtime(System.currentTimeMillis());
             trend.setEmotion(art.getEmotion());
             trend.setKid(kid);
             trend.setType(art.getType());
             trend.setUrl(art.getUrl());
             trend.setWebsite(art.getWebsite());
+            DBUtils.addTrend(trend);
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }

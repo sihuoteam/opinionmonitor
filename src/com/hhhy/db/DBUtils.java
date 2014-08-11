@@ -35,6 +35,14 @@ public class DBUtils {
     private static final String USERKEYWORD_TABLE = "a_userkeyword";
     private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
 
+    public static long isArticleExist(String url) throws SQLException {
+        String sql = "select * from "+ARTICLE_TABLE +" where url=?";
+        Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), 
+            new Object[]{url});
+        if(art==null) return -1l; // TODO: need check null?
+        return art.getId();
+    }
+
     public static long insertArticle(Article article) throws SQLException {
         String sql = "insert into " + ARTICLE_TABLE + " values(?,?,?,?,?,?,?)";
         Object[] params = { article.getTitle(), article.getSummary(),
@@ -60,8 +68,7 @@ public class DBUtils {
         return user != null && user.getId()>0;
     }
 
-    public static long loginCheck(String email, String password)
-            throws SQLException {
+    public static long loginCheck(String email, String password) throws SQLException {
         String sql = "select * from " + ADMIN_TABLE + " where email=?";
         User user = DBOperator.select(sql, new BeanHandler<User>(User.class),
                 new Object[] { email });
@@ -128,14 +135,12 @@ public class DBUtils {
         else return -1;
     }
 
-     public static boolean deleteUserKeyWord(long userid, int keywordid)
-            throws SQLException {
+    public static boolean deleteUserKeyWord(long userid, int keywordid) throws SQLException {
         String sql = "delete from " + KEYWORD_TABLE + " where uid=? and id=?";
         return DBOperator.update(sql, new Object[] { userid, keywordid });
     }
 
-    public static boolean addUserKeyWord(long userid, String keyword)
-            throws SQLException {
+    public static boolean addUserKeyWord(long userid, String keyword) throws SQLException {
         String sql = "insert into " + KEYWORD_TABLE
                 + "(uid,keyword) values(?,?)";
         return DBOperator.update(sql, new Object[] { userid, keyword });
@@ -163,6 +168,13 @@ public class DBUtils {
     /*************************** 关键词处理部分结束 **************************/
 
     /*************************** 关键词统计部分 **************************/
+
+    public static boolean addTrend(KeyWordTrend keyWordTrend) throws SQLException {
+        String sql = "insert into "+KEYWORDPAGE_TABLE + "(type,kid,emotion,url,website,ctime) values(?,?,?,?,?,?)";
+        Object[] params = new Object[]{keyWordTrend.getType(), keyWordTrend.getKid(), keyWordTrend.getEmotion(), 
+            keyWordTrend.getUrl(), keyWordTrend.getWebsite(), keyWordTrend.getCtime()};
+        return DBOperator.update(sql, params);
+    }
 
     /**
      * 媒体来源统计
