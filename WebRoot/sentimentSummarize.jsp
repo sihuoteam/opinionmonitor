@@ -54,14 +54,16 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 					style="position: relative; top: 0; left: 25px;">
 			</a>
 			<button class="menu-toggle" type="button"></button>
-			<div class="topnav pull-left ln">
+			
+			<!-- <div class="topnav pull-left ln">
 				<div class="btn-group" id="J-toggle-site">
 					<a class="btn dropdown-toggle btn-small"> name <span
 						class="caret" style="display: none;"></span> </a>
 					<ul class="dropdown-menu">
 					</ul>
 				</div>
-			</div>
+			</div> -->
+			
 			<ul class="topnav pull-right inline">
 				
 				<li>
@@ -183,7 +185,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 				</ul>
 				<div class="innerLR">
 
-					<div class="row-fluid">
+					<!-- <div class="row-fluid">
 						<div class="span12">
 							<ul class="inline tab-small">
 								<li class="first ">
@@ -197,7 +199,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 
 
 					<div class="row-fluid">
@@ -234,7 +236,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 									</dt>
 									<dd>
 										<h5>
-											<a href="">positive:3</a>
+											<a href="">3</a>
 										</h5>
 										<p>
 											正面

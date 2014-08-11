@@ -52,7 +52,8 @@ if(userid==null){
 <div class="navbar">
     <a class="appbrand"><img src="logo" alt="" style="position: relative;top:0;left: 25px;"></a>
     <button class="menu-toggle" type="button"></button>
-    <div class="topnav pull-left ln">
+    
+    <!-- <div class="topnav pull-left ln">
         <div class="btn-group" id="J-toggle-site">
             <a class="btn dropdown-toggle btn-small">
                 name
@@ -60,7 +61,8 @@ if(userid==null){
             </a>
             <ul class="dropdown-menu"></ul>
         </div>
-    </div>
+    </div> -->
+    
     <ul class="topnav pull-right inline">
         <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 关键词设置</a></li>
         <li><a href="" class="top-logout" data-toggle="tooltip" data-placement="bottom"><i></i> 退出</a></li>
