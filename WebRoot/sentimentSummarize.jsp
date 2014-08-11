@@ -141,16 +141,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 								<a href="">媒体来源</a>
 							</li>
 							<li>
-								<a href="">地域分布</a>
-							</li>
-							<li>
 								<a href="">情感走势</a>
-							</li>
-							<li>
-								<a href="">话题分布</a>
-							</li>
-							<li>
-								<a href="">TOP 排行</a>
 							</li>
 						</ul>
 					</li>

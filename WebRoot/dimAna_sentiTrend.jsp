@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>emailSet</title>
+    <title>dimAna_sentiTrend</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -30,6 +30,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="./css/style-red.css">
     
     <link rel="stylesheet" href="./css/style-red-my.css">
+    
+    <link rel="stylesheet" type="text/css" href="./css/dimensionAnalysis/sentimentTrend/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="./css/dimensionAnalysis/sentimentTrend/styles.css" />
+<link rel="stylesheet" type="text/css" href="./css/dimensionAnalysis/sentimentTrend/pager.css" />
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/jquery.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/jquery.yii.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/jquery.ba-bbq.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/highcharts.src.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/exporting.src.js"></script>
   </head>
   
   <body>
@@ -104,11 +113,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a href="" class="menu-title"><i></i><span>舆情概况</span>
 						</a>
 					</li>
-					<li id="more-sub-menu" class="menu-list menu-lat ">
+					<li id="more-sub-menu" class="menu-list menu-lat active">
 						<a href="" class="menu-title"><i></i><span>维度分析</span>
 						</a>
 						<ul class="sub-menu-list" id="sub-menu-list">
-							<li>
+							<li class=sub-active>
 								<a href="">舆情走势</a>
 							</li>
 							<li>
@@ -130,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 					</li>
-					<li class="menu-list menu-rep active">
+					<li class="menu-list menu-rep ">
 						<a href="" class="menu-title"><i></i><span>数据报告</span>
 						</a>
 					</li>
@@ -144,60 +153,112 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!--<div id="content">-->
     <ul class="breadcrumb">
   <li>您在这里：</li>
-  <li class="color-red">数据报告/预警邮件设置</li>
+  <li class="color-red">维度分析/舆情走势</li>
 </ul>
 <div class="innerLR">
-<form id="send-form" action="/export/warnsetting" method="post">
+<form action="/trend/index" method="get"><input type="hidden" value="3" name="period" id="period" /><input type="hidden" value="" name="author" id="author" /><div class="row-fluid pb10">
+  <div class="clearfix time-opt">   
+    <ul class="inline tab-small">
+      <li class="first ">
+        <a href="/trend/index?period=1&amp;source=&amp;sentiment=&amp;topic_id=&amp;merge=1&amp;author=">今日</a>      </li>
+      <li >
+        <a href="/trend/index?period=2&amp;source=&amp;sentiment=&amp;topic_id=&amp;merge=1&amp;author=">昨日</a>      </li>
+      <li class=current>
+        <a href="/trend/index?period=3&amp;source=&amp;sentiment=&amp;topic_id=&amp;merge=1&amp;author=">7天</a>            
+      </li>
+      <li >
+        <a href="/trend/index?period=4&amp;source=&amp;sentiment=&amp;topic_id=&amp;merge=1&amp;author=">30天</a> 
+      </li>
+      <li></li>
+      <li>自定义：
+      
+      <input class="input-small" readonly="readonly" onchange="document.getElementById(&quot;period&quot;).value=&quot;&quot;; this.form.submit();" id="start_date" type="text" value="2014-08-05" name="start_date" />      <a class="i-cal" href="javascript:;" id="start_date_link"></a>
+      <script>
+        $(function(){
+          $("#start_date_link").click(function(){
+             $("#start_date").datepicker("show");
+          });
+        });
+      </script>
+
+      <input class="input-small" readonly="readonly" onchange="document.getElementById(&quot;period&quot;).value=&quot;&quot;; this.form.submit();" id="end_date" type="text" value="2014-08-11" name="end_date" />      <a class="i-cal" href="javascript:;" id="end_date_link"></a>
+      <script>
+        $(function(){
+          $("#end_date_link").click(function(){
+             $("#end_date").datepicker("show");
+          });
+        });
+      </script>
+      </li>
+      <li>
+        <label>
+        <input data-toggle="checkbox" class="ez-hide" checked="checked" id="yt0" type="checkbox" value="1" name="merge" />合并相似文章
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row-fluid clearfix">
+  <div class="control-group form-inline">
+        <label class="control-label" for="">来源：</label>    <select class="mr20" name="source" id="source">
+<option value="" selected="selected">全部</option>
+<option value="news">新闻</option>
+<option value="bbs">论坛</option>
+<option value="blog">博客</option>
+<option value="epub">电子报</option>
+<option value="weibo">微博</option>
+</select>    
+    
+      <label class="control-label" for="">话题：</label>    <select class="mr20" name="topic_id" id="topic_id">
+<option value="" selected="selected">全部</option>
+<option value="913">观致3</option>
+<option value="914">观致五门版</option>
+<option value="982">性价比口碑</option>
+</select>  
+  </div>
+</div>
+</form>
+
   <div class="row-fluid">
-    <div class="tabbable white-bg-padding">
-      <ul class="nav nav-tabs">
-          <li><a href="./dataExport.jsp">导出数据</a></li>        
-          <li class="active"><a href="">预警邮件设置</a></li>   
-          <li><a href="./shortMessageSet.jsp">预警短信设置</a></li>          
-      </ul>
-      <div class="tab-content pd40">
- <div class="control-group form-horizontal">
-
-            <label class="control-label" for="email" style="width:80px">发送邮箱：</label>
-            <div class="controls" style="margin-left:80px">
-              <input value="xxx@yy.com" name="SendForm[warn_mail]" id="SendForm_warn_mail" type="text" />              <div class="errorMessage" id="SendForm_email_em_" style="display:none"></div>            </div>
-          </div>
-          <div class="control-group form-horizontal">
-            <label class="control-label" for="hour"  style="width:80px">是否发送：</label>
-            <div class="controls" style="margin-left:80px" >
-          <input id="ytSendForm_enable_warn" type="hidden" value="" name="SendForm[enable_warn]" /><span id="SendForm_enable_warn"><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_0" value="0" checked="checked" type="radio" name="SendForm[enable_warn]" />否</label><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_1" value="1" type="radio" name="SendForm[enable_warn]" />是</label></span>
-            </div>
-          </div>
-
-          <div class="control-group form-horizontal">
-            <label class="control-label" for=""  style="width:80px">&nbsp;</label>
-            <div class="controls" style="margin-left:80px">
-              <input id="sendForm" class="btn-red" type="submit" name="yt0" value="设置" />            </div>
-          </div>
-       
-	</div>
+    <div class="span12">
+      <div class="widget">
+        <div class="widget-hd"><span class="fr"><a href="/trend/export?0=&period=3&source=&sentiment=&topic_id=&merge=1&start_date=&end_date=" class="i-export">导出</a></span>舆情走势</div>
+        <div class="widget-bd h400">
+<div id="yw0"></div>
+        </div>
+     </div>
    </div>
   </div>
-  </form>
 </div>
- 
- 
-<!--</div>--><!-- content -->
+</div>
+</div>
+
+<script>
+Highcharts.setOptions({
+	lang: {
+    printChart:'打印图片',
+		downloadJPEG: '保存为jpeg',
+    downloadPNG: '保存为png',
+    downloadSVG: '保存为svg',
+    downloadPDF: '保存为pdf'
+	}
+});
+</script><!--</div>--><!-- content -->
     </div>
 </div>
- 
+
 <div id="pop" style="display:none;">
   <div id="popHead"><h2>&nbsp;</h2><a id="popClose" title="关闭">关闭</a> </div>
   <div id="popContent">
     <dl>
       <dt id="popIntro"></dt>
-      <dd id="popMore"><a href="http://yq.adt100.com/moniter/imp?merge=1"></a></dd>
+      <dd id="popMore"><a href="/moniter/imp?merge=1"></a></dd>
     </dl>
   </div>
 </div>
- 
+
 <script type="text/javascript">window.jQuery || document.write('<script type="text/javascript" src="./js/jquery.min.js"><\/script>')</script>
- 
+
 <script>
   $(function(){
     $.getJSON("/moniter/pop?merge=1", function(data){
@@ -209,46 +270,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   //    "请输入你的内容简介，这里是内容简介.请输入你的内容简介，这里是内容简介.请输入你的内容简介，这里是内容简介", "3");
   });
 </script>
- 
- 
-<!--
-<script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"></script>
--->
- 
-<script type="text/javascript" src="./js/dataExport/pop.js"></script>
-<script type="text/javascript" src="./js/dataExport/jquery.simInput.js"></script>
-<script type="text/javascript" src="./js/dataExport/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="./js/dataExport/common.js"></script>
-<script type="text/javascript" src="./js/dataExport/my.js"></script>
- 
+
+
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/pop.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/jquery.simInput.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/common.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/my.js"></script>
+
 <script type="text/javascript">
-   
+  
   $(function(){
     $('[data-toggle="checkbox"]').simInput();
     $('[data-toggle="radio"]').simInput();
   });
- 
-</script>
- 
-<!--[if lt IE 8]>
- 
-<script type="text/javascript" src="/apps/yuqing/theme/red/js/ie-fix.js" ></script>
- 
-<![endif]-->
- 
-<script type="text/javascript" src="./js/dataExport/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./js/dataExport/jquery-ui-i18n.min.js"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
-jQuery(function($) {
-jQuery('#start_date').datepicker(jQuery.extend({showMonthAfterYear:false},jQuery.datepicker.regional['zh_cn'],{'dateFormat':'yy-mm-dd'}));
-jQuery('#end_date').datepicker(jQuery.extend({showMonthAfterYear:false},jQuery.datepicker.regional['zh_cn'],{'dateFormat':'yy-mm-dd'}));
-});
-/*]]>*/
-</script>
- 
- 
-</div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>    
 
-  </body>
+</script>
+
+<!--[if lt IE 8]>
+
+<script type="text/javascript" src="/apps/yuqing/theme/red/js/ie-fix.js" ></script>
+
+<![endif]--> 
+
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="./js/dimensionAnalysis/sentimentTrend/jquery.yiilistview.js"></script>
+ 
+ 
+</body>
 </html>

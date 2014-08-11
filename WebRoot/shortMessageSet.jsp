@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>emailSet</title>
+    <title>shortMessageSet</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div> -->
     
     <ul class="topnav pull-right inline">
-        <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 设置</a></li>
+        <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 关键词设置</a></li>
         <li><a href="" class="top-logout" data-toggle="tooltip" data-placement="bottom"><i></i> 退出</a></li>
     </ul>
  
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</form>
 		</div>
             <ul class="menu-lists">
-					<li class="menu-list menu-general active">
+					<li class="menu-list menu-general">
 						<a href="" class="menu-title"><i></i><span>舆情概况</span>
 						</a>
 					</li>
@@ -118,16 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<a href="">媒体来源</a>
 							</li>
 							<li>
-								<a href="">地域分布</a>
-							</li>
-							<li>
 								<a href="">情感走势</a>
-							</li>
-							<li>
-								<a href="">话题分布</a>
-							</li>
-							<li>
-								<a href="">TOP 排行</a>
 							</li>
 						</ul>
 					</li>
@@ -139,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 					</li>
-					<li class="menu-list menu-rep ">
+					<li class="menu-list menu-rep active">
 						<a href="" class="menu-title"><i></i><span>数据报告</span>
 						</a>
 					</li>
@@ -153,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!--<div id="content">-->
     <ul class="breadcrumb">
   <li>您在这里：</li>
-  <li class="color-red">数据导出/预警短信设置</li>
+  <li class="color-red">数据报告/预警短信设置</li>
 </ul>
 <div class="innerLR">
 <form id="send-form" action="/export/warnsetting" method="post">
