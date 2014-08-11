@@ -35,9 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
 <div class="navbar">
-    <a class="appbrand" href="http://yq.adt100.com/"><img src="" alt="" style="position: relative;top:0;left: 25px;"></a>
+    <a class="appbrand" href=""><img src="" alt="" style="position: relative;top:0;left: 25px;"></a>
     <button class="menu-toggle" type="button"></button>
-    <div class="topnav pull-left ln">
+    
+    <!-- <div class="topnav pull-left ln">
         <div class="btn-group" id="J-toggle-site">
                           <a class="btn dropdown-toggle btn-small" href="">
                  name
@@ -45,7 +46,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </a>            <ul class="dropdown-menu">
                         </ul>
         </div>
-    </div>
+    </div> -->
+    
     <ul class="topnav pull-right inline">
         <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 设置</a></li>
         <li><a href="" class="top-logout" data-toggle="tooltip" data-placement="bottom"><i></i> 退出</a></li>
@@ -151,16 +153,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!--<div id="content">-->
     <ul class="breadcrumb">
   <li>您在这里：</li>
-  <li class="color-red">数据导出</li>
+  <li class="color-red">数据导出/导出数据</li>
 </ul>
 <div class="innerLR">
   <div class="row-fluid">
     <div class="tabbable white-bg-padding">
       <ul class="nav nav-tabs">
-          <li class="active"><a href="">导出数据</a></li>
-          <li><a href="">导出报告</a></li>
-          <li><a href="">报告发送设置</a></li>            
-          <li><a href="">预警邮件设置</a></li>            
+          <li class="active"><a href="">导出数据</a></li>        
+          <li><a href="./emailSet.jsp">预警邮件设置</a></li>   
+          <li><a href="./shortMessageSet.jsp">预警短信设置</a></li>          
       </ul>
       <div class="tab-content pd40">
  
