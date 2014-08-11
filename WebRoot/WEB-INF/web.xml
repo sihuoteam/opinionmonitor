@@ -76,6 +76,16 @@
 		<url-pattern>/summarize</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>export</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.ReportExportServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>export</servlet-name>
+		<url-pattern>/export</url-pattern>
+	</servlet-mapping>
+
 
 
 	<welcome-file-list>
