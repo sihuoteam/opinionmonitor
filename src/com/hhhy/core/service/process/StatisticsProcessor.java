@@ -11,11 +11,7 @@ import com.hhhy.db.beans.KeyWordTrend;
 
 /**
  * 关键词各项统计
-<<<<<<< HEAD
  * 暂时不需要
-=======
- * 
->>>>>>> parent of ab0050e... spider update
  * @author chenlingpeng
  * 
  */
