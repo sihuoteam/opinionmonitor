@@ -183,7 +183,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 				</ul>
 				<div class="innerLR">
 
-					<div class="row-fluid">
+					<!-- <div class="row-fluid">
 						<div class="span12">
 							<ul class="inline tab-small">
 								<li class="first ">
@@ -197,7 +197,7 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 
 
 					<div class="row-fluid">
