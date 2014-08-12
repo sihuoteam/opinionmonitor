@@ -1,5 +1,6 @@
 package com.hhhy.common.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,6 +22,12 @@ public class DateFormatUtils {
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern(pattern);
         return sdf.format(new Date());
+    }
+    
+    public static long getTime(String date, String pattern) throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern(pattern);
+        return sdf.parse(date).getTime();
     }
 
     /**
