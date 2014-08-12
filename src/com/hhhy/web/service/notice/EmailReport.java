@@ -1,4 +1,4 @@
-package com.hhhy.web.service.report;
+package com.hhhy.web.service.notice;
 
 import java.io.IOException;
 import java.util.ArrayList;

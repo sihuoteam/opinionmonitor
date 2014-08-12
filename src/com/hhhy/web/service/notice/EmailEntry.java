@@ -1,4 +1,4 @@
-package com.hhhy.web.service.report;
+package com.hhhy.web.service.notice;
 
 public class EmailEntry {
     public String subject;
