@@ -88,7 +88,11 @@
 
 
 
-	<welcome-file-list>
+	<!-- <welcome-file-list>
 		<welcome-file>loginWeb.jsp</welcome-file>
-	</welcome-file-list>
+	</welcome-file-list> -->
+	
+	<!-- <welcome-file-list>
+		<welcome-file>sentimentSummarize.jsp</welcome-file>
+	</welcome-file-list> -->
 </web-app>
