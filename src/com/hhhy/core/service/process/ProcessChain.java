@@ -1,13 +1,15 @@
 package com.hhhy.core.service.process;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
 
 public class ProcessChain {
-    private static final Logger logger = Logger.getLogger(ProcessChain.getClass());
+    private static final Logger logger = Logger.getLogger(ProcessChain.class);
 
     public static void process(Article art) {
         long id = -1l;

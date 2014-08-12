@@ -15,6 +15,7 @@ import com.hhhy.common.utils.DateFormatUtils;
 import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.EmotionWord;
 import com.hhhy.db.beans.KeyWord;
+import com.hhhy.db.beans.KeyWordTrend;
 import com.hhhy.db.beans.User;
 import com.hhhy.db.beans.item.Pair;
 import com.hhhy.db.beans.item.SrcType;
