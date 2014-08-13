@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*, com.hhhy.db.beans.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,6 +8,14 @@ if(userid==null){
 	return;
 }
 %>
+
+<%
+	List<Article> articles = new LinkedList<Article>(); 
+	Article a = new Article("title","content","http://weibo.com/zxlady9218","website");
+	a.setEmotion(1);
+	a.setTime("time");
+	articles.add(a); 
+ %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -271,7 +279,7 @@ if(userid==null){
             <a class="moniter-period" href="">全部</a>
         </li>
 
-        <li>
+        <!-- <li>
 
             <a class="moniter-period" href="">正面</a>
         </li>
@@ -284,58 +292,39 @@ if(userid==null){
         <li>
 
             <a class="moniter-period" href="">负面</a>
-        </li>
+        </li> -->
 
 
-        <li class="moniter-sort-li"><a class="i-seq desc" href=""><span>发布时间</span></a></li>
-        <li class="moniter-sort-li"><a class="i-seq" href=""><span>转载数</span></a></li></ul>
+      <!--   <li class="moniter-sort-li"><a class="i-seq desc" href=""><span>发布时间</span></a></li>
+        <li class="moniter-sort-li"><a class="i-seq" href=""><span>转载数</span></a></li> -->
+    </ul>
 </div>
 <div class="widget-tab-bd">
 
 <div class="row-fluid" id="info_list">
-<table id="moniter-sort"><tbody><tr>
-    <th class="tac" nowrap=""><a class="i-seq desc" href=""><span>发布时间</span></a></th>
-    <th class="tac" nowrap=""><a class="i-seq" href=""><span>转载数</span></a></th></tr></tbody></table>
+
 <ul class="m-news-filter">
-    <li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-red">正</span>    </div>
 
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="news-intro-hd">
-                <strong><a target="_blank" href="http://bbs.zhongsou.com/3/m_41/2761.html">【新闻】&gt; 人间冷暖</a></strong>
-                <span><a target="_blank" href="http://yq.adt100.com/moniter/snapshot/9553259">网页快照</a></span>
-            </div>
-            <div class="news-intro-bd">
-                ... 最少交535.464元
-                昨日，记者从郑州市社会保险局获悉，郑州市城镇职工及个体劳动者基本医疗保险缴费标准调整，除退休职工无需缴费外，在岗参保职工一年最少要交535.464元。按照规定，城镇职工基本医疗保险费由用人 [详细] 2014.07 21 10:26 美宝之家提醒防欺诈 赴美<b>月子</b><b>中心</b>要慎选
-                关于近期赴美生子欺 诈事件频曝光，主要原因是由于很多的家庭对选择赴美生子的认识不够，对中介的机构了解不多，导致了入宿民宿，进而引起了欺 诈行为的在此出现，在美宝之家看来，赴美生子要 [详细] 2014.07  ... <span style="color:#FAFAF9;">9553259</span>
-            </div>
+	<% for(Article aa : articles) {
+		out.println("<li class=\"m-news-filter-item clearfix\">" +
+    "<div class=\"m-i-flag\">");
+		if(aa.getEmotion() >= 0 ) {
+			out.println("<span class=\"bg-sapn-red\">正</span>    </div>");
+		}else {
+			out.println("<span class=\"bg-sapn-gray\">负</span>    </div>");		
+		}
+		
+		out.println("<div class=\"m-news-main\">"+
+        "<div class=\"m-news-intro \">"+
+            "<div class=\"news-intro-hd\">");
+            
+        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\"></a></strong>");
+        out.println("</div>"+
+            "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li>");
+            }
+	 %>
 
-            <div class="news-plus clearfix link-gray">
-                  <span class="fr">
-                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30883757"><span class="mr20">转载（1）</span></a>                    <!--
-                    <span class="mr20">点击（0）</span>
-                    <span class="mr20">评论（0）</span>
-                    -->
-                  </span>
-
-                <span class="mr20">佚名</span>
-                <span class="mr20">中搜论坛</span>
-                <span>2014/07/21 13:26:38</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
+<!-- <li class="m-news-filter-item clearfix">
     <div class="m-i-flag">
         <span class="bg-sapn-gray">中</span>    </div>
 
@@ -353,10 +342,10 @@ if(userid==null){
 
             <div class="news-plus clearfix link-gray">
                   <span class="fr">
-                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30875692"><span class="mr20">转载（1）</span></a>                    <!--
+                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30875692"><span class="mr20">转载（1）</span></a>                    
                     <span class="mr20">点击（0）</span>
                     <span class="mr20">评论（0）</span>
-                    -->
+                   
                   </span>
 
                 <span class="mr20">佚名</span>
@@ -365,319 +354,16 @@ if(userid==null){
             </div>
             <div class="news-tag">
                 话题：
-                <span class="tag-block">广州月子中心</span>              </div>
+                <span class="tag-block">广州月子中心</span>              
+            </div>
 
 
         </div>
     </div>
 
 
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-red">正</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="news-intro-hd">
-                <strong><a target="_blank" href="http://www.qianhuaweb.com/content/2014-07/21/content_5012547.htm">【新闻】编辑： 博涵</a></strong>
-                <span><a target="_blank" href="http://yq.adt100.com/moniter/snapshot/9556413">网页快照</a></span>
-            </div>
-            <div class="news-intro-bd">
-                ... 修复、心理疏导等24小时贴心照护服务。
-
-                (石家庄<b>月子</b><b>中心</b>会所的护理人员为贵宾提供健康护理)
-                兰 ... <span style="color:#FAFAF9;">9556413</span>
-            </div>
-
-            <div class="news-plus clearfix link-gray">
-                  <span class="fr">
-                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30889717"><span class="mr20">转载（1）</span></a>                    <!--
-                    <span class="mr20">点击（0）</span>
-                    <span class="mr20">评论（0）</span>
-                    -->
-                  </span>
-
-                <span class="mr20">佚名</span>
-                <span class="mr20">千华网</span>
-                <span>2014/07/21 09:59:00</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-gray">中</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="weibo-intro-bd">
-                <a target="_blank" href="http://weibo.com/u/1876369791">曾子萱萱：</a>                抵达美丽加州洛杉矶。感谢模范好爸爸的支持                <a target="_blank" href="http://ww2.sinaimg.cn/large/6fd7217fjw1eik5wags5pj20u215ob2a.jpg"><img src="./舆情监控_files/29523.png"></a>                <a href="http://weibo.com/1876369791/BeyQZigY4" target="_blank">[查看原文]</a>
-                <span style="color:#FAFAF9;">9537377</span>
-            </div>
-            <div class="weibo-plus clearfix">
-                  <span class="fr">
-                    <span class="mr20">转发（0）</span>
-                    <span class="mr20">评论（3）</span>
-                  </span>
-
-                <span class="mr20"><a href="http://weibo.com/1876369791/BeyQZigY4" target="_blank">2014/07/21 09:38:17</a></span>
-                <!--<span class="mr20">来自<a href="http://app.weibo.com/t/feed/3G5oUM" rel="nofollow">iPhone 5s</a></span>-->
-                <span class="mr20">新浪微博</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-red">正</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="news-intro-hd">
-                <strong><a target="_blank" href="http://www.jiaodong.net/news/system/more/2010300/0035/2010300_00003560.shtml">【新闻】社会新闻</a></strong>
-                <span><a target="_blank" href="http://yq.adt100.com/moniter/snapshot/9527682">网页快照</a></span>
-            </div>
-            <div class="news-intro-bd">
-                ... 的哥(图) 新商圈大悦城加剧城市拥堵
-                交警将进行路网改造 涉嫌洗黑钱？烟台一女子听信骗子被忽悠7800元 烟台机场2家VIP贵宾厅要关闭
-                企业证实已接通知 <b>月子</b><b>中心</b>28天收费6.6万
-                预约爆满排到明年2月份 伪造行驶证怕处罚跑路
-                一年后才来交警队处理 夫妻头胎孩子健康有缺陷
-                不受"单独两孩"政策限制 莱阳新 ... <span style="color:#FAFAF9;">9527682</span>
-            </div>
-
-            <div class="news-plus clearfix link-gray">
-                  <span class="fr">
-                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30836303"><span class="mr20">转载（1）</span></a>                    <!--
-                    <span class="mr20">点击（0）</span>
-                    <span class="mr20">评论（0）</span>
-                    -->
-                  </span>
-
-                <span class="mr20">佚名</span>
-                <span class="mr20">胶东在线</span>
-                <span>2014/07/21 04:04:01</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-gray">中</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="weibo-intro-bd">
-                <a target="_blank" href="http://weibo.com/u/2711987451">微问助手：</a>                @<b>广州</b><b>月</b><b>嫂</b>公司_吉宝乐 您好！来自【微问】的网友向您请教育儿方面的问题：“一周四个<b>月</b>宝宝不吃饭，爱闹脾气怎么...”『分享知识和经验来帮助TA，请点击 http://t.cn/RP2WWRo 』回答还能攒积分换礼品，iPad在向你招手！不愿收到求助信息请点击http://t.cn/zTPze3U                <a target="_blank" href="http://ww4.sinaimg.cn/large/a1a5a4fbjw1eijvbyr1ubj20c80g0q49.jpg"><img src="./舆情监控_files/29523.png"></a>                <a href="http://weibo.com/2711987451/Bewpd5a5m" target="_blank">[查看原文]</a>
-                <span style="color:#FAFAF9;">9527302</span>
-            </div>
-            <div class="weibo-plus clearfix">
-                  <span class="fr">
-                    <span class="mr20">转发（0）</span>
-                    <span class="mr20">评论（0）</span>
-                  </span>
-
-                <span class="mr20"><a href="http://weibo.com/2711987451/Bewpd5a5m" target="_blank">2014/07/21 03:24:21</a></span>
-                <!--<span class="mr20">来自<a href="http://app.weibo.com/t/feed/3ktQgw" rel="nofollow">微问</a></span>-->
-                <span class="mr20">新浪微博</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-gray">中</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="weibo-intro-bd">
-                <a target="_blank" href="http://weibo.com/u/5072991458">乐乐月嫂：</a>                发表了博文 《儿童最易发生烫伤的N个家庭细节》 - 　　夏季儿童意外烫伤高发 省消防医院收治的儿童占到总体病人的35% 　　每逢夏季来临，除了儿童溺水以外，烫伤等事故也呈高发态势。 　　昨天，<b>广州</b><b>月</b><b>嫂</b> http://t.cn/RPAVxBi                                <a href="http://weibo.com/5072991458/BeiQIFBlJ" target="_blank">[查看原文]</a>
-                <span style="color:#FAFAF9;">9472818</span>
-            </div>
-            <div class="weibo-plus clearfix">
-                  <span class="fr">
-                    <span class="mr20">转发（0）</span>
-                    <span class="mr20">评论（0）</span>
-                  </span>
-
-                <span class="mr20"><a href="http://weibo.com/5072991458/BeiQIFBlJ" target="_blank">2014/07/19 16:53:40</a></span>
-                <!--<span class="mr20">来自<a href="http://app.weibo.com/t/feed/2Bvk1e" rel="nofollow">新浪博客</a></span>-->
-                <span class="mr20">新浪微博</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-red">正</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="news-intro-hd">
-                <strong><a target="_blank" href="http://www.chinadaily.com.cn/hqcj/xfly/2014-07-19/content_12039259.html">【新闻】京华良子"奶奶、姥姥班"开课啦</a></strong>
-                <span><a target="_blank" href="http://yq.adt100.com/moniter/snapshot/9450705">网页快照</a></span>
-            </div>
-            <div class="news-intro-bd">
-                [提要] <b>月</b><b>嫂</b>市场劲爆点，京华良子真正实现把<b>月子</b><b>中心</b>搬回家，让爱在家里无限蔓延，京华良子把 ... <span style="color:#FAFAF9;">9450705</span>
-            </div>
-
-            <div class="news-plus clearfix link-gray">
-                  <span class="fr">
-                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30745609"><span class="mr20">转载（2）</span></a>                    <!--
-                    <span class="mr20">点击（0）</span>
-                    <span class="mr20">评论（0）</span>
-                    -->
-                  </span>
-
-                <span class="mr20">佚名</span>
-                <span class="mr20">中国日报网</span>
-                <span>2014/07/19 03:43:00</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-red">正</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="news-intro-hd">
-                <strong><a target="_blank" href="http://news.xinmin.cn/rollnews/2014/07/19/24834545.html">【新闻】京华良子家庭服务有限公司招聘</a></strong>
-                <span><a target="_blank" href="http://yq.adt100.com/moniter/snapshot/9450244">网页快照</a></span>
-            </div>
-            <div class="news-intro-bd">
-                ... 2.性别不限；3.一年以上销售岗位工作经验或有 <b>月</b><b>嫂</b> 工作经验者优先；4.有较强的沟通表达能力。
-                工资标准 ：面谈
-                如有意向，请把简历投送至：zhaopin@ihomecare
-                北京京华良子家庭服务有限公司诚邀加盟，和我们一起"把<b>月子</b><b>中心</b>搬回家"！加盟热线：4000515252
-                新民网茶馆 由新民网出品
-                微信号：newteahouse
-                无节操、有道理
-                最麻辣，最有趣的时事脱口秀！
-                你今天脑补了吗？
-                新民网事 由新民网出品
-                微信号：xinminwangshi
-                突发事、新鲜事、有趣事
-                ... <span style="color:#FAFAF9;">9450244</span>
-            </div>
-
-            <div class="news-plus clearfix link-gray">
-                  <span class="fr">
-                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30745580"><span class="mr20">转载（1）</span></a>                    <!--
-                    <span class="mr20">点击（0）</span>
-                    <span class="mr20">评论（0）</span>
-                    -->
-                  </span>
-
-                <span class="mr20">佚名</span>
-                <span class="mr20">新民网</span>
-                <span>2014/07/19 03:38:00</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-        </div>
-    </div>
-
-
-</li>
-<li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-gray">中</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="weibo-intro-bd">
-                <a target="_blank" href="http://weibo.com/u/5072991458">乐乐月嫂：</a>                发表了博文 《怀孕前三个<b>月</b>有哪些食物不能够食用》 - 　　女性怀孕以后，前三个<b>月</b>不能够吃那些食物？<b>广州</b><b>月</b><b>嫂</b>公司之孕期知识提醒大家，孕妇在怀孕期间最好不要吃油条，动物的肝脏，过敏性食物。对于饮食的误区孕 http://t.cn/RPwtfTW                                <a href="http://weibo.com/5072991458/Be9tFd9L7" target="_blank">[查看原文]</a>
-                <span style="color:#FAFAF9;">9428749</span>
-            </div>
-            <div class="weibo-plus clearfix">
-                  <span class="fr">
-                    <span class="mr20">转发（0）</span>
-                    <span class="mr20">评论（0）</span>
-                  </span>
-
-                <span class="mr20"><a href="http://weibo.com/5072991458/Be9tFd9L7" target="_blank">2014/07/18 17:02:09</a></span>
-                <!--<span class="mr20">来自<a href="http://app.weibo.com/t/feed/2Bvk1e" rel="nofollow">新浪博客</a></span>-->
-                <span class="mr20">新浪微博</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              </div>
-
-
-
-
-        </div>
-    </div>
-
-
-</li>
-</ul><br><div class="pager"><div id="yw0" class="page-count">  <strong class="mr20" id="total-search-count">67条搜索结果</strong>
-
-
-    <span class="current">1</span>
-    <a href="">2</a>
-    <a href="">3</a>
-    <a href="">4</a>
-    <a href="">5</a>
-    <a href="">6</a>
-    <a href="">7</a>
-    <a href="">下一页</a>
-    <a href="">尾页</a></div></div><div class="keys" style="display:none" title="/moniter/index?merge=1"><span>9553259</span><span>9549009</span><span>9556413</span><span>9537377</span><span>9527682</span><span>9527302</span><span>9472818</span><span>9450705</span><span>9450244</span><span>9428749</span></div>
-</div>
+</li> -->
+</ul><br><div class="pager"><div id="yw0" class="page-count">  <strong class="mr20" id="total-search-count"><%=articles.size() %>条搜索结果</strong></div>
 <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" src="./js/sentimentMonitor/bds_s_v2.js"></script>
 
 <script type="text/javascript">

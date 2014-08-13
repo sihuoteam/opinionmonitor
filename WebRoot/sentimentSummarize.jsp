@@ -1,5 +1,5 @@
-<%@ page language="java" import="java.util.*, com.hhhy.db.beans.*" pageEncoding="utf-8"%>
-<%
+<%@ page language="java" import="java.util.*, com.hhhy.db.beans.*" pageEncoding="utf-8"%>  
+<%-- <%
 	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Long userid = (Long)session.getAttribute("userid");
@@ -19,15 +19,21 @@ List<Article> negarts= (List<Article>)request.getAttribute("negarts");
 //
 Integer emotionNum = 2;
 String emotionDistribution = "[]";
-%>
-<%-- <%
+%> --%>
+<% 
+	String name = "username";
 	Integer poscount = 8;
 	Integer negcount = 2;
 
 	//
 	Integer emotionNum = 2;
-	String emotionDistribution = "[]";
-%> --%>
+	 List<Article> importantArticle = new LinkedList<Article>(); 
+	Article a = new Article("title","content","http://weibo.com/zxlady9218","website");
+	 importantArticle.add(a); 
+	
+	List<Article> negArticle = new LinkedList<Article>();
+	negArticle.add(a);
+%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -273,7 +279,7 @@ String emotionDistribution = "[]";
 								<div id="pie" class="h290" data-highcharts-chart="1">
 									<div class="highcharts-container"
 										id="highcharts-emotionDistributed"
-										style="position: relative; width: 530px; height: 290px; text-align: left; line-height: normal; z-index: 0;">
+										style="position: relative; width: 460px; height: 290px; text-align: left; line-height: normal; z-index: 0;">
 
 									</div>
 								</div>
@@ -292,16 +298,20 @@ String emotionDistribution = "[]";
 							</div>
 							<div class="widget-bd h290">
 								<ul class="prefix-stopwatch">
-									<li><a target="_blank"
-										href="http://weibo.com/2711987451/Bewpd5a5m">[微博]@广州月嫂公司_吉宝乐
-											您好！来自【微问...</a><span>新浪微博</span><span><a target="_blank"
-											href="http://yq.adt100.com/moniter/dedup?dedup_id=sina_3734611631230412">转载(1)</a>
-									</span></li>
-									<li><a target="_blank"
+								<%-- <% for(Article r:importantArticle){ %>
+									<li><a target="_blank" href=<%=r.getUrl()%>><%=r.getTitle() %> </a>
+									</li>
+								<% } %> --%>
+								
+								<% for(Article r:importantArticle) {
+										out.println("<li><a target=\"_blank\" href=" + r.getUrl() + ">"+ r.getTitle() +"</a></li>");
+								 	}%>
+								</ul>
+									<!-- <li><a target="_blank"
 										href="http://www.jiaodong.net/news/system/more/2010300/0035/2010300_00003560.shtml">[新闻]社会新闻</a><span>胶东在线</span><span><a
 											target="_blank"
 											href="http://yq.adt100.com/moniter/dedup?dedup_id=30836303">转载(1)</a>
-									</span></li>
+									</span></li> -->
 							</div>
 						</div>
 					</div>
@@ -311,7 +321,16 @@ String emotionDistribution = "[]";
 								<h4>负面舆情预警</h4>
 							</div>
 							<div class="widget-bd h290">
-								<ul class="prefix-stopwatch">暂无数据
+								<ul class="prefix-stopwatch">
+								<%-- <% for(Article r:negArticle){ %>
+									<li><a target="_blank"
+									href=<%=r.getUrl()%>><%=r.getTitle() %></a>
+									</li>
+								<% } %> --%>
+								<% for(Article r:negArticle) {
+										out.println("<li><a target=\"_blank\" href=" + r.getUrl() + ">"+ r.getTitle() +"</a></li>");
+								 	}%>
+								
 								</ul>
 							</div>
 						</div>
