@@ -15,11 +15,15 @@ if(poscount==null || negcount==null || plaincount==null)
 String posttrend = (String)request.getAttribute("postrend");//json
 String negtrend = (String)request.getAttribute("negtrend");//json
 List<Article> negarts= (List<Article>)request.getAttribute("negarts");
+Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
+Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
 
 //
 Integer emotionNum = 2;
 String emotionDistribution = "[]";
-%> --%>
+%>
+--%>
+
 <% 
 	String name = "username";
 	Integer poscount = 8;
@@ -34,6 +38,7 @@ String emotionDistribution = "[]";
 	List<Article> negArticle = new LinkedList<Article>();
 	negArticle.add(a);
 %>
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

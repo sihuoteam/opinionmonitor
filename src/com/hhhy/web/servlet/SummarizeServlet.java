@@ -38,6 +38,10 @@ public class SummarizeServlet extends HttpServlet {
             request.setAttribute("negtrend", negTrend);
             List<Article> arts = DBUtils.getNegArticles(Integer.parseInt(kid));
             request.setAttribute("negarts", arts);
+            Map<String, Integer> mediaStatis = DBUtils.getMediaSourceStatis(Integer.parseInt(kid));
+            Map<String, Integer> sourceStatis =DBUtils.getSourceTypeStatis(Integer.parseInt(kid));
+            request.setAttribute("mediaStatis", mediaStatis);
+            request.setAttribute("sourceStatis", sourceStatis);
             request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());
