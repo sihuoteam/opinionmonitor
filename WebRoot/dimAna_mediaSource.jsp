@@ -357,13 +357,14 @@ $(function () {
             name: '比例',
             colors : [ '#d95455', '#979080','#4c88a2', '#83823f','#f0c189', '#40131a' ],
             data: [
-                ['Firefox',   45.0],
+            <%=roundData%>
+                /* ['Firefox',   45.0],
                 ['IE',       26.8],
                 ['Chrome',   12.8],
                 ['Safari',    8.5],
                 ['Opera',     6.2],
                 ['QQ',		13],
-                ['Others',   0.7]
+                ['Others',   0.7] */
             ]
         }]
     });
