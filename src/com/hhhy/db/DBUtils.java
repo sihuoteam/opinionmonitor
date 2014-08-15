@@ -17,13 +17,12 @@ import com.hhhy.db.beans.EmotionWord;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.KeyWordTrend;
 import com.hhhy.db.beans.User;
-import com.hhhy.db.beans.item.Condition;
 import com.hhhy.db.beans.item.Pair;
 import com.hhhy.db.beans.item.SrcType;
 import com.sun.org.apache.commons.collections.MapUtils;
 
 /**
- * 瀵规�版��搴����浣����涓�浜�姝�
+ * 对数据库操作集中于此
  * 
  * @author chenlingpeng
  * 
@@ -54,7 +53,7 @@ public class DBUtils {
         return DBOperator.insert(sql, params);
     }
 
-    /*************************** 璐���风�＄����ㄥ�� **************************/
+    /*************************** 账号管理部分 **************************/
 
     public static long createUser(User user) throws SQLException {
         String sql = "insert into " + ADMIN_TABLE
@@ -84,7 +83,7 @@ public class DBUtils {
         return -1l;
     }
 
-    /*************************** 璐���风�＄����ㄥ��缁���� **************************/
+    /*************************** 账号管理部分结束 **************************/
 
     public static List<EmotionWord> getEmotionWords() throws SQLException {
         String sql = "select * from " + EMOTIONWORD_TABLE;
@@ -93,7 +92,7 @@ public class DBUtils {
         return emotionWords;
     }
 
-    /*************************** ��抽��璇�澶������ㄥ�� **************************/
+    /*************************** 关键词处理部分 **************************/
 
     public static List<KeyWord> getAllKeyWordObj() throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE;
@@ -103,7 +102,7 @@ public class DBUtils {
     }
 
     /**
-     * ���杩������抽��璇�
+     * 只返回关键词
      * 
      * @return
      * @throws SQLException
@@ -115,7 +114,7 @@ public class DBUtils {
         return keywords;
     }
 
-    // 涓������ㄦ�疯�����涓������抽��璇�, ��ㄦ�蜂俊���瀛����session涓�
+    // 不同用户返回不同关键词, 用户信息存放session中
     public static List<KeyWord> getUserKeyWord(long userid) throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE + " where uid=?";
         List<KeyWord> keywords = DBOperator.select(sql,
@@ -168,7 +167,7 @@ public class DBUtils {
                     Article.class), new Object[] { pageid });
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
-                art.setContent(""); // ���瀹圭疆绌猴�����灏�瀛���ㄦ�����
+                art.setContent(""); // 内容置空，减少存储消耗
                 art.setSummary("");
                 arts.add(art);
             }
@@ -176,9 +175,9 @@ public class DBUtils {
         return arts;
     }
 
-    /*************************** ��抽��璇�澶������ㄥ��缁���� **************************/
+    /*************************** 关键词处理部分结束 **************************/
 
-    /*************************** ��抽��璇�缁�璁￠�ㄥ�� **************************/
+    /*************************** 关键词统计部分 **************************/
 
     public static boolean addTrend(KeyWordTrend keyWordTrend) throws SQLException {
         String sql = "insert into " + KEYWORDPAGE_TABLE
@@ -191,7 +190,7 @@ public class DBUtils {
     }
 
     /**
-     * 濯�浣���ユ��缁�璁�
+     * 媒体来源统计
      */
     public static Map<String, Integer> getMediaSourceStatis(int kid) throws SQLException {
         // String sql0 = "select website from "+KEYWORDPAGE_TABLE
@@ -211,7 +210,7 @@ public class DBUtils {
     }
 
     /**
-     * ��ユ��绫诲��缁�璁�
+     * 来源类型统计
      * 
      * @param keyword
      * @return
@@ -232,7 +231,7 @@ public class DBUtils {
     }
 
     /**
-     * ��峰��姝ｈ��
+     * 获取正负
      * 
      * @param keyword
      * @return
@@ -301,7 +300,7 @@ public class DBUtils {
     }
 
     /**
-     * ��峰�� 姝ｈ��骞� ���������缁�璁￠��
+     * 获取 正负平 情感的统计量
      * 
      * @param keyword
      * @return
@@ -326,15 +325,15 @@ public class DBUtils {
         return counts;
     }
 
-    /*************************** ��抽��璇�缁�璁￠�ㄥ��缁���� **************************/
+    /*************************** 关键词统计部分结束 **************************/
 
-    /*************************** data export��ㄥ�� **************************/
+    /*************************** data export部分 **************************/
 
     public static List<Article> exportData(Condition condition) throws SQLException {
         return null;
     }
 
-    /*************************** data export��ㄥ��缁���� **************************/
+    /*************************** data export部分结束 **************************/
 
     public static void main(String[] args) throws SQLException {
         // Article a = new Article("title1", "content", "url", "website");
@@ -350,6 +349,7 @@ public class DBUtils {
         logger.info(getUserKeyWord(9l).get(0).getId());
         logger.info(getUserKeyWord(9l).get(0).getUid());
         logger.info(getUserKeyWord(9l).get(0).getKeyword());
+        
     }
 
 }
