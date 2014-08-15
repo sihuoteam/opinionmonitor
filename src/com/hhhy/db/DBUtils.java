@@ -37,10 +37,11 @@ public class DBUtils {
     private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
 
     public static long isArticleExist(String url) throws SQLException {
-        String sql = "select * from "+ARTICLE_TABLE +" where url=?";
-        Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), 
-            new Object[]{url});
-        if(art==null) return -1l; // TODO: need check null?
+        String sql = "select * from " + ARTICLE_TABLE + " where url=?";
+        Article art = DBOperator.select(sql, new BeanHandler<Article>(
+                Article.class), new Object[] { url });
+        if (art == null)
+            return -1l; // TODO: need check null?
         return art.getId();
     }
 
@@ -66,10 +67,11 @@ public class DBUtils {
         String sql = "select * from " + ADMIN_TABLE + " where email=?";
         User user = DBOperator.select(sql, new BeanHandler<User>(User.class),
                 new Object[] { email });
-        return user != null && user.getId()>0;
+        return user != null && user.getId() > 0;
     }
 
-    public static long loginCheck(String email, String password) throws SQLException {
+    public static long loginCheck(String email, String password)
+            throws SQLException {
         String sql = "select * from " + ADMIN_TABLE + " where email=?";
         User user = DBOperator.select(sql, new BeanHandler<User>(User.class),
                 new Object[] { email });
@@ -120,28 +122,34 @@ public class DBUtils {
                 new Object[] { userid });
         return keywords;
     }
-    
-    public static List<String> getUserKeyWordStr(long userid) throws SQLException {
+
+    public static List<String> getUserKeyWordStr(long userid)
+            throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE + " where uid=?";
         List<String> keywords = DBOperator.select(sql,
                 new BeanListHandler<String>(String.class),
                 new Object[] { userid });
         return keywords;
     }
-    
-    public static int getKeyWordId(String keyword) throws SQLException{
-        String sql = "select id from "+KEYWORD_TABLE +" where keyword=?";
-        Integer kid = DBOperator.select(sql, new BeanHandler<Integer>(Integer.class), new Object[]{keyword});
-        if(kid!=null) return kid;
-        else return -1;
+
+    public static int getKeyWordId(String keyword) throws SQLException {
+        String sql = "select id from " + KEYWORD_TABLE + " where keyword=?";
+        Integer kid = DBOperator.select(sql, new BeanHandler<Integer>(
+                Integer.class), new Object[] { keyword });
+        if (kid != null)
+            return kid;
+        else
+            return -1;
     }
 
-    public static boolean deleteUserKeyWord(long userid, int keywordid) throws SQLException {
+    public static boolean deleteUserKeyWord(long userid, int keywordid)
+            throws SQLException {
         String sql = "delete from " + KEYWORD_TABLE + " where uid=? and id=?";
         return DBOperator.update(sql, new Object[] { userid, keywordid });
     }
 
-    public static boolean addUserKeyWord(long userid, String keyword) throws SQLException {
+    public static boolean addUserKeyWord(long userid, String keyword)
+            throws SQLException {
         String sql = "insert into " + KEYWORD_TABLE
                 + "(uid,keyword) values(?,?)";
         return DBOperator.update(sql, new Object[] { userid, keyword });
@@ -157,7 +165,8 @@ public class DBUtils {
         for (long pageid : pagesid) {
             Article art = DBOperator.select(sql, new BeanHandler<Article>(
                     Article.class), new Object[] { pageid });
-            if(art!=null && art.getTitle()!=null && !"".equals(art.getTitle())){
+            if (art != null && art.getTitle() != null
+                    && !"".equals(art.getTitle())) {
                 art.setContent(""); // 内容置空，减少存储消耗
                 art.setSummary("");
                 arts.add(art);
@@ -170,10 +179,14 @@ public class DBUtils {
 
     /*************************** 关键词统计部分 **************************/
 
-    public static boolean addTrend(KeyWordTrend keyWordTrend) throws SQLException {
-        String sql = "insert into "+KEYWORDPAGE_TABLE + "(type,kid,emotion,url,website,ctime) values(?,?,?,?,?,?)";
-        Object[] params = new Object[]{keyWordTrend.getType(), keyWordTrend.getKid(), keyWordTrend.getEmotion(), 
-            keyWordTrend.getUrl(), keyWordTrend.getWebsite(), keyWordTrend.getCtime()};
+    public static boolean addTrend(KeyWordTrend keyWordTrend)
+            throws SQLException {
+        String sql = "insert into " + KEYWORDPAGE_TABLE
+                + "(type,kid,emotion,url,website,ctime) values(?,?,?,?,?,?)";
+        Object[] params = new Object[] { keyWordTrend.getType(),
+                keyWordTrend.getKid(), keyWordTrend.getEmotion(),
+                keyWordTrend.getUrl(), keyWordTrend.getWebsite(),
+                keyWordTrend.getCtime() };
         return DBOperator.update(sql, params);
     }
 
@@ -227,12 +240,13 @@ public class DBUtils {
      * @return
      * @throws SQLException
      */
-    public static Pair<Map<String, Integer>> getEmotionTrendStatis(int kid)
+    public static Pair<Map<String, Integer>,Map<String, Integer>> getEmotionTrendStatis(int kid)
             throws SQLException {
         String sql = "select emotion,ctime from " + KEYWORDPAGE_TABLE
-                + " where kid=?";
+                + " where kid=?  order by ctime";
         List<Object[]> emotions = DBOperator.selectArrayList(sql,
                 new Object[] { kid });
+
         Map<String, Integer> posMap = new HashMap<String, Integer>();
         Map<String, Integer> negMap = new HashMap<String, Integer>();
         for (Object[] emotion : emotions) {
@@ -249,10 +263,41 @@ public class DBUtils {
                 negMap.put(time, count + 1);
             }
         }
-        Pair<Map<String, Integer>> pair = new Pair<Map<String, Integer>>();
+        Pair<Map<String, Integer>,Map<String, Integer>> pair = new Pair<Map<String, Integer>,Map<String, Integer>>();
         pair.setFirst(posMap);
         pair.setSecond(negMap);
         return pair;
+    }
+
+    public static Pair<List<String>, List<Integer>> getEmotionTrendStatis2(int kid)
+            throws SQLException {
+        String sql = "select emotion,ctime from " + KEYWORDPAGE_TABLE
+                + " where kid=?  order by ctime";
+        List<Object[]> emotions = DBOperator.selectArrayList(sql,
+                new Object[] { kid });
+        List<String> dates = new ArrayList<String>();
+        List<Integer> negt = new ArrayList<Integer>();
+        List<Integer> post = new ArrayList<Integer>();
+        
+        for(Object[] emotion:emotions){
+            int emotionV = (Integer) emotion[0];
+            long ctimeV = (Long) emotion[1];
+            String dateF = DateFormatUtils.formatTime(ctimeV, DateFormatUtils.yyyyMMdd);
+            int size = dates.size();
+            if(size==0 || !dates.get(size).equals(dateF)){
+                dates.add(dateF);
+                negt.add(0);
+                post.add(0);
+            }
+            size = dates.size();
+            if(emotionV>0){
+                post.set(size-1, post.get(size-1)+1);
+            }else if(emotionV<0){
+                negt.set(size-1, negt.get(size-1)+1);
+            }
+        }
+        
+        return null;
     }
 
     /**
@@ -292,7 +337,7 @@ public class DBUtils {
         // logger.info("..." + createUser(user));
         // logger.info(checkUserExist("email2"));
         // logger.info(loginCheck("email3","password13"));
-//        logger.info(getEmotionWords().get(0).getWord());
+        // logger.info(getEmotionWords().get(0).getWord());
         logger.info(getUserKeyWord(9l).size());
         logger.info(getUserKeyWord(9l).get(0).getId());
         logger.info(getUserKeyWord(9l).get(0).getUid());

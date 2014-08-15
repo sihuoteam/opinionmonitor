@@ -31,7 +31,7 @@ public class SummarizeServlet extends HttpServlet {
             request.setAttribute("poscount", counts[0]);
             request.setAttribute("negcount", counts[1]);
             request.setAttribute("plaincount", counts[2]);
-            Pair<Map<String,Integer>> pair = DBUtils.getEmotionTrendStatis(Integer.parseInt(kid));
+            Pair<Map<String,Integer>,Map<String,Integer>> pair = DBUtils.getEmotionTrendStatis(Integer.parseInt(kid));
             String posTrend = JsonUtils.toJson(pair.getFirst());
             String negTrend = JsonUtils.toJson(pair.getSecond());
             request.setAttribute("postrend", posTrend);
