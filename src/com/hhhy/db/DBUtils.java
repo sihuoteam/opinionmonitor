@@ -179,8 +179,7 @@ public class DBUtils {
 
     /*************************** 关键词统计部分 **************************/
 
-    public static boolean addTrend(KeyWordTrend keyWordTrend)
-            throws SQLException {
+    public static boolean addTrend(KeyWordTrend keyWordTrend) throws SQLException {
         String sql = "insert into " + KEYWORDPAGE_TABLE
                 + "(type,kid,emotion,url,website,ctime) values(?,?,?,?,?,?)";
         Object[] params = new Object[] { keyWordTrend.getType(),
@@ -193,8 +192,7 @@ public class DBUtils {
     /**
      * 媒体来源统计
      */
-    public static Map<String, Integer> getMediaSourceStatis(int kid)
-            throws SQLException {
+    public static Map<String, Integer> getMediaSourceStatis(int kid) throws SQLException {
         // String sql0 = "select website from "+KEYWORDPAGE_TABLE
         // +" where kid=?";
         // List<Integer> websites =
@@ -218,8 +216,7 @@ public class DBUtils {
      * @return
      * @throws SQLException
      */
-    public static Map<String, Integer> getSourceTypeStatis(int kid)
-            throws SQLException {
+    public static Map<String, Integer> getSourceTypeStatis(int kid) throws SQLException {
         String sql = "select type from " + KEYWORDPAGE_TABLE + " where kid=?";
         List<Integer> types = DBOperator.select(sql,
                 new BeanListHandler<Integer>(Integer.class),
@@ -240,8 +237,7 @@ public class DBUtils {
      * @return
      * @throws SQLException
      */
-    public static Pair<Map<String, Integer>,Map<String, Integer>> getEmotionTrendStatis(int kid)
-            throws SQLException {
+    public static Pair<Map<String, Integer>,Map<String, Integer>> getEmotionTrendStatis(int kid) throws SQLException {
         String sql = "select emotion,ctime from " + KEYWORDPAGE_TABLE
                 + " where kid=?  order by ctime";
         List<Object[]> emotions = DBOperator.selectArrayList(sql,
@@ -269,8 +265,7 @@ public class DBUtils {
         return pair;
     }
 
-    public static Pair<List<String>, List<Integer>> getEmotionTrendStatis2(int kid)
-            throws SQLException {
+    public static Pair<List<String>, List<Integer>> getEmotionTrendStatis2(int kid) throws SQLException {
         String sql = "select emotion,ctime from " + KEYWORDPAGE_TABLE
                 + " where kid=?  order by ctime";
         List<Object[]> emotions = DBOperator.selectArrayList(sql,
@@ -296,8 +291,12 @@ public class DBUtils {
                 negt.set(size-1, negt.get(size-1)+1);
             }
         }
+        Pair<List<String>, List<Integer>> pair = new Pair<List<String>, List<Integer>>();
+        pair.setFirst(dates);
+        post.addAll(negt);
+        pair.setSecond(post);
         
-        return null;
+        return pair;
     }
 
     /**
@@ -327,6 +326,14 @@ public class DBUtils {
     }
 
     /*************************** 关键词统计部分结束 **************************/
+
+    /*************************** data export部分 **************************/
+
+    public static List<Article> exportData(Condition condition) throws SQLException {
+        return null;
+    }
+
+    /*************************** data export部分结束 **************************/
 
     public static void main(String[] args) throws SQLException {
         // Article a = new Article("title1", "content", "url", "website");

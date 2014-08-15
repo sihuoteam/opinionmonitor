@@ -12,6 +12,7 @@ Integer negcount = (Integer)request.getAttribute("negcount");
 Integer plaincount = (Integer)request.getAttribute("plaincount");
 if(poscount==null || negcount==null || plaincount==null)
 	response.sendRedirect("./login.jsp");
+String date = (String)request.getAttribute("date");//json
 String posttrend = (String)request.getAttribute("postrend");//json
 String negtrend = (String)request.getAttribute("negtrend");//json
 List<Article> negarts= (List<Article>)request.getAttribute("negarts");
