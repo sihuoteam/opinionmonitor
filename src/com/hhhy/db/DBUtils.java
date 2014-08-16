@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.log4j.Logger;
@@ -16,7 +14,7 @@ import com.hhhy.common.utils.DateFormatUtils;
 import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.EmotionWord;
 import com.hhhy.db.beans.KeyWord;
-import com.hhhy.db.beans.KeyWordTrend;
+import com.hhhy.db.beans.KeyWordPage;
 import com.hhhy.db.beans.User;
 import com.hhhy.db.beans.item.Condition;
 import com.hhhy.db.beans.item.Pair;
@@ -181,14 +179,14 @@ public class DBUtils {
 
     /*************************** 关键词统计部分 **************************/
 
-    public static boolean addTrend(KeyWordTrend keyWordTrend)
+    public static boolean addTrend(KeyWordPage keyWordPage)
             throws SQLException {
         String sql = "insert into " + KEYWORDPAGE_TABLE
                 + "(type,kid,emotion,url,website,ctime) values(?,?,?,?,?,?)";
-        Object[] params = new Object[] { keyWordTrend.getType(),
-                keyWordTrend.getKid(), keyWordTrend.getEmotion(),
-                keyWordTrend.getUrl(), keyWordTrend.getWebsite(),
-                keyWordTrend.getCtime() };
+        Object[] params = new Object[] { keyWordPage.getType(),
+                keyWordPage.getKid(), keyWordPage.getEmotion(),
+                keyWordPage.getUrl(), keyWordPage.getWebsite(),
+                keyWordPage.getCtime() };
         return DBOperator.update(sql, params);
     }
 
