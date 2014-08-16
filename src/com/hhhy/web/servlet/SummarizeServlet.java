@@ -39,7 +39,7 @@ public class SummarizeServlet extends HttpServlet {
             if(size>0){
                 request.setAttribute("date", JsonUtils.toJson(pair.getFirst()));
                 request.setAttribute("postrend", JsonUtils.toJson(pair.getSecond().subList(0,size/2)));
-                request.setAttribute("negtrend", JsonUtils.toJson(pair.getSecond().subList(size/2)));
+                request.setAttribute("negtrend", JsonUtils.toJson(pair.getSecond().subList(size/2,size)));
             }
 
             // String posTrend = JsonUtils.toJson(pair.getFirst());

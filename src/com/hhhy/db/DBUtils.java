@@ -17,6 +17,7 @@ import com.hhhy.db.beans.EmotionWord;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.KeyWordTrend;
 import com.hhhy.db.beans.User;
+import com.hhhy.db.beans.item.Condition;
 import com.hhhy.db.beans.item.Pair;
 import com.hhhy.db.beans.item.SrcType;
 import com.sun.org.apache.commons.collections.MapUtils;
