@@ -6,6 +6,7 @@ package com.hhhy.db.beans;
  * 
  */
 public class KeyWordPage {
+    private long pid;
     private int kid;
     // private long pageid;
     private int emotion;
@@ -13,6 +14,14 @@ public class KeyWordPage {
     private String website;
     private long ctime;
     private String url;
+    
+    public long getPid() {
+        return pid;
+    }
+
+    public void setPid(long pid) {
+        this.pid = pid;
+    }
 
     public int getKid() {
         return kid;

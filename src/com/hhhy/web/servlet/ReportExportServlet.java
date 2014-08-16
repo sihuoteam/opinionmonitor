@@ -16,7 +16,9 @@ import org.apache.log4j.PropertyConfigurator;
 import com.hhhy.common.utils.DateFormatUtils;
 import com.hhhy.common.utils.JsonUtils;
 import com.hhhy.db.DBUtils;
+import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.KeyWord;
+import com.hhhy.db.beans.item.Condition;
 
 /**
  * report export
@@ -48,17 +50,48 @@ public class ReportExportServlet extends HttpServlet {
         String emotion = JsonUtils.toJson(emotions);
         String topic_id = JsonUtils.toJson(topic_ids);
         String field = JsonUtils.toJson(fields);
-        logger.info(source);
-        logger.info(emotion);
-        logger.info(topic_id);
-        logger.info(field);
-        logger.info(limit);
-        logger.info(JsonUtils.toJson(merge));
+        Condition condition = new Condition();
+        condition.setSize(Integer.parseInt(limit));
+        condition.setKeywords(topic_ids);
+        condition.setSources(sources);
+        int[] emotionArr = new int[3];
+        for(String em:emotions){
+            if(em.equals("positive")){
+                emotionArr[0]=1;
+            }else if(em.equals("negative")){
+                emotionArr[1]=1;
+            }else if(em.equals("neutral")){
+                emotionArr[2]=1;
+            }
+        }
+        condition.setSentiments(emotionArr);
         try {
-            logger.info(DateFormatUtils.formatTime(DateFormatUtils.getTime(start_date, "yyyy-MM-dd"),DateFormatUtils.yyyyMMddhhmmss));
+            long start = DateFormatUtils.getTime(start_date, DateFormatUtils.yyyyMMdd);
+            long end = DateFormatUtils.getTime(end_date, DateFormatUtils.yyyyMMdd);
+            condition.setStart(start);
+            condition.setEnd(end);
         } catch (ParseException e) {
             logger.warn(e.getMessage());
         }
+        
+        try {
+            List<Article> arts = DBUtils.exportData(condition);
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+        
+        
+//        logger.info(source);
+//        logger.info(emotion);
+//        logger.info(topic_id);
+//        logger.info(field);
+//        logger.info(limit);
+//        logger.info(JsonUtils.toJson(merge));
+//        try {
+//            logger.info(DateFormatUtils.formatTime(DateFormatUtils.getTime(start_date, "yyyy-MM-dd"),DateFormatUtils.yyyyMMddhhmmss));
+//        } catch (ParseException e) {
+//            logger.warn(e.getMessage());
+//        }
         
         
         
