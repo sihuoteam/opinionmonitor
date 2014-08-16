@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
-import com.hhhy.db.beans.KeyWordTrend;
+import com.hhhy.db.beans.KeyWordPage;
 
 /**
  * 关键词各项统计
@@ -31,7 +31,8 @@ public class StatisticsProcessor {
                 kid = DBUtils.getKeyWordId(keyword);
                 keywordsCache.put(keyword,kid);
             }
-            KeyWordTrend trend = new KeyWordTrend();
+            KeyWordPage trend = new KeyWordPage();
+            trend.setPid(art.getId());
             trend.setCtime(System.currentTimeMillis());
             trend.setEmotion(art.getEmotion());
             trend.setKid(kid);

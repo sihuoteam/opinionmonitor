@@ -179,14 +179,14 @@ public class DBUtils {
 
     /*************************** 关键词统计部分 **************************/
 
-    public static boolean addTrend(KeyWordPage keyWordPage)
-            throws SQLException {
-        String sql = "insert into " + KEYWORDPAGE_TABLE
-                + "(type,kid,emotion,url,website,ctime) values(?,?,?,?,?,?)";
+    public static boolean addTrend(KeyWordPage keyWordPage) throws SQLException {
+        String sql = "insert into "
+                + KEYWORDPAGE_TABLE
+                + "(type,kid,emotion,url,website,ctime,pig) values(?,?,?,?,?,?,?)";
         Object[] params = new Object[] { keyWordPage.getType(),
                 keyWordPage.getKid(), keyWordPage.getEmotion(),
                 keyWordPage.getUrl(), keyWordPage.getWebsite(),
-                keyWordPage.getCtime() };
+                keyWordPage.getCtime(), keyWordPage.getPid() };
         return DBOperator.update(sql, params);
     }
 
@@ -359,8 +359,9 @@ public class DBUtils {
         long end = condition.getEnd();
 
         String emotion = "";
-
-        if (condition.negNeed()) {
+        if(condition.negNeed()&&condition.posNeed()&&condition.plainNeed()){
+            emotion=null;
+        }else if (condition.negNeed()) {
             emotion += "emotion<0";
             if (condition.posNeed()) {
                 emotion += " or emotion>0";
@@ -400,13 +401,18 @@ public class DBUtils {
             }
         }
 
-        String limit = "limit " + condition.getSize();
+        String limit = " limit " + condition.getSize();
         String orderby = " order by ctime";
-
-        String where = "(" + time + ") and (" + source + ") and (" + emotion
+        String where = "";
+        if(emotion==null){
+            where = "(" + time + ") and (" + source + ") and (" + keyword + ") ";
+        }else{
+         where = "(" + time + ") and (" + source + ") and (" + emotion
                 + ") and (" + keyword + ") ";
+        }
 
-        sql += where + limit + orderby;
+        sql += where + orderby + limit;
+        logger.info("export sql: " + sql);
 
         List<Long> pids = DBOperator.select(sql, new BeanListHandler<Long>(
                 Long.class));
@@ -416,7 +422,7 @@ public class DBUtils {
             Article art = DBOperator.select("select * from " + ARTICLE_TABLE
                     + " where id=?", new BeanHandler<Article>(Article.class),
                     new Object[] { pid });
-            if(art.getTitle()!=null && !"".equals(art.getTitle())){
+            if (art.getTitle() != null && !"".equals(art.getTitle())) {
                 arts.add(art);
             }
         }
