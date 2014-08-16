@@ -3,14 +3,29 @@ package com.hhhy.db.beans.item;
 import java.util.Set;
 
 public class Condition{
+	// 起止时间
 	private long start;
 	private long end;
-	private boolean merge;
-	private Set<String> sources;
+	// 是否合并相似文章
+//	private boolean merge;
+	// 来源类型
+	private String[] sources;
+	// 情感，0：正面，1：负面，2：无情感
 	private int[] sentiments;
-	private Set<String> keywords;
-	private Set<String> fields;
+	// 关键词
+	private String[] keywords;
+//	// 导出字段
+//	private Set<String> fields;
+	// 导出条数
 	private int size;
+	
+	public Condition(){
+	    sentiments = new int[3];
+//	    merge=false;
+	    start=0l;
+	    end = System.currentTimeMillis();
+	}
+	
 	public long getStart() {
 		return start;
 	}
@@ -23,16 +38,16 @@ public class Condition{
 	public void setEnd(long end) {
 		this.end = end;
 	}
-	public boolean isMerge() {
-		return merge;
-	}
-	public void setMerge(boolean merge) {
-		this.merge = merge;
-	}
-	public Set<String> getSources() {
+//	public boolean isMerge() {
+//		return merge;
+//	}
+//	public void setMerge(boolean merge) {
+//		this.merge = merge;
+//	}
+	public String[] getSources() {
 		return sources;
 	}
-	public void setSources(Set<String> sources) {
+	public void setSources(String[] sources) {
 		this.sources = sources;
 	}
 	public int[] getSentiments() {
@@ -41,18 +56,18 @@ public class Condition{
 	public void setSentiments(int[] sentiments) {
 		this.sentiments = sentiments;
 	}
-	public Set<String> getKeywords() {
+	public String[] getKeywords() {
 		return keywords;
 	}
-	public void setKeywords(Set<String> keywords) {
+	public void setKeywords(String[] keywords) {
 		this.keywords = keywords;
 	}
-	public Set<String> getFields() {
-		return fields;
-	}
-	public void setFields(Set<String> fields) {
-		this.fields = fields;
-	}
+//	public Set<String> getFields() {
+//		return fields;
+//	}
+//	public void setFields(Set<String> fields) {
+//		this.fields = fields;
+//	}
 	public int getSize() {
 		return size;
 	}
@@ -60,5 +75,22 @@ public class Condition{
 		this.size = size;
 	}
 	
-	
+	public boolean posNeed(){
+	    return this.sentiments[0]==1;
+	}
+	public void needPos(){
+	    this.sentiments[0]=1;
+	}
+	public boolean negNeed(){
+	    return this.sentiments[1]==1;
+	}
+	public void needNeg(){
+	    this.sentiments[1]=1;
+	}
+	public boolean plainNeed(){
+	    return this.sentiments[2]==0;
+	}
+	public void needPlain(){
+	    this.sentiments[2]=1;
+	}
 }

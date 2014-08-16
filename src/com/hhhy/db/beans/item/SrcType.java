@@ -1,8 +1,7 @@
 package com.hhhy.db.beans.item;
 
 public enum SrcType {
-    news("新闻", 1), bbs("论坛", 2), blog("博客", 3), elePaper("电子报", 4), weibo("微博",
-            5);
+    news("新闻", 1), bbs("论坛", 2), blog("博客", 3), elePaper("搜索引擎", 4);
     private String name;
     private int index;
 
@@ -18,6 +17,18 @@ public enum SrcType {
             }
         }
         return null;
+    }
+
+    public static int getIndex(String name) {
+        if (name.equals("news"))
+            return 1;
+        if (name.equals("bbs"))
+            return 2;
+        if (name.equals("blog"))
+            return 3;
+        if (name.equals("search"))
+            return 4;
+        return -1;
     }
 
     public String getName() {

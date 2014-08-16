@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -180,7 +181,8 @@ public class DBUtils {
 
     /*************************** 关键词统计部分 **************************/
 
-    public static boolean addTrend(KeyWordTrend keyWordTrend) throws SQLException {
+    public static boolean addTrend(KeyWordTrend keyWordTrend)
+            throws SQLException {
         String sql = "insert into " + KEYWORDPAGE_TABLE
                 + "(type,kid,emotion,url,website,ctime) values(?,?,?,?,?,?)";
         Object[] params = new Object[] { keyWordTrend.getType(),
@@ -193,7 +195,8 @@ public class DBUtils {
     /**
      * 媒体来源统计
      */
-    public static Map<String, Integer> getMediaSourceStatis(int kid) throws SQLException {
+    public static Map<String, Integer> getMediaSourceStatis(int kid)
+            throws SQLException {
         // String sql0 = "select website from "+KEYWORDPAGE_TABLE
         // +" where kid=?";
         // List<Integer> websites =
@@ -217,7 +220,8 @@ public class DBUtils {
      * @return
      * @throws SQLException
      */
-    public static Map<String, Integer> getSourceTypeStatis(int kid) throws SQLException {
+    public static Map<String, Integer> getSourceTypeStatis(int kid)
+            throws SQLException {
         String sql = "select type from " + KEYWORDPAGE_TABLE + " where kid=?";
         List<Integer> types = DBOperator.select(sql,
                 new BeanListHandler<Integer>(Integer.class),
@@ -238,7 +242,8 @@ public class DBUtils {
      * @return
      * @throws SQLException
      */
-    public static Pair<Map<String, Integer>,Map<String, Integer>> getEmotionTrendStatis(int kid) throws SQLException {
+    public static Pair<Map<String, Integer>, Map<String, Integer>> getEmotionTrendStatis(
+            int kid) throws SQLException {
         String sql = "select emotion,ctime from " + KEYWORDPAGE_TABLE
                 + " where kid=?  order by ctime";
         List<Object[]> emotions = DBOperator.selectArrayList(sql,
@@ -260,13 +265,14 @@ public class DBUtils {
                 negMap.put(time, count + 1);
             }
         }
-        Pair<Map<String, Integer>,Map<String, Integer>> pair = new Pair<Map<String, Integer>,Map<String, Integer>>();
+        Pair<Map<String, Integer>, Map<String, Integer>> pair = new Pair<Map<String, Integer>, Map<String, Integer>>();
         pair.setFirst(posMap);
         pair.setSecond(negMap);
         return pair;
     }
 
-    public static Pair<List<String>, List<Integer>> getEmotionTrendStatis2(int kid) throws SQLException {
+    public static Pair<List<String>, List<Integer>> getEmotionTrendStatis2(
+            int kid) throws SQLException {
         String sql = "select emotion,ctime from " + KEYWORDPAGE_TABLE
                 + " where kid=?  order by ctime";
         List<Object[]> emotions = DBOperator.selectArrayList(sql,
@@ -274,29 +280,30 @@ public class DBUtils {
         List<String> dates = new ArrayList<String>();
         List<Integer> negt = new ArrayList<Integer>();
         List<Integer> post = new ArrayList<Integer>();
-        
-        for(Object[] emotion:emotions){
+
+        for (Object[] emotion : emotions) {
             int emotionV = (Integer) emotion[0];
             long ctimeV = (Long) emotion[1];
-            String dateF = DateFormatUtils.formatTime(ctimeV, DateFormatUtils.yyyyMMdd);
+            String dateF = DateFormatUtils.formatTime(ctimeV,
+                    DateFormatUtils.yyyyMMdd);
             int size = dates.size();
-            if(size==0 || !dates.get(size).equals(dateF)){
+            if (size == 0 || !dates.get(size).equals(dateF)) {
                 dates.add(dateF);
                 negt.add(0);
                 post.add(0);
             }
             size = dates.size();
-            if(emotionV>0){
-                post.set(size-1, post.get(size-1)+1);
-            }else if(emotionV<0){
-                negt.set(size-1, negt.get(size-1)+1);
+            if (emotionV > 0) {
+                post.set(size - 1, post.get(size - 1) + 1);
+            } else if (emotionV < 0) {
+                negt.set(size - 1, negt.get(size - 1) + 1);
             }
         }
         Pair<List<String>, List<Integer>> pair = new Pair<List<String>, List<Integer>>();
         pair.setFirst(dates);
         post.addAll(negt);
         pair.setSecond(post);
-        
+
         return pair;
     }
 
@@ -330,8 +337,95 @@ public class DBUtils {
 
     /*************************** data export部分 **************************/
 
-    public static List<Article> exportData(Condition condition) throws SQLException {
-        return null;
+    public static List<Article> exportData(Condition condition)
+            throws SQLException {
+        String sql = "select distinct pid from " + KEYWORDPAGE_TABLE
+                + " where ";
+        // String where = "";
+        if (!condition.posNeed() && !condition.negNeed()
+                && !condition.plainNeed()) {
+            logger.info("no emotion selected");
+            return null;
+        }
+        String[] sources = condition.getSources();
+        if (sources == null || sources.length == 0) {
+            logger.info("no source selected");
+            return null;
+        }
+        String[] keywords = condition.getKeywords();
+        if (keywords == null || keywords.length == 0) {
+            logger.info("no keywords selected");
+            return null;
+        }
+        long start = condition.getStart();
+        long end = condition.getEnd();
+
+        String emotion = "";
+
+        if (condition.negNeed()) {
+            emotion += "emotion<0";
+            if (condition.posNeed()) {
+                emotion += " or emotion>0";
+            }
+            if (condition.plainNeed()) {
+                emotion += " or emotion=0";
+            }
+        } else if (condition.posNeed()) {
+            emotion += "emotion>0";
+            if (condition.plainNeed()) {
+                emotion += " or emotion=0";
+            }
+        } else if (condition.plainNeed()) {
+            emotion += "emotion=0";
+        }
+
+        String time = "ctime>" + start + " and ctime<" + end;
+
+        String source = "";
+        for (String src : sources) {
+            int type = SrcType.getIndex(src);
+            if (type > 0) {
+                if (source.length() == 0) {
+                    source = "type=" + type;
+                } else {
+                    source += " or type=" + type;
+                }
+            }
+        }
+
+        String keyword = "";
+        for (String kid : keywords) {
+            if (keyword.length() == 0) {
+                keyword = "kid=" + Integer.parseInt(kid);
+            } else {
+                keyword += " or kid=" + Integer.parseInt(kid);
+            }
+        }
+
+        String limit = "limit " + condition.getSize();
+        String orderby = " order by ctime";
+
+        String where = "(" + time + ") and (" + source + ") and (" + emotion
+                + ") and (" + keyword + ") ";
+
+        sql += where + limit + orderby;
+
+        List<Long> pids = DBOperator.select(sql, new BeanListHandler<Long>(
+                Long.class));
+        List<Article> arts = new ArrayList<Article>();
+
+        for (Long pid : pids) {
+            Article art = DBOperator.select("select * from " + ARTICLE_TABLE
+                    + " where id=?", new BeanHandler<Article>(Article.class),
+                    new Object[] { pid });
+            if(art.getTitle()!=null && !"".equals(art.getTitle())){
+                arts.add(art);
+            }
+        }
+
+        // where += " and ctime>"+start+" and ctime<"+end;
+
+        return arts;
     }
 
     /*************************** data export部分结束 **************************/
@@ -350,7 +444,7 @@ public class DBUtils {
         logger.info(getUserKeyWord(9l).get(0).getId());
         logger.info(getUserKeyWord(9l).get(0).getUid());
         logger.info(getUserKeyWord(9l).get(0).getKeyword());
-        
+
     }
 
 }
