@@ -10,6 +10,7 @@ tmp/
 *.bak
 *.swp
 *~.nib
+*.jar
 local.properties
 .settings/
 .loadpath
@@ -218,3 +219,26 @@ pip-log.txt
 .mr.developer.cfg
 
 *.iml
+.metadata/.lock
+
+*.xml
+
+*.version
+
+*.index
+
+*.tree
+
+*.resources
+
+.metadata/.plugins/org.eclipse.jdt.core/invalidArchivesCache
+
+.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
+
+*.dat
+
+*.ini
+
+.mymetadata
+
+.gitignore
