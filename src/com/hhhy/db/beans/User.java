@@ -11,6 +11,11 @@ public class User {
     private String nickname;
     private String email;
     private String password;
+    private String phone;
+    // need email, message, or alert
+    private int needemail;
+    private int needphone
+    private int needalert;
     
     public User(){
         this.id = -1l;
@@ -29,6 +34,30 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getNeedemail() {
+        return needemail;
+    }
+
+    public void setNeedemail(int needemail) {
+        this.needemail = needemail;
+    }
+
+    public int getNeedphone() {
+        return needphone;
+    }
+
+    public void setNeedphone(int needphone) {
+        this.needphone = needphone;
+    }
+
+    public int getNeedalert() {
+        return needalert;
+    }
+
+    public void setNeedemail(int needalert) {
+        this.needalert = needalert;
     }
 
     public String getNickname() {

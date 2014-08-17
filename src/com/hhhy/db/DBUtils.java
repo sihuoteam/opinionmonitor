@@ -57,9 +57,8 @@ public class DBUtils {
 
     public static long createUser(User user) throws SQLException {
         String sql = "insert into " + ADMIN_TABLE
-                + " (nickname, email, password) values(?,?,?)";
-        Object[] params = { user.getNickname(), user.getEmail(),
-                user.getPassword() };
+                + " (email, password, needemail, needphone, needalert) values(?,?,?,?,?)";
+        Object[] params = { user.getEmail(), user.getPassword(),0,0,0 };
         return DBOperator.insert(sql, params);
     }
 
@@ -150,8 +149,15 @@ public class DBUtils {
 
     public static boolean addUserKeyWord(long userid, String keyword)
             throws SQLException {
-        String sql = "insert into " + KEYWORD_TABLE
+        int kid = getKeyWordId(keyword);
+        String sql = null;
+        if(kid<0){
+            sql = "insert into " + KEYWORD_TABLE
                 + "(uid,keyword) values(?,?)";
+        }else{ 
+            sql = "insert into " + KEYWORD_TABLE
+                + "(id, uid,keyword) values("+kid+",?,?)";
+        }
         return DBOperator.update(sql, new Object[] { userid, keyword });
     }
 
