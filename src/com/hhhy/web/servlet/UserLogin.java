@@ -30,13 +30,14 @@ public class UserLogin extends HttpServlet {
         String username = (String) request.getParameter("username");
         String password = (String) request.getParameter("password");
         if (!(StringUtils.notEmpty(username) && StringUtils.notEmpty(password))) {
-            request.getSession().setAttribute("loginerror", "用户名密码不能为空");
+            request.getSession().setAttribute("loginerror", "邮箱密码不能为空");
             response.sendRedirect("loginWeb.jsp");
 //            request.getRequestDispatcher("/loginWeb.jsp").forward(request,
 //                    response);
             return;
         }
         logger.info("login request: "+username+", "+password);
+        
         try {
             long uid = DBUtils.loginCheck(username, password);
             if(uid<0){

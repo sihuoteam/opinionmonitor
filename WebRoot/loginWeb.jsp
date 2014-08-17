@@ -42,7 +42,7 @@
 				<div class="login-form">
 					<ul>
 						<li class="user">
-							<input placeholder="用户名或邮箱" name="username"
+							<input placeholder="邮箱" name="username"
 								id="LoginForm_username" type="text">
 						</li>
 						<li class="pwd">

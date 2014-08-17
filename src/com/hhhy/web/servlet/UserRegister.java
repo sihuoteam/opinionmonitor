@@ -38,7 +38,11 @@ public class UserRegister extends HttpServlet {
             response.sendRedirect("registerWeb.jsp");
             return;
         }
-
+        if(!EmailValidator.getInstance().isValid(email)){
+            request.getSession().setAttribute("regerror", "邮箱不合法");
+            response.sendRedirect("loginWeb.jsp");
+            return;
+        }
         try {
             boolean flag = DBUtils.checkUserExist(email);
             if (flag) {
