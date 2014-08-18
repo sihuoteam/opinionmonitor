@@ -103,6 +103,6 @@
 	</welcome-file-list> -->
 	
 	 <welcome-file-list>
-		<welcome-file>dimAna_emotionTrend.jsp</welcome-file>
+		<welcome-file>sentimentSummarize.jsp</welcome-file>
 	</welcome-file-list> 
 </web-app>
