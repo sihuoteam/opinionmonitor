@@ -1,7 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+			
+	Long userid = (Long)session.getAttribute("userid");
+	if(userid==null){
+		response.sendRedirect("./loginWeb.jsp");
+		return;
+	}
+	String name = (String)session.getAttribute("name");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -49,9 +58,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div> -->
     
     <ul class="topnav pull-right inline">
-        <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 关键词设置</a></li>
-        <li><a href="" class="top-logout" data-toggle="tooltip" data-placement="bottom"><i></i> 退出</a></li>
-    </ul>
+			<li><a href="keylist.jsp" class="top-opt" data-toggle="tooltip"
+				data-placement="bottom"><i></i> 关键词设置</a></li>
+			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
+				data-placement="bottom"><i></i> 退出</a></li>
+		</ul>
  
 </div>
 <div class="loading">载入中...</div>
@@ -59,9 +70,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="hidden-phone menu" id="menu">
         <div class="profile">
             <span>欢迎您：</span>
-            <a href="">name</a>
+            <a><%=name %></a>
         </div>
-        <div id="side-search" class="search-box">
+        <!-- <div id="side-search" class="search-box">
     <form action="" method="get">
 						<div class="side-search-downlist">
 							<p class="current" id="search-type">
@@ -98,47 +109,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input id="search-type-flag" type="hidden" name="adv" value="1">
 						</div>
 					</form>
-		</div>
+		</div> -->
             <ul class="menu-lists">
-					<li class="menu-list menu-general">
-						<a href="" class="menu-title"><i></i><span>舆情概况</span>
-						</a>
-					</li>
-					<li id="more-sub-menu" class="menu-list menu-lat ">
-						<a href="" class="menu-title"><i></i><span>维度分析</span>
-						</a>
-						<ul class="sub-menu-list" id="sub-menu-list">
-							<li>
-								<a href="">舆情走势</a>
-							</li>
-							<li>
-								<a href="">数据来源</a>
-							</li>
-							<li>
-								<a href="">媒体来源</a>
-							</li>
-							<li>
-								<a href="">情感走势</a>
-							</li>
-						</ul>
-					</li>
+				<li class="menu-list menu-general"><a href="sentimentSummarize.jsp"
+					class="menu-title"><i></i><span>舆情概况</span> </a></li>
+				<li id="more-sub-menu" class="menu-list menu-lat "><a href="dimAna_sentiTrend.jsp"
+					class="menu-title"><i></i><span>维度分析</span> </a>
+					<ul class="sub-menu-list" id="sub-menu-list">
+						<li><a href="dimAna_sentiTrend.jsp">舆情走势</a></li>
+						<li><a href="dimAna_dataSource.jsp">数据来源</a></li>
+						<li><a href="dimAna_mediaSource.jsp">媒体来源</a></li>
+						<li><a href="dimAna_emotionTrend.jsp">情感走势</a></li>
+					</ul></li>
 
 
-					<li class="menu-list menu-any ">
-						<a href="" class="menu-title"><i></i><span>舆情监控</span>
-						</a>
-
-
-					</li>
-					<li class="menu-list menu-rep active">
-						<a href="" class="menu-title"><i></i><span>数据报告</span>
-						</a>
-					</li>
-					<li class="menu-list menu-com ">
-						<a href="" class="menu-title"><i></i><span>对比分析</span>
-						</a>
-					</li>
-				</ul>
+				<li class="menu-list menu-any "><a href="sentimentMonitor.jsp" class="menu-title"><i></i><span>舆情监控</span>
+				</a></li>
+				<li class="menu-list menu-rep "><a href="#" class="menu-title"><i></i><span>数据报告</span>
+				</a></li>
+				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
+				</a></li> -->
+			</ul>
 			</div>
     <div id="content" class="content">
         <!--<div id="content">-->
@@ -152,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="tabbable white-bg-padding">
       <ul class="nav nav-tabs">
           <li><a href="./dataExport.jsp">导出数据</a></li>        
-          <li><a href="./shortMessageSet.jsp">预警邮件设置</a></li>   
+          <li><a href="./emailSet.jsp">预警邮件设置</a></li>   
           <li class="active"><a href="">预警短信设置</a></li>          
       </ul>
       <div class="tab-content pd40">
