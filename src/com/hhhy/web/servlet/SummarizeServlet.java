@@ -24,6 +24,15 @@ public class SummarizeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String kid = (String)request.getParameter("kid");
+        if(kid==null || "".equals(kid)){
+            Integer k = (Integer)req.getSession().getAttribute("kid");
+            if(k!=null){
+                kid=k+"";
+            }
+        }else{
+            request.getSession().setAttribute("kid", Integer.parseInt(kid));
+        }
+
         logger.info("will summarize for kid: "+kid);
         if(kid==null || "".equals(kid)) response.sendRedirect("login.jsp");
         try {
