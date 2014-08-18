@@ -116,10 +116,16 @@ public class DBUtils {
      * @throws SQLException
      */
     public static List<String> getAllKeyWord() throws SQLException {
-        String sql = "select distinct keyword from " + KEYWORD_TABLE;
-        List<String> keywords = DBOperator.select(sql,
-                new BeanListHandler<String>(String.class));
+//        String sql = "select  keyword from " + KEYWORD_TABLE;
+//        List<String> keywords = DBOperator.select(sql,
+//                new BeanListHandler<String>(String.class));
+        List<String> keywords = new ArrayList<String>();
+        List<KeyWord> objs = getAllKeyWordObj();
+        for(KeyWord obj:objs){
+            keywords.add(obj.getKeyword());
+        }
         return keywords;
+        
     }
 
     // 不同用户返回不同关键词, 用户信息存放session中
@@ -459,11 +465,12 @@ public class DBUtils {
         // logger.info(checkUserExist("email2"));
         // logger.info(loginCheck("email3","password13"));
         // logger.info(getEmotionWords().get(0).getWord());
-        logger.info(getUserKeyWord(9l).size());
-        logger.info(getUserKeyWord(9l).get(0).getId());
-        logger.info(getUserKeyWord(9l).get(0).getUid());
-        logger.info(getUserKeyWord(9l).get(0).getKeyword());
-
+//        logger.info(getUserKeyWord(9l).size());
+//        logger.info(getUserKeyWord(9l).get(0).getId());
+//        logger.info(getUserKeyWord(9l).get(0).getUid());
+//        logger.info(getUserKeyWord(9l).get(0).getKeyword());
+//        logger.info(DBOperator.select("select ", handler, params));
+        logger.info(DBUtils.getAllKeyWord());
     }
 
 }

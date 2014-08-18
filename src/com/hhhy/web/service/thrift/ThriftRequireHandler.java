@@ -29,6 +29,7 @@ public class ThriftRequireHandler implements HhhyService.Iface{
 
     @Override
     public String getKeywords() throws TException {
+        logger.info("receive getKeywords request, will process...");
         try {
             List<String> words = DBUtils.getAllKeyWord();
             return JsonUtils.toJson(words);
