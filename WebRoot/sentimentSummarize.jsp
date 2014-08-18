@@ -128,22 +128,22 @@ String emotionDistribution = "[]";
 			<ul class="menu-lists">
 				<li class="menu-list menu-general active"><a href="#"
 					class="menu-title"><i></i><span>舆情概况</span> </a></li>
-				<li id="more-sub-menu" class="menu-list menu-lat "><a href=""
+				<li id="more-sub-menu" class="menu-list menu-lat "><a href="dimAna_sentiTrend.jsp"
 					class="menu-title"><i></i><span>维度分析</span> </a>
 					<ul class="sub-menu-list" id="sub-menu-list">
-						<li><a href="">舆情走势</a></li>
-						<li><a href="">数据来源</a></li>
-						<li><a href="">媒体来源</a></li>
-						<li><a href="">情感走势</a></li>
+						<li><a href="dimAna_sentiTrend.jsp">舆情走势</a></li>
+						<li><a href="dimAna_dataSource.jsp">数据来源</a></li>
+						<li><a href="dimAna_mediaSource.jsp">媒体来源</a></li>
+						<li><a href="dimAna_emotionTrend.jsp">情感走势</a></li>
 					</ul></li>
 
 
-				<li class="menu-list menu-any "><a href="" class="menu-title"><i></i><span>舆情监控</span>
+				<li class="menu-list menu-any "><a href="sentimentMonitor.jsp" class="menu-title"><i></i><span>舆情监控</span>
 				</a></li>
-				<li class="menu-list menu-rep "><a href="" class="menu-title"><i></i><span>数据报告</span>
+				<li class="menu-list menu-rep "><a href="dataExport.jsp" class="menu-title"><i></i><span>数据报告</span>
 				</a></li>
-				<li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
-				</a></li>
+				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
+				</a></li> -->
 			</ul>
 		</div>
 		<div id="content" class="content" style="margin-left: 230px;">
@@ -185,7 +185,9 @@ String emotionDistribution = "[]";
 								</dt>
 								<dd>
 									<h5>
-										<a href=""><%=poscount + negcount%></a>
+										<!-- <a href=""> -->
+										<%=poscount + negcount%>
+										<!-- </a> -->
 									</h5>
 									<p>舆情总量</p>
 								</dd>
@@ -204,7 +206,9 @@ String emotionDistribution = "[]";
 								</dt>
 								<dd>
 									<h5>
-										<a href=""><%=poscount%></a>
+										<!-- <a href=""> -->
+										<%=poscount%>
+										<!-- </a> -->
 									</h5>
 									<p>正面</p>
 								</dd>
@@ -244,7 +248,9 @@ String emotionDistribution = "[]";
 								</dt>
 								<dd>
 									<h5>
-										<a href=""><%=negcount%></a>
+										<!-- <a href=""> -->
+										<%=negcount%>
+										<!-- </a> -->
 									</h5>
 									<p>负面</p>
 								</dd>
