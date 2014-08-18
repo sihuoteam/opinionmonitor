@@ -14,7 +14,7 @@ public class User {
     private String phone;
     // need email, message, or alert
     private int needemail;
-    private int needphone
+    private int needphone;
     private int needalert;
     
     public User(){
@@ -56,7 +56,7 @@ public class User {
         return needalert;
     }
 
-    public void setNeedemail(int needalert) {
+    public void setNeedalert(int needalert) {
         this.needalert = needalert;
     }
 

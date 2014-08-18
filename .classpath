@@ -39,5 +39,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/org.apache.commons.httpclient.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.10-FINAL-20140208.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-3.10-FINAL-20140208.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-validator-1.4.0.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
