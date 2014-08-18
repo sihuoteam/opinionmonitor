@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
- * 关键词的添加，删除
  * 
  * @author chenlingpeng
  * 
@@ -21,14 +20,18 @@ public class PhoneSetServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    /* 
-     * 对应关键词的增删操作
-     */
     @Override
     protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp) throws ServletException,
             IOException {
-        
+        String enable = req.getParamater("SendForm[enable_warn]");
+        String phone = req.getParamater("SendForm[warn_shortMessage]");
+        Long uid = (Long)req.getSession().getAttribute("userid");
+        if(uid==null){
+            response.sendRedirect("loginWeb.jsp");
+            return;
+        }
+        DBUtils.updateWarnPhone(String phone, String enable, long uid);
     }
 
     @Override

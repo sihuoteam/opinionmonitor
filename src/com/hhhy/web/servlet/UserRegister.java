@@ -64,6 +64,7 @@ public class UserRegister extends HttpServlet {
         try {
             long uid = DBUtils.createUser(user);
             request.getSession().setAttribute("userid", uid);
+            request.getSession().setAttribute("name", email);
             request.getSession().removeAttribute("regerror");
             request.getRequestDispatcher("/keylist.jsp").forward(request,
                     response);

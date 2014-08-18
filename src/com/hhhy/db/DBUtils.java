@@ -91,6 +91,30 @@ public class DBUtils {
         return -1l;
     }
 
+    public static void updateWarnMail(String email, String enable, long uid) throws SQLException {
+        String sql = "update "+ADMIN_TABLE+" set reportemail=?, needemail=? where id=?";
+        int able = -1;
+        if("1".equals(enable)){
+            able=1;
+        }else if("0".equals(enable)){
+            able=0;
+        }
+        if(able<0) return;
+        DBOperator.update(sql,new Object[]{email, able, uid});
+    }
+
+    public static void updateWarnPhone(String phone, String enable, long uid) throws SQLException {
+        String sql = "update "+ADMIN_TABLE+" set reportphone=?, needphone=? where id=?";
+        int able = -1;
+        if("1".equals(enable)){
+            able=1;
+        }else if("0".equals(enable)){
+            able=0;
+        }
+        if(able<0) return;
+        DBOperator.update(sql,new Object[]{phone, able, uid});
+    }
+
     /*************************** 账号管理部分结束 **************************/
 
     public static List<EmotionWord> getEmotionWords() throws SQLException {
@@ -451,6 +475,21 @@ public class DBUtils {
         // where += " and ctime>"+start+" and ctime<"+end;
 
         return arts;
+    }
+
+    public static void importEmotionWord() throws SQLException{
+        // neg
+        List<String> lines = FileUtils.readLines(new File("xxx.txt")," GBK");
+        String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)"
+        for(String line:lines){
+            line = line.trim();
+            DBOperator.update(sql, new Object[]{line,-1});
+        }
+        lines = FileUtils.readLines(new File("xxx2.txt")," GBK");
+        for(String line:lines){
+            line = line.trim();
+            DBOperator.update(sql, new Object[]{line,1});
+        }
     }
 
     /*************************** data export部分结束 **************************/

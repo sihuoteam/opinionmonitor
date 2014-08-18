@@ -26,7 +26,19 @@ public class EmailSetServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest req,
             final HttpServletResponse resp) throws ServletException,
             IOException {
-        
+        String enable = req.getParamater("SendForm[enable_warn]");
+        String email = req.getParamater("SendForm[warn_mail]");
+        if(!EmailValidator.getInstance().isValid(email)){
+            request.getSession().setAttribute("emailseterror", "邮箱不合法");
+            response.sendRedirect("emailSet.jsp");
+            return;
+        }
+        Long uid = (Long)req.getSession().getAttribute("userid");
+        if(uid==null){
+            response.sendRedirect("loginWeb.jsp");
+            return;
+        }
+        DBUtils.updateWarnMail(String email, String enable, long uid);
     }
 
     @Override
