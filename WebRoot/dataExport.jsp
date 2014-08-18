@@ -112,7 +112,7 @@
 
 				<li class="menu-list menu-any "><a href="sentimentMonitor.jsp" class="menu-title"><i></i><span>舆情监控</span>
 				</a></li>
-				<li class="menu-list menu-rep "><a href="#" class="menu-title"><i></i><span>数据报告</span>
+				<li class="menu-list menu-rep active"><a href="#" class="menu-title"><i></i><span>数据报告</span>
 				</a></li>
 				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
 				</a></li> -->

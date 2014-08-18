@@ -4,9 +4,10 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Long userid = (Long)session.getAttribute("userid");
 if(userid==null){
-	//response.sendRedirect("./loginWeb.jsp");
-	//return;
+	response.sendRedirect("./loginWeb.jsp");
+	return;
 }
+String name = (String)session.getAttribute("name");
 %>
 
 <%
@@ -72,9 +73,12 @@ if(userid==null){
     </div> -->
     
     <ul class="topnav pull-right inline">
-        <li><a href="" class="top-opt" data-toggle="tooltip" data-placement="bottom"><i></i> 关键词设置</a></li>
-        <li><a href="" class="top-logout" data-toggle="tooltip" data-placement="bottom"><i></i> 退出</a></li>
-    </ul>
+
+			<li><a href="keylist.jsp" class="top-opt" data-toggle="tooltip"
+				data-placement="bottom"><i></i> 关键词设置</a></li>
+			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
+				data-placement="bottom"><i></i> 退出</a></li>
+		</ul>
 
 </div>
 
@@ -82,9 +86,9 @@ if(userid==null){
 <div class="hidden-phone menu" id="menu">
     <div class="profile">
         <span>欢迎您：</span>
-        <a>name</a>
+        <a><%=name %></a>
     </div>
-    <div id="side-search" class="search-box">
+    <!-- <div id="side-search" class="search-box">
         <form action="" method="get">
             <div class="side-search-downlist">
                 <p class="current" id="search-type">全部</p>
@@ -104,34 +108,27 @@ if(userid==null){
                 <input id="search-type-flag" type="hidden" name="adv" value="1">
             </div>
         </form>
-    </div>
+    </div> -->
     <ul class="menu-lists">
-        <li class="menu-list menu-general ">
-            <a href="" class="menu-title"><i></i><span>舆情概况</span></a>
-        </li>
-        <li id="more-sub-menu" class="menu-list menu-lat ">
-            <a href="" class="menu-title"><i></i><span>维度分析</span></a>
-            <ul class="sub-menu-list" id="sub-menu-list">
-                <li><a href="">舆情走势</a></li>
-                <li><a href="">数据来源</a></li>
-                <li><a href="">媒体来源</a></li>
-                <li><a href="">情感走势</a></li>
-            </ul>
-        </li>
+				<li class="menu-list menu-general"><a href="sentimentSummarize.jsp"
+					class="menu-title"><i></i><span>舆情概况</span> </a></li>
+				<li id="more-sub-menu" class="menu-list menu-lat "><a href="dimAna_sentiTrend.jsp"
+					class="menu-title"><i></i><span>维度分析</span> </a>
+					<ul class="sub-menu-list" id="sub-menu-list">
+						<li><a href="dimAna_sentiTrend.jsp">舆情走势</a></li>
+						<li><a href="dimAna_dataSource.jsp">数据来源</a></li>
+						<li><a href="dimAna_mediaSource.jsp">媒体来源</a></li>
+						<li><a href="dimAna_emotionTrend.jsp">情感走势</a></li>
+					</ul></li>
 
 
-        <li class="menu-list menu-any active">
-            <a href="" class="menu-title"><i></i><span>舆情监控</span></a>
-
-
-        </li>
-        <li class="menu-list menu-rep ">
-            <a href="" class="menu-title"><i></i><span>数据报告</span></a>
-        </li>
-        <li class="menu-list menu-com ">
-            <a href="" class="menu-title"><i></i><span>对比分析</span></a>
-        </li>
-    </ul>
+				<li class="menu-list menu-any  active"><a href="#" class="menu-title"><i></i><span>舆情监控</span>
+				</a></li>
+				<li class="menu-list menu-rep "><a href="dataExport.jsp" class="menu-title"><i></i><span>数据报告</span>
+				</a></li>
+				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
+				</a></li> -->
+			</ul>
 </div>
 <div id="content" class="content">
 <!--<div id="content">-->
@@ -141,7 +138,7 @@ if(userid==null){
 </ul>
 <div class="innerLR">
 
-<form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
+<<!-- form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
     <div class="search-filter-box">
         <div class="normal-search-box clearfix">
             <div class="clearfix time-opt span10">
@@ -210,7 +207,7 @@ if(userid==null){
                 </p>
             </div>
         </div>
-        <!-- normal -->
+        normal
 
         <div class="advance-search-box J-advance-search-box">
             <div class="control-group form-horizontal">
@@ -249,13 +246,13 @@ if(userid==null){
             </div>
         </div>
         <div class="toggle-advance-search"><a href="javascript:;" id="hide-advance-search">隐藏高级搜索</a></div>
-        <!-- adv -->
+        adv
 
 
     </div>
 
 </div>
-</form>
+</form> -->
 
 <div class="row-fluid">
 <div class="span12">

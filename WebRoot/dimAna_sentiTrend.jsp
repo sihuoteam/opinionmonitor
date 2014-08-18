@@ -4,12 +4,23 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+			if(userid==null){
+	response.sendRedirect("./loginWeb.jsp");
+		return;
+	}
+	
+	
+	String email = (String)session.getAttribute("name");
+	
+	List<String> dates = (List<String>)request.getAttribute("date");//json
+	List<Integer> postEmotionTrend= (List<Integer>)request.getAttribute("postrend");//json
+	List<Integer> negEmotionTrend= (List<Integer>)request.getAttribute("negtrend");//json
 %>
 
 <%
-	String dates = "'2014-8-1','2014-8-2','2014-8-3','2014-8-4','2014-8-5'";
+	/* String dates = "'2014-8-1','2014-8-2','2014-8-3','2014-8-4','2014-8-5'";
 	String posttrend = "1,2,3,4,5";
-	String negtrend = "2,2,3,4,1";
+	String negtrend = "2,2,3,4,1"; */
  %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -76,9 +87,9 @@
     </div> -->
 
 		<ul class="topnav pull-right inline">
-			<li><a href="" class="top-opt" data-toggle="tooltip"
+			<li><a href="keylist.jsp" class="top-opt" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 关键词设置</a></li>
-			<li><a href="" class="top-logout" data-toggle="tooltip"
+			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 退出</a></li>
 		</ul>
 
@@ -87,10 +98,10 @@
 	<div class="wrapper">
 		<div class="hidden-phone menu" id="menu">
 			<div class="profile">
-				<span>欢迎您：</span> <a href="">name</a>
+				<span>欢迎您：</span> <a><%=email %></a>
 			</div>
 			<div id="side-search" class="search-box">
-				<form action="" method="get">
+				<!-- <form action="" method="get">
 					<div class="side-search-downlist">
 						<p class="current" id="search-type">全部</p>
 						<ul id="search-type-list" style="display: none;">
@@ -116,36 +127,27 @@
 						<input id="search-type-flag" type="hidden" name="source" value="0">
 						<input id="search-type-flag" type="hidden" name="adv" value="1">
 					</div>
-				</form>
+				</form> -->
 			</div>
 			<ul class="menu-lists">
-				<li class="menu-list menu-general"><a href=""
-					class="menu-title"><i></i><span>舆情概况</span> </a>
-				</li>
-				<li id="more-sub-menu" class="menu-list menu-lat active"><a
-					href="" class="menu-title"><i></i><span>维度分析</span> </a>
+				<li class="menu-list menu-general"><a href="sentimentSummarize.jsp"
+					class="menu-title"><i></i><span>舆情概况</span> </a></li>
+				<li id="more-sub-menu" class="menu-list menu-lat active"><a href="dimAna_sentiTrend.jsp"
+					class="menu-title"><i></i><span>维度分析</span> </a>
 					<ul class="sub-menu-list" id="sub-menu-list">
-						<li class=sub-active><a href="">舆情走势</a>
-						</li>
-						<li><a href="">数据来源</a>
-						</li>
-						<li><a href="">媒体来源</a>
-						</li>
-						<li><a href="">情感走势</a>
-						</li>
-					</ul>
-				</li>
+						<li class="sub-active"><a href="#">舆情走势</a></li>
+						<li><a href="dimAna_dataSource.jsp">数据来源</a></li>
+						<li><a href="dimAna_mediaSource.jsp">媒体来源</a></li>
+						<li><a href="dimAna_emotionTrend.jsp">情感走势</a></li>
+					</ul></li>
 
 
-				<li class="menu-list menu-any "><a href="" class="menu-title"><i></i><span>舆情监控</span>
-				</a>
-				</li>
-				<li class="menu-list menu-rep "><a href="" class="menu-title"><i></i><span>数据报告</span>
-				</a>
-				</li>
-				<li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
-				</a>
-				</li>
+				<li class="menu-list menu-any "><a href="sentimentMonitor.jsp" class="menu-title"><i></i><span>舆情监控</span>
+				</a></li>
+				<li class="menu-list menu-rep "><a href="dataExport.jsp" class="menu-title"><i></i><span>数据报告</span>
+				</a></li>
+				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
+				</a></li> -->
 			</ul>
 		</div>
 		<div id="content" class="content">
@@ -155,7 +157,7 @@
 				<li class="color-red">维度分析/舆情走势</li>
 			</ul>
 			<div class="innerLR">
-				<form action="/trend/index" method="get">
+				<!-- <form action="/trend/index" method="get">
 					<input type="hidden" value="3" name="period" id="period" /><input
 						type="hidden" value="" name="author" id="author" />
 					<div class="row-fluid pb10">
@@ -221,15 +223,14 @@
 							</select>
 						</div>
 					</div>
-				</form>
+				</form> -->
 
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="widget">
 							<div class="widget-hd">
 								<span class="fr"><a
-									href="/trend/export?0=&period=3&source=&sentiment=&topic_id=&merge=1&start_date=&end_date="
-									class="i-export">导出</a> </span>舆情走势
+									class="i-export"></a> </span>舆情走势
 							</div>
 							<div class="widget-bd h400">
 								<div id="yw0" data-highcharts-chart="0"></div>
