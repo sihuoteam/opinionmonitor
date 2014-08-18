@@ -4,6 +4,15 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	Long userid = (Long)session.getAttribute("userid");
+	if(userid==null){
+	response.sendRedirect("./loginWeb.jsp");
+		return;
+	}
+	String email = (String)session.getAttribute("name");
+	List<String> = (String)request.getAttribute("date");//json
+	List<Integer> = (String)request.getAttribute("postrend");//json
+	List<Integer> = (String)request.getAttribute("negtrend");//json
 %>
 
 <%
