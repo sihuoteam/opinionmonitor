@@ -89,9 +89,9 @@ String emotionDistribution = "[]";
 
 		<ul class="topnav pull-right inline">
 
-			<li><a href="" class="top-opt" data-toggle="tooltip"
+			<li><a href="keylist.jsp" class="top-opt" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 关键词设置</a></li>
-			<li><a href="" class="top-logout" data-toggle="tooltip"
+			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 退出</a></li>
 		</ul>
 
@@ -100,9 +100,9 @@ String emotionDistribution = "[]";
 	<div class="wrapper">
 		<div class="hidden-phone menu" id="menu" style="display: block;">
 			<div class="profile">
-				<span>欢迎您：</span> <a>name</a>
+				<span>欢迎您：</span> <a><%=name %></a>
 			</div>
-			<div id="side-search" class="search-box">
+			<!-- <div id="side-search" class="search-box">
 				<form action="" method="get">
 					<div class="side-search-downlist">
 						<p class="current" id="search-type">全部</p>
@@ -124,9 +124,9 @@ String emotionDistribution = "[]";
 						<input id="search-type-flag" type="hidden" name="adv" value="1">
 					</div>
 				</form>
-			</div>
+			</div> -->
 			<ul class="menu-lists">
-				<li class="menu-list menu-general active"><a href=""
+				<li class="menu-list menu-general active"><a href="#"
 					class="menu-title"><i></i><span>舆情概况</span> </a></li>
 				<li id="more-sub-menu" class="menu-list menu-lat "><a href=""
 					class="menu-title"><i></i><span>维度分析</span> </a>
