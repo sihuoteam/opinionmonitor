@@ -17,13 +17,12 @@ public class ProcessChain {
 
         int titleScore = EmotionAnalysisProcessor.emotionParser(titleWords);
         int contentScore = EmotionAnalysisProcessor.emotionParser(contentWords);
-
-        if (titleScore < 0) {
-            art.setEmotion(titleScore);
-        } else {
-            art.setEmotion(titleScore + contentScore);
+        int score = titleScore<0?titleScore:titleScore + contentScore;
+        art.setEmotion(score);
+        if(score<-3){
+            ReportProcessor.reportProcess(art);
         }
-        
+
         long id = -1l;
          try {
             id = DBUtils.isArticleExist(art.getUrl());

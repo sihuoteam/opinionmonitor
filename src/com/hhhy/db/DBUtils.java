@@ -91,6 +91,13 @@ public class DBUtils {
         return -1l;
     }
 
+    public static User getUserById(long uid) throws SQLException {
+        String sql = "select * from " + ADMIN_TABLE + " where id=?";
+        User user = DBOperator.select(sql, new BeanHandler<User>(User.class),
+                new Object[] { uid });
+        return user;
+    }
+
     public static void updateWarnMail(String email, String enable, long uid) throws SQLException {
         String sql = "update "+ADMIN_TABLE+" set reportemail=?, needemail=? where id=?";
         int able = -1;
@@ -178,6 +185,15 @@ public class DBUtils {
             return kid;
         else
             return -1;
+    }
+
+    public static List<Long> getUserSet(String keyword) throws SQLException {
+        String sql = "select uid from " + KEYWORD_TABLE + " where keyword=?";
+        List<Long> users = DBOperator.select(sql,
+                new BeanListHandler<Long>(Long.class),
+                new Object[] { keyword });
+        return users;
+
     }
 
     public static boolean deleteUserKeyWord(long userid, int keywordid)
