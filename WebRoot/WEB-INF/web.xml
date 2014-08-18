@@ -85,6 +85,16 @@
 		<servlet-name>export</servlet-name>
 		<url-pattern>/export</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>search</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.ServletServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
 
 
 

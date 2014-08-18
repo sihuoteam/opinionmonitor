@@ -12,6 +12,18 @@ public class ProcessChain {
     private static final Logger logger = Logger.getLogger(ProcessChain.class);
 
     public static void process(Article art) {
+        List<String> contentWords = WordSplitProcessor.split(art.getContent());
+        List<String> titleWords = WordSplitProcessor.split(art.getTitle());
+
+        int titleScore = EmotionAnalysisProcessor.emotionParser(titleWords);
+        int contentScore = EmotionAnalysisProcessor.emotionParser(contentWords);
+
+        if (titleScore < 0) {
+            art.setEmotion(titleScore);
+        } else {
+            art.setEmotion(titleScore + contentScore);
+        }
+        
         long id = -1l;
          try {
             id = DBUtils.isArticleExist(art.getUrl());
@@ -30,17 +42,7 @@ public class ProcessChain {
             return;
         }
 
-        List<String> contentWords = WordSplitProcessor.split(art.getContent());
-        List<String> titleWords = WordSplitProcessor.split(art.getTitle());
-
-        int titleScore = EmotionAnalysisProcessor.emotionParser(titleWords);
-        int contentScore = EmotionAnalysisProcessor.emotionParser(contentWords);
-
-        if (titleScore < 0) {
-            art.setEmotion(titleScore);
-        } else {
-            art.setEmotion(titleScore + contentScore);
-        }
+        
 
         StatisticsProcessor.statistics(art);
     }

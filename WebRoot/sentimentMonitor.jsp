@@ -4,8 +4,8 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Long userid = (Long)session.getAttribute("userid");
 if(userid==null){
-	response.sendRedirect("./loginWeb.jsp");
-	return;
+	//response.sendRedirect("./loginWeb.jsp");
+	//return;
 }
 %>
 
@@ -141,7 +141,7 @@ if(userid==null){
 </ul>
 <div class="innerLR">
 
-<form action="h" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
+<form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
     <div class="search-filter-box">
         <div class="normal-search-box clearfix">
             <div class="clearfix time-opt span10">
@@ -169,16 +169,15 @@ if(userid==null){
                 <div class="control-group form-inline">
 
                     <label class="control-label" for="">来源：</label>          <select class="mr20" name="source" id="source">
-                    <option value="" selected="selected">全部</option>
+                    <option value="all" selected="selected">全部</option>
                     <option value="news">新闻</option>
                     <option value="bbs">论坛</option>
                     <option value="blog">博客</option>
-                    <option value="epub">电子报</option>
-                    <option value="weibo">微博</option>
+                    <option value="search">搜索引擎</option>
                 </select>
 
                     <label class="control-label" for="">情感：</label>          <select class="mr20" name="sentiment" id="sentiment">
-                    <option value="" selected="selected">全部</option>
+                    <option value="all" selected="selected">全部</option>
                     <option value="positive">正面</option>
                     <option value="negative">负面</option>
                     <option value="neutral">中立</option>
@@ -232,16 +231,7 @@ if(userid==null){
                 <label class="control-label">关键词位置：</label>
                 <div class="controls s-radio">
                     <span id="position"><label><div class="ez-radio ez-selected"><input data-toggle="checkbox" value="0" id="position_0" checked="checked" type="radio" name="position" class="ez-hide"></div> 不限位置</label><label><div class="ez-radio"><input data-toggle="checkbox" value="1" id="position_1" type="radio" name="position" class="ez-hide"></div> 仅限标题中</label><label><div class="ez-radio"><input data-toggle="checkbox" value="2" id="position_2" type="radio" name="position" class="ez-hide"></div> 仅限URL中</label></span>        </div>
-                <div class="mb10">
-                    <label class="control-label">限制站点：</label>
-                    <div class="controls">
-                        <input type="text" value="" name="host" id="host">          </div>
-                </div>
-                <div class="mb10">
-                    <label class="control-label">限制作者：</label>
-                    <div class="controls">
-                        <input type="text" value="" name="author" id="author">          </div>
-                </div>
+                
                 <div class="mb10">
                     <label class="control-label">结果条数：</label>
                     <div class="controls">
@@ -249,7 +239,6 @@ if(userid==null){
                             <option value="10">每页10条</option>
                             <option value="30">每页30条</option>
                             <option value="50">每页50条</option>
-                            <option value="100">每页100条</option>
                         </select>        </div>
                 </div>
                 <div class="mb10 search-advance-btn">

@@ -48,6 +48,7 @@ public class ThriftServer {
             server = new TThreadPoolServer(args);
             logger.info("Starting the TThreadPoolServer server...");
             server.serve();
+            logger.info("TThreadPoolServer server started...");
         } catch (TTransportException e) {
             logger.error(e.getMessage());
         }

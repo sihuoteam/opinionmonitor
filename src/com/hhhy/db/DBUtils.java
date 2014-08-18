@@ -1,6 +1,7 @@
 package com.hhhy.db;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,10 +47,18 @@ public class DBUtils {
     }
 
     public static long insertArticle(Article article) throws SQLException {
-        String sql = "insert into " + ARTICLE_TABLE + " values(?,?,?,?,?,?,?)";
+        String sql = "insert into " + ARTICLE_TABLE + "(title,summary, time, url,website,type,emotion) values(?,?,?,?,?,?,?)";
+        long time = System.currentTimeMillis();
+        if(article.getTime()!=null && !article.getTime().equals("")){
+            try {
+                time = DateFormatUtils.getTime(article.getTime(), DateFormatUtils.yyyyMMdd);
+            } catch (ParseException e) {
+                logger.warn(e.getMessage());
+            }
+        }
         Object[] params = { article.getTitle(), article.getSummary(),
-                article.getContent(), article.getTime(), article.getUrl(),
-                article.getWebsite(), article.getType() };
+                time, article.getUrl(), article.getWebsite(), 
+                article.getType(),article.getEmotion() };
         return DBOperator.insert(sql, params);
     }
 
@@ -57,8 +66,8 @@ public class DBUtils {
 
     public static long createUser(User user) throws SQLException {
         String sql = "insert into " + ADMIN_TABLE
-                + " (email, password, needemail, needphone, needalert) values(?,?,?,?,?)";
-        Object[] params = { user.getEmail(), user.getPassword(),0,0,0 };
+                + " (email, password) values(?,?)";
+        Object[] params = { user.getEmail(), user.getPassword() };
         return DBOperator.insert(sql, params);
     }
 

@@ -1,8 +1,10 @@
 package com.hhhy.common.utils;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -59,6 +61,23 @@ public class JsonUtils {
         System.out.println(art2.getKeyword());
         System.out.println(art2.getSummary());
         Article art3 = JsonUtils.fromJson("{\"hehe\":123}", Article.class);
+        
+        List<String> sss = new ArrayList<String>();
+        sss.add("1");
+        sss.add("2");
+        sss.add("3");
+        sss.add("4");
+        System.out.println(JsonUtils.toJson(sss));
+        List<String> sd = JsonUtils.fromJson(JsonUtils.toJson(sss), List.class);
+        for(String s2:sd){
+            System.out.println(s2);
+        }
+        
+        Article a = null;
+//        a.setUrl("sdf'sd");
+        System.out.println(JsonUtils.toJson(a));
+        
+        
 //        System.out.println(JsonUtils.toJson("haha"));
     }
 

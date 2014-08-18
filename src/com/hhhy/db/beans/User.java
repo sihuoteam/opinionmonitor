@@ -1,29 +1,28 @@
 package com.hhhy.db.beans;
 
 /**
- * 用户类
- * 对应a_admin表
+ * 用户类 对应a_admin表
+ * 
  * @author chenlingpeng
- *
+ * 
  */
 public class User {
     private long id;
-    private String nickname;
     private String email;
     private String password;
-    private String phone;
+    private String reportphone;
+    private String reportemail;
     // need email, message, or alert
     private int needemail;
     private int needphone;
     private int needalert;
-    
-    public User(){
+
+    public User() {
         this.id = -1l;
     }
 
     public User(String nickname, String email, String password) {
         this.id = -1l;
-        this.nickname = nickname;
         this.email = email;
         this.password = password;
     }
@@ -58,14 +57,6 @@ public class User {
 
     public void setNeedalert(int needalert) {
         this.needalert = needalert;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getEmail() {
