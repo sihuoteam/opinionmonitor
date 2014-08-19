@@ -1,6 +1,8 @@
 package com.hhhy.web.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+
+import com.hhhy.db.DBUtils;
 
 /**
  * 
@@ -27,11 +31,15 @@ public class MediaSourceServlet extends HttpServlet {
             final HttpServletResponse resp) throws ServletException,
             IOException {
         Integer kid = (Integer)req.getSession().getAttribute("kid");
-        if(kid!=null){
-            Map<String, Integer> mediaStatis = DBUtils.getMediaSourceStatis(Integer.parseInt(kid));
-            request.setAttribute("mediaStatis", mediaStatis);
+        try {
+            if(kid!=null){
+                Map<String, Integer> mediaStatis = DBUtils.getMediaSourceStatis(kid);
+                req.setAttribute("mediaStatis", mediaStatis);
+            }
+        } catch (SQLException e) {
+            logger.warn(e.getMessage());
         }
-        request.getRequestDispatcher("/dimAna_mediaSource.jsp").forward(request, response);
+        req.getRequestDispatcher("/dimAna_mediaSource.jsp").forward(req, resp);
     }
 
     @Override

@@ -4,6 +4,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+			Long userid = (Long)session.getAttribute("userid");
 			if(userid==null){
 	response.sendRedirect("./loginWeb.jsp");
 		return;

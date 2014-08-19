@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.hhhy.common.utils.JsonUtils;
-import com.hhhy.db.DBOperator;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.item.Pair;
@@ -25,7 +24,7 @@ public class SummarizeServlet extends HttpServlet {
             throws ServletException, IOException {
         String kid = (String)request.getParameter("kid");
         if(kid==null || "".equals(kid)){
-            Integer k = (Integer)req.getSession().getAttribute("kid");
+            Integer k = (Integer)request.getSession().getAttribute("kid");
             if(k!=null){
                 kid=k+"";
             }

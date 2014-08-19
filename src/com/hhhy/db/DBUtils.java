@@ -1,5 +1,7 @@
 package com.hhhy.db;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import com.hhhy.common.utils.DateFormatUtils;
@@ -493,10 +496,10 @@ public class DBUtils {
         return arts;
     }
 
-    public static void importEmotionWord() throws SQLException{
+    public static void importEmotionWord() throws SQLException, IOException{
         // neg
         List<String> lines = FileUtils.readLines(new File("xxx.txt")," GBK");
-        String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)"
+        String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)";
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,-1});

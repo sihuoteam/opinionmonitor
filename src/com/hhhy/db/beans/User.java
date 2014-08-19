@@ -59,6 +59,22 @@ public class User {
         this.needalert = needalert;
     }
 
+    public String getReportphone() {
+        return reportphone;
+    }
+
+    public void setReportphone(String reportphone) {
+        this.reportphone = reportphone;
+    }
+
+    public String getReportemail() {
+        return reportemail;
+    }
+
+    public void setReportemail(String reportemail) {
+        this.reportemail = reportemail;
+    }
+
     public String getEmail() {
         return email;
     }

@@ -1,6 +1,8 @@
 package com.hhhy.web.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+
+import com.hhhy.db.DBUtils;
 
 /**
  * 
@@ -27,11 +31,15 @@ public class DataSourceServlet extends HttpServlet {
             final HttpServletResponse resp) throws ServletException,
             IOException {
         Integer kid = (Integer)req.getSession().getAttribute("kid");
-        if(kid!=null){
-            Map<String, Integer> sourceStatis = DBUtils.getMediaSourceStatis(kid);
-            request.setAttribute("sourceStatis", sourceStatis);
+        try {
+            if(kid!=null){
+                Map<String, Integer> sourceStatis = DBUtils.getMediaSourceStatis(kid);
+                req.setAttribute("sourceStatis", sourceStatis);
+            }
+        } catch (SQLException e) {
+            logger.warn(e.getMessage());
         }
-        request.getRequestDispatcher("/dimAna_dataSource.jsp").forward(request, response);
+        req.getRequestDispatcher("/dimAna_dataSource.jsp").forward(req, resp);
     }
 
     @Override
