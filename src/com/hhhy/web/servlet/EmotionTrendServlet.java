@@ -48,7 +48,7 @@ public class EmotionTrendServlet extends HttpServlet {
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
-        req.getRequestDispatcher("/dimAna_dataSource.jsp").forward(req, resp);
+        req.getRequestDispatcher("/dimAna_emotionTrend.jsp").forward(req, resp);
     }
 
     @Override

@@ -40,15 +40,15 @@ public class SummarizeServlet extends HttpServlet {
             request.setAttribute("negcount", counts[1]);
             request.setAttribute("plaincount", counts[2]);
             // Pair<Map<String,Integer>,Map<String,Integer>> pair = DBUtils.getEmotionTrendStatis(Integer.parseInt(kid));
-            Pair<List<String>,List<Integer>> pair = DBUtils.getEmotionTrendStatis2(Integer.parseInt(kid));
-            logger.info("trend size: dateSize: "+pair.getFirst().size()+" trendSize: "+pair.getSecond().size());
+            // Pair<List<String>,List<Integer>> pair = DBUtils.getEmotionTrendStatis2(Integer.parseInt(kid));
+            // logger.info("trend size: dateSize: "+pair.getFirst().size()+" trendSize: "+pair.getSecond().size());
             // TODO: test needed
-            int size = pair.getFirst().size();
-            if(size>0){
-                request.setAttribute("date", JsonUtils.toJson(pair.getFirst()));
-                request.setAttribute("postrend", JsonUtils.toJson(pair.getSecond().subList(0,size/2)));
-                request.setAttribute("negtrend", JsonUtils.toJson(pair.getSecond().subList(size/2,size)));
-            }
+            // int size = pair.getFirst().size();
+            // if(size>0){
+            //     request.setAttribute("date", JsonUtils.toJson(pair.getFirst()));
+            //     request.setAttribute("postrend", JsonUtils.toJson(pair.getSecond().subList(0,size/2)));
+            //     request.setAttribute("negtrend", JsonUtils.toJson(pair.getSecond().subList(size/2,size)));
+            // }
 
             // String posTrend = JsonUtils.toJson(pair.getFirst());
             // String negTrend = JsonUtils.toJson(pair.getSecond());
@@ -56,10 +56,12 @@ public class SummarizeServlet extends HttpServlet {
             // request.setAttribute("negtrend", negTrend);
             List<Article> arts = DBUtils.getNegArticles(Integer.parseInt(kid));
             request.setAttribute("negarts", arts);
-            Map<String, Integer> mediaStatis = DBUtils.getMediaSourceStatis(Integer.parseInt(kid));
-            Map<String, Integer> sourceStatis =DBUtils.getSourceTypeStatis(Integer.parseInt(kid));
-            request.setAttribute("mediaStatis", mediaStatis);
-            request.setAttribute("sourceStatis", sourceStatis);
+            List<Article> importArts = DBUtils.getRecentArticles(Integer.parseInt(kid));
+            request.setAttribute("importarts", importArts);
+            // Map<String, Integer> mediaStatis = DBUtils.getMediaSourceStatis(Integer.parseInt(kid));
+            // Map<String, Integer> sourceStatis =DBUtils.getSourceTypeStatis(Integer.parseInt(kid));
+            // request.setAttribute("mediaStatis", mediaStatis);
+            // request.setAttribute("sourceStatis", sourceStatis);
             request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());

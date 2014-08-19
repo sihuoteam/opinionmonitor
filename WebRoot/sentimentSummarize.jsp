@@ -15,15 +15,15 @@ Integer plaincount = (Integer)request.getAttribute("plaincount");
 if(poscount==null || negcount==null || plaincount==null)
 	response.sendRedirect("./login.jsp");
 	
-String date = (String)request.getAttribute("date");//json
-String posttrend = (String)request.getAttribute("postrend");//json
-String negtrend = (String)request.getAttribute("negtrend");//json
+//String date = (String)request.getAttribute("date");//json
+//String posttrend = (String)request.getAttribute("postrend");//json
+//String negtrend = (String)request.getAttribute("negtrend");//json
 //少一个重要舆情
-List<Article> importantArticle = null;
+List<Article> importantArticle = (List<Article>)request.getAttribute("importarts");
 List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
 
-Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
-Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
+//Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
+//Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
 // no importantArticle
 //
 Integer emotionNum = 2;

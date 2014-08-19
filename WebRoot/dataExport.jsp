@@ -7,11 +7,12 @@
 			
 	Long userid = (Long)session.getAttribute("userid");
 	
-	//if(userid==null){
-		//response.sendRedirect("./loginWeb.jsp");
-		//return;
-	//}
+	if(userid==null){
+		response.sendRedirect("./loginWeb.jsp");
+		return;
+	}
 	String name = (String)session.getAttribute("name");
+
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

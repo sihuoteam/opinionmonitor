@@ -138,7 +138,7 @@
   <li class="color-red">数据报告/预警短信设置</li>
 </ul>
 <div class="innerLR">
-<form id="send-form" action="/export/warnsetting" method="post">
+<form id="send-form" action="phoneset" method="post">
   <div class="row-fluid">
     <div class="tabbable white-bg-padding">
       <ul class="nav nav-tabs">
@@ -156,7 +156,7 @@
           <div class="control-group form-horizontal">
             <label class="control-label" for="hour"  style="width:80px">是否发送：</label>
             <div class="controls" style="margin-left:80px" >
-          <input id="ytSendForm_enable_warn" type="hidden" value="" name="SendForm[enable_warn]" /><span id="SendForm_enable_warn"><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_0" value="0" checked="checked" type="radio" name="SendForm[enable_warn]" />否</label><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_1" value="1" type="radio" name="SendForm[enable_warn]" />是</label></span>
+          <!-- <input id="ytSendForm_enable_warn" type="hidden" value="" name="SendForm[enable_warn]" /> --><span id="SendForm_enable_warn"><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_0" value="0" checked="checked" type="radio" name="SendForm[enable_warn]" />否</label><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_1" value="1" type="radio" name="SendForm[enable_warn]" />是</label></span>
             </div>
           </div>
 

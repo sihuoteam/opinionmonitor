@@ -248,6 +248,26 @@ public class DBUtils {
         return arts;
     }
 
+    public static List<Article> getRecentArticles(int kid) throws SQLException {
+        String sql = "select * from " + KEYWORDPAGE_TABLE
+                + " where kid=? and emotion<>0 sort by ctime desc limit 10";
+        List<KeyWordPage> pagesid = DBOperator.select(sql, new BeanListHandler<KeyWordPage>(
+                KeyWordPage.class), new Object[] { kid });
+        List<Article> arts = new ArrayList<Article>();
+        sql = "select * from " + ARTICLE_TABLE + " where id=?";
+        for (KeyWordPage pageid : pagesid) {
+            Article art = DBOperator.select(sql, new BeanHandler<Article>(
+                    Article.class), new Object[] { pageid.getPid() });
+            if (art != null && art.getTitle() != null
+                    && !"".equals(art.getTitle())) {
+                art.setContent(""); // 内容置空，减少存储消耗
+                art.setSummary("");
+                arts.add(art);
+            }
+        }
+        return arts;
+    }
+
     /*************************** 关键词处理部分结束 **************************/
 
     /*************************** 关键词统计部分 **************************/
@@ -446,7 +466,7 @@ return res;
         String[] keywords = condition.getKeywords();
         if (keywords == null || keywords.length == 0) {
             logger.info("no keywords selected");
-            return null;
+            // return null;
         }
         long start = condition.getStart();
         long end = condition.getEnd();
@@ -485,19 +505,21 @@ return res;
             }
         }
 
-        String keyword = "";
+        String keyword = "1=1";
+        /*
         for (String kid : keywords) {
             if (keyword.length() == 0) {
                 keyword = "kid=" + Integer.parseInt(kid);
             } else {
                 keyword += " or kid=" + Integer.parseInt(kid);
             }
-        }
+        }*/
 
         String limit = " limit " + condition.getSize();
         String orderby = " order by ctime";
         String where = "";
         if(emotion==null){
+            // where = "(" + time + ") and (" + source + ") and (" + keyword + ") ";
             where = "(" + time + ") and (" + source + ") and (" + keyword + ") ";
         }else{
          where = "(" + time + ") and (" + source + ") and (" + emotion

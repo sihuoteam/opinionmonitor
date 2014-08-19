@@ -50,7 +50,7 @@ public class ReportExportServlet extends HttpServlet {
         String[] merge = req.getParameterValues("merge");
         String[] sources = req.getParameterValues("source[]");
         String[] emotions = req.getParameterValues("sentiment[]");
-        String[] topic_ids = req.getParameterValues("topic_id[]");
+        // String[] topic_ids = req.getParameterValues("topic_id[]");
         String[] fields = req.getParameterValues("field[]");
 //        String[] firstTitles = new String[]{"关键字","标题","摘要","url","来源","媒体","情感"，"时间"};
 //        topic title summary url source media sentiment time
@@ -66,11 +66,11 @@ public class ReportExportServlet extends HttpServlet {
         String limit = req.getParameter("limit");
         String source = JsonUtils.toJson(sources);
         String emotion = JsonUtils.toJson(emotions);
-        String topic_id = JsonUtils.toJson(topic_ids);
+        // String topic_id = JsonUtils.toJson(topic_ids);
         String field = JsonUtils.toJson(fields);
         Condition condition = new Condition();
         condition.setSize(Integer.parseInt(limit));
-        condition.setKeywords(topic_ids);
+        // condition.setKeywords(topic_ids);
         condition.setSources(sources);
         int[] emotionArr = new int[3];
         for(String em:emotions){
