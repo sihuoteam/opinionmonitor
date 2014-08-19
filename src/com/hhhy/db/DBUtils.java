@@ -229,15 +229,15 @@ public class DBUtils {
     }
     // TODO: for test
     public static List<Article> getNegArticles(int kid) throws SQLException {
-        String sql = "select pid from " + KEYWORDPAGE_TABLE
+        String sql = "select * from " + KEYWORDPAGE_TABLE
                 + " where emotion<0 and kid=? limit 10";
-        List<Long> pagesid = DBOperator.select(sql, new BeanListHandler<Long>(
-                Long.class), new Object[] { kid });
+        List<KeyWordPage> pagesid = DBOperator.select(sql, new BeanListHandler<KeyWordPage>(
+                KeyWordPage.class), new Object[] { kid });
         List<Article> arts = new ArrayList<Article>();
         sql = "select * from " + ARTICLE_TABLE + " where id=?";
-        for (long pageid : pagesid) {
+        for (KeyWordPage pageid : pagesid) {
             Article art = DBOperator.select(sql, new BeanHandler<Article>(
-                    Article.class), new Object[] { pageid });
+                    Article.class), new Object[] { pageid.getPid() });
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
                 art.setContent(""); // 内容置空，减少存储消耗
@@ -266,7 +266,7 @@ public class DBUtils {
     /**
      * 媒体来源统计
      */
-    public static Map<String, Integer> getMediaSourceStatis(int kid)
+    public static Map<String, Integer> getMediaSourceStatis2(int kid)
             throws SQLException {
         // String sql0 = "select website from "+KEYWORDPAGE_TABLE
         // +" where kid=?";
@@ -283,6 +283,26 @@ public class DBUtils {
         }
         return res;
     }
+    
+    public static Map<String, Integer> getMediaSourceStatis(int kid)
+    throws SQLException {
+// String sql0 = "select website from "+KEYWORDPAGE_TABLE
+// +" where kid=?";
+// List<Integer> websites =
+String sql = "select website from " + KEYWORDPAGE_TABLE
+        + " where kid=?";
+//List<String> websites = DBOperator
+//        .select(sql, new BeanListHandler<String>(String.class),
+//                new Object[] { kid });
+
+List<Object[]> websites = DBOperator.selectArrayList(sql, new Object[] { kid });
+Map<String, Integer> res = new HashMap<String, Integer>();
+for (Object[] website : websites) {
+    int count = MapUtils.getInteger(res, (String)website[0], 0);
+    res.put((String)website[0], count + 1);
+}
+return res;
+}
 
     /**
      * 来源类型统计
@@ -551,8 +571,9 @@ public class DBUtils {
 //        logger.info(getKeyWordId("关键词2"));
 //        logger.info(getKeyWordId("关键词3"));
         
-        logger.info(getUserSet("关键词1"));
-        logger.info(getUserSet("关键词3"));
+//        logger.info(getUserSet("关键词1"));
+//        logger.info(getUserSet("关键词3"));
+        logger.info(getMediaSourceStatis2(1));
         
     }
 
