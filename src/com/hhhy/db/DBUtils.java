@@ -181,11 +181,11 @@ public class DBUtils {
     }
 
     public static int getKeyWordId(String keyword) throws SQLException {
-        String sql = "select id from " + KEYWORD_TABLE + " where keyword=?";
-        Integer kid = DBOperator.select(sql, new BeanHandler<Integer>(
-                Integer.class), new Object[] { keyword });
+        String sql = "select * from " + KEYWORD_TABLE + " where keyword=?";
+        KeyWord kid = DBOperator.select(sql, new BeanHandler<KeyWord>(
+                KeyWord.class), new Object[] { keyword });
         if (kid != null)
-            return kid;
+            return kid.getId();
         else
             return -1;
     }
@@ -212,15 +212,18 @@ public class DBUtils {
         if(kid<0){
             sql = "insert into " + KEYWORD_TABLE
                 + "(uid,keyword) values(?,?)";
-        }else{ 
+            sql = "select max(id) from "+KEYWORD_TABLE;
+            kid = DBOperator.max(sql);
+            kid++;
+        }
             sql = "insert into " + KEYWORD_TABLE
                 + "(id, uid,keyword) values("+kid+",?,?)";
-        }
+        
         return DBOperator.update(sql, new Object[] { userid, keyword });
     }
 
     public static List<Article> getNegArticles(int kid) throws SQLException {
-        String sql = "select pageid from " + KEYWORDPAGE_TABLE
+        String sql = "select pid from " + KEYWORDPAGE_TABLE
                 + " where emotion<0 and kid=? limit 10";
         List<Long> pagesid = DBOperator.select(sql, new BeanListHandler<Long>(
                 Long.class), new Object[] { kid });
@@ -378,7 +381,7 @@ public class DBUtils {
      */
     public static int[] getEmotionStatisCount(int kid) throws SQLException {
         String sql = "select emotion from " + KEYWORDPAGE_TABLE
-                + " where keyword=?";
+                + " where kid=?";
         int[] counts = new int[3];
         List<Integer> emotions = DBOperator.select(sql,
                 new BeanListHandler<Integer>(Integer.class),

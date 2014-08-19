@@ -109,7 +109,13 @@ public class DBOperator {
         if (result == false) {
             return -1L;
         } else {
-            return (Long)qr.query("select LAST_INSERT_ID()", new ScalarHandler(1));
+            return (Long) qr.query("select LAST_INSERT_ID()",
+                    new ScalarHandler(1));
         }
+    }
+
+    public static int max(String sql) throws SQLException {
+        QueryRunner qr = new QueryRunner(pool);
+        return (Integer) qr.query(sql, new ScalarHandler());
     }
 }

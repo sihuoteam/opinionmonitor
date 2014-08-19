@@ -95,6 +95,16 @@
 		<servlet-name>search</servlet-name>
 		<url-pattern>/search</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>keylist</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.KeylistServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>keylist</servlet-name>
+		<url-pattern>/keylist</url-pattern>
+	</servlet-mapping>
 
 
 
