@@ -33,7 +33,7 @@ public class DataSourceServlet extends HttpServlet {
         Integer kid = (Integer)req.getSession().getAttribute("kid");
         try {
             if(kid!=null){
-                Map<String, Integer> sourceStatis = DBUtils.getMediaSourceStatis(kid);
+                Map<String, Integer> sourceStatis = DBUtils.getSourceTypeStatis(kid);
                 req.setAttribute("sourceStatis", sourceStatis);
             }
         } catch (SQLException e) {

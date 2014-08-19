@@ -11,6 +11,12 @@
 		return;
 	}
 	String name = (String)session.getAttribute("name");
+	User user = DBUtils.getUserById(userid);
+	String reportphone = "";
+	if(user!=null){
+		reportphone = user.getReportphone();
+		if(reportphone==null)reportphone = "";
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -151,7 +157,7 @@
 
             <label class="control-label" for="email" style="width:80px">发送手机：</label>
             <div class="controls" style="margin-left:80px">
-              <input value="XXXXXXXXXXX" name="SendForm[warn_shortMessage]" id="SendForm_warn_shortMessage" type="text" />              <div class="errorMessage" id="SendForm_email_em_" style="display:none"></div>            </div>
+              <input value="<%= reportphone%>" name="SendForm[warn_shortMessage]" id="SendForm_warn_shortMessage" type="text" />              <div class="errorMessage" id="SendForm_email_em_" style="display:none"></div>            </div>
           </div>
           <div class="control-group form-horizontal">
             <label class="control-label" for="hour"  style="width:80px">是否发送：</label>

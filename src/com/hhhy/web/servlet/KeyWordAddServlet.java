@@ -47,12 +47,11 @@ public class KeyWordAddServlet extends HttpServlet {
                 logger.info("add keyword: uid("+uid+"), keyword("+keyword+")");
 //                if(flag)
                 List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
-                if(keyWords.size()>0)
-                logger.info("get keyword: "+keyWords.get(0).getKeyword());
                 req.setAttribute("keywords", keyWords);
                 req.getRequestDispatcher("/keylist.jsp").forward(req, resp);
             } catch (SQLException e) {
                 logger.warn(e.getMessage());
+                resp.sendRedirect("error.jsp");
             }
         }
         

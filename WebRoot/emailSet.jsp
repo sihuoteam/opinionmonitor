@@ -11,6 +11,12 @@
 		return;
 	}
 	String name = (String)session.getAttribute("name");
+	User user = DBUtils.getUserById(userid);
+	String reportrmail = "";
+	if(user!=null){
+		reportrmail = user.getReportrmail();
+		if(reportrmail==null)reportrmail = "";
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -151,7 +157,7 @@
 
             <label class="control-label" for="email" style="width:80px">发送邮箱：</label>
             <div class="controls" style="margin-left:80px">
-              <input value="xxx@yy.com" name="SendForm[warn_mail]" id="SendForm_warn_mail" type="text" />              <div class="errorMessage" id="SendForm_email_em_" style="display:none"></div>            </div>
+              <input value="<%=reportrmail %>" name="SendForm[warn_mail]" id="SendForm_warn_mail" type="text" />              <div class="errorMessage" id="SendForm_email_em_" style="display:none"></div>            </div>
           </div>
           <div class="control-group form-horizontal">
             <label class="control-label" for="hour"  style="width:80px">是否发送：</label>
