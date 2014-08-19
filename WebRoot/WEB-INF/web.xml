@@ -113,6 +113,6 @@
 	</welcome-file-list> -->
 	
 	 <welcome-file-list>
-		<welcome-file>sentimentSummarize.jsp</welcome-file>
+		<welcome-file>dataExport.jsp</welcome-file>
 	</welcome-file-list> 
 </web-app>

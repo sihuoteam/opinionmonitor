@@ -21,6 +21,7 @@ String negtrend = (String)request.getAttribute("negtrend");//json
 //少一个重要舆情
 List<Article> importantArticle = null;
 List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
+
 Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
 Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
 // no importantArticle

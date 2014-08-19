@@ -6,10 +6,11 @@
 			+ path + "/";
 			
 	Long userid = (Long)session.getAttribute("userid");
-	if(userid==null){
-		response.sendRedirect("./loginWeb.jsp");
-		return;
-	}
+	
+	//if(userid==null){
+		//response.sendRedirect("./loginWeb.jsp");
+		//return;
+	//}
 	String name = (String)session.getAttribute("name");
 %>
 
@@ -40,6 +41,16 @@
 <link rel="stylesheet" href="./css/style-red.css">
 
 <link rel="stylesheet" href="./css/style-red-my.css">
+
+ 
+<script src="./jquery-1.10.2.js"></script>
+<script src="./jquery-ui.js"></script>
+
+<!-- 
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript" src="./js/dataExport/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/dataExport/jquery-ui-i18n.min.js"></script>
+ -->
 </head>
 
 <body>
@@ -145,36 +156,36 @@
 									<div class="clearfix time-opt">
 										<ul class="inline tab-small">
 
-											<li style="padding-left:0px;">自定义： <input
-												class="input-small hasDatepicker" readonly="readonly"
-												onchange="" id="start_date" type="text" value="2014-07-15"
-												name="start_date"> <a class="i-cal"
-												href="javascript:;" id="start_date_link"></a> <script>
+											<li style="padding-left:0px;">自定义：
+											 <input class="input-small hasDatepicker" readonly="readonly"
+												onchange="" id="start_date" type="text" 
+												name="start_date">
+												 <a class="i-cal"
+												href="javascript:;" id="start_date_link">
+												</a> 
+												<script>
 													$(function() {
-														$("#start_date_link")
-																.click(
-																		function() {
-																			$(
-																					"#start_date")
-																					.datepicker(
-																							"show");
-																		});
+														$("#start_date_link").click(
+															function() {
+																$("#start_date").datepicker("show");
+															});
 													});
-												</script> <input class="input-small hasDatepicker"
+												</script> 
+												<input class="input-small hasDatepicker"
 												readonly="readonly" onchange="" id="end_date" type="text"
-												value="2014-07-21" name="end_date"> <a class="i-cal"
-												href="javascript:;" id="end_date_link"></a> <script>
+												name="end_date"> 
+												<a class="i-cal"
+												href="javascript:;" id="end_date_link">
+												</a> 
+												<script>
 													$(function() {
-														$("#end_date_link")
-																.click(
-																		function() {
-																			$(
-																					"#end_date")
-																					.datepicker(
-																							"show");
-																		});
+														$("#end_date_link").click(
+															function() {
+																$("#end_date").datepicker("show");
+															});
 													});
-												</script></li>
+												</script>
+											</li>
 											<li>
 												<div class="ez-checkbox">
 													<input data-toggle="checkbox" class="ez-hide"
@@ -367,9 +378,9 @@
 		</script>
 
 
-		<!--
+<!--
 <script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"></script>
--->
+  -->
 
 		<script type="text/javascript" src="./js/dataExport/pop.js"></script>
 		<script type="text/javascript"
