@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.hhhy.common.utils.ShowUtil" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -11,13 +11,16 @@
 	}
 	String email = (String)session.getAttribute("name");
 	Map<String, Integer> mediaStatis =(Map<String, Integer>)request.getAttribute("mediaStatis");
+	String roundData = ShowUtil.dimAna_dataSourceRoundData(mediaStatis);
+	String zhuSource = ShowUtil.dimAna_dataSourceZhuSource(mediaStatis);
+	String zhuData=ShowUtil.dimAna_dataSourceZhuData(mediaStatis);
 %>
 
 <%
-	String roundData = "['Firefox',   45.0],['IE',       26.8],['Chrome',   12.8],['Safari',    8.5],['Opera',     6.2],['Others',   0.7]";
+	///String roundData = "['Firefox',   45.0],['IE',       26.8],['Chrome',   12.8],['Safari',    8.5],['Opera',     6.2],['Others',   0.7]";
 	
-	String zhuSource = "'Africa', 'America', 'Asia', 'Europe', 'Oceania'";
-	String zhuData="107, 31, 635, 203, 2";
+	//String zhuSource = "'Africa', 'America', 'Asia', 'Europe', 'Oceania'";
+	//String zhuData="107, 31, 635, 203, 2";
  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

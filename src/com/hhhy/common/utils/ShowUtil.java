@@ -13,7 +13,7 @@ public class ShowUtil {
     /*
     dimAna_dataSource & mediaSource
      */
-    public static String dimAna_dataSourceRoundData(Map<String,String> sourceStatis){
+    public static String dimAna_dataSourceRoundData(Map<String,Integer> sourceStatis){
 //        String roundData = "['Firefox',   45.0],['IE',       26.8],['Chrome',   12.8],['Safari',    8.5],['Opera',     6.2],['Others',   0.7]";
         StringBuilder sb = new StringBuilder();
         for(String key:sourceStatis.keySet()){
@@ -22,7 +22,7 @@ public class ShowUtil {
         return sb.toString().substring(0,sb.toString().length()-1);
     }
 
-    public static String dimAna_dataSourceZhuSource(Map<String,String> sourceStatis){
+    public static String dimAna_dataSourceZhuSource(Map<String,Integer> sourceStatis){
 //        String zhuSource = "'Africa', 'America', 'Asia', 'Europe', 'Oceania'";
         StringBuilder sb = new StringBuilder();
         for(String key:sourceStatis.keySet()) {
@@ -31,7 +31,7 @@ public class ShowUtil {
         return sb.toString().substring(0, sb.toString().length() - 1);
     }
 
-    public static String dimAna_dataSourceZhuData(Map<String,String> sourceStatis){
+    public static String dimAna_dataSourceZhuData(Map<String,Integer> sourceStatis){
 //        String zhuData="107, 31, 635, 203, 2";
         StringBuilder sb = new StringBuilder();
         for(String key:sourceStatis.keySet()) {
@@ -51,10 +51,10 @@ public class ShowUtil {
         }
         return sb.toString().substring(0, sb.toString().length() - 1);
     }
-    public static String dimAna_trendPostTrend(List<String> dates){
+    public static String dimAna_trendPostTrend(List<Integer> dates){
     /* String postEmotionTrend = "1,4,3,2,5";*/
         StringBuilder sb = new StringBuilder();
-        for(String date:dates){
+        for(Integer date:dates){
             sb.append(date + ",");
         }
         return sb.toString().substring(0, sb.toString().length() - 1);

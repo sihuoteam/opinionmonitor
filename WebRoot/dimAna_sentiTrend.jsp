@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.hhhy.common.utils.ShowUtil" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -13,9 +13,12 @@
 	
 	String email = (String)session.getAttribute("name");
 	
-	List<String> dates = (List<String>)request.getAttribute("date");//json
-	List<Integer> postEmotionTrend= (List<Integer>)request.getAttribute("postrend");//json
-	List<Integer> negEmotionTrend= (List<Integer>)request.getAttribute("negtrend");//json
+	//List<String> dates = (List<String>)request.getAttribute("date");//json
+	//List<Integer> postEmotionTrend= (List<Integer>)request.getAttribute("postrend");//json
+	//List<Integer> negEmotionTrend= (List<Integer>)request.getAttribute("negtrend");//json
+	String dates = ShowUtil.dimAna_trendDates((List<String>)request.getAttribute("date"));
+	String postEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("postrend"));
+	String negEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
 %>
 
 <%
