@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
@@ -66,7 +67,7 @@ public class DBUtils {
     }
 
     /*************************** 账号管理部分 **************************/
-
+    // 不能连续create TODO
     public static long createUser(User user) throws SQLException {
         String sql = "insert into " + ADMIN_TABLE
                 + " (email, password) values(?,?)";
@@ -173,10 +174,11 @@ public class DBUtils {
 
     public static List<String> getUserKeyWordStr(long userid)
             throws SQLException {
-        String sql = "select * from " + KEYWORD_TABLE + " where uid=?";
-        List<String> keywords = DBOperator.select(sql,
-                new BeanListHandler<String>(String.class),
-                new Object[] { userid });
+        List<KeyWord> keys = getUserKeyWord(userid);
+        List<String> keywords = new ArrayList<String>();
+        for(KeyWord key:keys){
+            keywords.add(key.getKeyword());
+        }
         return keywords;
     }
 
@@ -191,11 +193,15 @@ public class DBUtils {
     }
 
     public static List<Long> getUserSet(String keyword) throws SQLException {
-        String sql = "select uid from " + KEYWORD_TABLE + " where keyword=?";
-        List<Long> users = DBOperator.select(sql,
-                new BeanListHandler<Long>(Long.class),
+        String sql = "select * from " + KEYWORD_TABLE + " where keyword=?";
+        List<KeyWord> users = DBOperator.select(sql,
+                new BeanListHandler<KeyWord>(KeyWord.class),
                 new Object[] { keyword });
-        return users;
+        List<Long> us = new ArrayList<Long>();
+        for(KeyWord u:users){
+            us.add(u.getUid());
+        }
+        return us;
 
     }
 
@@ -221,7 +227,7 @@ public class DBUtils {
         
         return DBOperator.update(sql, new Object[] { userid, keyword });
     }
-
+    // TODO: for test
     public static List<Article> getNegArticles(int kid) throws SQLException {
         String sql = "select pid from " + KEYWORDPAGE_TABLE
                 + " where emotion<0 and kid=? limit 10";
@@ -517,21 +523,37 @@ public class DBUtils {
     /*************************** data export部分结束 **************************/
 
     public static void main(String[] args) throws SQLException {
-        // Article a = new Article("title1", "content", "url", "website");
-        // insertArticle(a);
-        // logger.info(DigestUtils.md5Hex("6"));
-        // User user = new User("nickname1", "email1", DigestUtils
-        // .md5Hex("password1"));
-        // logger.info("..." + createUser(user));
-        // logger.info(checkUserExist("email2"));
-        // logger.info(loginCheck("email3","password13"));
-        // logger.info(getEmotionWords().get(0).getWord());
-//        logger.info(getUserKeyWord(9l).size());
-//        logger.info(getUserKeyWord(9l).get(0).getId());
-//        logger.info(getUserKeyWord(9l).get(0).getUid());
-//        logger.info(getUserKeyWord(9l).get(0).getKeyword());
-//        logger.info(DBOperator.select("select ", handler, params));
-        logger.info(DBUtils.getAllKeyWord());
+        /*logger.info(isArticleExist("http://www.djtz.net/forum.php?mod=redirect&goto=findpost&ptid=2942416&pid=3156303"));
+        logger.info(isArticleExist("sdfsd"));
+        User user = new User();
+        user.setEmail("clp3");
+        user.setPassword("psw");
+        logger.info("1"+createUser(user));
+        logger.info("2"+createUser(user));
+        logger.info("3"+createUser(user));
+        logger.info("4"+createUser(user));
+        logger.info(checkUserExist("clp3"));
+        logger.info(checkUserExist("clp344"));
+        logger.info(loginCheck("clp3","psw"));
+        logger.info(loginCheck("d","d"));
+        logger.info(getUserById(45));
+        logger.info(getUserById(100)==null);*/
+        
+        /*updateWarnMail("warn", "1", 45);
+        updateWarnPhone("12345", "0", 460);
+        
+        logger.info(getEmotionWords().get(0).getWord());
+        logger.info(getAllKeyWordObj().get(0).getKeyword());
+        logger.info(getUserKeyWord(15).get(0).getKeyword());*/
+        
+//        logger.info(getUserKeyWordStr(158));
+//        logger.info(getKeyWordId("关键词1"));
+//        logger.info(getKeyWordId("关键词2"));
+//        logger.info(getKeyWordId("关键词3"));
+        
+        logger.info(getUserSet("关键词1"));
+        logger.info(getUserSet("关键词3"));
+        
     }
 
 }
