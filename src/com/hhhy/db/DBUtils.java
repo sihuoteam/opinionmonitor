@@ -334,12 +334,10 @@ return res;
     public static Map<String, Integer> getSourceTypeStatis(int kid)
             throws SQLException {
         String sql = "select type from " + KEYWORDPAGE_TABLE + " where kid=?";
-        List<Integer> types = DBOperator.select(sql,
-                new BeanListHandler<Integer>(Integer.class),
-                new Object[] { kid });
+        List<Object[]> types = DBOperator.selectArrayList(sql, new Object[]{kid});
         Map<String, Integer> res = new HashMap<String, Integer>();
-        for (Integer type : types) {
-            String stype = SrcType.getName(type);
+        for (Object[] type : types) {
+            String stype = SrcType.getName((Integer)type[0]);
             int count = MapUtils.getInteger(res, stype, 0);
             res.put(stype, count + 1);
         }
@@ -348,7 +346,7 @@ return res;
 
     /**
      * 获取正负
-     * 
+     * deplicated?
      * @param keyword
      * @return
      * @throws SQLException
@@ -429,10 +427,9 @@ return res;
         String sql = "select emotion from " + KEYWORDPAGE_TABLE
                 + " where kid=?";
         int[] counts = new int[3];
-        List<Integer> emotions = DBOperator.select(sql,
-                new BeanListHandler<Integer>(Integer.class),
-                new Object[] { kid });
-        for (Integer emotion : emotions) {
+        List<Object[]> emotions = DBOperator.select(sql,new Object[] {kid});
+        for (Object[] _emotion : emotions) {
+            int emotion = (Integer)_emotion[0];
             if (emotion > 0) {
                 counts[0]++;
             } else if (emotion < 0) {
@@ -465,7 +462,7 @@ return res;
         }
         String[] keywords = condition.getKeywords();
         if (keywords == null || keywords.length == 0) {
-            logger.info("no keywords selected");
+            // logger.info("no keywords selected");
             // return null;
         }
         long start = condition.getStart();
@@ -529,14 +526,13 @@ return res;
         sql += where + orderby + limit;
         logger.info("export sql: " + sql);
 
-        List<Long> pids = DBOperator.select(sql, new BeanListHandler<Long>(
-                Long.class));
+        List<Object[]> pids = DBOperator.select(sql);
         List<Article> arts = new ArrayList<Article>();
 
-        for (Long pid : pids) {
+        for (Object[] pid : pids) {
             Article art = DBOperator.select("select * from " + ARTICLE_TABLE
                     + " where id=?", new BeanHandler<Article>(Article.class),
-                    new Object[] { pid });
+                    new Object[] {(Long)pid[0]});
             if (art.getTitle() != null && !"".equals(art.getTitle())) {
                 arts.add(art);
             }
