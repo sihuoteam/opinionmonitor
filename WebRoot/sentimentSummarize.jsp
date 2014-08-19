@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*, com.hhhy.db.beans.*, com.hhhy.db.beans.item.*" pageEncoding="utf-8"%>  
-<%-- <%
+<%
 	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Long userid = (Long)session.getAttribute("userid");
@@ -11,11 +11,15 @@ String name = (String)session.getAttribute("name");
 Integer poscount = (Integer)request.getAttribute("poscount");
 Integer negcount = (Integer)request.getAttribute("negcount");
 Integer plaincount = (Integer)request.getAttribute("plaincount");
+
 if(poscount==null || negcount==null || plaincount==null)
 	response.sendRedirect("./login.jsp");
+	
 String date = (String)request.getAttribute("date");//json
 String posttrend = (String)request.getAttribute("postrend");//json
 String negtrend = (String)request.getAttribute("negtrend");//json
+//少一个重要舆情
+List<Article> importantArticle = null;
 List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
 Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
 Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
@@ -24,21 +28,21 @@ Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("s
 Integer emotionNum = 2;
 String emotionDistribution = "[]";
 %>
---%>
+
 
 <% 
-	String name = "username";
-	Integer poscount = 8;
-	Integer negcount = 2;
+	//String name = "username";
+	//Integer poscount = 8;
+	//Integer negcount = 2;
 
 	//
-	Integer emotionNum = 2;
-	 List<Article> importantArticle = new LinkedList<Article>(); 
-	Article a = new Article("title","content","http://weibo.com/zxlady9218","website");
-	 importantArticle.add(a); 
+	//Integer emotionNum = 2;
+	// List<Article> importantArticle = new LinkedList<Article>(); 
+	//Article a = new Article("title","content","http://weibo.com/zxlady9218","website");
+	// importantArticle.add(a); 
 	
-	List<Article> negArticle = new LinkedList<Article>();
-	negArticle.add(a);
+	//List<Article> negArticle = new LinkedList<Article>();
+	//negArticle.add(a);
 %>
 
 
@@ -215,27 +219,26 @@ String emotionDistribution = "[]";
 							</dl>
 						</div>
 					</div>
-					<!-- <div class="span3 mglf20">
+					 <div class="span3 mglf20">
 							<div class="widget">
 								<dl class="trend-box clearfix">
 									<dt>
 										<p>
 											<img src="./images/sentimentSummarize/zhongli.png">
 										</p>
-										<p class="color-green">
-                        +50%</p>
+										<!--  <p class="color-green">
+                        +50%</p>-->
 									</dt>
 									<dd>
 										<h5>
-											<a href="">3</a>
+											<!-- <a href="">3</a> -->
+											<%=plaincount%>
 										</h5>
-										<p>
-											中立
-										</p>
+										<p>中立</p>
 									</dd>
 								</dl>
 							</div>
-						</div> -->
+						</div> 
 					<div class="span3 mglf20">
 						<div class="widget">
 							<dl class="trend-box clearfix">
