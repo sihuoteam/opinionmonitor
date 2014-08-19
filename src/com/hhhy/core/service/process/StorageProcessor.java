@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
 
+// duplicated
 public class StorageProcessor {
     private static final Logger logger = Logger.getLogger(StorageProcessor.class);
 

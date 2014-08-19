@@ -20,7 +20,7 @@ public class ThriftRequireHandler implements HhhyService.Iface{
 
     @Override
     public void addArticle(String jsonString) throws TException {
-        logger.info("receive json Object, will process...");
+        logger.info("receive article, will process...");
         Article art = JsonUtils.fromJson(jsonString, Article.class);
         // TODO: tread running using thread pool?
         ProcessChain.process(art);

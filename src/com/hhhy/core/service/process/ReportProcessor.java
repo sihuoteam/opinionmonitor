@@ -18,6 +18,7 @@ public class ReportProcessor {
     private static Logger logger = Logger.getLogger(ReportProcessor.class);
 
     public static void reportProcess(Article art){
+        logger.info(art.getUrl()+"'s emotion is "+art.getEmotion()+", will enter report process");
         try {
             List<Long> users = DBUtils.getUserSet(art.getKeyword());
             for(Long userid:users){
