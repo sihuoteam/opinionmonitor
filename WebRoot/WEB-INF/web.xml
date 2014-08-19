@@ -88,7 +88,7 @@
 	
 	<servlet>
 		<servlet-name>search</servlet-name>
-		<servlet-class>com.hhhy.web.servlet.ServletServlet</servlet-class>
+		<servlet-class>com.hhhy.web.servlet.SearchServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -104,6 +104,56 @@
 	<servlet-mapping>
 		<servlet-name>keylist</servlet-name>
 		<url-pattern>/keylist</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>datasource</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.DataSourceServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>datasource</servlet-name>
+		<url-pattern>/datasource</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>emailset</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.EmailSetServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>emailset</servlet-name>
+		<url-pattern>/emailset</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>emotiontrend</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.EmotionTrendServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>emotiontrend</servlet-name>
+		<url-pattern>/emotiontrend</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>mediasource</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.MediaSourceServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>mediasource</servlet-name>
+		<url-pattern>/mediasource</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>phoneset</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.PhoneSetServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>phoneset</servlet-name>
+		<url-pattern>/phoneset</url-pattern>
 	</servlet-mapping>
 
 

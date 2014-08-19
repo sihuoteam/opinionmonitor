@@ -10,8 +10,8 @@
         response.sendRedirect("./loginWeb.jsp");
         return;
     }
-    List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
-    //List<KeyWord> keywords = (List<KeyWord>) request.getAttribute("keywords");
+    //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
+    List<KeyWord> keywords = (List<KeyWord>) request.getAttribute("keywords");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
