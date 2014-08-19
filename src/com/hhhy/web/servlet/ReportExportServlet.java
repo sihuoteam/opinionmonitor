@@ -93,19 +93,19 @@ public class ReportExportServlet extends HttpServlet {
         }
         
         try {
-//            List<Article> arts = DBUtils.exportData(condition);
-            List<Article> arts = new LinkedList<Article>();
-            Article art0 = new Article();
-//            art.setContent("content");
-            art0.setTime("11");
-            art0.setEmotion(2);
-            art0.setSummary("summary");
-            art0.setTitle("title");
-            art0.setType(2);
-            art0.setUrl("url");
-            art0.setWebsite("website");
-
-            arts.add(art0);
+            List<Article> arts = DBUtils.exportData(condition);
+//            List<Article> arts = new LinkedList<Article>();
+//            Article art0 = new Article();
+////            art.setContent("content");
+//            art0.setTime("11");
+//            art0.setEmotion(2);
+//            art0.setSummary("summary");
+//            art0.setTitle("title");
+//            art0.setType(2);
+//            art0.setUrl("url");
+//            art0.setWebsite("website");
+//
+//            arts.add(art0);
 
             //生成新版xls
             /*
@@ -134,7 +134,7 @@ public class ReportExportServlet extends HttpServlet {
             }
 
             //输出文件
-            OutputStream out = new FileOutputStream("file/WriteXlsx.xlsx");
+            OutputStream out = new FileOutputStream("D:/index/WriteXlsx.xlsx");
             xwb.write(out);
             out.close();
 
