@@ -118,10 +118,10 @@ public class ThriftClient implements HhhyService.Iface{
 
     public static void main(String[] args) {
         try {
-            ThriftClient.init("localhost",12306);
+            ThriftClient.init("baby11",12306);
             ThriftClient client = ThriftClient.getInstance();
-            System.out.println("test start");
-            client.addArticle("test");
+//            System.out.println("test start");
+//            client.addArticle("test");
             System.out.println(client.getKeywords());
         } catch (TTransportException e) {
             e.printStackTrace();

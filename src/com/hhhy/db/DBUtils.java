@@ -62,11 +62,13 @@ public class DBUtils {
                 time, article.getUrl(), article.getWebsite(), 
                 article.getType(),article.getEmotion() };
 //        return DBOperator.insert(sql, params);
-        boolean flag =  DBOperator.update(sql, params);
-        if(flag){
-            return DBOperator.maxlong("select max(id) from "+ADMIN_TABLE);
+        synchronized (DBUtils.class) {
+            boolean flag =  DBOperator.update(sql, params);
+            if(flag){
+                return DBOperator.maxlong("select max(id) from "+ADMIN_TABLE);
+            }
+            return -1;
         }
-        return -1;
     }
 
     /*************************** 账号管理部分 **************************/
@@ -577,12 +579,12 @@ return res;
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
-        User user = new User();
-        user.setEmail("clp3");
-        user.setPassword("psw");
-        logger.info("1"+createUser(user));
-        logger.info("2"+createUser(user));
-        logger.info("3"+createUser(user));
+//        User user = new User();
+//        user.setEmail("clp3");
+//        user.setPassword("psw");
+//        logger.info("1"+createUser(user));
+//        logger.info("2"+createUser(user));
+//        logger.info("3"+createUser(user));
         logger.info(getAllKeyWord());
         
         /*logger.info(isArticleExist("http://www.djtz.net/forum.php?mod=redirect&goto=findpost&ptid=2942416&pid=3156303"));
