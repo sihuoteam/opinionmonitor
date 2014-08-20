@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.MapUtils;
 import org.apache.log4j.Logger;
 
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.EmotionWord;
-import com.sun.org.apache.commons.collections.MapUtils;
 
 
 /**

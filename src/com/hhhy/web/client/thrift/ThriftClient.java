@@ -121,7 +121,7 @@ public class ThriftClient implements HhhyService.Iface{
             ThriftClient.init("baby11",12306);
             ThriftClient client = ThriftClient.getInstance();
 //            System.out.println("test start");
-//            client.addArticle("test");
+            client.addArticle("{\"id\":0,\"title\":\"经济最近相关新闻_国搜新闻\",\"summary\":\"栏目：正点新闻主持人：黄橙子标签：APEC高官会杨洁篪\",\"content\":\"http://www.chinaso.com/search/link?url\\u003dkaVK3z12tTrkGIrigexQNhUGeOOP8N0wZQN%2B3KZ9OQLtGlmbs9K6FlpiONRFwv9QEWDFzsExe1B73FmQxEj74Q%3D%3D\\u0026_typeid_\\u003d130\",\"time\":\"2014-08-20\",\"url\":\"http://www.chinaso.com/search/link?url\\u003dkaVK3z12tTrkGIrigexQNhUGeOOP8N0wZQN%2B3KZ9OQLtGlmbs9K6FlpiONRFwv9QEWDFzsExe1B73FmQxEj74Q%3D%3D\\u0026_typeid_\\u003d130\",\"website\":\"千龙网\",\"type\":4,\"emotion\":0}");
             System.out.println(client.getKeywords());
         } catch (TTransportException e) {
             e.printStackTrace();
