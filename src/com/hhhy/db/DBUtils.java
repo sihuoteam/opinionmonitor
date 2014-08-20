@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
@@ -38,7 +37,6 @@ public class DBUtils {
     private static final String ADMIN_TABLE = "a_admin";
     private static final String KEYWORD_TABLE = "a_keyword";
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
-    private static final String USERKEYWORD_TABLE = "a_userkeyword";
     private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
 
     public static long isArticleExist(String url) throws SQLException {
@@ -63,7 +61,12 @@ public class DBUtils {
         Object[] params = { article.getTitle(), article.getSummary(),
                 time, article.getUrl(), article.getWebsite(), 
                 article.getType(),article.getEmotion() };
-        return DBOperator.insert(sql, params);
+//        return DBOperator.insert(sql, params);
+        boolean flag =  DBOperator.update(sql, params);
+        if(flag){
+            return DBOperator.maxlong("select max(id) from "+ADMIN_TABLE);
+        }
+        return -1;
     }
 
     /*************************** 账号管理部分 **************************/
@@ -72,7 +75,11 @@ public class DBUtils {
         String sql = "insert into " + ADMIN_TABLE
                 + " (email, password) values(?,?)";
         Object[] params = { user.getEmail(), user.getPassword() };
-        return DBOperator.insert(sql, params);
+        boolean flag = DBOperator.update(sql, params);
+        if(flag){
+            return DBOperator.maxlong("select max(id) from "+ADMIN_TABLE);
+        }
+        return -1;
     }
 
     public static boolean checkUserExist(String email) throws SQLException {
@@ -151,15 +158,17 @@ public class DBUtils {
      * @throws SQLException
      */
     public static List<String> getAllKeyWord() throws SQLException {
-//        String sql = "select  keyword from " + KEYWORD_TABLE;
-//        List<String> keywords = DBOperator.select(sql,
-//                new BeanListHandler<String>(String.class));
-        List<String> keywords = new ArrayList<String>();
-        List<KeyWord> objs = getAllKeyWordObj();
-        for(KeyWord obj:objs){
-            keywords.add(obj.getKeyword());
+        String sql = "select distinct keyword from " + KEYWORD_TABLE;
+        List<Object[]> keywords = DBOperator.selectArrayList(sql);
+        List<String> keywordList = new ArrayList<String>();
+        for(Object[] word:keywords){
+            keywordList.add((String)word[0]);
         }
-        return keywords;
+//        List<KeyWord> objs = getAllKeyWordObj();
+//        for(KeyWord obj:objs){
+//            keywords.add(obj.getKeyword());
+//        }
+        return keywordList;
         
     }
     
@@ -551,22 +560,31 @@ return res;
 
     public static void importEmotionWord() throws SQLException, IOException{
         // neg
-        List<String> lines = FileUtils.readLines(new File("xxx.txt")," GBK");
+        List<String> lines = FileUtils.readLines(new File("file/负面情感词语（中文）.txt"),"gbk");
         String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)";
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,-1});
         }
-        lines = FileUtils.readLines(new File("xxx2.txt")," GBK");
+        lines = FileUtils.readLines(new File("file/正面情感词语（中文）.txt"),"gbk");
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,1});
         }
     }
 
-    /*************************** data export部分结束 **************************/
+    /*************************** data export部分结束 
+     * @throws IOException **************************/
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
+        User user = new User();
+        user.setEmail("clp3");
+        user.setPassword("psw");
+        logger.info("1"+createUser(user));
+        logger.info("2"+createUser(user));
+        logger.info("3"+createUser(user));
+        logger.info(getAllKeyWord());
+        
         /*logger.info(isArticleExist("http://www.djtz.net/forum.php?mod=redirect&goto=findpost&ptid=2942416&pid=3156303"));
         logger.info(isArticleExist("sdfsd"));
         User user = new User();
@@ -653,7 +671,8 @@ return res;
         condition.setSize(10);
         condition.setSources(new String[]{"bbs","blog","search"});
         logger.info(exportData(condition));*/
-        logger.info(getUserById(45));
+//        logger.info(getUserById(45));
+//        importEmotionWord();
     }
 
 }

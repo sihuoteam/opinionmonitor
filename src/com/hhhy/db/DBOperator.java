@@ -20,8 +20,6 @@ public class DBOperator {
     private static DataSource pool = new ComboPooledDataSource();
     private static final Logger logger = Logger.getLogger(DBOperator.class);
 
-    private static final String WEBPAGE_TABLE = "webpage";
-
     static {
         init();
     }
@@ -101,21 +99,30 @@ public class DBOperator {
      * @return
      * @throws SQLException
      */
-    public static long insert(String sql, java.lang.Object... params)
-            throws SQLException {
-        QueryRunner qr = new QueryRunner(pool);
-        boolean result = (qr.update(sql, params) == 1);
-
-        if (result == false) {
-            return -1L;
-        } else {
-            return (Long) qr.query("select LAST_INSERT_ID()",
-                    new ScalarHandler(1));
-        }
-    }
+//    public static long insert(String sql, java.lang.Object... params)
+//            throws SQLException {
+//        QueryRunner qr = new QueryRunner(pool);
+//        boolean result = (qr.update(sql, params) == 1);
+//
+//        if (result == false) {
+//            return -1L;
+//        } else {
+////            QueryRunner qr2 = new QueryRunner(pool);
+////            (Long) qr2.query("select LAST_INSERT_ID()", new ScalarHandler());
+//            qr.query("select LAST_INSERT_ID()",
+//                    new ScalarHandler());
+//            return (Long) qr.query("select LAST_INSERT_ID()",
+//                    new ScalarHandler());
+//        }
+//    }
 
     public static int max(String sql) throws SQLException {
         QueryRunner qr = new QueryRunner(pool);
         return (Integer) qr.query(sql, new ScalarHandler());
+    }
+    
+    public static long maxlong(String sql) throws SQLException {
+        QueryRunner qr = new QueryRunner(pool);
+        return (Long) qr.query(sql, new ScalarHandler());
     }
 }
