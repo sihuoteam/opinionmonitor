@@ -256,15 +256,14 @@ public class DBUtils {
     }
 
     public static List<Article> getRecentArticles(int kid) throws SQLException {
-        String sql = "select * from " + KEYWORDPAGE_TABLE
-                + " where kid=? and emotion<>0 sort by ctime desc limit 10";
-        List<KeyWordPage> pagesid = DBOperator.select(sql, new BeanListHandler<KeyWordPage>(
-                KeyWordPage.class), new Object[] { kid });
+        String sql = "select distinct pid from " + KEYWORDPAGE_TABLE
+                + " where kid=? and emotion<>0 order by ctime desc limit 10";
+        List<Object[]> pagesid = DBOperator.selectArrayList(sql, new Object[] { kid });
         List<Article> arts = new ArrayList<Article>();
         sql = "select * from " + ARTICLE_TABLE + " where id=?";
-        for (KeyWordPage pageid : pagesid) {
+        for (Object[] pageid : pagesid) {
             Article art = DBOperator.select(sql, new BeanHandler<Article>(
-                    Article.class), new Object[] { pageid.getPid() });
+                    Article.class), new Object[] {(Long)pageid[0]});
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
                 art.setContent(""); // 内容置空，减少存储消耗
@@ -282,7 +281,7 @@ public class DBUtils {
     public static boolean addTrend(KeyWordPage keyWordPage) throws SQLException {
         String sql = "insert into "
                 + KEYWORDPAGE_TABLE
-                + "(type,kid,emotion,url,website,ctime,pig) values(?,?,?,?,?,?,?)";
+                + "(type,kid,emotion,url,website,ctime,pid) values(?,?,?,?,?,?,?)";
         Object[] params = new Object[] { keyWordPage.getType(),
                 keyWordPage.getKid(), keyWordPage.getEmotion(),
                 keyWordPage.getUrl(), keyWordPage.getWebsite(),
@@ -403,7 +402,7 @@ return res;
             String dateF = DateFormatUtils.formatTime(ctimeV,
                     DateFormatUtils.yyyyMMdd);
             int size = dates.size();
-            if (size == 0 || !dates.get(size).equals(dateF)) {
+            if (size == 0 || !dates.get(size-1).equals(dateF)) {
                 dates.add(dateF);
                 negt.add(0);
                 post.add(0);
@@ -598,8 +597,62 @@ return res;
         
 //        logger.info(getUserSet("关键词1"));
 //        logger.info(getUserSet("关键词3"));
-        logger.info(getMediaSourceStatis2(1));
-        
+//        logger.info(getMediaSourceStatis2(1));
+       /* logger.info(getRecentArticles(1));
+        logger.info(getRecentArticles(30));
+        KeyWordPage page = new KeyWordPage();
+        page.setKid(9);
+        page.setCtime(123);
+        page.setEmotion(-1);
+        page.setType(3);
+        page.setUrl("url1");
+        page.setWebsite("wangyi");
+        page.setPid(213);
+        logger.info(addTrend(page));
+        page.setKid(8);
+        page.setCtime(345);
+        page.setEmotion(1);
+        page.setType(2);
+        page.setUrl("url3");
+        page.setWebsite("wangyi");
+        page.setPid(211);
+        logger.info(addTrend(page));
+        page.setKid(8);
+        page.setCtime(3435);
+        page.setEmotion(-1);
+        page.setType(2);
+        page.setUrl("url4");
+        page.setWebsite("wangyi");
+        page.setPid(231);
+        logger.info(addTrend(page));*/
+        /*logger.info(getSourceTypeStatis(1));
+        logger.info(getSourceTypeStatis(22));
+        Pair<Map<String, Integer>, Map<String, Integer>> pair =  getEmotionTrendStatis(1);
+        logger.info(pair.getFirst());
+        logger.info(pair.getSecond());
+        pair =  getEmotionTrendStatis(2);
+        logger.info(pair.getFirst());
+        logger.info(pair.getSecond());*/
+        /*Pair<List<String>, List<Integer>> pair1 = getEmotionTrendStatis2(1);
+        Pair<List<String>, List<Integer>> pair2 = getEmotionTrendStatis2(2);
+        logger.info(pair1.getFirst());
+        logger.info(pair1.getSecond());
+        logger.info(pair2.getFirst());
+        logger.info(pair2.getSecond());*/
+        /*int[] count1 = getEmotionStatisCount(1);
+        int[] count2 = getEmotionStatisCount(2);
+        int[] count3 = getEmotionStatisCount(9);
+        logger.info(count1[0]+" "+count1[1]+" "+count1[2]);
+        logger.info(count2[0]+" "+count2[1]+" "+count2[2]);
+        logger.info(count3[0]+" "+count3[1]+" "+count3[2]);*/
+        Condition condition = new Condition();
+        condition.setStart(0);
+        condition.setEnd(Long.MAX_VALUE);
+        condition.setKeyword(1);
+        condition.setSentiments(new int[]{1,1,1});
+        condition.setSize(10);
+        condition.setSources(new String[]{"bbs","blog","search"});
+        logger.info(exportData(condition));
     }
 
 }

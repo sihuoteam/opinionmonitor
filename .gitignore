@@ -19,7 +19,10 @@ WebRoot/WEB-INF/classes/*/
 classes/
 logs/
 WebRoot/WEB-INF/lib/*
-.classpath
+.*path
+lucene/*
+*.war
+
 
 # External tool builders
 .externalToolBuilders/
