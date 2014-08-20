@@ -13,7 +13,7 @@ public class Condition{
 	// 情感，0：正面，1：负面，2：无情感
 	private int[] sentiments;
 	// 关键词
-	private String[] keywords;
+	private int keyword;
 //	// 导出字段
 //	private Set<String> fields;
 	// 导出条数
@@ -56,13 +56,17 @@ public class Condition{
 	public void setSentiments(int[] sentiments) {
 		this.sentiments = sentiments;
 	}
-	public String[] getKeywords() {
-		return keywords;
-	}
-	public void setKeywords(String[] keywords) {
-		this.keywords = keywords;
-	}
-//	public Set<String> getFields() {
+
+
+public int getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(int keyword) {
+        this.keyword = keyword;
+    }
+
+    //	public Set<String> getFields() {
 //		return fields;
 //	}
 //	public void setFields(Set<String> fields) {

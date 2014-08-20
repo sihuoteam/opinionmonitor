@@ -162,6 +162,13 @@ public class DBUtils {
         return keywords;
         
     }
+    
+    public static String getKeyWordById(int kid) throws SQLException{
+        String sql = "select * from "+KEYWORD_TABLE+ " where id=?";
+        KeyWord keyword = DBOperator.select(sql, new BeanHandler<KeyWord>(KeyWord.class), new Object[]{kid});
+        if(keyword==null) return null;
+        return keyword.getKeyword();
+    }
 
     // 不同用户返回不同关键词, 用户信息存放session中
     public static List<KeyWord> getUserKeyWord(long userid) throws SQLException {
@@ -427,7 +434,7 @@ return res;
         String sql = "select emotion from " + KEYWORDPAGE_TABLE
                 + " where kid=?";
         int[] counts = new int[3];
-        List<Object[]> emotions = DBOperator.select(sql,new Object[] {kid});
+        List<Object[]> emotions = DBOperator.selectArrayList(sql,new Object[] {kid});
         for (Object[] _emotion : emotions) {
             int emotion = (Integer)_emotion[0];
             if (emotion > 0) {
@@ -460,10 +467,10 @@ return res;
             logger.info("no source selected");
             return null;
         }
-        String[] keywords = condition.getKeywords();
-        if (keywords == null || keywords.length == 0) {
-            // logger.info("no keywords selected");
-            // return null;
+        int kid = condition.getKeyword();
+        if (kid<0) {
+             logger.info("no keywords selected");
+             return null;
         }
         long start = condition.getStart();
         long end = condition.getEnd();
@@ -502,7 +509,7 @@ return res;
             }
         }
 
-        String keyword = "1=1";
+        String keyword = "kid="+kid;
         /*
         for (String kid : keywords) {
             if (keyword.length() == 0) {
@@ -526,7 +533,7 @@ return res;
         sql += where + orderby + limit;
         logger.info("export sql: " + sql);
 
-        List<Object[]> pids = DBOperator.select(sql);
+        List<Object[]> pids = DBOperator.selectArrayList(sql);
         List<Article> arts = new ArrayList<Article>();
 
         for (Object[] pid : pids) {

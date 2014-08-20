@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*, com.hhhy.db.DBUtils, com.hhhy.db.beans.User" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -14,7 +14,7 @@
 	User user = DBUtils.getUserById(userid);
 	String reportrmail = "";
 	if(user!=null){
-		reportrmail = user.getReportrmail();
+		reportrmail = user.getReportemail();
 		if(reportrmail==null)reportrmail = "";
 	}
 %>
