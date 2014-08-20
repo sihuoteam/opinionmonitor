@@ -8,6 +8,39 @@ if(userid==null){
 	return;
 }
 String name = (String)session.getAttribute("name");
+
+Integer poscount = (Integer)request.getAttribute("poscount");
+Integer negcount = (Integer)request.getAttribute("negcount");
+Integer plaincount = (Integer)request.getAttribute("plaincount");
+
+if(poscount==null || negcount==null || plaincount==null)
+    response.sendRedirect("./login.jsp");
+    
+//String date = (String)request.getAttribute("date");//json
+//String posttrend = (String)request.getAttribute("postrend");//json
+//String negtrend = (String)request.getAttribute("negtrend");//json
+String dates = ShowUtil.dimAna_trendDates((List<String>)request.getAttribute("date"));
+String postEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("postrend"));
+    String negEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
+
+//少一个重要舆情
+List<Article> importantArticle = (List<Article>)request.getAttribute("importarts");
+List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
+
+//Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
+Map<String, Integer> mediaStatis =(Map<String, Integer>)request.getAttribute("mediaStatis");
+    String roundDataMedia = ShowUtil.dimAna_dataSourceRoundData(mediaStatis);
+    String zhuSourceMedia = ShowUtil.dimAna_dataSourceZhuSource(mediaStatis);
+    String zhuDataMedia=ShowUtil.dimAna_dataSourceZhuData(mediaStatis);
+//Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
+Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
+    String roundDataSource = ShowUtil.dimAna_dataSourceRoundData(sourceStatis);
+    String zhuSourceSource = ShowUtil.dimAna_dataSourceZhuSource(sourceStatis);
+    String zhuDataSource=ShowUtil.dimAna_dataSourceZhuData(sourceStatis);
+// no importantArticle
+//
+Integer emotionNum = 2;
+String emotionDistribution = "[]";
 %>
 
 <%
