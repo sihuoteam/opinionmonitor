@@ -28,6 +28,11 @@
 		<!-- Theme -->
 		<link rel="stylesheet" href="./css/style-red.css">
 		<link rel="stylesheet" href="./css/style-red-my.css">
+		<style type="text/css">
+		a.zhuce {
+			float: left;
+		}
+		</style>
 	</head>
 
 	<body class="bg-login">
@@ -52,13 +57,18 @@
 					</ul>
 
 					<div class="login-opt clearfix">
+						
 						<input class="login-btn" type="submit" name="yt0" value="登录">
+						<ul>
+						<li><a class="zhuce" href="registerWeb.jsp">注册</a></li>
+						</ul>
 						<label class="remember-me">
 							<% String loginerror = (String)session.getAttribute("loginerror"); %>
 							<% if(loginerror!=null){ %>
 							<div><%=loginerror %></div>
 							<% } %>
 						</label>
+						
 					</div>
 				</div>
 			</div>

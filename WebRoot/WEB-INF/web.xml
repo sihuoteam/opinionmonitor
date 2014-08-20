@@ -163,6 +163,6 @@
 	</welcome-file-list> -->
 	
 	 <welcome-file-list>
-		<welcome-file>dataExport.jsp</welcome-file>
+		<welcome-file>loginWeb.jsp</welcome-file>
 	</welcome-file-list> 
 </web-app>

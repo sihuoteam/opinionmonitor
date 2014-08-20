@@ -55,6 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					<div class="login-opt clearfix">
 						<input class="login-btn" type="submit" name="register" value="注册">
+						<ul>
+						<li><a class="zhuce" href="loginWeb.jsp">登陆</a></li>
+						</ul>
 						<label class="remember-me">
 							<%-- <% String loginerror = (String)session.getAttribute("loginerror"); %>
 							<% if(loginerror!=null){ %>
