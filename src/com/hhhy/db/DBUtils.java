@@ -645,14 +645,15 @@ return res;
         logger.info(count1[0]+" "+count1[1]+" "+count1[2]);
         logger.info(count2[0]+" "+count2[1]+" "+count2[2]);
         logger.info(count3[0]+" "+count3[1]+" "+count3[2]);*/
-        Condition condition = new Condition();
+        /*Condition condition = new Condition();
         condition.setStart(0);
         condition.setEnd(Long.MAX_VALUE);
         condition.setKeyword(1);
         condition.setSentiments(new int[]{1,1,1});
         condition.setSize(10);
         condition.setSources(new String[]{"bbs","blog","search"});
-        logger.info(exportData(condition));
+        logger.info(exportData(condition));*/
+        logger.info(getUserById(45));
     }
 
 }
