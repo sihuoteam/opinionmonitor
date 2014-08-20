@@ -47,7 +47,7 @@ public class ReportProcessor {
         EmailEntry entry = new EmailEntry();
         entry.subject = "邮件告警";
         entry.text = "有新的重要舆情需要关注: <br>标题: "+art.getTitle()+
-            "<br>摘要: "+art.getSummary()+"<br>URL: <a href=\""+art.getUrl()+"\">这里</a>";
+            "<br>摘要: "+art.getSummary()+"<br>URL: "+art.getUrl();
         entry.toAddresses = email;
         try {
             EmailReport.sendMail(entry);
