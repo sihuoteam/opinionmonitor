@@ -9,46 +9,10 @@ if(userid==null){
 }
 String name = (String)session.getAttribute("name");
 
-Integer poscount = (Integer)request.getAttribute("poscount");
-Integer negcount = (Integer)request.getAttribute("negcount");
-Integer plaincount = (Integer)request.getAttribute("plaincount");
-
-if(poscount==null || negcount==null || plaincount==null)
-    response.sendRedirect("./login.jsp");
-    
-//String date = (String)request.getAttribute("date");//json
-//String posttrend = (String)request.getAttribute("postrend");//json
-//String negtrend = (String)request.getAttribute("negtrend");//json
-String dates = ShowUtil.dimAna_trendDates((List<String>)request.getAttribute("date"));
-String postEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("postrend"));
-    String negEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
-
-//少一个重要舆情
-List<Article> importantArticle = (List<Article>)request.getAttribute("importarts");
-List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
-
-//Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
-Map<String, Integer> mediaStatis =(Map<String, Integer>)request.getAttribute("mediaStatis");
-    String roundDataMedia = ShowUtil.dimAna_dataSourceRoundData(mediaStatis);
-    String zhuSourceMedia = ShowUtil.dimAna_dataSourceZhuSource(mediaStatis);
-    String zhuDataMedia=ShowUtil.dimAna_dataSourceZhuData(mediaStatis);
-//Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
-Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
-    String roundDataSource = ShowUtil.dimAna_dataSourceRoundData(sourceStatis);
-    String zhuSourceSource = ShowUtil.dimAna_dataSourceZhuSource(sourceStatis);
-    String zhuDataSource=ShowUtil.dimAna_dataSourceZhuData(sourceStatis);
-// no importantArticle
-//
-Integer emotionNum = 2;
-String emotionDistribution = "[]";
 %>
 
 <%
-	List<Article> articles = new LinkedList<Article>(); 
-	Article a = new Article("title","content","http://weibo.com/zxlady9218","website");
-	a.setEmotion(1);
-	a.setTime("time");
-	articles.add(a); 
+	List<Article> articles = (List<Article>)session.getAttribute("all");
  %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -92,7 +56,7 @@ String emotionDistribution = "[]";
 <body>
 <iframe frameborder="0" style="display: none;"></iframe><div id="bdshare_s" style="display: block;"><iframe id="bdsIfr" style="position:absolute;display:none;z-index:9999;" frameborder="0"></iframe><div id="bdshare_l" style="display: none;"><div id="bdshare_l_c"><h6>分享到</h6><ul><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_mshare mshare">一键分享</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_qzone qqkj">QQ空间</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_tsina xlwb">新浪微博</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_bdysc bdysc">百度云收藏</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_renren rrw">人人网</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_tqq txwb">腾讯微博</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_bdxc bdxc">百度相册</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_kaixin001 kxw">开心网</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_tqf txpy">腾讯朋友</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_tieba bdtb">百度贴吧</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_douban db">豆瓣网</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_tsohu shwb">搜狐微博</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_bdhome bdhome">百度新首页</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_sqq sqq">QQ好友</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_thx thx">和讯微博</a></li><li><a href="http://yq.adt100.com/moniter/index?merge=1#" class="bds_more">更多...</a></li></ul><p><a href="http://yq.adt100.com/moniter/index?merge=1#" class="goWebsite">百度分享</a></p></div></div></div>
 <div class="navbar">
-    <a class="appbrand"><img src="logo" alt="" style="position: relative;top:0;left: 25px;"></a>
+    <a class="appbrand"><!-- <img src="logo" alt="" style="position: relative;top:0;left: 25px;"> --></a>
     <button class="menu-toggle" type="button"></button>
     
     <!-- <div class="topnav pull-left ln">
@@ -171,7 +135,7 @@ String emotionDistribution = "[]";
 </ul>
 <div class="innerLR">
 
-<<!-- form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
+<!-- form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
     <div class="search-filter-box">
         <div class="normal-search-box clearfix">
             <div class="clearfix time-opt span10">
@@ -339,7 +303,7 @@ String emotionDistribution = "[]";
             
         out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\"></a></strong>");
         out.println("</div>"+
-            "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li>");
+            "<div class=\"news-intro-bd\">"+ aa.getTitle() +"</div></div></div></li>");
             }
 	 %>
 

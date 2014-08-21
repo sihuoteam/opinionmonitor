@@ -33,30 +33,11 @@ public class MonitorServlet extends HttpServlet {
         }
 
         logger.info("will summarize for kid: "+kid);
-        if(kid==null || "".equals(kid)) response.sendRedirect("login.jsp");
+        if(kid==null || "".equals(kid)) response.sendRedirect("loginWeb.jsp");
         try {
-            int[] counts = DBUtils.getEmotionStatisCount(Integer.parseInt(kid));
-            request.setAttribute("poscount", counts[0]);
-            request.setAttribute("negcount", counts[1]);
-            request.setAttribute("plaincount", counts[2]);
-            // Pair<Map<String,Integer>,Map<String,Integer>> pair = DBUtils.getEmotionTrendStatis(Integer.parseInt(kid));
-            Pair<List<String>,List<Integer>> pair = DBUtils.getEmotionTrendStatis2(Integer.parseInt(kid));
-            // logger.info("trend size: dateSize: "+pair.getFirst().size()+" trendSize: "+pair.getSecond().size());
-            // TODO: test needed
-            int size = pair.getFirst().size();
-            if(size>0){
-                request.setAttribute("date", pair.getFirst());
-                request.setAttribute("postrend", pair.getSecond().subList(0,size/2));
-                request.setAttribute("negtrend", pair.getSecond().subList(size/2,size));
-            }
-            List<Article> arts = DBUtils.getNegArticles(Integer.parseInt(kid));
-            request.setAttribute("negarts", arts);
-            List<Article> importArts = DBUtils.getRecentArticles(Integer.parseInt(kid));
-            request.setAttribute("importarts", importArts);
-            Map<String, Integer> mediaStatis = DBUtils.getMediaSourceStatis(Integer.parseInt(kid));
-            Map<String, Integer> sourceStatis =DBUtils.getSourceTypeStatis(Integer.parseInt(kid));
-            request.setAttribute("mediaStatis", mediaStatis);
-            request.setAttribute("sourceStatis", sourceStatis);
+            // TODO: 需要加所有舆情文章
+            List<Article> arts = DBUtils.getUserArticle((Long)request.getSession().getAttribute("userid"));
+            request.getSession().setAttribute("all", arts);
             request.getRequestDispatcher("/sentimentMonitor.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());

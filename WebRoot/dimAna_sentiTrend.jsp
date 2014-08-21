@@ -18,7 +18,9 @@
 	//List<Integer> negEmotionTrend= (List<Integer>)request.getAttribute("negtrend");//json
 	String dates = ShowUtil.dimAna_trendDates((List<String>)request.getAttribute("date"));
 	String posttrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("postrend"));
+	System.out.println("posttrend: "+posttrend);
 	String negtrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
+	System.out.println("negtrend: "+negtrend);
 %>
 
 <%
@@ -136,7 +138,7 @@
 			<ul class="menu-lists">
 				<li class="menu-list menu-general"><a href="summarize"
 					class="menu-title"><i></i><span>舆情概况</span> </a></li>
-				<li id="more-sub-menu" class="menu-list menu-lat active"><a href="sentitrend"
+				<li id="more-sub-menu" class="menu-list menu-lat active"><a href="#"
 					class="menu-title"><i></i><span>维度分析</span> </a>
 					<ul class="sub-menu-list" id="sub-menu-list">
 						<li class="sub-active"><a href="#">舆情走势</a></li>
