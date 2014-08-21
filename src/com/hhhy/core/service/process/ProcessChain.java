@@ -27,8 +27,12 @@ public class ProcessChain {
         long id = -1l;
          try {
             id = DBUtils.isArticleExist(art.getUrl());
-            if(id<0){
+            if(id<=0){
                 id = DBUtils.insertArticle(art);
+                if(id<=0){
+                    logger.info("insert error: "+art.getUrl());
+                    return;
+                }
                 art.setId(id);
                 logger.info("artid: "+art.getId());
                 //no need for repeat index if url already exist
@@ -36,6 +40,8 @@ public class ProcessChain {
                 if(score<-3){ // only report the first time
                     ReportProcessor.reportProcess(art);
                 }
+            }else{
+                logger.info("duplicated url: "+art.getUrl());
             }
         } catch (SQLException e) {
             logger.warn("can't insert article with url: "+art.getUrl());
