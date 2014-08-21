@@ -13,9 +13,11 @@
 	String name = (String)session.getAttribute("name");
 	User user = DBUtils.getUserById(userid);
 	String reportrmail = "";
+	int report = 0;
 	if(user!=null){
 		reportrmail = user.getReportemail();
 		if(reportrmail==null)reportrmail = "";
+		report = user.getNeedemail();
 	}
 %>
 
@@ -162,7 +164,7 @@
           <div class="control-group form-horizontal">
             <label class="control-label" for="hour"  style="width:80px">是否发送：</label>
             <div class="controls" style="margin-left:80px" >
-          <!-- <input id="ytSendForm_enable_warn" type="hidden" value="" name="SendForm[enable_warn]" /> --><span id="SendForm_enable_warn"><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_0" value="0" checked="checked" type="radio" name="SendForm[enable_warn]" />否</label><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_1" value="1" type="radio" name="SendForm[enable_warn]" />是</label></span>
+          <!-- <input id="ytSendForm_enable_warn" type="hidden" value="" name="SendForm[enable_warn]" /> --><span id="SendForm_enable_warn"><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_0" value="0" <% if(report==0){ %>checked="checked" <% } %> type="radio" name="SendForm[enable_warn]" />否</label><label><input data-toggle="checkbox" class="ez-hide" id="SendForm_enable_warn_1" value="1" <% if(report==1){ %>checked="checked" <% } %> type="radio" name="SendForm[enable_warn]" />是</label></span>
             </div>
           </div>
 
