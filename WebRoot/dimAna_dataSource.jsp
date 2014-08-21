@@ -89,7 +89,7 @@
     </div> -->
 
 		<ul class="topnav pull-right inline">
-			<li><a href="keylist.jsp" class="top-opt" data-toggle="tooltip"
+			<li><a href="keylist" class="top-opt" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 关键词设置</a></li>
 			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 退出</a></li>
@@ -132,21 +132,21 @@
 				</form>
 			</div> -->
 			<ul class="menu-lists">
-				<li class="menu-list menu-general"><a href="sentimentSummarize.jsp"
+				<li class="menu-list menu-general"><a href="summarize"
 					class="menu-title"><i></i><span>舆情概况</span> </a></li>
 				<li id="more-sub-menu" class="menu-list menu-lat  active"><a href="dimAna_sentiTrend.jsp"
 					class="menu-title "><i></i><span>维度分析</span> </a>
 					<ul class="sub-menu-list" id="sub-menu-list">
 						<li><a href="dimAna_sentiTrend.jsp">舆情走势</a></li>
 						<li class="sub-active"><a href="#">数据来源</a></li>
-						<li><a href="dimAna_mediaSource.jsp">媒体来源</a></li>
-						<li><a href="dimAna_emotionTrend.jsp">情感走势</a></li>
+						<li><a href="mediasource">媒体来源</a></li>
+						<li><a href="emotiontrend">情感走势</a></li>
 					</ul></li>
 
 
-				<li class="menu-list menu-any "><a href="sentimentMonitor.jsp" class="menu-title"><i></i><span>舆情监控</span>
+				<li class="menu-list menu-any "><a href="monitor" class="menu-title"><i></i><span>舆情监控</span>
 				</a></li>
-				<li class="menu-list menu-rep "><a href="dataExport.jsp" class="menu-title"><i></i><span>数据报告</span>
+				<li class="menu-list menu-rep "><a href="export" class="menu-title"><i></i><span>数据报告</span>
 				</a></li>
 				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
 				</a></li> -->

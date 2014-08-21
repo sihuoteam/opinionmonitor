@@ -12,10 +12,13 @@ public class ProcessChain {
     private static final Logger logger = Logger.getLogger(ProcessChain.class);
 
     public static void process(Article art) {
-        logger.info("split word for article: "+art.getUrl());
+//        logger.info("split word for article: "+art.getUrl());
+        if(art.getTitle().length()>50){
+            art.setTitle(art.getTitle().substring(0,50));
+        }
         List<String> contentWords = WordSplitProcessor.split(art.getContent());
         List<String> titleWords = WordSplitProcessor.split(art.getTitle());
-        logger.info("emotionParser for article: "+art.getUrl());
+//        logger.info("emotionParser for article: "+art.getUrl());
         int titleScore = EmotionAnalysisProcessor.emotionParser(titleWords);
         int contentScore = EmotionAnalysisProcessor.emotionParser(contentWords);
         int score = titleScore<0?titleScore:titleScore + contentScore;
@@ -27,6 +30,7 @@ public class ProcessChain {
             if(id<0){
                 id = DBUtils.insertArticle(art);
                 art.setId(id);
+                logger.info("artid: "+art.getId());
                 //no need for repeat index if url already exist
                 IndexProcessor.addIndex(art);
                 if(score<-3){ // only report the first time

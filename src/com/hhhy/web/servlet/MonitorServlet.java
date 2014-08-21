@@ -57,7 +57,7 @@ public class MonitorServlet extends HttpServlet {
             Map<String, Integer> sourceStatis =DBUtils.getSourceTypeStatis(Integer.parseInt(kid));
             request.setAttribute("mediaStatis", mediaStatis);
             request.setAttribute("sourceStatis", sourceStatis);
-            request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
+            request.getRequestDispatcher("/sentimentMonitor.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());
             response.sendRedirect("error.jsp");

@@ -1,5 +1,10 @@
 package com.hhhy.web.client.thrift;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -13,7 +18,7 @@ import com.hhhy.web.service.thrift.gencode.HhhyService;
  * Created by lenovo on 8/10/2014.
  */
 public class ThriftClient implements HhhyService.Iface{
-//    private static final Logger logger = Logger.getLogger(ThriftClient.class);
+    private static final Logger logger = Logger.getLogger(ThriftClient.class);
 
     private static ThriftClient instance;
     private HhhyService.Client client;
@@ -116,18 +121,27 @@ public class ThriftClient implements HhhyService.Iface{
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
-            ThriftClient.init("baby11",12306);
+            ThriftClient.init("localhost",12306);
             ThriftClient client = ThriftClient.getInstance();
 //            System.out.println("test start");
-            client.addArticle("{\"id\":0,\"title\":\"经济最近相关新闻_国搜新闻\",\"summary\":\"栏目：正点新闻主持人：黄橙子标签：APEC高官会杨洁篪\",\"content\":\"http://www.chinaso.com/search/link?url\\u003dkaVK3z12tTrkGIrigexQNhUGeOOP8N0wZQN%2B3KZ9OQLtGlmbs9K6FlpiONRFwv9QEWDFzsExe1B73FmQxEj74Q%3D%3D\\u0026_typeid_\\u003d130\",\"time\":\"2014-08-20\",\"url\":\"http://www.chinaso.com/search/link?url\\u003dkaVK3z12tTrkGIrigexQNhUGeOOP8N0wZQN%2B3KZ9OQLtGlmbs9K6FlpiONRFwv9QEWDFzsExe1B73FmQxEj74Q%3D%3D\\u0026_typeid_\\u003d130\",\"website\":\"千龙网\",\"type\":4,\"emotion\":0}");
+            List<String> arts = getArts();
+            for(String art:arts){
+                client.addArticle(art);
+            }
+            
             System.out.println(client.getKeywords());
         } catch (TTransportException e) {
             e.printStackTrace();
         } catch (TException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static List<String> getArts() throws IOException{
+        List<String> lines = FileUtils.readLines(new File("C:\\Users\\chenlingpeng\\Desktop\\myInfo.log"));
+        return lines;
     }
 
 

@@ -7,10 +7,10 @@
 			
 	Long userid = (Long)session.getAttribute("userid");
 	
-	//if(userid==null){
-	//	response.sendRedirect("./loginWeb.jsp");
-	//	return;
-	//}
+	if(userid==null){
+		response.sendRedirect("./loginWeb.jsp");
+		return;
+	}
 	String name = (String)session.getAttribute("name");
 
 %>
@@ -77,7 +77,7 @@
     </div> -->
 
 		<ul class="topnav pull-right inline">
-			<li><a href="keylist.jsp" class="top-opt" data-toggle="tooltip"
+			<li><a href="keylist" class="top-opt" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 关键词设置</a></li>
 			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 退出</a></li>
@@ -114,19 +114,19 @@
 				</form>
 			</div> -->
 			<ul class="menu-lists">
-				<li class="menu-list menu-general"><a href="sentimentSummarize.jsp"
+				<li class="menu-list menu-general"><a href="summarize"
 					class="menu-title"><i></i><span>舆情概况</span> </a></li>
 				<li id="more-sub-menu" class="menu-list menu-lat "><a href="dimAna_sentiTrend.jsp"
 					class="menu-title"><i></i><span>维度分析</span> </a>
 					<ul class="sub-menu-list" id="sub-menu-list">
 						<li><a href="dimAna_sentiTrend.jsp">舆情走势</a></li>
-						<li><a href="dimAna_dataSource.jsp">数据来源</a></li>
-						<li><a href="dimAna_mediaSource.jsp">媒体来源</a></li>
-						<li><a href="dimAna_emotionTrend.jsp">情感走势</a></li>
+						<li><a href="datasource">数据来源</a></li>
+						<li><a href="mediasource">媒体来源</a></li>
+						<li><a href="emotiontrend">情感走势</a></li>
 					</ul></li>
 
 
-				<li class="menu-list menu-any "><a href="sentimentMonitor.jsp" class="menu-title"><i></i><span>舆情监控</span>
+				<li class="menu-list menu-any "><a href="monitor" class="menu-title"><i></i><span>舆情监控</span>
 				</a></li>
 				<li class="menu-list menu-rep active"><a href="#" class="menu-title"><i></i><span>数据报告</span>
 				</a></li>
@@ -146,14 +146,12 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#">导出数据</a>
 							</li>
-							<li><a href="./emailSet.jsp">预警邮件设置</a>
+							<li><a href="emailset">预警邮件设置</a>
 							</li>
-							<li><a href="./shortMessageSet.jsp">预警短信设置</a>
+							<li><a href="phoneset">预警短信设置</a>
 							</li>
 						</ul>
 						<div class="tab-content pd40">
-
-
 							<form action="export" method="get">
 								<input type="hidden" value="" name="period" id="period"><input
 									type="hidden" value="" name="author" id="author">

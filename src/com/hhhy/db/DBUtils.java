@@ -65,7 +65,7 @@ public class DBUtils {
         synchronized (DBUtils.class) {
             boolean flag =  DBOperator.update(sql, params);
             if(flag){
-                return DBOperator.maxlong("select max(id) from "+ADMIN_TABLE);
+                return DBOperator.maxlong("select max(id) from "+ARTICLE_TABLE);
             }
             return -1;
         }
