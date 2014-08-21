@@ -38,6 +38,7 @@ public class DBUtils {
     private static final String KEYWORD_TABLE = "a_keyword";
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
     private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
+    private static final String USERKEYWORD_TABLE = "a_userkeyword";
 
     public static long isArticleExist(String url) throws SQLException {
         String sql = "select * from " + ARTICLE_TABLE + " where url=?";
@@ -285,6 +286,7 @@ public class DBUtils {
         return arts;
     }
 
+    // get all articles for user(uid), should paging
     public static List<Article> getUserArticle(long uid) throws SQLException {
         String sql = "select distinct  a_keywordpage.pid from a_keywordpage left join a_userkeyword on a_userkeyword.uid=?";
         List<Object[]> pids = DBOperator.selectArrayList(sql, new Object[]{uid});
@@ -292,6 +294,30 @@ public class DBUtils {
         for(Object[] pid:pids){
             sql = "select * from "+ARTICLE_TABLE+" where id=?";
             Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), new Object[]{(Long)pid[0]});
+            if(art!=null && art.getId()>0){
+                arts.add(art);
+            }
+        }
+        return arts;
+    }
+
+    // TODO: compare with getUserArticle tr verify
+    public static List<Article> getUserArticle2(long uid) throws SQLException {
+        String sql = "select distinct kid from "+ USERKEYWORD_TABLE + " where uid=?";
+        List<Object[]> kids = DBOperator.selectArrayList(sql, new Object[]{uid});
+        Set<Long> pids = new HashSet<Long>();
+        sql = "select distinct pid from "+KEYWORDPAGE_TABLE+" where kid=?";
+        for(Object[] kid:kids){
+            List<Object[]> _pids = DBOperator.selectArrayList(sql,new Object[]{(Integer)kid[0]})
+            for(Object[] pid:_pids){
+                pids.add((Long)pid[0]);
+            }
+        }
+
+        List<Article> arts = new ArrayList<Article>();
+        for(Long pid:pids){
+            sql = "select * from "+ARTICLE_TABLE+" where id=?";
+            Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), new Object[]{pid});
             if(art!=null && art.getId()>0){
                 arts.add(art);
             }
