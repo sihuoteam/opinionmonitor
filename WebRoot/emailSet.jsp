@@ -119,10 +119,10 @@
             <ul class="menu-lists">
 				<li class="menu-list menu-general"><a href="summarize"
 					class="menu-title"><i></i><span>舆情概况</span> </a></li>
-				<li id="more-sub-menu" class="menu-list menu-lat "><a href="dimAna_sentiTrend.jsp"
+				<li id="more-sub-menu" class="menu-list menu-lat "><a href="sentitrend"
 					class="menu-title"><i></i><span>维度分析</span> </a>
 					<ul class="sub-menu-list" id="sub-menu-list">
-						<li><a href="dimAna_sentiTrend.jsp">舆情走势</a></li>
+						<li><a href="sentitrend">舆情走势</a></li>
 						<li><a href="datasource">数据来源</a></li>
 						<li><a href="mediasource">媒体来源</a></li>
 						<li><a href="emotiontrend">情感走势</a></li>

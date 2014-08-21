@@ -59,10 +59,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li><a class="zhuce" href="loginWeb.jsp">登陆</a></li>
 						</ul>
 						<label class="remember-me">
-							<%-- <% String loginerror = (String)session.getAttribute("loginerror"); %>
+							<% String loginerror = (String)session.getAttribute("regerror"); %>
 							<% if(loginerror!=null){ %>
 							<div><%=loginerror %></div>
-							<% } %> --%>
+							<% } %>
 						</label>
 					</div>
 				</div>

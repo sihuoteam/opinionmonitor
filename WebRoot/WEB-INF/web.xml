@@ -137,6 +137,16 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>sentitrend</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.SentiTrendServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>sentitrend</servlet-name>
+		<url-pattern>/sentitrend</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>mediasource</servlet-name>
 		<servlet-class>com.hhhy.web.servlet.MediaSourceServlet</servlet-class>
 	</servlet>
