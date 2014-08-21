@@ -50,7 +50,8 @@ String name = (String)session.getAttribute("name");
     <link rel="stylesheet" href="http://yq.adt100.com/apps/yuqing/theme/red/css/style-red-my.css">
 
 
-    <link href="./css/sentimentMonitor/bdsstyle.css" rel="stylesheet" type="text/css"><script src="./js/sentimentMonitorles/logger.js"></script>
+    <link href="./css/sentimentMonitor/bdsstyle.css" rel="stylesheet" type="text/css">
+    <script src="./js/sentimentMonitorles/logger.js"></script>
 </head>
 
 <body>

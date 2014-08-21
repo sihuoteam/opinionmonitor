@@ -1,7 +1,6 @@
-<%@ page language="java" import="java.util.*,com.hhhy.db.beans.KeyWord, com.hhhy.db.DBUtils"
-	pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.hhhy.db.beans.KeyWord, com.hhhy.db.DBUtils" pageEncoding="GB18030"%>
 <%
-    String path = request.getContextPath();
+String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
@@ -16,80 +15,94 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<head>
-		<title>keylist</title>
-		<link rel="stylesheet" type="text/css"
-			href="./css/sentimentSummarize/YiiTagCloud.css">
-		<link rel="stylesheet" type="text/css" href="./css/login.css">
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'Keys.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<link rel="stylesheet" type="text/css" href="./css/key/boostrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/key/boostrap-theme.css">
+	
+	<link rel="stylesheet" href="./css/style-red.css">
+	
+		<!-- –¬ Bootstrap ∫À–ƒ CSS Œƒº˛ -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
-		<!-- Bootstrap -->
-		<link href="./css/bootstrap.min.css" rel="stylesheet">
-		<link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
-		<!-- Theme -->
-		<link rel="stylesheet" href="./css/style-red.css">
-		<link rel="stylesheet" href="./css/style-red-my.css">
+<!-- ø…—°µƒBootstrap÷˜Ã‚Œƒº˛£®“ª∞„≤ª”√“˝»Î£© -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-		<style type="text/css">
-div {
-	width: 280px;
-	align: center;
-	top: 200px;
-	margin-left: auto;
-	margin-right: auto;
-}
+<!-- jQueryŒƒº˛°£ŒÒ±ÿ‘⁄bootstrap.min.js ÷Æ«∞“˝»Î -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
-ul.pop {
-	position: absolute;
-	top: 150px
-}
+<!-- ◊Ó–¬µƒ Bootstrap ∫À–ƒ JavaScript Œƒº˛ -->
+<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<style type="text/css">	
 
-li.pop {
-	margin: 0px auto width : 50px;
-	height: 50px;
-}
 </style>
+  </head>
+  
+  <body>
+  <iframe frameborder="0" style="display: none;"></iframe>
+  
+<div class="navbar">
+    <a class="appbrand"></a>
+    <button class="menu-toggle" type="button"></button>
 
-	</head>
-	<body>
-	<br><br><br>
-		<!--  <div class="pop_abs" id="center">
-<div class="hidden-phone menu" style="display: block;">   
--->
-		<div align="center">
-		<% if(keywords==null || keywords.size()==0){ %>
-			<div>ËøòÊ≤°ÊúâÊ∑ªÂä†ÂÖ≥ÈîÆËØç</div>
+    <ul class="topnav pull-right inline">
+			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
+				data-placement="bottom"><i></i> <%=userid %>ÕÀ≥ˆ</a></li>
+			
+	</ul>
+
+</div>
+  <br><br><br>
+    <table align="center" cellspacing="10">
+    <% if(keywords==null || keywords.size()==0){ %>
+			<tr>
+			<td>ªπ√ª”–ÃÌº”πÿº¸¥ </td>
+			
+			</tr>
 		<% } else{ %>
-			<ul class="menu-lists ">
-				<% for(KeyWord keyword:keywords){ %>
-
-				<li class="menu-list menu-general active ">
-					<a href="./summarize?kid=<%=keyword.getId() %>" class="menu-title">
-					<i></i>
-					<span>
-					<%=keyword.getKeyword() %>
-					</span>
-					</a>
-					<form action="deletekeyword" method="POST">    
-                    	<input value=Âà†Èô§ type="submit">    
+		
+		<% for(KeyWord keyword:keywords){ %>
+    	<tr>
+  			<td>
+  			<a href="./summarize?kid=<%=keyword.getId() %>" >
+  			<%=keyword.getKeyword() %>
+  			</a>
+  			</td>
+  			<td>
+				<form action="deletekeyword" method="POST">    
+                    	<input value=…æ≥˝ class="btn btn-danger" type="submit">    
                     	<input type='hidden' name='kid' value="<%=keyword.getId() %>">
-					</form>
-				</li>				
-				<% } %>				
-			</ul>
-			<% } %>
-			
-			
-			<br><br><br><br>
-			<h2>Ê∑ªÂä†ÂÖ≥ÈîÆËØç</h2>
-				<form action="addkeyword" method="POST"> 
-					<dl class=" " id="label_field">
-						
-						<dd><input id="label" name="keyword" type="text"></dd>
-     					
-     
-					</dl>
-					<input value="Ê∑ªÂä†" type="submit">
-         		</form>
-		</div>
-	</body>
+				</form>
+			</td>
+		</tr>		
+		<% }} %>
+    </table>
+    
+    
+    <br><br><br><br>
+    
+    <div align="center">
+    	<h4>ÃÌº”πÿº¸¥ </h2>
+    	<table cellspacing="10">
+			<form action="addkeyword" method="POST"> 
+				<tr>	
+					<td><input id="label" name="keyword" type="text"></td>
+					<td><input value=ÃÌº” class="btn btn-success" type="submit"></td>
+				</tr>
+				
+       		</form>
+      	</table>
+    </div>
+  </body>
 </html>
