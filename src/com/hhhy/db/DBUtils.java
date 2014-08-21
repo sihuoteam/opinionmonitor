@@ -285,6 +285,20 @@ public class DBUtils {
         return arts;
     }
 
+    public static List<Article> getUserArticle(long uid) throws SQLException {
+        String sql = "select distinct  a_keywordpage.pid from a_keywordpage left join a_userkeyword on a_userkeyword.uid=?";
+        List<Object[]> pids = DBOperator.selectArrayList(sql, new Object[]{uid});
+        List<Article> arts = new ArrayList<Article>();
+        for(Object[] pid:pids){
+            sql = "select * from "+ARTICLE_TABLE+" where id=?";
+            Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), new Object[]{(Long)pid[0]});
+            if(art!=null && art.getId()>0){
+                arts.add(art);
+            }
+        }
+        return arts;
+    }
+
     /*************************** 关键词处理部分结束 **************************/
 
     /*************************** 关键词统计部分 **************************/
