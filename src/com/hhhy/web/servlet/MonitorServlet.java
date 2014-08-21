@@ -45,7 +45,7 @@ public class MonitorServlet extends HttpServlet {
             // TODO: test needed
             int size = pair.getFirst().size();
             if(size>0){
-                request.setAttribute("date", JsonUtils.toJson(pair.getFirst()));
+                request.setAttribute("date", pair.getFirst());
                 request.setAttribute("postrend", pair.getSecond().subList(0,size/2));
                 request.setAttribute("negtrend", pair.getSecond().subList(size/2,size));
             }

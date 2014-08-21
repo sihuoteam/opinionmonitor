@@ -40,7 +40,7 @@ public class SentiTrendServlet extends HttpServlet {
                 // TODO: test needed
                 int size = pair.getFirst().size();
                 if(size>0){
-                    req.setAttribute("date", JsonUtils.toJson(pair.getFirst()));
+                    req.setAttribute("date", pair.getFirst());
                     req.setAttribute("postrend", pair.getSecond().subList(0,size/2));
                     req.setAttribute("negtrend", pair.getSecond().subList(size/2,size));
                 }
