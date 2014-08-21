@@ -38,6 +38,7 @@ public class DataSourceServlet extends HttpServlet {
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage());
+            // TODO: redirect to error.jsp and locate to keylist
         }
         req.getRequestDispatcher("/dimAna_dataSource.jsp").forward(req, resp);
     }

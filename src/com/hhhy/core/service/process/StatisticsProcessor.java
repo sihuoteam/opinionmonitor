@@ -31,6 +31,7 @@ public class StatisticsProcessor {
             //     kid = DBUtils.getKeyWordId(keyword);
             //     keywordsCache.put(keyword,kid);
             // }
+            if(kid<0) return;
             KeyWordPage trend = new KeyWordPage();
             trend.setPid(art.getId());
             trend.setCtime(System.currentTimeMillis());

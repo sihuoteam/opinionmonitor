@@ -14,8 +14,9 @@ public class ProcessChain {
     public static void process(Article art) {
 //        logger.info("split word for article: "+art.getUrl());
         if(art.getTitle().length()>50){
-            art.setTitle(art.getTitle().substring(0,50));
+            art.setTitle(art.getTitle().substring(0,45)+"...");
         }
+        if(art.getUrl().length()>200)return;
         List<String> contentWords = WordSplitProcessor.split(art.getContent());
         List<String> titleWords = WordSplitProcessor.split(art.getTitle());
 //        logger.info("emotionParser for article: "+art.getUrl());
