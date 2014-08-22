@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.MessagingException;
 
+import org.apache.commons.collections4.MapUtils;
 import org.apache.log4j.Logger;
 
 import com.hhhy.common.utils.StringUtils;
@@ -18,7 +19,6 @@ import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.User;
 import com.hhhy.web.service.notice.EmailEntry;
 import com.hhhy.web.service.notice.EmailReport;
-import com.sun.org.apache.commons.collections.MapUtils;
 
 public class ReportProcessor {
     private static Logger logger = Logger.getLogger(ReportProcessor.class);
