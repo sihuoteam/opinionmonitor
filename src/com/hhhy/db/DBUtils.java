@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -308,7 +310,7 @@ public class DBUtils {
         Set<Long> pids = new HashSet<Long>();
         sql = "select distinct pid from "+KEYWORDPAGE_TABLE+" where kid=?";
         for(Object[] kid:kids){
-            List<Object[]> _pids = DBOperator.selectArrayList(sql,new Object[]{(Integer)kid[0]})
+            List<Object[]> _pids = DBOperator.selectArrayList(sql,new Object[]{(Integer)kid[0]});
             for(Object[] pid:_pids){
                 pids.add((Long)pid[0]);
             }
