@@ -40,7 +40,9 @@ public class StatisticsProcessor {
             trend.setType(art.getType());
             trend.setUrl(art.getUrl());
             trend.setWebsite(art.getWebsite());
-            DBUtils.addTrend(trend);
+            if(!DBUtils.addTrend(trend)){
+                logger.info("duplicate trend: "+trend.getKid()+" "+trend.getPid());
+            }
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }

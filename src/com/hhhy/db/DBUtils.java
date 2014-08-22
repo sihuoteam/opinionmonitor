@@ -737,7 +737,7 @@ return res;
         logger.info(addTrend(page));
         page.setKid(66);
         logger.info(addTrend(page));*/
-        contert();
+//        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
     }
