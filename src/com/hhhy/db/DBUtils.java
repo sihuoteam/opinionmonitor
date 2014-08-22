@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -628,6 +629,11 @@ return res;
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
+        Map<String, String> map1 = new ConcurrentHashMap<String, String>();
+        map1.put("1", "1");
+        Map<String, String> map2 = new ConcurrentHashMap<String, String>(map1);
+        map1.clear();
+        logger.info(map2);
 //        User user = new User();
 //        user.setEmail("clp3");
 //        user.setPassword("psw");
