@@ -726,7 +726,7 @@ return res;
 //        importEmotionWord();
 //        logger.info(DBUtils.deleteUserKeyWord(57, 8));
 //        logger.info(DBUtils.getAllKeyWord());
-        KeyWordPage page = new KeyWordPage();
+        /*KeyWordPage page = new KeyWordPage();
         page.setKid(6);
         page.setCtime(123);
         page.setEmotion(-1);
@@ -736,9 +736,22 @@ return res;
         page.setPid(4916);
         logger.info(addTrend(page));
         page.setKid(66);
-        logger.info(addTrend(page));
+        logger.info(addTrend(page));*/
+        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
+    }
+    
+    public static void contert(){
+        try {
+            List<String> lines = FileUtils.readLines(new File("file/正面情感词语.txt"),"gbk");
+            FileUtils.writeLines(new File("file/正面情感词语.txt"), lines);
+            lines = FileUtils.readLines(new File("file/负面情感词语.txt"),"gbk");
+            FileUtils.writeLines(new File("file/负面情感词语.txt"), lines);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
