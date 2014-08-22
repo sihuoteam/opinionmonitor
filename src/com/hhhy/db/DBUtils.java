@@ -611,13 +611,13 @@ return res;
 
     public static void importEmotionWord() throws SQLException, IOException{
         // neg
-        List<String> lines = FileUtils.readLines(new File("file/负面情感词语.txt"));
+        List<String> lines = FileUtils.readLines(new File("file/负面情感词语（中文）.txt"),"gbk");
         String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)";
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,-1});
         }
-        lines = FileUtils.readLines(new File("file/正面情感词语.txt"));
+        lines = FileUtils.readLines(new File("file/正面情感词语（中文）.txt"),"gbk");
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,1});
@@ -628,7 +628,6 @@ return res;
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
-        importEmotionWord();
 //        User user = new User();
 //        user.setEmail("clp3");
 //        user.setPassword("psw");
