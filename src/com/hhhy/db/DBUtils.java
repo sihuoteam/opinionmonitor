@@ -14,6 +14,7 @@ import java.util.Set;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
@@ -40,7 +41,7 @@ public class DBUtils {
     private static final String KEYWORD_TABLE = "a_keyword";
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
     private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
-    private static final String USERKEYWORD_TABLE = "a_userkeyword";
+//    private static final String USERKEYWORD_TABLE = "a_userkeyword";
 
     public static long isArticleExist(String url) throws SQLException {
         String sql = "select * from " + ARTICLE_TABLE + " where url=?";
@@ -150,7 +151,7 @@ public class DBUtils {
     /*************************** 关键词处理部分 **************************/
 
     public static List<KeyWord> getAllKeyWordObj() throws SQLException {
-        String sql = "select * from " + KEYWORD_TABLE;
+        String sql = "select * from " + KEYWORD_TABLE +" where uid>0";
         List<KeyWord> keywords = DBOperator.select(sql,
                 new BeanListHandler<KeyWord>(KeyWord.class));
         return keywords;
@@ -163,7 +164,7 @@ public class DBUtils {
      * @throws SQLException
      */
     public static List<String> getAllKeyWord() throws SQLException {
-        String sql = "select distinct keyword from " + KEYWORD_TABLE;
+        String sql = "select distinct keyword from " + KEYWORD_TABLE +" where uid>0";
         List<Object[]> keywords = DBOperator.selectArrayList(sql);
         List<String> keywordList = new ArrayList<String>();
         for(Object[] word:keywords){
@@ -214,7 +215,7 @@ public class DBUtils {
     }
 
     public static List<Long> getUserSet(String keyword) throws SQLException {
-        String sql = "select * from " + KEYWORD_TABLE + " where keyword=?";
+        String sql = "select * from " + KEYWORD_TABLE + " where keyword=? and uid>0";
         List<KeyWord> users = DBOperator.select(sql,
                 new BeanListHandler<KeyWord>(KeyWord.class),
                 new Object[] { keyword });
@@ -228,8 +229,9 @@ public class DBUtils {
 
     public static boolean deleteUserKeyWord(long userid, int keywordid)
             throws SQLException {
-        String sql = "delete from " + KEYWORD_TABLE + " where uid=? and id=?";
-        return DBOperator.update(sql, new Object[] { userid, keywordid });
+        String sql = "update "+KEYWORD_TABLE +" set uid=-1 where uid=? and id=?";
+        boolean flag = DBOperator.update(sql, new Object[] { userid, keywordid });
+        return flag;
     }
 
     public static boolean addUserKeyWord(long userid, String keyword)
@@ -246,7 +248,9 @@ public class DBUtils {
             sql = "insert into " + KEYWORD_TABLE
                 + "(id, uid,keyword) values("+kid+",?,?)";
         
-        return DBOperator.update(sql, new Object[] { userid, keyword });
+        boolean flag = DBOperator.update(sql, new Object[] { userid, keyword });
+//        int kid = getKeyWordId(keyword);
+        return flag;
     }
     // TODO: for test
     public static List<Article> getNegArticles(int kid) throws SQLException {
@@ -289,8 +293,8 @@ public class DBUtils {
     }
 
     // get all articles for user(uid), should paging
-    public static List<Article> getUserArticle(long uid) throws SQLException {
-        String sql = "select distinct  a_keywordpage.pid from a_keywordpage left join a_userkeyword on a_userkeyword.uid=?";
+    public static List<Article> getUserArticle2(long uid) throws SQLException {
+        String sql = "select distinct a_keywordpage.pid from a_keywordpage inner join a_keyword on a_keyword.id=a_keywordpage.kid where a_keyword.uid=?";
         List<Object[]> pids = DBOperator.selectArrayList(sql, new Object[]{uid});
         List<Article> arts = new ArrayList<Article>();
         for(Object[] pid:pids){
@@ -304,8 +308,8 @@ public class DBUtils {
     }
 
     // TODO: compare with getUserArticle tr verify
-    public static List<Article> getUserArticle2(long uid) throws SQLException {
-        String sql = "select distinct kid from "+ USERKEYWORD_TABLE + " where uid=?";
+    public static List<Article> getUserArticle(long uid) throws SQLException {
+        String sql = "select distinct id from "+ KEYWORD_TABLE + " where uid=?";
         List<Object[]> kids = DBOperator.selectArrayList(sql, new Object[]{uid});
         Set<Long> pids = new HashSet<Long>();
         sql = "select distinct pid from "+KEYWORDPAGE_TABLE+" where kid=?";
@@ -332,7 +336,10 @@ public class DBUtils {
     /*************************** 关键词统计部分 **************************/
 
     public static boolean addTrend(KeyWordPage keyWordPage) throws SQLException {
-        String sql = "insert into "
+        String sql ="select count(*) from "+ KEYWORDPAGE_TABLE +" where pid=? and kid=?";
+        Long cnt = (Long)DBOperator.select(sql, new ScalarHandler(), new Object[]{keyWordPage.getPid(), keyWordPage.getKid()});
+        if(cnt!=null && cnt>0)return false;
+        sql = "insert into "
                 + KEYWORDPAGE_TABLE
                 + "(type,kid,emotion,url,website,ctime,pid) values(?,?,?,?,?,?,?)";
         Object[] params = new Object[] { keyWordPage.getType(),
@@ -627,7 +634,7 @@ return res;
 //        logger.info("1"+createUser(user));
 //        logger.info("2"+createUser(user));
 //        logger.info("3"+createUser(user));
-        logger.info(getAllKeyWord());
+//        logger.info(getAllKeyWord());
         
         /*logger.info(isArticleExist("http://www.djtz.net/forum.php?mod=redirect&goto=findpost&ptid=2942416&pid=3156303"));
         logger.info(isArticleExist("sdfsd"));
@@ -717,6 +724,21 @@ return res;
         logger.info(exportData(condition));*/
 //        logger.info(getUserById(45));
 //        importEmotionWord();
+//        logger.info(DBUtils.deleteUserKeyWord(57, 8));
+//        logger.info(DBUtils.getAllKeyWord());
+        KeyWordPage page = new KeyWordPage();
+        page.setKid(6);
+        page.setCtime(123);
+        page.setEmotion(-1);
+        page.setType(3);
+        page.setUrl("url1");
+        page.setWebsite("wangyi");
+        page.setPid(4916);
+        logger.info(addTrend(page));
+        page.setKid(66);
+        logger.info(addTrend(page));
+//        logger.info(getUserArticle(58).size());
+//        logger.info(getUserArticle2(58).size());
     }
 
 }

@@ -22,7 +22,6 @@ WebRoot/WEB-INF/lib/*
 .*path
 lucene/*
 *.war
-file/*
 
 
 # External tool builders

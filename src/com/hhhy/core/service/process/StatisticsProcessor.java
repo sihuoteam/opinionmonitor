@@ -17,7 +17,7 @@ import com.hhhy.db.beans.KeyWordPage;
  */
 public class StatisticsProcessor {
     private static final Logger logger = Logger.getLogger(StatisticsProcessor.class);
-    // private static Map<String, Integer> keywordsCache = new ConcurrentHashMap<String, Integer>();
+     private static Map<String, Integer> keywordsCache = new ConcurrentHashMap<String, Integer>();
 
     public static void statistics(Article art) {
 //        statisticsOpinionType(art);
@@ -25,13 +25,13 @@ public class StatisticsProcessor {
 //        statisticsMediaType(art);
         String keyword = art.getKeyword();
         try {
-            int kid = DBUtils.getKeyWordId(keyword);
-            // Integer kid = keywordsCache.get(keyword);
-            // if(kid==null){
-            //     kid = DBUtils.getKeyWordId(keyword);
-            //     keywordsCache.put(keyword,kid);
-            // }
-            if(kid<0) return;
+//            int kid = DBUtils.getKeyWordId(keyword);
+             Integer kid = keywordsCache.get(keyword);
+             if(kid==null){
+                 kid = DBUtils.getKeyWordId(keyword);
+             }
+            if(kid==null || kid<0) return;
+            keywordsCache.put(keyword,kid);
             KeyWordPage trend = new KeyWordPage();
             trend.setPid(art.getId());
             trend.setCtime(System.currentTimeMillis());

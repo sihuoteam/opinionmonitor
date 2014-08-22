@@ -38,7 +38,7 @@ public class ProcessChain {
                 logger.info("artid: "+art.getId());
                 //no need for repeat index if url already exist
                 IndexProcessor.addIndex(art);
-                if(score<-3){ // only report the first time
+                if(score<0){ // only report the first time
                     ReportProcessor.reportProcess(art);
                 }
             }else{
@@ -49,7 +49,7 @@ public class ProcessChain {
             logger.warn(e);
         }
 
-        if (id <= 0) {
+        if (art.getId() <= 0) {
             return;
         }
 

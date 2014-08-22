@@ -134,9 +134,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Article [content=" + content + ", summary=" + summary
-                + ", time=" + time + ", title=" + title + ", type=" + type
-                + ", url=" + url + ", website=" + website + "]";
+        return "Article [url=" + url + "]";
     }
 
 }
