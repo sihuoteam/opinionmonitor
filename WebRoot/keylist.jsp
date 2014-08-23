@@ -9,6 +9,7 @@ String path = request.getContextPath();
         response.sendRedirect("./loginWeb.jsp");
         return;
     }
+    String email = (String) session.getAttribute("name");
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
     List<KeyWord> keywords = (List<KeyWord>) request.getAttribute("keywords");
 %>
@@ -58,7 +59,7 @@ String path = request.getContextPath();
 
     <ul class="topnav pull-right inline">
 			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
-				data-placement="bottom"><i></i> <%=userid %>ÍË³ö</a></li>
+				data-placement="bottom"><i></i> <%=email %>ÍË³ö</a></li>
 			
 	</ul>
 
