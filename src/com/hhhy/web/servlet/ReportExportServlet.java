@@ -1,12 +1,11 @@
 package com.hhhy.web.servlet;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.SQLException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,17 +14,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hhhy.db.beans.item.SrcType;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.hhhy.common.utils.DateFormatUtils;
 import com.hhhy.common.utils.JsonUtils;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
-import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.item.Condition;
-import org.apache.poi.xssf.usermodel.*;
 
 /**
  * report export
