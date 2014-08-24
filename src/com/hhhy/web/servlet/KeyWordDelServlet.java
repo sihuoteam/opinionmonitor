@@ -52,7 +52,7 @@ public class KeyWordDelServlet extends HttpServlet {
                 req.getRequestDispatcher("/keylist.jsp").forward(req, resp);
             } catch (SQLException e) {
                 logger.warn(e.getMessage());
-                resp.sendRedirect("error.jsp");
+                resp.sendRedirect("keylist");
             }
         }
         
