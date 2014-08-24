@@ -8,12 +8,12 @@ import com.hhhy.db.beans.item.SrcType;
  * @author chenlingpeng
  * 
  */
-public class Article {
+public class Article{
     private long id;
     private String title;//not null
     private String summary;//may be null
     private String content;//may be null,given url instead in some cases...
-    private String time;//may be null
+    private long time;//may be null
     private String url;//not null
     private String website;//name of the website
 //    private SrcType type;
@@ -90,11 +90,11 @@ public class Article {
         this.content = content;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

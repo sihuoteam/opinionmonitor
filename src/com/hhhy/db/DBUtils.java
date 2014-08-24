@@ -285,8 +285,8 @@ public class DBUtils {
                     Article.class), new Object[] {(Long)pageid[0]});
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
-                art.setContent(""); // 内容置空，减少存储消耗
-                art.setSummary("");
+                // art.setContent(""); // 内容置空，减少存储消耗
+                // art.setSummary("");
                 arts.add(art);
             }
         }
