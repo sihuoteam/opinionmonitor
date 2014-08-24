@@ -339,9 +339,9 @@ public class DBUtils {
 
         List<Object[]> pids = DBOperator.selectArrayList(sql,new Object[]{kid});
         List<Article> arts = new ArrayList<Article>();
-        for(Long pid:pids){
+        for(Object[] pid:pids){
             sql = "select * from "+ARTICLE_TABLE+" where id=?";
-            Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), new Object[]{pid});
+            Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), new Object[]{(Long)pid[0]});
             if(art!=null && art.getId()>0){
                 arts.add(art);
             }
