@@ -27,7 +27,7 @@
   <head>
     <!-- <base href="<%=basePath%>"> -->
     
-    <title>shortMessageSet</title>
+    <title>短信设置</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

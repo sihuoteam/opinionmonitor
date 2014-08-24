@@ -35,7 +35,7 @@
 <head>
 <!-- <base href="<%=basePath%>"> -->
 
-<title>dimAna_sentiTrend</title>
+<title>舆情走势</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">

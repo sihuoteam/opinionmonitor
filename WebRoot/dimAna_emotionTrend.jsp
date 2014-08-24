@@ -31,7 +31,7 @@
 <head>
 <!-- <base href="<%=basePath%>"> -->
 
-<title>dimAna_sentimentTrend</title>
+<title>情感走势</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">

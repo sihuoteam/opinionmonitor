@@ -61,7 +61,7 @@ String keyword = (String)session.getAttribute("keyword");
 	src="./js/sentimentSummarize/highcharts-more.src.js"></script>
 <script type="text/javascript"
 	src="./js/sentimentSummarize/exporting.src.js"></script>
-<title>sentimentSummarize</title>
+<title>舆情概况</title>
 
 <meta charset="UTF-8">
 <meta name="viewport"

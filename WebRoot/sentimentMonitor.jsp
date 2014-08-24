@@ -26,7 +26,7 @@ String keyword = (String)session.getAttribute("keyword");
     <script type="text/javascript" src="./js/sentimentMonitor/jquery.js"></script>
     <script type="text/javascript" src="./js/sentimentMonitor/jquery.yii.js"></script>
     <script type="text/javascript" src="./js/sentimentMonitor/jquery.ba-bbq.js"></script>
-    <title>sentimentMonitor</title>
+    <title>全部舆情</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">

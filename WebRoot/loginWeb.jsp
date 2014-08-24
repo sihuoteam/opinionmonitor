@@ -11,7 +11,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>LoginWeb</title>
+		<title>登陆界面</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">

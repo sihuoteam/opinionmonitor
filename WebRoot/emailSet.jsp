@@ -27,7 +27,7 @@
   <head>
     <!-- <base href="<%=basePath%>"> -->
     
-    <title>emailSet</title>
+    <title>邮件设置</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

@@ -31,7 +31,7 @@
 <head>
 <!-- <base href="<%=basePath%>"> -->
 
-<title>dimAna_dataSource</title>
+<title>数据来源</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">

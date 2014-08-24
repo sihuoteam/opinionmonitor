@@ -19,7 +19,7 @@ String path = request.getContextPath();
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'Keys.jsp' starting page</title>
+    <title>关键词列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
