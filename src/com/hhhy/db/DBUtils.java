@@ -31,7 +31,7 @@ import com.hhhy.db.beans.item.Pair;
 import com.hhhy.db.beans.item.SrcType;
 
 /**
- * 瀵规暟鎹簱鎿嶄綔闆嗕腑浜庢
+ * 对数据库操作集中于此
  * 
  * @author chenlingpeng
  * 
@@ -70,8 +70,8 @@ public class DBUtils {
         }
     }
 
-    /*************************** 璐﹀彿绠＄悊閮ㄥ垎 **************************/
-    // 涓嶈兘杩炵画create TODO
+    /*************************** 账号管理部分 **************************/
+    // 不能连续create TODO
     public static long createUser(User user) throws SQLException {
         String sql = "insert into " + ADMIN_TABLE
                 + " (email, password) values(?,?)";
@@ -134,7 +134,7 @@ public class DBUtils {
         DBOperator.update(sql,new Object[]{phone, able, uid});
     }
 
-    /*************************** 璐﹀彿绠＄悊閮ㄥ垎缁撴潫 **************************/
+    /*************************** 账号管理部分结束 **************************/
 
     public static List<EmotionWord> getEmotionWords() throws SQLException {
         String sql = "select * from " + EMOTIONWORD_TABLE;
@@ -143,7 +143,7 @@ public class DBUtils {
         return emotionWords;
     }
 
-    /*************************** 鍏抽敭璇嶅鐞嗛儴鍒�**************************/
+    /*************************** 关键词处理部分**************************/
 
     public static List<KeyWord> getAllKeyWordObj() throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE +" where uid>0";
@@ -153,7 +153,7 @@ public class DBUtils {
     }
 
     /**
-     * 鍙繑鍥炲叧閿瘝
+     * 只返回关键词
      * 
      * @return
      * @throws SQLException
@@ -180,7 +180,7 @@ public class DBUtils {
         return keyword.getKeyword();
     }
 
-    // 涓嶅悓鐢ㄦ埛杩斿洖涓嶅悓鍏抽敭璇� 鐢ㄦ埛淇℃伅瀛樻斁session涓�
+    // 不同用户返回不同关键词, 用户信息存放session中
     public static List<KeyWord> getUserKeyWord(long userid) throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE + " where uid=?";
         List<KeyWord> keywords = DBOperator.select(sql,
@@ -260,7 +260,7 @@ public class DBUtils {
                     Article.class), new Object[] { pageid.getPid() });
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
-                art.setContent(""); // 鍐呭缃┖锛屽噺灏戝瓨鍌ㄦ秷鑰�
+                art.setContent(""); // 内容置空，减少存储消耗
                 art.setSummary("");
                 arts.add(art);
             }
@@ -279,7 +279,7 @@ public class DBUtils {
                     Article.class), new Object[] {(Long)pageid[0]});
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
-                // art.setContent(""); // 鍐呭缃┖锛屽噺灏戝瓨鍌ㄦ秷鑰�
+                // art.setContent(""); // 内容置空，减少存储消耗
                 // art.setSummary("");
                 arts.add(art);
             }
@@ -328,9 +328,9 @@ public class DBUtils {
         return arts;
     }
 
-    /*************************** 鍏抽敭璇嶅鐞嗛儴鍒嗙粨鏉�**************************/
+    /*************************** 关键词处理部分结束 **************************/
 
-    /*************************** 鍏抽敭璇嶇粺璁￠儴鍒�**************************/
+    /*************************** 关键词统计部分**************************/
 
     public static boolean addTrend(KeyWordPage keyWordPage) throws SQLException {
         String sql ="select count(*) from "+ KEYWORDPAGE_TABLE +" where pid=? and kid=?";
@@ -347,7 +347,7 @@ public class DBUtils {
     }
 
     /**
-     * 濯掍綋鏉ユ簮缁熻
+     * 媒体来源统计
      */
     public static Map<String, Integer> getMediaSourceStatis2(int kid)
             throws SQLException {
@@ -388,7 +388,7 @@ return res;
 }
 
     /**
-     * 鏉ユ簮绫诲瀷缁熻
+     * 来源类型统计
      * 
      * @param keyword
      * @return
@@ -408,7 +408,7 @@ return res;
     }
 
     /**
-     * 鑾峰彇姝ｈ礋
+     * 获取正负
      * deplicated?
      * @param keyword
      * @return
@@ -480,7 +480,7 @@ return res;
     }
 
     /**
-     * 鑾峰彇 姝ｈ礋骞�鎯呮劅鐨勭粺璁￠噺
+     * 获取 正负平 情感的统计量
      * 
      * @param keyword
      * @return
@@ -504,9 +504,9 @@ return res;
         return counts;
     }
 
-    /*************************** 鍏抽敭璇嶇粺璁￠儴鍒嗙粨鏉�**************************/
+    /*************************** 关键词统计部分结束 **************************/
 
-    /*************************** data export閮ㄥ垎 **************************/
+    /*************************** data export部分 **************************/
 
     public static List<Article> exportData(Condition condition)
             throws SQLException {
@@ -608,20 +608,19 @@ return res;
 
     public static void importEmotionWord() throws SQLException, IOException{
         // neg
-        List<String> lines = FileUtils.readLines(new File("file/璐熼潰鎯呮劅璇嶈锛堜腑鏂囷級.txt"),"gbk");
-        String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)";
+    	List<String> lines = FileUtils.readLines(new File("file/负面情感词语（中文）.txt"),"gbk");        String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)";
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,-1});
         }
-        lines = FileUtils.readLines(new File("file/姝ｉ潰鎯呮劅璇嶈锛堜腑鏂囷級.txt"),"gbk");
+        lines = FileUtils.readLines(new File("file/正面情感词语（中文）.txt"),"gbk");
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,1});
         }
     }
 
-    /*************************** data export閮ㄥ垎缁撴潫 
+    /*************************** data export部分结束 
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
@@ -662,12 +661,11 @@ return res;
         logger.info(getUserKeyWord(15).get(0).getKeyword());*/
         
 //        logger.info(getUserKeyWordStr(158));
-//        logger.info(getKeyWordId("鍏抽敭璇�"));
-//        logger.info(getKeyWordId("鍏抽敭璇�"));
-//        logger.info(getKeyWordId("鍏抽敭璇�"));
-        
-//        logger.info(getUserSet("鍏抽敭璇�"));
-//        logger.info(getUserSet("鍏抽敭璇�"));
+//      logger.info(getKeyWordId("关键词1"));
+//      logger.info(getKeyWordId("关键词2"));
+//      logger.info(getKeyWordId("关键词3"));        
+//      logger.info(getUserSet("关键词1"));
+//      logger.info(getUserSet("关键词3"));
 //        logger.info(getMediaSourceStatis2(1));
        /* logger.info(getRecentArticles(1));
         logger.info(getRecentArticles(30));
@@ -746,10 +744,10 @@ return res;
     
     public static void contert(){
         try {
-            List<String> lines = FileUtils.readLines(new File("file/姝ｉ潰鎯呮劅璇嶈.txt"),"gbk");
-            FileUtils.writeLines(new File("file/姝ｉ潰鎯呮劅璇嶈.txt"), lines);
-            lines = FileUtils.readLines(new File("file/璐熼潰鎯呮劅璇嶈.txt"),"gbk");
-            FileUtils.writeLines(new File("file/璐熼潰鎯呮劅璇嶈.txt"), lines);
+            List<String> lines = FileUtils.readLines(new File("file/正面情感词语.txt"),"gbk");
+            FileUtils.writeLines(new File("file/正面情感词语.txt"), lines);
+            lines = FileUtils.readLines(new File("file/负面情感词语.txt"),"gbk");
+            FileUtils.writeLines(new File("file/负面情感词语.txt"), lines);
             
         } catch (IOException e) {
             e.printStackTrace();
