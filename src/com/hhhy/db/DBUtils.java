@@ -55,14 +55,7 @@ public class DBUtils {
 
     public static long insertArticle(Article article) throws SQLException {
         String sql = "insert into " + ARTICLE_TABLE + "(title,summary, time, url,website,type,emotion) values(?,?,?,?,?,?,?)";
-        long time = System.currentTimeMillis();
-        if(article.getTime()!=null && !article.getTime().equals("")){
-            try {
-                time = DateFormatUtils.getTime(article.getTime(), DateFormatUtils.yyyyMMdd);
-            } catch (ParseException e) {
-                logger.warn(e.getMessage());
-            }
-        }
+        long time = article.getTime();
         Object[] params = { article.getTitle(), article.getSummary(),
                 time, article.getUrl(), article.getWebsite(), 
                 article.getType(),article.getEmotion() };
