@@ -629,12 +629,18 @@ return res;
 
     public static void importEmotionWord() throws SQLException, IOException{
         // neg
-    	List<String> lines = FileUtils.readLines(new File("file/负面情感词语（中文）.txt"),"gbk");        String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)";
+    	List<String> lines = FileUtils.readLines(new File("file/负面_单劼.txt"));        
+    	String sql = "insert into "+EMOTIONWORD_TABLE+"(word,val) values(?,?)";
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,-1});
         }
-        lines = FileUtils.readLines(new File("file/正面情感词语（中文）.txt"),"gbk");
+        lines = FileUtils.readLines(new File("file/负面_周璇.txt"));        
+        for(String line:lines){
+            line = line.trim();
+            DBOperator.update(sql, new Object[]{line,-1});
+        }
+        lines = FileUtils.readLines(new File("file/正面情感词语.txt"));
         for(String line:lines){
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,1});
@@ -645,11 +651,11 @@ return res;
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
-        Map<String, String> map1 = new ConcurrentHashMap<String, String>();
-        map1.put("1", "1");
-        Map<String, String> map2 = new ConcurrentHashMap<String, String>(map1);
-        map1.clear();
-        logger.info(map2);
+//        Map<String, String> map1 = new ConcurrentHashMap<String, String>();
+//        map1.put("1", "1");
+//        Map<String, String> map2 = new ConcurrentHashMap<String, String>(map1);
+//        map1.clear();
+//        logger.info(map2);
 //        User user = new User();
 //        user.setEmail("clp3");
 //        user.setPassword("psw");
@@ -761,6 +767,7 @@ return res;
 //        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
+    	importEmotionWord();
     }
     
     public static void contert(){
