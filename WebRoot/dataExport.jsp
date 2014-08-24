@@ -240,10 +240,7 @@
 												</div>前1000条</label><label><div class="ez-radio">
 													<input data-toggle="checkbox" class="ez-hide" value="2000"
 														id="limit_3" type="radio" name="limit">
-												</div>前2000条</label><label><div class="ez-radio">
-													<input data-toggle="checkbox" class="ez-hide" value="20000"
-														id="limit_4" type="radio" name="limit">
-												</div>前20000条（请不要重复提交，下载时间可能较长请耐心等待）</label> </span>
+												</div>前2000条</label> </span>
 									</div>
 								</div>
 

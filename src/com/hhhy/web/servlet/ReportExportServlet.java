@@ -75,7 +75,7 @@ public class ReportExportServlet extends HttpServlet {
         fieldsMap.put("媒体", "media");
         fieldsMap.put("情感", "sentiment");
         fieldsMap.put("时间", "time");
-        String limit = req.getParameter("limit");
+        String limit = req.getParameterValues("limit")[0];
         String source = JsonUtils.toJson(sources);
         String emotion = JsonUtils.toJson(emotions);
         // String topic_id = JsonUtils.toJson(topic_ids);
@@ -110,6 +110,7 @@ public class ReportExportServlet extends HttpServlet {
             String topic = DBUtils.getKeyWordById(kid);
             condition.setKeyword(kid);
             List<Article> arts = DBUtils.exportData(condition);
+            logger.info("art size: "+arts.size());
             // List<Article> arts = new LinkedList<Article>();
             // Article art0 = new Article();
             // // art.setContent("content");
@@ -136,8 +137,8 @@ public class ReportExportServlet extends HttpServlet {
             // String[]{"关键字","标题","摘要","url","来源","媒体","情感"，"时间"};
             for (int i = 0; i < fields.length; i++) {
                 firstCell[i] = firstRow.createCell(i);
-                firstCell[i].setCellValue(new XSSFRichTextString(fieldsMap
-                        .get(fields[i])));
+//                firstCell[i].setCellValue(new XSSFRichTextString(fieldsMap.get(fields[i])));
+                firstCell[i].setCellValue(new XSSFRichTextString(fields[i]));
             }
             int i = 1;
             // 写入数据部分
@@ -153,9 +154,11 @@ public class ReportExportServlet extends HttpServlet {
             }
             resp.setHeader("Connection", "close");  
             resp.setHeader("Content-Type", "application/vnd.ms-excel;charset=UTF-8");
+           
             String fileName = "WriteXlsx.xlsx";
             fileName = encodeFileName(req,fileName);
             resp.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+            resp.resetBuffer();
 
             // 输出文件
             OutputStream out =resp.getOutputStream();
@@ -181,7 +184,7 @@ public class ReportExportServlet extends HttpServlet {
         // logger.warn(e.getMessage());
         // }
 
-        resp.sendRedirect("loginWeb.jsp");
+//        resp.sendRedirect("loginWeb.jsp");
     }
     public  String encodeFileName(HttpServletRequest request,  
             String fileName) throws UnsupportedEncodingException {  
