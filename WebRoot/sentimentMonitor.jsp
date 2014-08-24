@@ -287,10 +287,11 @@ String keyword = (String)session.getAttribute("keyword");
 
 <div class="row-fluid" id="info_list">
 
-<ul class="m-news-filter">
+<!-- <ul class="m-news-filter"> -->
 
 	<% for(Article aa : articles) {
-		out.println("<li class=\"m-news-filter-item clearfix\">" +
+		out.println("<ul class=\"m-news-filter\">" +
+		"<li class=\"m-news-filter-item clearfix\">" +
     "<div class=\"m-i-flag\">");
 		if(aa.getEmotion() > 0 ) {
 			out.println("<span class=\"bg-sapn-red\">正</span>    </div>");
@@ -306,11 +307,12 @@ String keyword = (String)session.getAttribute("keyword");
             
         out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">" + aa.getTitle() + "</a></strong>");
         out.println("</div>"+
-            "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li>");
+            "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li></ul>");
             }
 	 %>
 
-</ul><br><div class="pager"><div id="yw0" class="page-count">  <strong class="mr20" id="total-search-count"><%=articles.size() %>条搜索结果</strong></div>
+<!-- </ul> -->
+<br><div class="pager"><div id="yw0" class="page-count">  <strong class="mr20" id="total-search-count"><%=articles.size() %>条搜索结果</strong></div>
 <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" src="./js/sentimentMonitor/bds_s_v2.js"></script>
 
 <script type="text/javascript">
@@ -331,16 +333,16 @@ String keyword = (String)session.getAttribute("keyword");
             $("#moniter-sort-move").append('<li class=moniter-sort-li>'+ $(this).html() + '</li>');
         });
     });
-    
-    <script> 
+</script>    
+<script> 
 var obj,j; 
 var page=0; 
 var nowPage=0;//当前页 
-var listNum=3;//每页显示<ul>数 
+var listNum=15;//每页显示<ul>数 
 var PagesLen;//总页数 
 var PageNum=4;//分页链接接数(5个) 
 onload=function(){ 
-obj=document.getElementById("mydiv").getElementsByTagName("ul"); 
+obj=document.getElementById("info_list").getElementsByTagName("ul"); 
 j=obj.length 
 PagesLen=Math.ceil(j/listNum); 
 upPage(0) 
@@ -372,7 +374,6 @@ document.getElementById("changpage").innerHTML=strS+strC+strE+strE2
 } 
 </script> 
 
-</script>
 
 <!--</div>--><!-- content -->
 </div>
