@@ -1,33 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery UI Datepicker - Default functionality</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+</script>
+<script>
+	$(function() {
+		$("#start_date").datepicker();
+	});
+</script>
+<script>
+	$(function() {
+		$("#end_date").datepicker();
+	});
+</script>
+</head>
+<body>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: lenovo
-  Date: 5/29/14
-  Time: 11:29 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-      <meta http-equiv="content-type" content="text/html;charset=utf-8">
-      <script type="text/javascript" src="js/jquery.min.js"></script>
-      <script type="text/javascript" src="js/jscharts.js"></script>
-    <title></title>
-  </head>
-  <body>
-    <div id="chartcontainer">正在产生图标</div>
-    <script type="text/javascript">
-        var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
-        var myChart = new JSChart('chartcontainer', 'line');
-        myChart.setDataArray(myData);
-        myChart.draw();
-    </script>
-  </body>
-  <%--<script type="text/javascript">--%>
-      <%--var myDate= new Array([10,20],[15,10],[20,30],[25,10],[30,5]);--%>
-      <%--var myChart = new JSChart('chartcontainer',"line");--%>
-      <%--myChart.setDateArray(myDate);--%>
-<%--//      myChart--%>
-      <%--myChart.draw();--%>
-  <%--</script>--%>
+	<p>
+		Date: <input type="text" id="datepicker">
+	</p>
+
+	<input id="start_date" type="text" name="start_date">
+	<input id="end_date" type="text" name="end_date">
+	
+</body>
 </html>
