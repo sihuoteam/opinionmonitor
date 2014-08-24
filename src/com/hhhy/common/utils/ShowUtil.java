@@ -81,6 +81,29 @@ public class ShowUtil {
         }
         return sb.toString().substring(0, sb.toString().length() - 1);
     }
+    public static String dimAna_trendPostTrend2(List<Double> dates) {
+        /* String postEmotionTrend = "1,4,3,2,5"; */
+        if (dates == null || dates.size() == 0)
+            return "";
+        StringBuilder sb = new StringBuilder();
+        for (Double date : dates) {
+            sb.append(date + ",");
+        }
+        return sb.toString().substring(0, sb.toString().length() - 1);
+    }
+    public static String dimAna_emotionTrend(List<Integer> post,List<Integer> neg) {
+    	if(post == null || neg == null) return "";
+    	if(post.size() != neg.size()){
+    		return "";
+    	}else if(post.size() == 0) {
+    		return "";
+    	}
+    	List<Double> emotion = new LinkedList<Double>();
+    	for(int i = 0 ;i < post.size();i++){
+    		emotion.add(5*(post.get(i) - neg.get(i) - 0.0)/(post.get(i) + neg.get(i)));
+    	}
+    	return dimAna_trendPostTrend2(emotion);
+    }
 
     public static void main(String[] args) {
         // String a = "aaa";

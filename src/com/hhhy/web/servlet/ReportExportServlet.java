@@ -112,6 +112,8 @@ public class ReportExportServlet extends HttpServlet {
             condition.setEnd(end);
         } catch (ParseException e) {
             logger.warn(e.getMessage());
+            condition.setEnd(System.currentTimeMillis());
+            condition.setStart(0);
         }
 
         try {

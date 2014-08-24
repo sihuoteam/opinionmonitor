@@ -26,7 +26,7 @@ List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
 //Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
 // no importantArticle
 //
-Integer emotionNum = 2;
+Double emotionNum = 5* (poscount-negcount - 0.0)/(poscount + negcount);
 String emotionDistribution = "[]";
 String keyword = (String)session.getAttribute("keyword");
 %>

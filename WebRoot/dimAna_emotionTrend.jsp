@@ -17,6 +17,7 @@
 	String dates = ShowUtil.dimAna_trendDates((List<String>)request.getAttribute("date"));
 	String postEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("postrend"));
 	String negEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
+	String emotionTrend = ShowUtil.dimAna_emotionTrend((List<Integer>)request.getAttribute("postrend"), (List<Integer>)request.getAttribute("negtrend"));
 	String keyword = (String)session.getAttribute("keyword");
 %>
 
@@ -299,6 +300,10 @@ $(function () {
             name: '负面',
             color:'#4c88a2',
             data: [<%=negEmotionTrend%>]
+        },{
+        	name: '情感值',
+        	color: '#979080',
+        	data: [<%=emotionTrend%>]
         }]
     });
 });
