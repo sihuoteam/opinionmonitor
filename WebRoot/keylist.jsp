@@ -34,16 +34,16 @@ String path = request.getContextPath();
 	
 	<link rel="stylesheet" href="./css/style-red.css">
 	
-		<!-- ĞÂ Bootstrap ºËĞÄ CSS ÎÄ¼ş -->
+		<!--  Bootstrap css-->
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
-<!-- ¿ÉÑ¡µÄBootstrapÖ÷ÌâÎÄ¼ş£¨Ò»°ã²»ÓÃÒıÈë£© -->
+		<!-- Bootstrap-->
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-<!-- jQueryÎÄ¼ş¡£Îñ±ØÔÚbootstrap.min.js Ö®Ç°ÒıÈë -->
+<!-- jQuery bootstrap.min.js  -->
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
-<!-- ×îĞÂµÄ Bootstrap ºËĞÄ JavaScript ÎÄ¼ş -->
+<!-- Bootstrap JavaScript -->
 <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <style type="text/css">	
 
@@ -59,7 +59,7 @@ String path = request.getContextPath();
 
     <ul class="topnav pull-right inline">
 			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
-				data-placement="bottom"><i></i> <%=email %>ÍË³ö</a></li>
+				data-placement="bottom"><i></i> <%=email %>é€€å‡º</a></li>
 			
 	</ul>
 
@@ -68,7 +68,7 @@ String path = request.getContextPath();
     <table align="center" cellspacing="10">
     <% if(keywords==null || keywords.size()==0){ %>
 			<tr>
-			<td>»¹Ã»ÓĞÌí¼Ó¹Ø¼ü´Ê</td>
+			<td>å°šæœªæ·»åŠ å…³é”®è¯</td>
 			
 			</tr>
 		<% } else{ %>
@@ -82,7 +82,7 @@ String path = request.getContextPath();
   			</td>
   			<td>
 				<form action="deletekeyword" method="POST">    
-                    	<input value=É¾³ı class="btn btn-danger" type="submit">    
+                    	<input value=åˆ é™¤ class="btn btn-danger" type="submit">    
                     	<input type='hidden' name='kid' value="<%=keyword.getId() %>">
 				</form>
 			</td>
@@ -94,12 +94,12 @@ String path = request.getContextPath();
     <br><br><br><br>
     
     <div align="center">
-    	<h4>Ìí¼Ó¹Ø¼ü´Ê</h2>
+    	<h4>æ·»åŠ å…³é”®è¯</h4>
     	<table cellspacing="10">
 			<form action="addkeyword" method="POST"> 
 				<tr>	
 					<td><input id="label" name="keyword" type="text"></td>
-					<td><input value=Ìí¼Ó class="btn btn-success" type="submit"></td>
+					<td><input value=æ·»åŠ  class="btn btn-success" type="submit"></td>
 				</tr>
 				
        		</form>
