@@ -8,7 +8,7 @@ if(userid==null){
 	return;
 }
 String name = (String)session.getAttribute("name");
-
+String keyword = (String)session.getAttribute("keyword");
 %>
 
 <%

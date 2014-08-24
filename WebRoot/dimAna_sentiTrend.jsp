@@ -21,6 +21,7 @@
 	System.out.println("posttrend: "+posttrend);
 	String negtrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
 	System.out.println("negtrend: "+negtrend);
+	String keyword = (String)session.getAttribute("keyword");
 %>
 
 <%

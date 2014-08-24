@@ -17,6 +17,7 @@
 	String dates = ShowUtil.dimAna_trendDates((List<String>)request.getAttribute("date"));
 	String postEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("postrend"));
 	String negEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
+	String keyword = (String)session.getAttribute("keyword");
 %>
 
 <%

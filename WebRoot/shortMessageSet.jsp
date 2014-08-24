@@ -19,6 +19,7 @@
 		if(reportphone==null)reportphone = "";
 		report = user.getNeedphone();
 	}
+	String keyword = (String)session.getAttribute("keyword");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

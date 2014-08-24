@@ -14,6 +14,7 @@
 	String roundData = ShowUtil.dimAna_dataSourceRoundData(mediaStatis);
 	String zhuSource = ShowUtil.dimAna_dataSourceZhuSource(mediaStatis);
 	String zhuData=ShowUtil.dimAna_dataSourceZhuData(mediaStatis);
+	String keyword = (String)session.getAttribute("keyword");
 %>
 
 <%

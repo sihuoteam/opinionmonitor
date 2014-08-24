@@ -28,6 +28,7 @@ List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
 //
 Integer emotionNum = 2;
 String emotionDistribution = "[]";
+String keyword = (String)session.getAttribute("keyword");
 %>
 
 

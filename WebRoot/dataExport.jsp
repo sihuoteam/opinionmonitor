@@ -12,6 +12,7 @@
 		return;
 	}
 	String name = (String) session.getAttribute("name");
+	String keyword = (String)session.getAttribute("keyword");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
