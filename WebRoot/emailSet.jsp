@@ -67,6 +67,7 @@
     </div> -->
     
     <ul class="topnav pull-right inline">
+    <li> <%=keyword %><li>
 			<li><a href="keylist" class="top-opt" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 关键词设置</a></li>
 			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
