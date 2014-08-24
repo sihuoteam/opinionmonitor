@@ -429,7 +429,7 @@ $(function () {
             enabled: false                                                 
         },                                                                 
         series: [{                                                         
-            name: 'Year 1800',                                             		 
+            name: '新闻个数',                                             		 
             color:'#d95455',	
             data: [<%=zhuData%>]                                   
         }]                                                                 
