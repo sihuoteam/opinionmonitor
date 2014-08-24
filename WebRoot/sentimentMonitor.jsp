@@ -292,19 +292,21 @@ String name = (String)session.getAttribute("name");
 	<% for(Article aa : articles) {
 		out.println("<li class=\"m-news-filter-item clearfix\">" +
     "<div class=\"m-i-flag\">");
-		if(aa.getEmotion() >= 0 ) {
+		if(aa.getEmotion() > 0 ) {
 			out.println("<span class=\"bg-sapn-red\">正</span>    </div>");
-		}else {
-			out.println("<span class=\"bg-sapn-gray\">负</span>    </div>");		
+		}else if(aa.getEmotion() < 0){
+			out.println("<span class=\"bg-sapn-green\">负</span>    </div>");		
+		}else if(aa.getEmotion() == 0) {
+			out.println("<span class=\"bg-sapn-gray\">中</span>    </div>");	
 		}
 		
 		out.println("<div class=\"m-news-main\">"+
         "<div class=\"m-news-intro \">"+
             "<div class=\"news-intro-hd\">");
             
-        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\"></a></strong>");
+        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">" + aa.getTitle() + "</a></strong>");
         out.println("</div>"+
-            "<div class=\"news-intro-bd\">"+ aa.getTitle() +"</div></div></div></li>");
+            "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li>");
             }
 	 %>
 
