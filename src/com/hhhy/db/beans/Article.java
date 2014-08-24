@@ -8,7 +8,7 @@ import com.hhhy.db.beans.item.SrcType;
  * @author chenlingpeng
  * 
  */
-public class Article{
+public class Article implements Comparable<Article>{
     private long id;
     private String title;//not null
     private String summary;//may be null
@@ -135,6 +135,11 @@ public class Article{
     @Override
     public String toString() {
         return "Article [url=" + url + "]";
+    }
+
+    @Override
+    public int compareTo(Article that){
+        return that.getTime() - this.getTime();
     }
 
 }
