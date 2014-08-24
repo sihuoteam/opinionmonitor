@@ -1,4 +1,4 @@
-w<%@ page language="java" import="java.util.*, com.hhhy.db.beans.*, com.hhhy.db.beans.item.*" pageEncoding="utf-8"%>  
+<%@ page language="java" import="java.util.*, com.hhhy.db.beans.*, com.hhhy.db.beans.item.*" pageEncoding="utf-8"%>  
 <%
 	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -94,7 +94,7 @@ String keyword = (String)session.getAttribute("keyword");
 			</div> -->
 
 		<ul class="topnav pull-right inline">
-
+			<li> <%=keyword %><li>
 			<li><a href="keylist" class="top-opt" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 关键词设置</a></li>
 			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
@@ -192,7 +192,7 @@ String keyword = (String)session.getAttribute("keyword");
 								<dd>
 									<h5>
 										<!-- <a href=""> -->
-										<%=poscount + negcount%>
+										<%=poscount + plaincount + negcount%>
 										<!-- </a> -->
 									</h5>
 									<p>舆情总量</p>
