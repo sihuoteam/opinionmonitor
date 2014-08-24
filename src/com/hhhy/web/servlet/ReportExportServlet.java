@@ -150,11 +150,18 @@ public class ReportExportServlet extends HttpServlet {
                 }
                 i++;
             }
+            resp.setHeader("Connection", "close");  
+            resp.setHeader("Content-Type", "application/vnd.ms-excel;charset=UTF-8");
+            String fileName = "WriteXlsx.xlsx";
+            fileName = encodeFileName(req,fileName);
+            resp.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 
             // 输出文件
-            OutputStream out = new FileOutputStream("D:/index/WriteXlsx.xlsx");
+            OutputStream out =resp.getOutputStream();
             xwb.write(out);
             out.close();
+
+            
 
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -174,6 +181,19 @@ public class ReportExportServlet extends HttpServlet {
         // }
 
         resp.sendRedirect("loginWeb.jsp");
+    }
+    public  String encodeFileName(HttpServletRequest request,  
+            String fileName) throws UnsupportedEncodingException {  
+        String agent = request.getHeader("USER-AGENT");  
+        if (null != agent && -1 != agent.indexOf("MSIE")) {  
+            return URLEncoder.encode(fileName, "UTF-8");  
+        } else if (null != agent && -1 != agent.indexOf("Mozilla")) {  
+            return "=?UTF-8?B?"  
+                    + (new String(Base64.encodeBase64(fileName  
+                            .getBytes("UTF-8")))) + "?=";  
+        } else {  
+            return fileName;  
+        }  
     }
 
     private String getFieldValue(String field, Article art, String topic) {

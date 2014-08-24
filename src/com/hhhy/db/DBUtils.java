@@ -300,6 +300,9 @@ public class DBUtils {
             }
         }
         Collections.sort(arts);
+        if(arts.size()>225){
+            arts = arts.subList(0,225);
+        }
         return arts;
     }
 
@@ -325,6 +328,9 @@ public class DBUtils {
             }
         }
         Collections.sort(arts);
+        if(arts.size()>225){
+            arts = arts.subList(0,225);
+        }
         return arts;
     }
 
