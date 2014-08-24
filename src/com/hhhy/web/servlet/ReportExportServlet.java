@@ -49,6 +49,8 @@ public class ReportExportServlet extends HttpServlet {
         // TODO:
         String start_date = req.getParameter("start_date");
         String end_date = req.getParameter("end_date");
+        System.out.println("start:" + start_date);
+        System.out.println("end:" + end_date);        
         String[] merge = req.getParameterValues("merge");
         String[] sources = req.getParameterValues("source[]");
         String[] emotions = req.getParameterValues("sentiment[]");
