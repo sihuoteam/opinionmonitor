@@ -1,5 +1,7 @@
 package com.hhhy.db.beans;
 
+import java.io.Serializable;
+
 import com.hhhy.db.beans.item.SrcType;
 
 /**
@@ -8,7 +10,7 @@ import com.hhhy.db.beans.item.SrcType;
  * @author chenlingpeng
  * 
  */
-public class Article implements Comparable<Article>{
+public class Article implements Comparable<Article>, Serializable{
     private long id;
     private String title;//not null
     private String summary;//may be null
@@ -139,7 +141,7 @@ public class Article implements Comparable<Article>{
 
     @Override
     public int compareTo(Article that){
-        return that.getTime() - this.getTime();
+        return (int) (that.getTime() - this.getTime());
     }
 
 }
