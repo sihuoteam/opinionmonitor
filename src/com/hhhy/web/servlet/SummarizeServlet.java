@@ -23,6 +23,7 @@ public class SummarizeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String kid = (String)request.getParameter("kid");
+        String keyword = (String)request.getParameter("keyword");
         if(kid==null || "".equals(kid)){
             Integer k = (Integer)request.getSession().getAttribute("kid");
             if(k!=null){
@@ -44,6 +45,8 @@ public class SummarizeServlet extends HttpServlet {
             request.setAttribute("negarts", arts);
             List<Article> importArts = DBUtils.getRecentArticles(Integer.parseInt(kid));
             request.setAttribute("importarts", importArts);
+            request.getSession().setAttribute("keyword",keyword);
+            String keyword = DBUtils.getKeyWordById(Integer.parseInt(kid));
             request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());
