@@ -310,45 +310,6 @@ String name = (String)session.getAttribute("name");
             }
 	 %>
 
-<!-- <li class="m-news-filter-item clearfix">
-    <div class="m-i-flag">
-        <span class="bg-sapn-gray">中</span>    </div>
-
-    <div class="m-news-main">
-        <div class="m-news-intro ">
-            <div class="news-intro-hd">
-                <strong><a target="_blank" href="http://bbs.zhongsou.com/3/20140721/14974416.html">【新闻】美宝之家是骗子?传闻可信度让人怀疑</a></strong>
-                <span><a target="_blank" href="http://yq.adt100.com/moniter/snapshot/9549009">网页快照</a></span>
-            </div>
-            <div class="news-intro-bd">
-                ... 随着需求的不断增长，行业间的竞争也慢慢朝着恶性化的趋势发展。很多小公司为了能招揽更多客户，不断的用一些非正当手段赢取自身的利益，通过众多的网络宣传平台恶意中伤一些较大规模正规的同行竞争者。
-                美宝之家在中国和美国都是有注册过的正式机构，不仅在美国拥有多家大型<b>月子</b><b>中心</b>，在中国依然拥有超百人的专业服务团队。然而，正是这样一个行业的领头者却成为同行小公司群力攻击的对象。
-                现在网络上很多人都在抨击美宝之家的种种罪行，而这些无非都是一些住宿条件不好、伙食不好这类千篇一律的问题，而当你真正问到一些实质性的问题时他们又 ... <span style="color:#FAFAF9;">9549009</span>
-            </div>
-
-            <div class="news-plus clearfix link-gray">
-                  <span class="fr">
-                    <a target="_blank" href="http://yq.adt100.com/moniter/dedup?dedup_id=30875692"><span class="mr20">转载（1）</span></a>                    
-                    <span class="mr20">点击（0）</span>
-                    <span class="mr20">评论（0）</span>
-                   
-                  </span>
-
-                <span class="mr20">佚名</span>
-                <span class="mr20">中搜论坛</span>
-                <span>2014/07/21 11:30:00</span>
-            </div>
-            <div class="news-tag">
-                话题：
-                <span class="tag-block">广州月子中心</span>              
-            </div>
-
-
-        </div>
-    </div>
-
-
-</li> -->
 </ul><br><div class="pager"><div id="yw0" class="page-count">  <strong class="mr20" id="total-search-count"><%=articles.size() %>条搜索结果</strong></div>
 <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" src="./js/sentimentMonitor/bds_s_v2.js"></script>
 
@@ -357,6 +318,7 @@ String name = (String)session.getAttribute("name");
 </script>
 </div>
 </div>
+ <div id="changpage"></div>
 </div>
 </div>
 
@@ -369,6 +331,46 @@ String name = (String)session.getAttribute("name");
             $("#moniter-sort-move").append('<li class=moniter-sort-li>'+ $(this).html() + '</li>');
         });
     });
+    
+    <script> 
+var obj,j; 
+var page=0; 
+var nowPage=0;//当前页 
+var listNum=3;//每页显示<ul>数 
+var PagesLen;//总页数 
+var PageNum=4;//分页链接接数(5个) 
+onload=function(){ 
+obj=document.getElementById("mydiv").getElementsByTagName("ul"); 
+j=obj.length 
+PagesLen=Math.ceil(j/listNum); 
+upPage(0) 
+} 
+function upPage(p){ 
+nowPage=p 
+//内容变换 
+for (var i=0;i<j;i++){ 
+obj[i].style.display="none" 
+} 
+for (var i=p*listNum;i<(p+1)*listNum;i++){ 
+if(obj[i])obj[i].style.display="block" 
+} 
+//分页链接变换 
+strS='<a href="###" onclick="upPage(0)">首页</a>  ' 
+var PageNum_2=PageNum%2==0?Math.ceil(PageNum/2)+1:Math.ceil(PageNum/2) 
+var PageNum_3=PageNum%2==0?Math.ceil(PageNum/2):Math.ceil(PageNum/2)+1 
+var strC="",startPage,endPage; 
+if (PageNum>=PagesLen) {startPage=0;endPage=PagesLen-1} 
+else if (nowPage<PageNum_2){startPage=0;endPage=PagesLen-1>PageNum?PageNum:PagesLen-1}//首页 
+else {startPage=nowPage+PageNum_3>=PagesLen?PagesLen-PageNum-1: nowPage-PageNum_2+1;var t=startPage+PageNum;endPage=t>PagesLen?PagesLen-1:t} 
+for (var i=startPage;i<=endPage;i++){ 
+if (i==nowPage)strC+='<a href="###" style="color:red;font-weight:700;" onclick="upPage('+i+')">'+(i+1)+'</a> ' 
+else strC+='<a href="###" onclick="upPage('+i+')">'+(i+1)+'</a> ' 
+} 
+strE=' <a href="###" onclick="upPage('+(PagesLen-1)+')">尾页</a>  ' 
+strE2=nowPage+1+"/"+PagesLen+"页"+"  共"+j+"条" 
+document.getElementById("changpage").innerHTML=strS+strC+strE+strE2 
+} 
+</script> 
 
 </script>
 
