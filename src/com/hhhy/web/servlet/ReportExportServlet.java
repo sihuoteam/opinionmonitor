@@ -96,9 +96,9 @@ public class ReportExportServlet extends HttpServlet {
         condition.setSentiments(emotionArr);
         try {
             long start = DateFormatUtils.getTime(start_date,
-                    DateFormatUtils.yyyyMMdd);
+                    DateFormatUtils.yyyyMMdd2);
             long end = DateFormatUtils.getTime(end_date,
-                    DateFormatUtils.yyyyMMdd);
+                    DateFormatUtils.yyyyMMdd2);
             condition.setStart(start);
             condition.setEnd(end);
         } catch (ParseException e) {
