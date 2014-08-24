@@ -76,9 +76,14 @@ String path = request.getContextPath();
 		<% for(KeyWord keyword:keywords){ %>
     	<tr>
   			<td>
-  			<a href="./summarize?kid=<%=keyword.getId() %>" >
+  			
   			<%=keyword.getKeyword() %>
-  			</a>
+  			
+  			</td>
+  			<td>
+  				<a href="./summarize?kid=<%=keyword.getId() %>" >
+  				<input value=查看 class="btn btn-info" type="submit">
+  				</a>
   			</td>
   			<td>
 				<form action="deletekeyword" method="POST">    
@@ -99,7 +104,7 @@ String path = request.getContextPath();
 			<form action="addkeyword" method="POST"> 
 				<tr>	
 					<td><input id="label" name="keyword" type="text"></td>
-					<td><input value=添加 class="btn btn-success" type="submit"></td>
+					<td><input value=添加 class="btn btn-info" type="submit"></td>
 				</tr>
 				
        		</form>
