@@ -217,7 +217,7 @@
 														value="sentiment" id="field_11" checked="checked"
 														type="checkbox" name="field[]">
 												</div>情感</label><label><div class="ez-checkbox ez-checked">
-													<input data-toggle="checkbox" class="ez-hide" value="time"
+													<input data-toggle="checkbox" class="ez-hide" value="time2"
 														id="field_12" checked="checked" type="checkbox"
 														name="field[]">
 												</div>时间</label> </span>

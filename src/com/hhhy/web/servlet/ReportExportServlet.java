@@ -67,14 +67,22 @@ public class ReportExportServlet extends HttpServlet {
         // String[]{"关键字","标题","摘要","url","来源","媒体","情感"，"时间"};
         // topic title summary url source media sentiment time
         Map<String, String> fieldsMap = new HashMap<String, String>();
-        fieldsMap.put("关键字", "topic");
-        fieldsMap.put("标题", "title");
-        fieldsMap.put("摘要", "summary");
+        fieldsMap.put("topic", "关键字");
+        fieldsMap.put("title", "标题");
+        fieldsMap.put("summary", "摘要");
         fieldsMap.put("url", "url");
-        fieldsMap.put("来源", "source");
-        fieldsMap.put("媒体", "media");
-        fieldsMap.put("情感", "sentiment");
-        fieldsMap.put("时间", "time");
+        fieldsMap.put("source", "来源");
+        fieldsMap.put("media", "媒体");
+        fieldsMap.put("sentiment", "情感");
+        fieldsMap.put("time2", "时间");
+//        fieldsMap.put("关键字", "topic");
+//        fieldsMap.put("标题", "title");
+//        fieldsMap.put("摘要", "summary");
+//        fieldsMap.put("url", "url");
+//        fieldsMap.put("来源", "source");
+//        fieldsMap.put("媒体", "media");
+//        fieldsMap.put("情感", "sentiment");
+//        fieldsMap.put("时间", "time2");
         String limit = req.getParameterValues("limit")[0];
         String source = JsonUtils.toJson(sources);
         String emotion = JsonUtils.toJson(emotions);
@@ -137,8 +145,8 @@ public class ReportExportServlet extends HttpServlet {
             // String[]{"关键字","标题","摘要","url","来源","媒体","情感"，"时间"};
             for (int i = 0; i < fields.length; i++) {
                 firstCell[i] = firstRow.createCell(i);
-//                firstCell[i].setCellValue(new XSSFRichTextString(fieldsMap.get(fields[i])));
-                firstCell[i].setCellValue(new XSSFRichTextString(fields[i]));
+                firstCell[i].setCellValue(new XSSFRichTextString(fieldsMap.get(fields[i])));
+//                firstCell[i].setCellValue(new XSSFRichTextString(fields[i]));
             }
             int i = 1;
             // 写入数据部分
@@ -205,6 +213,7 @@ public class ReportExportServlet extends HttpServlet {
          * 关键字 标题 摘要 来源 url 媒体 情感 topic title summary url source media sentiment
          * id url type website time emotion
          */
+    	logger.info("field:"+field);
         if (field.equals("topic")) {
             return topic;
         } else if (field.equals("title")) {
@@ -235,7 +244,10 @@ public class ReportExportServlet extends HttpServlet {
                 return "正面";
             } else
                 return "负面";
-        } else
+        } else if(field.equals("time2")) {
+        	logger.info("time" + art.getTime());
+        	return art.getTime() + "";
+        }else
             return null;
 
         // return null;
