@@ -307,7 +307,7 @@ public class DBUtils {
     }
 
     // TODO: compare with getUserArticle tr verify
-    public static List<Article> getUserArticle(long uid) throws SQLException {
+    public static List<Article> getUserArticle3(long uid) throws SQLException {
         String sql = "select distinct id from "+ KEYWORD_TABLE + " where uid=?";
         List<Object[]> kids = DBOperator.selectArrayList(sql, new Object[]{uid});
         Set<Long> pids = new HashSet<Long>();
@@ -330,6 +330,21 @@ public class DBUtils {
         Collections.sort(arts);
         if(arts.size()>225){
             arts = arts.subList(0,225);
+        }
+        return arts;
+    }
+
+    public static List<Article> getUserArticle(int kid) throws SQLException {
+        String sql = "select distinct pid from "+KEYWORDPAGE_TABLE+" where kid=? order by ctime desc limit 225";
+
+        List<Object[]> pids = DBOperator.selectArrayList(sql,new Object[]{kid});
+        List<Article> arts = new ArrayList<Article>();
+        for(Long pid:pids){
+            sql = "select * from "+ARTICLE_TABLE+" where id=?";
+            Article art = DBOperator.select(sql, new BeanHandler<Article>(Article.class), new Object[]{pid});
+            if(art!=null && art.getId()>0){
+                arts.add(art);
+            }
         }
         return arts;
     }
