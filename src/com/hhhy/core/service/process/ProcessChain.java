@@ -12,48 +12,64 @@ public class ProcessChain {
     private static final Logger logger = Logger.getLogger(ProcessChain.class);
 
     public static void process(Article art) {
-//        logger.info("split word for article: "+art.getUrl());
-        if(art.getTitle().length()>50){
-            art.setTitle(art.getTitle().substring(0,45)+"...");
+        // logger.info("split word for article: "+art.getUrl());
+        if (art.getTitle().length() > 50) {
+            art.setTitle(art.getTitle().substring(0, 45) + "...");
         }
-        if(art.getUrl().length()>200)return;
-        List<String> contentWords = WordSplitProcessor.split(art.getContent());
-        List<String> titleWords = WordSplitProcessor.split(art.getTitle());
-//        logger.info("emotionParser for article: "+art.getUrl());
-        int titleScore = EmotionAnalysisProcessor.emotionParser(titleWords);
-        int contentScore = EmotionAnalysisProcessor.emotionParser(contentWords);
-        int score = titleScore<0?titleScore:titleScore + contentScore;
-        art.setEmotion(score);
+        if (art.getUrl().length() > 200)
+            return;
 
         long id = -1l;
-         try {
+        try {
             id = DBUtils.isArticleExist(art.getUrl());
-            if(id<=0){
+            if (id <= 0) {
+                List<String> titleWords = WordSplitProcessor.split(art
+                        .getTitle());
+                int titleScore = EmotionAnalysisProcessor
+                        .emotionParser(titleWords);
+                int score = 0;
+                if (titleScore < 0) {
+                    score = titleScore * 2;
+                } else if (titleScore > 0) {
+                    score = titleScore;
+                } else {
+                    List<String> contentWords = WordSplitProcessor.split(art
+                            .getContent());
+                    int contentScore = EmotionAnalysisProcessor
+                            .emotionParser(contentWords);
+                    score = contentScore;
+                }
+
+                art.setEmotion(score);
+                
+                
                 id = DBUtils.insertArticle(art);
-                if(id<=0){
-                    logger.info("insert error: "+art.getUrl());
+                if (id <= 0) {
+                    logger.info("insert error: " + art.getUrl());
                     return;
                 }
+
+                
+
                 art.setId(id);
-                logger.info("artid: "+art.getId());
-                //no need for repeat index if url already exist
-                IndexProcessor.addIndex(art);
-                if(score<0){ // only report the first time
+                logger.info("artid: " + art.getId());
+                // no need for repeat index if url already exist
+                // TODO 
+//                IndexProcessor.addIndex(art);
+                if (score < -1) { // only report the first time
                     ReportProcessor.reportProcess(art);
                 }
-            }else{
-                logger.info("duplicated url: "+art.getUrl());
+            } else {
+                logger.info("duplicated url: " + art.getUrl());
             }
         } catch (SQLException e) {
-            logger.warn("can't insert article with url: "+art.getUrl());
+            logger.warn("can't insert article with url: " + art.getUrl());
             logger.warn(e);
         }
 
         if (art.getId() <= 0) {
             return;
         }
-
-        
 
         StatisticsProcessor.statistics(art);
     }

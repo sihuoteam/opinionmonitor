@@ -597,7 +597,7 @@ return res;
         }*/
 
         String limit = " limit " + condition.getSize();
-        String orderby = " order by ctime";
+        String orderby = " order by ctime desc ";
         String where = "";
         if(emotion==null){
             // where = "(" + time + ") and (" + source + ") and (" + keyword + ") ";

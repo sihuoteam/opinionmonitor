@@ -86,7 +86,7 @@
 				<li class="menu-list menu-any "><a href="monitor"
 					class="menu-title"><i></i><span>舆情监控</span> </a>
 				</li>
-				<li class="menu-list menu-rep active"><a href="#"
+				<li class="menu-list menu-rep active"><a href="dataExport.jsp"
 					class="menu-title"><i></i><span>数据报告</span> </a>
 				</li>
 				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>

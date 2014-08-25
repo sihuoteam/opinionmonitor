@@ -121,23 +121,6 @@ public class ReportExportServlet extends HttpServlet {
             condition.setKeyword(kid);
             List<Article> arts = DBUtils.exportData(condition);
             logger.info("art size: "+arts.size());
-            // List<Article> arts = new LinkedList<Article>();
-            // Article art0 = new Article();
-            // // art.setContent("content");
-            // art0.setTime("11");
-            // art0.setEmotion(2);
-            // art0.setSummary("summary");
-            // art0.setTitle("title");
-            // art0.setType(2);
-            // art0.setUrl("url");
-            // art0.setWebsite("website");
-            //
-            // arts.add(art0);
-
-            // 生成新版xls
-            /*
-             * 关键字 标题 摘要 来源 url 媒体 情感 时间
-             */
             XSSFWorkbook xwb = new XSSFWorkbook();
             XSSFSheet sheet = xwb.createSheet("datas");
             // 第一行标题准备
@@ -248,7 +231,8 @@ public class ReportExportServlet extends HttpServlet {
                 return "负面";
         } else if(field.equals("time2")) {
         	logger.info("time" + art.getTime());
-        	return art.getTime() + "";
+        	return DateFormatUtils.formatTime(art.getTime(), DateFormatUtils.yyyyMMdd);
+//        	return art.getTime() + "";
         }else
             return null;
 

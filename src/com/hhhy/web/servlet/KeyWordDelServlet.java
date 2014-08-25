@@ -41,6 +41,7 @@ public class KeyWordDelServlet extends HttpServlet {
         String kid = req.getParameter("kid");
         if(kid==null || kid.trim().equals("")){
             // TODO: 不应该出现这种情况，页面检查是否空值
+            resp.sendRedirect("keylist");
         }else{
             try {
                 

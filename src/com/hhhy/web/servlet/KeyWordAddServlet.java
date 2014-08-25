@@ -38,10 +38,11 @@ public class KeyWordAddServlet extends HttpServlet {
             return;
         }
         String keyword = req.getParameter("keyword");
-        keyword = new String(keyword.getBytes("ISO-8859-1"), "utf-8");
         if(keyword==null || keyword.trim().equals("")){
             // TODO: 不应该出现这种情况，页面检查是否空值
+            resp.sendRedirect("keylist");
         }else{
+            keyword = new String(keyword.getBytes("ISO-8859-1"), "utf-8");
             try {
                 boolean flag = DBUtils.addUserKeyWord(uid, keyword);
                 logger.info("add keyword: uid("+uid+"), keyword("+keyword+")");

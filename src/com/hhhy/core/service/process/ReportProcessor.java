@@ -1,5 +1,6 @@
 package com.hhhy.core.service.process;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.User;
 import com.hhhy.web.service.notice.EmailEntry;
 import com.hhhy.web.service.notice.EmailReport;
+import com.hhhy.web.service.notice.MessageReport;
 
 public class ReportProcessor {
     private static Logger logger = Logger.getLogger(ReportProcessor.class);
@@ -28,6 +30,10 @@ public class ReportProcessor {
         Timer timer = new Timer("email-sending-task");
         TimerTask emailTask = new EmailTask();
         timer.schedule(emailTask, 1l, 1000*60*10);
+        
+        Timer timer2 = new Timer("message-sending-task");
+        TimerTask messageTask = new MessageTask();
+        timer2.schedule(messageTask, 1l, 1000*60*10);
     }
 
     public static void reportProcess(Article art){
@@ -67,6 +73,10 @@ public class ReportProcessor {
         // TODO
         if(!StringUtils.notEmpty(phone)){return;}
         logger.info("will send message to: "+phone);
+        String content = MapUtils.getString(phoneWaiting, phone, "");
+        content+="标题: "+art.getTitle()+
+        "\n摘要: "+art.getSummary()+"\nURL: "+art.getUrl()+"\n"+"情感：负面\n\n\n";
+        phoneWaiting.put(phone, content);
     }
     
     public static class EmailTask extends TimerTask {
@@ -88,6 +98,28 @@ public class ReportProcessor {
                     EmailReport.sendMail(entry);
                 } catch (MessagingException e) {
                     logger.warn(e.getMessage());
+                }
+            }
+//            emailWaiting.clear();
+        }
+        
+    }
+    
+    public static class MessageTask extends TimerTask {
+
+        @Override
+        public void run() {
+            logger.info("run message sending task");
+            Map<String, String> tmp = new ConcurrentHashMap<String, String>(phoneWaiting);
+            phoneWaiting.clear();
+            Set<String> users = tmp.keySet();
+            for(String user:users){
+                String content = tmp.get(user);
+                try {
+                    logger.info("will send message to "+user);
+                    MessageReport.sendMessage(user, content);
+                } catch (UnsupportedEncodingException e) {
+                    logger.error(e.getMessage());
                 }
             }
 //            emailWaiting.clear();
