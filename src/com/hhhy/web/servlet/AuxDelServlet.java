@@ -34,6 +34,7 @@ public class AuxDelServlet extends HttpServlet {
         }
 
         String aux = request.getParameter("auxiliary");
+        logger.info("will del aux: "+aux);
         
         try {
             KeyWord keyWord = DBUtils.getUserKeyWord(uid, keyword.getId());

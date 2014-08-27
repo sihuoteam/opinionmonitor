@@ -34,6 +34,7 @@ public class AuxAddServlet extends HttpServlet {
         }
 
         String aux = request.getParameter("auxiliary");
+        logger.info("will add aux: "+aux);
         
         try {
             if(aux==null || aux.trim().equals("")){

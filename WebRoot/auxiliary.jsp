@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF8"%>
+<%@ page language="java" import="java.util.*, com.hhhy.db.beans.KeyWord" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,10 +11,17 @@ if (userid == null) {
 }
 
 KeyWord kw = (KeyWord)session.getAttribute("keyword");
-String keyword = kw.getKeyWord();
+String keyword = kw.getKeyword();
 String aux = kw.getAuxiliary();
 List<String> auxis = new ArrayList();
-auxis.addAll(aux.split(";"));
+if(aux!=null && !"".equals(aux.trim())){
+	String[] tmps = aux.split(";");
+	for(String tmp:tmps){
+		if(tmp!=null && !"".equals(tmp.trim())){
+			auxis.add(tmp);
+		}
+	}
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -86,7 +93,7 @@ auxis.addAll(aux.split(";"));
 		  			</td>
 		  			<td>
 		  			<!-- 
-		  				<a href="./summarize?kid=<%= %>" >
+		  				<a href="./summarize?kid=<%=kw.getId() %>" >
 		  				<input value=查看 class="btn btn-info" type="submit">
 		  				</a>
 		  				 -->

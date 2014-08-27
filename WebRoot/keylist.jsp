@@ -77,7 +77,7 @@ String path = request.getContextPath();
     	<tr>
   			<td>
   			
-  			<%=keyword.getKeyword() %>:<%=keyword.getAuxiliary().replaceAll(";",",") %>>
+  			<%=keyword.getKeyword() %>:<%=keyword.getAuxiliary() %>>
   			
   			</td>
   			<td>
