@@ -196,6 +196,16 @@
 		<url-pattern>/delaux</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>auxiliary</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.AuxiliaryServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>auxiliary</servlet-name>
+		<url-pattern>/auxiliary</url-pattern>
+	</servlet-mapping>
+
 
 	<servlet>
 		<servlet-name>test</servlet-name>
