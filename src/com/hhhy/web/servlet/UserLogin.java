@@ -50,11 +50,13 @@ public class UserLogin extends HttpServlet {
             request.getSession().setAttribute("userid", uid);
             request.getSession().setAttribute("name", username);
             List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
-            request.setAttribute("keywords", keyWords);
+//            request.setAttribute("keywords", keyWords);
+            request.getSession().setAttribute("keywords", keyWords);
 //            if(keyWords.size()>0)
 //                logger.info("get keyword: "+keyWords.get(0).getKeyword());
-            request.getRequestDispatcher("/keylist.jsp").forward(request,
-                    response);
+//            request.getRequestDispatcher("/keylist.jsp").forward(request,
+//                    response);
+            response.sendRedirect("keylist.jsp");
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }

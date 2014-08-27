@@ -25,6 +25,7 @@ public class Article implements Comparable<Article>, Serializable{
     
     // 因为哪个关键词得到这篇文章
     private String keyword;  //一个文章可能对于多个关键词，所以存在数据库中可能无效
+    private int cnt;
 //    private long ctime;// 获取网页时间
     
     public String getKeyword() {
@@ -67,6 +68,14 @@ public class Article implements Comparable<Article>, Serializable{
 //    public void setEmotion(int emotion) {
 //        this.emotion = emotion;
 //    }
+
+    public int getCnt() {
+        return cnt;
+    }
+
+    public void setCnt(int cnt) {
+        this.cnt = cnt;
+    }
 
     public String getTitle() {
         return title;

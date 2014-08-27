@@ -33,17 +33,18 @@ public class SummarizeServlet extends HttpServlet {
         if(kid==null || "".equals(kid)) response.sendRedirect("login.jsp");
         try {
             int[] counts = DBUtils.getEmotionStatisCount(Integer.parseInt(kid));
-            request.setAttribute("poscount", counts[0]);
-            request.setAttribute("negcount", counts[1]);
-            request.setAttribute("plaincount", counts[2]);
+            request.getSession().setAttribute("poscount", counts[0]);
+            request.getSession().setAttribute("negcount", counts[1]);
+            request.getSession().setAttribute("plaincount", counts[2]);
 
             List<Article> arts = DBUtils.getNegArticles(Integer.parseInt(kid));
-            request.setAttribute("negarts", arts);
+            request.getSession().setAttribute("negarts", arts);
             List<Article> importArts = DBUtils.getRecentArticles(Integer.parseInt(kid));
-            request.setAttribute("importarts", importArts);
+            request.getSession().setAttribute("importarts", importArts);
             String keyword = DBUtils.getKeyWordById(Integer.parseInt(kid));
             request.getSession().setAttribute("keyword",keyword);
-            request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
+            response.sendRedirect("sentimentSummarize.jsp");
+            // request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());
             response.sendRedirect("keylist");

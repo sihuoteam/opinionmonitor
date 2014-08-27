@@ -21,19 +21,17 @@ public class AuxAddServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-//        if(true)return;
-        
         Long uid = (Long)request.getSession().getAttribute("userid");
         if(uid==null || uid<0){
             response.sendRedirect("loginWeb.jsp");
         }
         KeyWord keyword = (KeyWord)request.getSession().getAttribute("keyword");
         if(keyword==null){
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
         }
 
         String aux = request.getParameter("auxiliary");
+        aux = new String(aux.getBytes("ISO-8859-1"),"utf-8");
         logger.info("will add aux: "+aux);
         
         try {
@@ -50,8 +48,9 @@ public class AuxAddServlet extends HttpServlet {
                 DBUtils.updateUserAuxiliary(uid, keyWord.getId(), auxiliary);
                 request.getSession().setAttribute("keyword",keyWord);
             }
-            request.getRequestDispatcher("/auxiliary.jsp").forward(request,
-                    response);
+            response.sendRedirect("auxiliary.jsp");
+//            request.getRequestDispatcher("/auxiliary.jsp").forward(request,
+//                    response);
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }

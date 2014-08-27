@@ -35,9 +35,8 @@ public class KeylistServlet extends HttpServlet {
            
             request.getSession().removeAttribute("loginerror");
             List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
-            request.setAttribute("keywords", keyWords);
-            request.getRequestDispatcher("/keylist.jsp").forward(request,
-                    response);
+            request.getSession().setAttribute("keywords", keyWords);
+            response.sendRedirect("keylist.jsp");
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }

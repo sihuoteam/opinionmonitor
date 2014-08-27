@@ -37,8 +37,9 @@ public class AuxiliaryServlet extends HttpServlet {
         try {
             KeyWord keyWord = DBUtils.getUserKeyWord(uid, Integer.parseInt(kid));
             request.getSession().setAttribute("keyword",keyWord);
-            request.getRequestDispatcher("/auxiliary.jsp").forward(request,
-                    response);
+            response.sendRedirect("auxiliary.jsp");
+//            request.getRequestDispatcher("/auxiliary.jsp").forward(request,
+//                    response);
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }

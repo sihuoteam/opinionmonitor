@@ -19,6 +19,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import com.hhhy.common.utils.DateFormatUtils;
+import com.hhhy.common.utils.JsonUtils;
 import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.EmotionWord;
 import com.hhhy.db.beans.KeyWord;
@@ -779,7 +780,14 @@ return res;
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
 //    	importEmotionWord();
-        updateUserAuxiliary(57,7,"haha");
+//        updateUserAuxiliary(57,7,"haha");
+        List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
+        Map<String, String> keymap = new HashMap<String, String>();
+        for(KeyWord word:keywords){
+            String key = word.getKeyword()+";"+word.getUid();
+            keymap.put(key, word.getAuxiliary()==null?"":word.getAuxiliary());
+        }
+        logger.info(JsonUtils.toJson(keymap));
     }
     
     public static void contert(){

@@ -30,10 +30,11 @@ public class AuxDelServlet extends HttpServlet {
         }
         KeyWord keyword = (KeyWord)request.getSession().getAttribute("keyword");
         if(keyword==null){
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
         }
 
         String aux = request.getParameter("auxiliary");
+        aux = new String(aux.getBytes("ISO-8859-1"),"utf-8");
         logger.info("will del aux: "+aux);
         
         try {
@@ -49,8 +50,9 @@ public class AuxDelServlet extends HttpServlet {
             keyWord.setAuxiliary(aux2);
             DBUtils.updateUserAuxiliary(uid, keyWord.getId(), aux2);
             request.getSession().setAttribute("keyword",keyWord);
-            request.getRequestDispatcher("/auxiliary.jsp").forward(request,
-                    response);
+            response.sendRedirect("auxiliary.jsp");
+//            request.getRequestDispatcher("/auxiliary.jsp").forward(request,
+//                    response);
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
