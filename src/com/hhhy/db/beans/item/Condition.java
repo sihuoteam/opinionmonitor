@@ -1,6 +1,5 @@
 package com.hhhy.db.beans.item;
 
-import java.util.Set;
 
 public class Condition{
 	// 起止时间

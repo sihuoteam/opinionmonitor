@@ -13,12 +13,11 @@ import org.apache.log4j.Logger;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
 
-public class AuxiliaryServlet extends HttpServlet {
+public class AuxDelServlet extends HttpServlet {
     /**
      * 
      */
-    private static final long serialVersionUID = -3515602744561659250L;
-    private static final Logger logger = Logger.getLogger(AuxiliaryServlet.class);
+    private static final Logger logger = Logger.getLogger(AuxDelServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,13 +28,25 @@ public class AuxiliaryServlet extends HttpServlet {
         if(uid==null || uid<0){
             response.sendRedirect("loginWeb.jsp");
         }
-        String kid = request.getParameter("kid");
-        if(kid==null){
+        KeyWord keyword = (KeyWord)request.getSession().getAttribute("keyword");
+        if(keyword==null){
             response.sendRedirect("keylist");
         }
+
+        String aux = request.getParameter("auxiliary");
         
         try {
-            KeyWord keyWord = DBUtils.getUserKeyWord(uid, Integer.parseInt(kid));
+            KeyWord keyWord = DBUtils.getUserKeyWord(uid, keyword.getId());
+            String auxiliary = keyWord.getAuxiliary();
+            String[] tmps = auxiliary.split(";");
+            String aux2 = "";
+            for(String tmp:tmps){
+                if(!tmp.equals(aux)){
+                    aux2+=tmp+";";
+                }
+            }
+            keyWord.setAuxiliary(aux2);
+            DBUtils.updateUserAuxiliary(uid, keyWord.getId(), aux2);
             request.getSession().setAttribute("keyword",keyWord);
             request.getRequestDispatcher("/auxiliary.jsp").forward(request,
                     response);

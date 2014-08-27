@@ -175,6 +175,26 @@
 		<servlet-name>monitor</servlet-name>
 		<url-pattern>/monitor</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>addaux</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.AuxAddServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>addaux</servlet-name>
+		<url-pattern>/addaux</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>delaux</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.AuxDelServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>delaux</servlet-name>
+		<url-pattern>/delaux</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet>

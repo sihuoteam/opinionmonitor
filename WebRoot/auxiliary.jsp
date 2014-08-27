@@ -93,7 +93,7 @@ auxis.addAll(aux.split(";"));
 		  				 
 		  			</td>
 		  			<td>
-						<form action="" method="POST">    
+						<form action="delaux" method="POST">    
 		                    	<input value=删除 class="btn btn-danger" type="submit">    
 		                    	<input type='hidden' name='auxiliary' value="<%=auxi%>">
 						</form>
@@ -108,9 +108,9 @@ auxis.addAll(aux.split(";"));
 		    <div align="center">
 		    	<h4>添加<%=keyword %>的附属关键词</h4>
 		    	<table cellspacing="10">
-					<form action="" method="POST"> 
+					<form action="addaux" method="POST"> 
 						<tr>	
-							<td><input id="label" name="keyword" type="text"></td>
+							<td><input id="label" name="auxiliary" type="text"></td>
 							<td><input value=添加 class="btn btn-info" type="submit"></td>
 						</tr>
 						

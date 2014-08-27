@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.hhhy.common.utils.StringUtils;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
 

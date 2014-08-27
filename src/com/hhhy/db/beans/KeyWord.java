@@ -1,12 +1,14 @@
 package com.hhhy.db.beans;
 
+import java.io.Serializable;
+
 /**
  * 关键词类
  * 对应a_keyword表
  * @author chenlingpeng
  * 
  */
-public class KeyWord {
+public class KeyWord implements Serializable{
     private int id;
     private long uid;
     private String keyword;

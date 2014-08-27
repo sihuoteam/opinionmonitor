@@ -3,7 +3,6 @@ package com.hhhy.web.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.hhhy.common.utils.JsonUtils;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
-import com.hhhy.db.beans.item.Pair;
 
 public class SummarizeServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(SummarizeServlet.class);
