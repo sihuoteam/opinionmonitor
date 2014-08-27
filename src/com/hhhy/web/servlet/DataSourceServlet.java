@@ -33,13 +33,14 @@ public class DataSourceServlet extends HttpServlet {
         try {
             if(kid!=null){
                 Map<String, Integer> sourceStatis = DBUtils.getSourceTypeStatis(kid);
-                req.setAttribute("sourceStatis", sourceStatis);
+//                req.setAttribute("sourceStatis", sourceStatis);
+                req.getSession().setAttribute("sourceStatis", sourceStatis);
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage());
-            // TODO: redirect to error.jsp and locate to keylist
         }
-        req.getRequestDispatcher("/dimAna_dataSource.jsp").forward(req, resp);
+        resp.sendRedirect("dimAna_dataSource.jsp");
+//        req.getRequestDispatcher("/dimAna_dataSource.jsp").forward(req, resp);
     }
 
     @Override

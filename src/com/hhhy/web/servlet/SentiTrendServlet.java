@@ -38,15 +38,16 @@ public class SentiTrendServlet extends HttpServlet {
                 // TODO: test needed
                 int size = pair.getFirst().size();
                 if(size>0){
-                    req.setAttribute("date", pair.getFirst());
-                    req.setAttribute("postrend", pair.getSecond().subList(0,size));
-                    req.setAttribute("negtrend", pair.getSecond().subList(size,2*size));
+                    req.getSession().setAttribute("date", pair.getFirst());
+                    req.getSession().setAttribute("postrend", pair.getSecond().subList(0,size));
+                    req.getSession().setAttribute("negtrend", pair.getSecond().subList(size,2*size));
                 }
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
-        req.getRequestDispatcher("/dimAna_sentiTrend.jsp").forward(req, resp);
+        resp.sendRedirect("dimAna_sentiTrend.jsp");
+//        req.getRequestDispatcher("/dimAna_sentiTrend.jsp").forward(req, resp);
     }
 
     @Override

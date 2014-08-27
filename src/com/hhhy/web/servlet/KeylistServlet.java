@@ -23,9 +23,6 @@ public class KeylistServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-//        if(true)return;
-        
         Long uid = (Long)request.getSession().getAttribute("userid");
         if(uid==null || uid<0){
             response.sendRedirect("loginWeb.jsp");

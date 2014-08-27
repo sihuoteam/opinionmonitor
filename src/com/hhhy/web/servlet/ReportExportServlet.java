@@ -59,7 +59,7 @@ public class ReportExportServlet extends HttpServlet {
         String[] fields = req.getParameterValues("field[]");
         Integer kid = (Integer) req.getSession().getAttribute("kid");
         if (kid == null) {
-            resp.sendRedirect("keylist");
+            resp.sendRedirect("keylist.jsp");
             return;
         }
         

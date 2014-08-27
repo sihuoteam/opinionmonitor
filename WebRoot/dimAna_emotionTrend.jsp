@@ -14,10 +14,10 @@
 	//List<Integer> postEmotionTrend= (List<Integer>)request.getAttribute("postrend");//json
 	//List<Integer> negEmotionTrend= (List<Integer>)request.getAttribute("negtrend");//json
 	
-	String dates = ShowUtil.dimAna_trendDates((List<String>)request.getAttribute("date"));
-	String postEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("postrend"));
-	String negEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)request.getAttribute("negtrend")); 
-	String emotionTrend = ShowUtil.dimAna_emotionTrend((List<Integer>)request.getAttribute("postrend"), (List<Integer>)request.getAttribute("negtrend"));
+	String dates = ShowUtil.dimAna_trendDates((List<String>)session.getAttribute("date"));
+	String postEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)session.getAttribute("postrend"));
+	String negEmotionTrend = ShowUtil.dimAna_trendPostTrend((List<Integer>)session.getAttribute("negtrend")); 
+	String emotionTrend = ShowUtil.dimAna_emotionTrend((List<Integer>)session.getAttribute("postrend"), (List<Integer>)session.getAttribute("negtrend"));
 	String keyword = (String)session.getAttribute("keyword");
 %>
 

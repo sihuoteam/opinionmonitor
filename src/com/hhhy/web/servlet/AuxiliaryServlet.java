@@ -31,7 +31,7 @@ public class AuxiliaryServlet extends HttpServlet {
         }
         String kid = request.getParameter("kid");
         if(kid==null){
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
         }
         
         try {

@@ -13,7 +13,7 @@ public class StatisKeyWord extends HttpServlet {
             throws ServletException, IOException {
         String kid = request.getParameter("kid");
         if(kid==null || "".equals(kid)){
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
             return;
         }
         

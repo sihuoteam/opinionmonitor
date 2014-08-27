@@ -39,7 +39,7 @@ public class KeyWordAddServlet extends HttpServlet {
         String keyword = req.getParameter("keyword");
         if(keyword==null || keyword.trim().equals("")){
             // TODO: 不应该出现这种情况，页面检查是否空值
-            resp.sendRedirect("keylist");
+            resp.sendRedirect("keylist.jsp");
         }else{
             keyword = new String(keyword.getBytes("ISO-8859-1"), "utf-8");
             try {
@@ -47,11 +47,11 @@ public class KeyWordAddServlet extends HttpServlet {
                 logger.info("add keyword: uid("+uid+"), keyword("+keyword+")");
 //                if(flag)
                 List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
-                req.setAttribute("keywords", keyWords);
-                req.getRequestDispatcher("/keylist.jsp").forward(req, resp);
+                req.getSession().setAttribute("keywords", keyWords);
+                resp.sendRedirect("keylist.jsp");
             } catch (SQLException e) {
                 logger.warn(e.getMessage());
-                resp.sendRedirect("keylist");
+                resp.sendRedirect("keylist.jsp");
             }
         }
         

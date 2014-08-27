@@ -40,19 +40,18 @@ public class KeyWordDelServlet extends HttpServlet {
         String kid = req.getParameter("kid");
         if(kid==null || kid.trim().equals("")){
             // TODO: 不应该出现这种情况，页面检查是否空值
-            resp.sendRedirect("keylist");
+            resp.sendRedirect("keylist.jsp");
         }else{
             try {
                 
                 boolean flag = DBUtils.deleteUserKeyWord(uid, Integer.parseInt(kid));
                 logger.info("add keyword: uid("+uid+"), keywordid("+kid+")");
-//                if(flag)
                 List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
-                req.setAttribute("keywords", keyWords);
-                req.getRequestDispatcher("/keylist.jsp").forward(req, resp);
+                req.getSession().setAttribute("keywords", keyWords);
+                resp.sendRedirect("keylist.jsp");
             } catch (SQLException e) {
                 logger.warn(e.getMessage());
-                resp.sendRedirect("keylist");
+                resp.sendRedirect("keylist.jsp");
             }
         }
         

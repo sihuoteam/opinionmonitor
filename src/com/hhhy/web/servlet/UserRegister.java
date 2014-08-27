@@ -65,8 +65,9 @@ public class UserRegister extends HttpServlet {
             request.getSession().setAttribute("userid", uid);
             request.getSession().setAttribute("name", email);
             request.getSession().removeAttribute("regerror");
-            request.getRequestDispatcher("/keylist.jsp").forward(request,
-                    response);
+            response.sendRedirect("keylist.jsp");
+            // request.getRequestDispatcher("/keylist.jsp").forward(request,
+            //         response);
         } catch (SQLException e) {
             logger.warn(e.getMessage());
             request.getSession().setAttribute("regerror", "创建用户时后台数据库出错，请重试");

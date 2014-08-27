@@ -35,13 +35,14 @@ public class MonitorServlet extends HttpServlet {
             // TODO: 需要加所有舆情文章
             List<Article> arts = DBUtils.getUserArticle(Integer.parseInt(kid));
             request.getSession().setAttribute("all", arts);
-            request.getRequestDispatcher("/sentimentMonitor.jsp").forward(request, response);
+            response.sendRedirect("sentimentMonitor.jsp");
+//            request.getRequestDispatcher("/sentimentMonitor.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
         } catch (SQLException e) {
             logger.warn(e.getMessage());
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
         }
     }
 

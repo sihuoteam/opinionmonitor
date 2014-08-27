@@ -33,12 +33,13 @@ public class MediaSourceServlet extends HttpServlet {
         try {
             if(kid!=null){
                 Map<String, Integer> mediaStatis = DBUtils.getMediaSourceStatis(kid);
-                req.setAttribute("mediaStatis", mediaStatis);
+                req.getSession().setAttribute("mediaStatis", mediaStatis);
             }
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
-        req.getRequestDispatcher("/dimAna_mediaSource.jsp").forward(req, resp);
+        resp.sendRedirect("dimAna_mediaSource.jsp");
+//        req.getRequestDispatcher("/dimAna_mediaSource.jsp").forward(req, resp);
     }
 
     @Override

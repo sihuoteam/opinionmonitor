@@ -12,7 +12,7 @@
 	
 	
 	String email = (String)session.getAttribute("name");
-	Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");
+	Map<String, Integer> sourceStatis =(Map<String, Integer>)session.getAttribute("sourceStatis");
 	String roundData = ShowUtil.dimAna_dataSourceRoundData(sourceStatis);
 	String zhuSource = ShowUtil.dimAna_dataSourceZhuSource(sourceStatis);
 	String zhuData=ShowUtil.dimAna_dataSourceZhuData(sourceStatis);

@@ -10,7 +10,7 @@
 		return;
 	}
 	String email = (String)session.getAttribute("name");
-	Map<String, Integer> mediaStatis =(Map<String, Integer>)request.getAttribute("mediaStatis");
+	Map<String, Integer> mediaStatis =(Map<String, Integer>)session.getAttribute("mediaStatis");
 	String roundData = ShowUtil.dimAna_dataSourceRoundData(mediaStatis);
 	String zhuSource = ShowUtil.dimAna_dataSourceZhuSource(mediaStatis);
 	String zhuData=ShowUtil.dimAna_dataSourceZhuData(mediaStatis);

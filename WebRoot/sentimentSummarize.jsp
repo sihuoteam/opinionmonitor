@@ -8,9 +8,9 @@ if(userid==null){
 	return;
 }
 String name = (String)session.getAttribute("name");
-Integer poscount = (Integer)request.getAttribute("poscount");
-Integer negcount = (Integer)request.getAttribute("negcount");
-Integer plaincount = (Integer)request.getAttribute("plaincount");
+Integer poscount = (Integer)session.getAttribute("poscount");
+Integer negcount = (Integer)session.getAttribute("negcount");
+Integer plaincount = (Integer)session.getAttribute("plaincount");
 
 if(poscount==null || negcount==null || plaincount==null)
 	response.sendRedirect("./login.jsp");
@@ -19,8 +19,8 @@ if(poscount==null || negcount==null || plaincount==null)
 //String posttrend = (String)request.getAttribute("postrend");//json
 //String negtrend = (String)request.getAttribute("negtrend");//json
 //少一个重要舆情
-List<Article> importantArticle = (List<Article>)request.getAttribute("importarts");
-List<Article> negArticle= (List<Article>)request.getAttribute("negarts");
+List<Article> importantArticle = (List<Article>)session.getAttribute("importarts");
+List<Article> negArticle= (List<Article>)session.getAttribute("negarts");
 
 //Map<String, Integer> mediaStatis = (Map<String, Integer>)request.getAttribute("mediaStatis");
 //Map<String, Integer> sourceStatis =(Map<String, Integer>)request.getAttribute("sourceStatis");

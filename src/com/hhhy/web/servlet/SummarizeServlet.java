@@ -47,10 +47,10 @@ public class SummarizeServlet extends HttpServlet {
             // request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
         } catch (SQLException e) {
             logger.warn(e.getMessage());
-            response.sendRedirect("keylist");
+            response.sendRedirect("keylist.jsp");
         }
     }
 
