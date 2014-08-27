@@ -77,8 +77,13 @@ String path = request.getContextPath();
     	<tr>
   			<td>
   			
-  			<%=keyword.getKeyword() %>
+  			<%=keyword.getKeyword() %>:<%=keyword.getAuxiliary().replaceAll(";",",") %>>
   			
+  			</td>
+  			<td>
+  				<a href="">
+  				<input value=附属词编辑 class="btn btn-info" type="submit">
+  				</a>
   			</td>
   			<td>
   				<a href="./summarize?kid=<%=keyword.getId() %>" >
