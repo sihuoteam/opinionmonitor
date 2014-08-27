@@ -81,7 +81,7 @@ String path = request.getContextPath();
   			
   			</td>
   			<td>
-  				<a href="./auxiliary?kid=<%=keyword.getId() ">
+  				<a href="./auxiliary?kid=<%=keyword.getId() %>">
   				<input value=附属词编辑 class="btn btn-info" type="submit">
   				</a>
   			</td>
