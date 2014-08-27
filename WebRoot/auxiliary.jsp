@@ -49,7 +49,6 @@ List<String> auxis = null;
 			style="position: relative; top: 0; left: 25px;"> --> </a>
 		<button class="menu-toggle" type="button"></button>
 		<ul class="topnav pull-right inline">
-			<li> <%=keyword %><li>
 			<li><a href="keylist" class="top-opt" data-toggle="tooltip"
 				data-placement="bottom"><i></i> 返回关键词设置</a></li>
 		</ul>
@@ -86,7 +85,7 @@ List<String> auxis = null;
 		  			<td>
 						<form action="" method="POST">    
 		                    	<input value=删除 class="btn btn-danger" type="submit">    
-		                    	<input type='hidden' name='kid' value="<%=keyword.getId() %>">
+		                    	<input type='hidden' name='auxiliary' value="<%=auxi%>">
 						</form>
 					</td>
 				</tr>		
