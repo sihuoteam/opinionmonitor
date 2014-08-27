@@ -189,6 +189,14 @@ public class DBUtils {
         return keywords;
     }
 
+    public static KeyWord getUserKeyWord(long userid, int kid) throws SQLException {
+        String sql = "select * from " + KEYWORD_TABLE + " where uid=? and id=?";
+        KeyWord keyword = DBOperator.select(sql,
+                new BeanHandler<KeyWord>(KeyWord.class),
+                new Object[] { userid,kid });
+        return keyword;
+    }
+
     public static List<String> getUserKeyWordStr(long userid)
             throws SQLException {
         List<KeyWord> keys = getUserKeyWord(userid);
@@ -220,6 +228,11 @@ public class DBUtils {
         }
         return us;
 
+    }
+    
+    public static boolean updateUserAuxiliary(long uid, int kid, String auxiliary) throws SQLException{
+        String sql = "update "+KEYWORD_TABLE+" set auxiliary=? where uid=? and id=?";
+        return DBOperator.update(sql, new Object[]{auxiliary, uid, kid});
     }
 
     public static boolean deleteUserKeyWord(long userid, int keywordid)
@@ -767,7 +780,8 @@ return res;
 //        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
-    	importEmotionWord();
+//    	importEmotionWord();
+        updateUserAuxiliary(57,7,"haha");
     }
     
     public static void contert(){

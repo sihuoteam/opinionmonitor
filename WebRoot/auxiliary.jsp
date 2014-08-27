@@ -1,10 +1,20 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-String keyword = "";
-List<String> auxis = null;
+Long userid = (Long) session.getAttribute("userid");
+
+if (userid == null) {
+	response.sendRedirect("./loginWeb.jsp");
+	return;
+}
+
+KeyWord kw = (KeyWord)session.getAttribute("keyword");
+String keyword = kw.getKeyWord();
+String aux = kw.getAuxiliary();
+List<String> auxis = new ArrayList();
+auxis.addAll(aux.split(";"));
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

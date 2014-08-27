@@ -10,6 +10,7 @@ public class KeyWord {
     private int id;
     private long uid;
     private String keyword;
+    private String auxiliary;
 
     public KeyWord(){}
 
@@ -37,6 +38,12 @@ public class KeyWord {
         this.keyword = keyword;
     }
 
-    
+    public String getAuxiliary() {
+        return auxiliary;
+    }
+
+    public void setAuxiliary(String auxiliary) {
+        this.auxiliary = auxiliary;
+    }
 
 }
