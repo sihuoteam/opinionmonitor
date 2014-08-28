@@ -77,9 +77,9 @@ String path = request.getContextPath();
     	<tr>
   			<td>
   			
-  			<%=keyword.getKeyword() %><%=keyword.getAuxiliary()==null?"":":"+keyword.getAuxiliary() %>
+  			<%=keyword.getKeyword() %><!--<%=keyword.getAuxiliary()==null?"":":"+keyword.getAuxiliary() %>
   			
-  			</td>
+  			--></td>
   			<td>
   				<a href="./auxiliary?kid=<%=keyword.getId() %>">
   				<input value=附属词编辑 class="btn btn-info" type="submit">

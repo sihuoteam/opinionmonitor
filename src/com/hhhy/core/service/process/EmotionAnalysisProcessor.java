@@ -67,7 +67,7 @@ public class EmotionAnalysisProcessor {
         for(EmotionWord word:prorNegWords){
             if(title.contains(word.getWord())){
                 score+=word.getVal();
-                logger.info("emotion rec in title for "+word);
+                logger.info("emotion rec in title for "+word.getWord());
             }
         }
         return score;
