@@ -657,6 +657,11 @@ return res;
             line = line.trim();
             DBOperator.update(sql, new Object[]{line,1});
         }
+        lines = FileUtils.readLines(new File("file/neg.txt"));
+        for(String line:lines){
+            line = line.trim();
+            DBOperator.update(sql, new Object[]{line,-2});
+        }
     }
 
     /*************************** data export部分结束 
@@ -779,15 +784,15 @@ return res;
 //        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
-//    	importEmotionWord();
+    	importEmotionWord();
 //        updateUserAuxiliary(57,7,"haha");
-        List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
-        Map<String, String> keymap = new HashMap<String, String>();
-        for(KeyWord word:keywords){
-            String key = word.getKeyword()+";"+word.getUid();
-            keymap.put(key, word.getAuxiliary()==null?"":word.getAuxiliary());
-        }
-        logger.info(JsonUtils.toJson(keymap));
+//        List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
+//        Map<String, String> keymap = new HashMap<String, String>();
+//        for(KeyWord word:keywords){
+//            String key = word.getKeyword()+";"+word.getUid();
+//            keymap.put(key, word.getAuxiliary()==null?"":word.getAuxiliary());
+//        }
+//        logger.info(JsonUtils.toJson(keymap));
     }
     
     public static void contert(){

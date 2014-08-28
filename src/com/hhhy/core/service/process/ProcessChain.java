@@ -23,40 +23,44 @@ public class ProcessChain {
         try {
             id = DBUtils.isArticleExist(art.getUrl());
             if (id <= 0) {
-                List<String> titleWords = WordSplitProcessor.split(art
-                        .getTitle());
-                int titleScore = EmotionAnalysisProcessor
-                        .emotionParser(titleWords);
                 int score = 0;
-                if (titleScore < 0) {
-                    score = titleScore * 2;
-                } else if (titleScore > 0) {
-                    score = titleScore;
-                } else {
-                    List<String> contentWords = WordSplitProcessor.split(art
-                            .getContent());
-                    int contentScore = EmotionAnalysisProcessor
-                            .emotionParser(contentWords);
-                    score = contentScore;
+                int titleScore = 0;
+                score = EmotionAnalysisProcessor.unSegEmotionParser(art
+                        .getTitle());
+                if (score == 0) {
+                    List<String> titleWords = WordSplitProcessor.split(art
+                            .getTitle());
+                    titleScore = EmotionAnalysisProcessor
+                            .emotionParser(titleWords);
+                    if (titleScore < 0) {
+                        score = titleScore * 2;
+                    } else if (titleScore > 0) {
+                        score = titleScore;
+                    } else {
+                        List<String> contentWords = WordSplitProcessor.split(art
+                                .getContent());
+                        int contentScore = EmotionAnalysisProcessor
+                                .emotionParser(contentWords);
+                        score = contentScore;
+                    }
                 }
 
+                
+
                 art.setEmotion(score);
-                
-                
+
                 id = DBUtils.insertArticle(art);
                 if (id <= 0) {
                     logger.info("insert error: " + art.getUrl());
                     return;
                 }
 
-                
-
                 art.setId(id);
                 logger.info("artid: " + art.getId());
                 // no need for repeat index if url already exist
-                // TODO 
-//                IndexProcessor.addIndex(art);
-                if (score < -1) { // only report the first time
+                // TODO
+                // IndexProcessor.addIndex(art);
+                if (score != 0) { // only report the first time
                     ReportProcessor.reportProcess(art);
                 }
             } else {
