@@ -322,7 +322,7 @@ String keyword = (String)session.getAttribute("keyword");
 								<% } %> --%>
 								
 								<% for(Article r:importantArticle) {
-										out.println("<li><a target=\"_blank\" href=" + r.getUrl() + ">"+ r.getTitle() +"</a></li>");
+										out.println("<li><a target=\"_blank\" href=" + r.getUrl() + ">["+ r.getWebsite()+"]"+r.getTitle() +"</a></li>");
 								 	}%>
 								</ul>
 									<!-- <li><a target="_blank"
@@ -346,7 +346,7 @@ String keyword = (String)session.getAttribute("keyword");
 									</li>
 								<% } %> --%>
 								<% for(Article r:negArticle) {
-										out.println("<li><a target=\"_blank\" href=" + r.getUrl() + ">"+ r.getTitle() +"</a></li>");
+										out.println("<li><a target=\"_blank\" href=" + r.getUrl() + ">["+r.getWebsite()+"]"+ r.getTitle() +"</a></li>");
 								 	}%>
 								
 								</ul>

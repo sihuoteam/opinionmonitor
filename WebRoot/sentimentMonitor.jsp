@@ -305,7 +305,7 @@ String keyword = (String)session.getAttribute("keyword");
         "<div class=\"m-news-intro \">"+
             "<div class=\"news-intro-hd\">");
             
-        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">" + aa.getTitle() + "</a></strong>");
+        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">["+aa.getWebsite()+"]" + aa.getTitle() + "</a></strong>");
         out.println("</div>"+
             "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li></ul>");
             }
