@@ -263,9 +263,13 @@ public class DBUtils {
     public static List<Article> getNegArticles(int kid) throws SQLException {
         String sql = "select * from " + KEYWORDPAGE_TABLE
                 + " where emotion<0 and kid=? limit 10";
+        System.out.println("will excute getNegArticles");
+        logger.info("will excute getNegArticles");
         List<KeyWordPage> pagesid = DBOperator.select(sql, new BeanListHandler<KeyWordPage>(
                 KeyWordPage.class), new Object[] { kid });
         List<Article> arts = new ArrayList<Article>();
+        System.out.println("size: "+pagesid.size());
+        logger.info("size: "+pagesid.size());
         sql = "select * from " + ARTICLE_TABLE + " where id=?";
         for (KeyWordPage pageid : pagesid) {
             Article art = DBOperator.select(sql, new BeanHandler<Article>(
@@ -275,8 +279,11 @@ public class DBUtils {
                 art.setContent(""); // 内容置空，减少存储消耗
                 art.setSummary("");
                 arts.add(art);
+            }else{
+            	System.out.println("can't find  pid: "+pageid.getPid());
             }
         }
+        System.out.println("art size is "+arts.size());
         return arts;
     }
 
