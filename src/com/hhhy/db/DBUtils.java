@@ -42,6 +42,7 @@ public class DBUtils {
     private static final String KEYWORD_TABLE = "a_keyword";
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
     private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
+    private static final String NEGWORD_TABLE = "a_negword";
 //    private static final String USERKEYWORD_TABLE = "a_userkeyword";
 
     public static long isArticleExist(String url) throws SQLException {
@@ -140,6 +141,16 @@ public class DBUtils {
         List<EmotionWord> emotionWords = DBOperator.select(sql,
                 new BeanListHandler<EmotionWord>(EmotionWord.class));
         return emotionWords;
+    }
+    
+    public static List<String> loadNegWords() throws SQLException{
+    	String sql = "select word from "+NEGWORD_TABLE;
+    	List<Object[]> res = DBOperator.selectArrayList(sql);
+    	List<String> ret = new ArrayList<String>();
+    	for(Object[] word:res){
+    		ret.add((String)word[0]);
+    	}
+    	return ret;
     }
 
     /*************************** 关键词处理部分**************************/

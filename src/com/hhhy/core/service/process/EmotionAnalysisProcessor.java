@@ -23,6 +23,7 @@ public class EmotionAnalysisProcessor {
     private static final Logger logger = Logger.getLogger(EmotionAnalysisProcessor.class);
     private static Map<String, Integer> emotionWords = new HashMap<String, Integer>();
     private static Set<EmotionWord> prorNegWords = new HashSet<EmotionWord>();
+    private static List<String> negWords;
 
     static {
         init();
@@ -38,6 +39,7 @@ public class EmotionAnalysisProcessor {
                     emotionWords.put(word.getWord(), word.getVal());
                 }
             }
+            negWords = DBUtils.loadNegWords();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e);
@@ -63,12 +65,19 @@ public class EmotionAnalysisProcessor {
 
     // spec for title analysis
     public static int unSegEmotionParser(String title) {
+    	String tmp = title;
         int score = 0;
         for(EmotionWord word:prorNegWords){
-            if(title.contains(word.getWord())){
+            if(tmp.contains(word.getWord())){
                 score+=word.getVal();
+                tmp.replace(word.getWord(), "");
                 logger.info("emotion rec in title for "+word.getWord());
             }
+        }
+        for(String neg:negWords){
+        	if(tmp.contains(neg)){
+        		return -score;
+        	}
         }
         return score;
     }
