@@ -675,6 +675,13 @@ return res;
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
+    	List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
+        Map<String, String> keymap = new HashMap<String, String>();
+        for(KeyWord word:keywords){
+            String key = word.getKeyword()+";"+word.getUid();
+            keymap.put(key, word.getAuxiliary()==null?"":word.getAuxiliary());
+        }
+        System.out.println(JsonUtils.toJson(keymap));
 //        Map<String, String> map1 = new ConcurrentHashMap<String, String>();
 //        map1.put("1", "1");
 //        Map<String, String> map2 = new ConcurrentHashMap<String, String>(map1);
@@ -791,7 +798,7 @@ return res;
 //        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
-    	importEmotionWord();
+//    	importEmotionWord();
 //        updateUserAuxiliary(57,7,"haha");
 //        List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
 //        Map<String, String> keymap = new HashMap<String, String>();
