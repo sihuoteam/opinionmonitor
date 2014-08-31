@@ -1,6 +1,7 @@
 package com.hhhy.core.service.process;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.hhhy.db.beans.EmotionWord;
  * 
  */
 public class EmotionAnalysisProcessor {
+	private static final String negstr = "不,非,无,未,不曾,没,没有,请勿,不用,无须,并非,毫无,决不,休想,永不,不要,未尝,未曾,毋,莫,从不,从未,从未有过,尚未,一无,并未,尚无,从来不,从没,绝非,远非,切莫,永不,休想,绝不,毫不,不必,禁止,忌,拒绝,杜绝,否,木有";
     private static final Logger logger = Logger.getLogger(EmotionAnalysisProcessor.class);
     private static Map<String, Integer> emotionWords = new HashMap<String, Integer>();
     private static Set<EmotionWord> prorNegWords = new HashSet<EmotionWord>();
@@ -39,7 +41,12 @@ public class EmotionAnalysisProcessor {
                     emotionWords.put(word.getWord(), word.getVal());
                 }
             }
-            negWords = DBUtils.loadNegWords();
+            String[] tmps = negstr.split(",");
+            negWords = new ArrayList<String>();
+            for(String word:tmps){
+            	negWords.add(word);
+            }
+            logger.info("loading negwords... with size: "+negWords.size());
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e);
