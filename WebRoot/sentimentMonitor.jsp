@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*, com.hhhy.db.beans.*,com.hhhy.common.utils.ShowUtil" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*, com.hhhy.db.beans.*,com.hhhy.common.utils.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -305,7 +305,7 @@ String keyword = (String)session.getAttribute("keyword");
         "<div class=\"m-news-intro \">"+
             "<div class=\"news-intro-hd\">");
             
-        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">["+aa.getWebsite()+"]" + aa.getTitle() + "</a></strong>");
+        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">["+aa.getWebsite()+"]" + aa.getTitle() + "</a> "+DateFormatUtils.formatTime(aa.getTime(), "yyyy-MM-dd hh:mm")+"</strong>");
         out.println("</div>"+
             "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li></ul>");
             }
