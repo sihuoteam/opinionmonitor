@@ -15,7 +15,7 @@ Integer plaincount = (Integer)session.getAttribute("plaincount");
 if(poscount==null || negcount==null || plaincount==null)
 	response.sendRedirect("./login.jsp");
 	
-//String date = (String)request.getAttribute("date");//json
+String date = (String)request.getAttribute("date");//json
 //String posttrend = (String)request.getAttribute("postrend");//json
 //String negtrend = (String)request.getAttribute("negtrend");//json
 //少一个重要舆情
@@ -35,7 +35,8 @@ String keyword = (String)session.getAttribute("keyword");
 <% 
 	//String name = "username";
 	//Integer poscount = 8;
-	//Integer negcount = 2;
+	//Integer plaincount = 6;
+	//Integer negcount = 4;
 
 	//
 	//Integer emotionNum = 2;
@@ -275,19 +276,60 @@ String keyword = (String)session.getAttribute("keyword");
 							</div>
 							<div class="widget-bd h290">
 								<div id="container" class="h220" data-highcharts-chart="0">
-									<div class="highcharts-container" id="highcharts-emotionNum"
+									<div class="highcharts-container" id="highcharts-poscount"
 										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
 
 									</div>
 								</div>
 								<div id="today-index">
-									情感指数： <span class="color-red"><%=emotionNum%></span>
+									情感指数： <span class="color-red"><%=poscount%></span>
 								</div>
 								<div id="yw0"></div>
 							</div>
 						</div>
 					</div>
+					
+					<div class="span6">
+						<div class="widget">
+							<div class="widget-hd">
+								<h4>情感指数</h4>
+							</div>
+							<div class="widget-bd h290">
+								<div id="container" class="h220" data-highcharts-chart="0">
+									<div class="highcharts-container" id="highcharts-plaincount"
+										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
 
+									</div>
+								</div>
+								<div id="today-index">
+									情感指数： <span class="color-red"><%=plaincount%></span>
+								</div>
+								<div id="yw0"></div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="widget">
+							<div class="widget-hd">
+								<h4>情感指数</h4>
+							</div>
+							<div class="widget-bd h290">
+								<div id="container" class="h220" data-highcharts-chart="0">
+									<div class="highcharts-container" id="highcharts-negcount"
+										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
+
+									</div>
+								</div>
+								<div id="today-index">
+									情感指数： <span class="color-red"><%=negcount%></span>
+								</div>
+								<div id="yw0"></div>
+							</div>
+						</div>
+					</div>
+					
 					<div class="span6 mglf20">
 						<div class="widget">
 							<div class="widget-hd">
@@ -305,8 +347,7 @@ String keyword = (String)session.getAttribute("keyword");
 							</div>
 						</div>
 					</div>
-				</div>
-
+				</div>		
 
 				<div class="row-fluid">
 					<div class="span6">
@@ -393,7 +434,7 @@ String keyword = (String)session.getAttribute("keyword");
 
 					$('#highcharts-emotionNum').highcharts({ */
 				$(function() {
-					$('#highcharts-emotionNum').highcharts(
+					$('#highcharts-poscount').highcharts(
 
 					{
 
@@ -424,8 +465,8 @@ String keyword = (String)session.getAttribute("keyword");
 							center : [ '50%', '100%' ]
 						},
 						yAxis : {
-							min : -5,
-							max : 5,
+							min : <%=poscount%>-5,
+							max : <%=poscount%>+5,
 							minorTickInterval : 'auto',
 							minorTickWidth : 1,
 							minorTickLength : 10,
@@ -460,7 +501,163 @@ String keyword = (String)session.getAttribute("keyword");
 						series : [ {
 							name : '情感指数',
 							data : [
-			<%=emotionNum%>
+			<%=poscount%>
+				],
+							tooltip : {
+								valueSuffix : ''
+							}
+						} ]
+					});
+
+				});
+				
+				$(function() {
+					$('#highcharts-plaincount').highcharts(
+
+					{
+
+						chart : {
+							renderTo : 'container',
+							type : 'gauge',
+							plotBackgroundColor : null,
+							plotBackgroundImage : null,
+							plotBorderWidth : 0,
+							plotShadow : false
+						},
+						exporting : {
+							enabled : true
+						},
+						egend : {
+							borderRadius : 0
+						},
+						tooltip : {
+							borderRadius : 0
+						},
+						title : {
+							text : ''
+						},
+						pane : {
+							startAngle : -90,
+							endAngle : 90,
+							size : [ 30 ],
+							center : [ '50%', '100%' ]
+						},
+						yAxis : {
+							min : <%=plaincount%>-5,
+							max : <%=plaincount%>+5,
+							minorTickInterval : 'auto',
+							minorTickWidth : 1,
+							minorTickLength : 10,
+							minorTickPosition : 'inside',
+							minorTickColor : '#666',
+							tickPixelInterval : 30,
+							tickWidth : 2,
+							tickPosition : 'inside',
+							tickLength : 10,
+							tickColor : '#666',
+							labels : {
+								step : 2,
+								rotation : 'auto'
+							},
+							title : {
+								text : ''
+							},
+							plotBands : [ {
+								from : -5,
+								to : -2.5,
+								color : '#4c88a2' // green
+							}, {
+								from : -2.5,
+								to : 2.5,
+								color : '#DDDF0D' // yellow
+							}, {
+								from : 2.5,
+								to : 5,
+								color : '#d95455' // red
+							} ]
+						},
+						series : [ {
+							name : '情感指数',
+							data : [
+			<%=plaincount%>
+				],
+							tooltip : {
+								valueSuffix : ''
+							}
+						} ]
+					});
+
+				});
+				
+				$(function() {
+					$('#highcharts-negcount').highcharts(
+
+					{
+
+						chart : {
+							renderTo : 'container',
+							type : 'gauge',
+							plotBackgroundColor : null,
+							plotBackgroundImage : null,
+							plotBorderWidth : 0,
+							plotShadow : false
+						},
+						exporting : {
+							enabled : true
+						},
+						egend : {
+							borderRadius : 0
+						},
+						tooltip : {
+							borderRadius : 0
+						},
+						title : {
+							text : ''
+						},
+						pane : {
+							startAngle : -90,
+							endAngle : 90,
+							size : [ 30 ],
+							center : [ '50%', '100%' ]
+						},
+						yAxis : {
+							min : <%=negcount%>-5,
+							max : <%=negcount%>+5,
+							minorTickInterval : 'auto',
+							minorTickWidth : 1,
+							minorTickLength : 10,
+							minorTickPosition : 'inside',
+							minorTickColor : '#666',
+							tickPixelInterval : 30,
+							tickWidth : 2,
+							tickPosition : 'inside',
+							tickLength : 10,
+							tickColor : '#666',
+							labels : {
+								step : 2,
+								rotation : 'auto'
+							},
+							title : {
+								text : ''
+							},
+							plotBands : [ {
+								from : -5,
+								to : -2.5,
+								color : '#4c88a2' // green
+							}, {
+								from : -2.5,
+								to : 2.5,
+								color : '#DDDF0D' // yellow
+							}, {
+								from : 2.5,
+								to : 5,
+								color : '#d95455' // red
+							} ]
+						},
+						series : [ {
+							name : '情感指数',
+							data : [
+			<%=negcount%>
 				],
 							tooltip : {
 								valueSuffix : ''
