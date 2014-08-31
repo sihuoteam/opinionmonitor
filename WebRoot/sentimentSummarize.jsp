@@ -11,6 +11,7 @@ String name = (String)session.getAttribute("name");
 Integer poscount = (Integer)session.getAttribute("poscount");
 Integer negcount = (Integer)session.getAttribute("negcount");
 Integer plaincount = (Integer)session.getAttribute("plaincount");
+plaincount++;
 
 if(poscount==null || negcount==null || plaincount==null)
 	response.sendRedirect("./login.jsp");
@@ -29,6 +30,7 @@ List<Article> negArticle= (List<Article>)session.getAttribute("negarts");
 Double emotionNum = 5* (poscount-negcount - 0.0)/(poscount + negcount);
 String emotionDistribution = "[]";
 String keyword = (String)session.getAttribute("keyword");
+System.out.println("poscount"+poscount+"negcount"+negcount+"plaincount"+plaincount);
 %>
 
 
@@ -289,26 +291,26 @@ String keyword = (String)session.getAttribute("keyword");
 						</div>
 					</div>
 					
-					<div class="span6">
+					<div class="span6 mglf20">
 						<div class="widget">
 							<div class="widget-hd">
 								<h4>中立舆情数</h4>
 							</div>
 							<div class="widget-bd h290">
-								<div id="container" class="h220" data-highcharts-chart="0">
+								<div id="container2" class="h290" data-highcharts-chart="1">
 									<div class="highcharts-container" id="highcharts-plaincount"
 										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
 
 									</div>
 								</div>
 								<div id="today-index">
-									中立舆情数：<span class="color-red"><%=plaincount%></span>
+								中立舆情数： <span class="color-red"><%=plaincount%></span>
 								</div>
-								<div id="yw0"></div>
+								<div id="yw1"></div>
 							</div>
 						</div>
+					</div>	
 					</div>
-				</div>	
 				<div class="row-fluid">
 					<div class="span6">
 						<div class="widget">
@@ -316,7 +318,7 @@ String keyword = (String)session.getAttribute("keyword");
 								<h4>负面舆情数</h4>
 							</div>
 							<div class="widget-bd h290">
-								<div id="container" class="h220" data-highcharts-chart="0">
+								<div id="container3" class="h220" data-highcharts-chart="2">
 									<div class="highcharts-container" id="highcharts-negcount"
 										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
 
@@ -325,7 +327,7 @@ String keyword = (String)session.getAttribute("keyword");
 								<div id="today-index">
 									负面舆情数： <span class="color-red"><%=negcount%></span>
 								</div>
-								<div id="yw0"></div>
+								<div id="yw2"></div>
 							</div>
 						</div>
 					</div>
@@ -336,14 +338,14 @@ String keyword = (String)session.getAttribute("keyword");
 								<h4>情感分布</h4>
 							</div>
 							<div class="widget-bd h290">
-								<div id="pie" class="h290" data-highcharts-chart="1">
+								<div id="pie" class="h290" data-highcharts-chart="3">
 									<div class="highcharts-container"
 										id="highcharts-emotionDistributed"
 										style="position: relative; width: 460px; height: 290px; text-align: left; line-height: normal; z-index: 0;">
 
 									</div>
 								</div>
-								<div id="yw1"></div>
+								<div id="yw3"></div>
 							</div>
 						</div>
 					</div>
@@ -499,7 +501,7 @@ String keyword = (String)session.getAttribute("keyword");
 							} ]
 						},
 						series : [ {
-							name : '情感指数',
+							name : '正面舆情数',
 							data : [
 			<%=poscount%>
 				],
@@ -577,7 +579,7 @@ String keyword = (String)session.getAttribute("keyword");
 							} ]
 						},
 						series : [ {
-							name : '情感指数',
+							name : '中立舆情数',
 							data : [
 			<%=plaincount%>
 				],
@@ -655,7 +657,7 @@ String keyword = (String)session.getAttribute("keyword");
 							} ]
 						},
 						series : [ {
-							name : '情感指数',
+							name : '负面舆情数',
 							data : [
 			<%=negcount%>
 				],
@@ -733,6 +735,7 @@ String keyword = (String)session.getAttribute("keyword");
 										} ]
 									});
 				});
+				
 			</script>
 			<script>
 				Highcharts.setOptions({

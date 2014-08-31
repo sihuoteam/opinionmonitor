@@ -44,6 +44,7 @@ public class SummarizeServlet extends HttpServlet {
             String keyword = DBUtils.getKeyWordById(Integer.parseInt(kid));
             request.getSession().setAttribute("keyword",keyword);
             response.sendRedirect("sentimentSummarize.jsp");
+            System.out.println("&&&&&&&&&&&&&&&&&&&&&&sentimentSummarize.jsp");
             // request.getRequestDispatcher("/sentimentSummarize.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             logger.warn(e.getMessage());

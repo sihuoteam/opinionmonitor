@@ -795,7 +795,7 @@ return res;
 //        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
-    	importEmotionWord();
+//    	importEmotionWord();
 //        updateUserAuxiliary(57,7,"haha");
 //        List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
 //        Map<String, String> keymap = new HashMap<String, String>();
