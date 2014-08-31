@@ -17,7 +17,7 @@ public class MessageReport {
 //        mms = new MdMmsSend(sn, pwd);
     }
     
-    public static void sendMessage(String number, String content) throws UnsupportedEncodingException{
+    public static String sendMessage(String number, String content) throws UnsupportedEncodingException{
 //        String sn = "SDK-BBX-010-21101";
 //        String password = "dfe6f-]]";
         String title = null;
@@ -34,7 +34,8 @@ public class MessageReport {
         String stime="";
         MdMmsSend mms = new MdMmsSend(sn, pwd);
         String result = mms.mdMmsSend(title, number, content, stime);
-        System.out.println(result);
+        System.out.println("message send result: "+result);
+        return result;
     }
 
     /**
@@ -42,7 +43,7 @@ public class MessageReport {
      * @throws UnsupportedEncodingException 
      */
     public static void main(String[] args) throws UnsupportedEncodingException {
-//        MessageReport.sendMessage("15210835484", "升值加薪","今日大盘涨停第三方三东方闪电\n明日预测撒旦法斯蒂芬\n后天启发");
+        MessageReport.sendMessage("15210835484", "升值加薪今日大盘涨停第三方三东方闪电\n明日预测撒旦法斯蒂芬\n后天启发");
         Article art = new Article();
         art.setTitle("title");
         art.setUrl("url");
