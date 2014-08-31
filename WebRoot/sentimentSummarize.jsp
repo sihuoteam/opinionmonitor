@@ -272,7 +272,7 @@ String keyword = (String)session.getAttribute("keyword");
 					<div class="span6">
 						<div class="widget">
 							<div class="widget-hd">
-								<h4>情感指数</h4>
+								<h4>正面舆情数</h4>
 							</div>
 							<div class="widget-bd h290">
 								<div id="container" class="h220" data-highcharts-chart="0">
@@ -282,7 +282,7 @@ String keyword = (String)session.getAttribute("keyword");
 									</div>
 								</div>
 								<div id="today-index">
-									情感指数： <span class="color-red"><%=poscount%></span>
+								正面舆情数： <span class="color-red"><%=poscount%></span>
 								</div>
 								<div id="yw0"></div>
 							</div>
@@ -292,7 +292,7 @@ String keyword = (String)session.getAttribute("keyword");
 					<div class="span6">
 						<div class="widget">
 							<div class="widget-hd">
-								<h4>情感指数</h4>
+								<h4>中立舆情数</h4>
 							</div>
 							<div class="widget-bd h290">
 								<div id="container" class="h220" data-highcharts-chart="0">
@@ -302,7 +302,7 @@ String keyword = (String)session.getAttribute("keyword");
 									</div>
 								</div>
 								<div id="today-index">
-									情感指数： <span class="color-red"><%=plaincount%></span>
+									中立舆情数span class="color-red"><%=plaincount%></span>
 								</div>
 								<div id="yw0"></div>
 							</div>
@@ -313,7 +313,7 @@ String keyword = (String)session.getAttribute("keyword");
 					<div class="span6">
 						<div class="widget">
 							<div class="widget-hd">
-								<h4>情感指数</h4>
+								<h4>负面舆情数</h4>
 							</div>
 							<div class="widget-bd h290">
 								<div id="container" class="h220" data-highcharts-chart="0">
@@ -323,7 +323,7 @@ String keyword = (String)session.getAttribute("keyword");
 									</div>
 								</div>
 								<div id="today-index">
-									情感指数： <span class="color-red"><%=negcount%></span>
+									负面舆情数： <span class="color-red"><%=negcount%></span>
 								</div>
 								<div id="yw0"></div>
 							</div>
@@ -485,16 +485,16 @@ String keyword = (String)session.getAttribute("keyword");
 								text : ''
 							},
 							plotBands : [ {
-								from : -5,
-								to : -2.5,
+								from : <%=poscount%>-5,
+								to : <%=poscount%>-2.5,
 								color : '#4c88a2' // green
 							}, {
-								from : -2.5,
-								to : 2.5,
+								from : <%=poscount%>-2.5,
+								to : <%=poscount%>+2.5,
 								color : '#DDDF0D' // yellow
 							}, {
-								from : 2.5,
-								to : 5,
+								from : <%=poscount%>+2.5,
+								to : <%=poscount%>+5,
 								color : '#d95455' // red
 							} ]
 						},
@@ -563,16 +563,16 @@ String keyword = (String)session.getAttribute("keyword");
 								text : ''
 							},
 							plotBands : [ {
-								from : -5,
-								to : -2.5,
+								from : <%=plaincount%>-5,
+								to : <%=plaincount%>-2.5,
 								color : '#4c88a2' // green
 							}, {
-								from : -2.5,
-								to : 2.5,
+								from : <%=plaincount%>-2.5,
+								to : <%=plaincount%>+2.5,
 								color : '#DDDF0D' // yellow
 							}, {
-								from : 2.5,
-								to : 5,
+								from : <%=plaincount%>+2.5,
+								to : <%=plaincount%>+5,
 								color : '#d95455' // red
 							} ]
 						},
@@ -641,16 +641,16 @@ String keyword = (String)session.getAttribute("keyword");
 								text : ''
 							},
 							plotBands : [ {
-								from : -5,
-								to : -2.5,
+								from : <%=negcount%>-5,
+								to : <%=negcount%>-2.5,
 								color : '#4c88a2' // green
 							}, {
-								from : -2.5,
-								to : 2.5,
+								from : <%=negcount%>-2.5,
+								to : <%=negcount%>+2.5,
 								color : '#DDDF0D' // yellow
 							}, {
-								from : 2.5,
-								to : 5,
+								from : <%=negcount%>+2.5,
+								to : <%=negcount%>+5,
 								color : '#d95455' // red
 							} ]
 						},
@@ -718,6 +718,11 @@ String keyword = (String)session.getAttribute("keyword");
 													{
 														name : '正面',
 														y : <%=poscount%>,
+														url : ''
+													},
+													{
+														name : '中立',
+														y : <%=plaincount%>,
 														url : ''
 													},
 													{
