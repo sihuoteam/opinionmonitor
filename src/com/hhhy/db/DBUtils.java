@@ -262,14 +262,10 @@ public class DBUtils {
     // TODO: for test
     public static List<Article> getNegArticles(int kid) throws SQLException {
         String sql = "select * from " + KEYWORDPAGE_TABLE
-                + " where emotion<0 and kid=? limit 10";
-        System.out.println("will excute getNegArticles");
-        logger.info("will excute getNegArticles");
+                + " where emotion<0 and kid=? order by ctime desc limit 10";
         List<KeyWordPage> pagesid = DBOperator.select(sql, new BeanListHandler<KeyWordPage>(
                 KeyWordPage.class), new Object[] { kid });
         List<Article> arts = new ArrayList<Article>();
-        System.out.println("size: "+pagesid.size());
-        logger.info("size: "+pagesid.size());
         sql = "select * from " + ARTICLE_TABLE + " where id=?";
         for (KeyWordPage pageid : pagesid) {
             Article art = DBOperator.select(sql, new BeanHandler<Article>(
@@ -279,11 +275,8 @@ public class DBUtils {
                 art.setContent(""); // 内容置空，减少存储消耗
                 art.setSummary("");
                 arts.add(art);
-            }else{
-            	System.out.println("can't find  pid: "+pageid.getPid());
             }
         }
-        System.out.println("art size is "+arts.size());
         return arts;
     }
 
@@ -675,13 +668,6 @@ return res;
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
-    	List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
-        Map<String, String> keymap = new HashMap<String, String>();
-        for(KeyWord word:keywords){
-            String key = word.getKeyword()+";"+word.getUid();
-            keymap.put(key, word.getAuxiliary()==null?"":word.getAuxiliary());
-        }
-        System.out.println(JsonUtils.toJson(keymap));
 //        Map<String, String> map1 = new ConcurrentHashMap<String, String>();
 //        map1.put("1", "1");
 //        Map<String, String> map2 = new ConcurrentHashMap<String, String>(map1);
@@ -798,7 +784,7 @@ return res;
 //        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
-//    	importEmotionWord();
+    	importEmotionWord();
 //        updateUserAuxiliary(57,7,"haha");
 //        List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
 //        Map<String, String> keymap = new HashMap<String, String>();
