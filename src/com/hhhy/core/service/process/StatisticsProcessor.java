@@ -37,7 +37,7 @@ public class StatisticsProcessor {
             keywordsCache.put(keyword, kid);
             KeyWordPage trend = new KeyWordPage();
             trend.setPid(art.getId());
-            trend.setCtime(System.currentTimeMillis());
+            trend.setCtime(art.getTime());
             trend.setEmotion(art.getEmotion());
             trend.setKid(kid);
             trend.setType(art.getType());

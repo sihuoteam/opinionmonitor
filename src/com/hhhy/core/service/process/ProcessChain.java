@@ -60,7 +60,7 @@ public class ProcessChain {
                 // no need for repeat index if url already exist
                 // TODO
                 // IndexProcessor.addIndex(art);
-                if (score != 0) { // only report the first time
+                if (score != 0 && art.getType()==1) { // only report the first time for news
                     ReportProcessor.reportProcess(art);
                 }
             } else {
