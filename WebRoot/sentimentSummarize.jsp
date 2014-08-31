@@ -302,7 +302,7 @@ String keyword = (String)session.getAttribute("keyword");
 									</div>
 								</div>
 								<div id="today-index">
-									中立舆情数<span class="color-red"><%=plaincount%></span>
+									中立舆情数：<span class="color-red"><%=plaincount%></span>
 								</div>
 								<div id="yw0"></div>
 							</div>
