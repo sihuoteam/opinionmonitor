@@ -39,7 +39,7 @@ public class ThriftRequireHandler implements HhhyService.Iface{
             Map<String, String> keymap = new HashMap<String, String>();
             for(KeyWord word:keywords){
                 String key = word.getKeyword()+";"+word.getUid();
-                keymap.put(key, word.getAuxiliary());
+                keymap.put(key,word.getAuxiliary()==null?"":word.getAuxiliary());
             }
             return JsonUtils.toJson(keymap);
         } catch (SQLException e) {
