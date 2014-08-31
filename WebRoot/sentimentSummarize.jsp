@@ -11,7 +11,7 @@ String name = (String)session.getAttribute("name");
 Integer poscount = (Integer)session.getAttribute("poscount");
 Integer negcount = (Integer)session.getAttribute("negcount");
 Integer plaincount = (Integer)session.getAttribute("plaincount");
-
+plaincount++;
 if(poscount==null || negcount==null || plaincount==null)
 	response.sendRedirect("./login.jsp");
 	
