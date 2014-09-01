@@ -19,10 +19,10 @@ String keyword = (String)session.getAttribute("keyword");
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="./css/sentimentMonitor/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="./css/sentimentMonitor/jquery-ui-timepicker-addon.css">
-    <link rel="stylesheet" type="text/css" href="./css/sentimentMonitor/styles.css">
-    <link rel="stylesheet" type="text/css" href="./css/sentimentMonitor/pager.css">
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/pager.css">
     <script type="text/javascript" src="./js/sentimentMonitor/jquery.js"></script>
     <script type="text/javascript" src="./js/sentimentMonitor/jquery.yii.js"></script>
     <script type="text/javascript" src="./js/sentimentMonitor/jquery.ba-bbq.js"></script>
@@ -50,7 +50,7 @@ String keyword = (String)session.getAttribute("keyword");
     <link rel="stylesheet" href="http://yq.adt100.com/apps/yuqing/theme/red/css/style-red-my.css">
 
 
-    <link href="./css/sentimentMonitor/bdsstyle.css" rel="stylesheet" type="text/css">
+    <link href="./css/bdsstyle.css" rel="stylesheet" type="text/css">
     <script src="./js/sentimentMonitorles/logger.js"></script>
 </head>
 

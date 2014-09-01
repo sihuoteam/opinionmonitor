@@ -20,7 +20,7 @@ String keyword = (String)session.getAttribute("keyword");
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="./css/dataExport/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
 	<script type="text/javascript" src="./js/dataExport/jquery.js"></script>
 	
 	<!-- Bootstrap -->

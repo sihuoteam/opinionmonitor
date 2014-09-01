@@ -42,7 +42,7 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <link rel="stylesheet" type="text/css"
-	href="./css/dataExport/jquery-ui.css">
+	href="./css/jquery-ui.css">
 <script type="text/javascript" src="./js/dataExport/jquery.js"></script>
 
 <!-- Bootstrap -->
@@ -55,11 +55,11 @@
 <link rel="stylesheet" href="./css/style-red-my.css">
 
 <link rel="stylesheet" type="text/css"
-	href="./css/dimensionAnalysis/dataSource/jquery-ui.css" />
+	href="./css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css"
-	href="./css/dimensionAnalysis/dataSource/styles.css" />
+	href="./css/styles.css" />
 <link rel="stylesheet" type="text/css"
-	href="./css/dimensionAnalysis/dataSource/pager.css" />
+	href="./css/pager.css" />
 <script type="text/javascript"
 	src="./js/dimensionAnalysis/dataSource/jquery.js"></script>
 <script type="text/javascript"
