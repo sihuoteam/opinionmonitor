@@ -91,7 +91,7 @@ public int getKeyword() {
 	    this.sentiments[1]=1;
 	}
 	public boolean plainNeed(){
-	    return this.sentiments[2]==0;
+	    return this.sentiments[2]==1;
 	}
 	public void needPlain(){
 	    this.sentiments[2]=1;

@@ -576,7 +576,9 @@ return res;
         long end = condition.getEnd();
 
         String emotion = "";
+        System.out.println("emotion: "+condition.negNeed()+":"+condition.posNeed()+":"+condition.plainNeed());
         if(condition.negNeed()&&condition.posNeed()&&condition.plainNeed()){
+            System.out.println("emotion to null");
             emotion=null;
         }else if (condition.negNeed()) {
             emotion += "emotion<0";

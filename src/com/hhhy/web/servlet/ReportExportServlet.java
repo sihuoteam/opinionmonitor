@@ -51,7 +51,7 @@ public class ReportExportServlet extends HttpServlet {
         String start_date = req.getParameter("start_date");
         String end_date = req.getParameter("end_date");
         System.out.println("start:" + start_date);
-        System.out.println("end:" + end_date);        
+        System.out.println("end:" + end_date);
         String[] merge = req.getParameterValues("merge");
         String[] sources = req.getParameterValues("source[]");
         String[] emotions = req.getParameterValues("sentiment[]");
@@ -62,7 +62,7 @@ public class ReportExportServlet extends HttpServlet {
             resp.sendRedirect("keylist.jsp");
             return;
         }
-        
+
         // String[] firstTitles = new
         // String[]{"关键字","标题","摘要","url","来源","媒体","情感"，"时间"};
         // topic title summary url source media sentiment time
@@ -75,14 +75,14 @@ public class ReportExportServlet extends HttpServlet {
         fieldsMap.put("media", "媒体");
         fieldsMap.put("sentiment", "情感");
         fieldsMap.put("time2", "时间");
-//        fieldsMap.put("关键字", "topic");
-//        fieldsMap.put("标题", "title");
-//        fieldsMap.put("摘要", "summary");
-//        fieldsMap.put("url", "url");
-//        fieldsMap.put("来源", "source");
-//        fieldsMap.put("媒体", "media");
-//        fieldsMap.put("情感", "sentiment");
-//        fieldsMap.put("时间", "time2");
+        // fieldsMap.put("关键字", "topic");
+        // fieldsMap.put("标题", "title");
+        // fieldsMap.put("摘要", "summary");
+        // fieldsMap.put("url", "url");
+        // fieldsMap.put("来源", "source");
+        // fieldsMap.put("媒体", "media");
+        // fieldsMap.put("情感", "sentiment");
+        // fieldsMap.put("时间", "time2");
         String limit = req.getParameterValues("limit")[0];
         String source = JsonUtils.toJson(sources);
         String emotion = JsonUtils.toJson(emotions);
@@ -108,6 +108,7 @@ public class ReportExportServlet extends HttpServlet {
                     DateFormatUtils.yyyyMMdd2);
             long end = DateFormatUtils.getTime(end_date,
                     DateFormatUtils.yyyyMMdd2);
+            end+=24*60*60*1000;
             condition.setStart(start);
             condition.setEnd(end);
         } catch (ParseException e) {
@@ -120,7 +121,7 @@ public class ReportExportServlet extends HttpServlet {
             String topic = DBUtils.getKeyWordById(kid);
             condition.setKeyword(kid);
             List<Article> arts = DBUtils.exportData(condition);
-            logger.info("art size: "+arts.size());
+            logger.info("art size: " + arts.size());
             XSSFWorkbook xwb = new XSSFWorkbook();
             XSSFSheet sheet = xwb.createSheet("datas");
             // 第一行标题准备
@@ -130,8 +131,9 @@ public class ReportExportServlet extends HttpServlet {
             // String[]{"关键字","标题","摘要","url","来源","媒体","情感"，"时间"};
             for (int i = 0; i < fields.length; i++) {
                 firstCell[i] = firstRow.createCell(i);
-                firstCell[i].setCellValue(new XSSFRichTextString(fieldsMap.get(fields[i])));
-//                firstCell[i].setCellValue(new XSSFRichTextString(fields[i]));
+                firstCell[i].setCellValue(new XSSFRichTextString(fieldsMap
+                        .get(fields[i])));
+                // firstCell[i].setCellValue(new XSSFRichTextString(fields[i]));
             }
             int i = 1;
             // 写入数据部分
@@ -145,52 +147,38 @@ public class ReportExportServlet extends HttpServlet {
                 }
                 i++;
             }
-            resp.setHeader("Connection", "close");  
-            resp.setHeader("Content-Type", "application/vnd.ms-excel;charset=UTF-8");
-           
+            resp.setHeader("Connection", "close");
+            resp.setHeader("Content-Type",
+                    "application/vnd.ms-excel;charset=UTF-8");
+
             String fileName = "WriteXlsx.xlsx";
-            fileName = encodeFileName(req,fileName);
-            resp.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+            fileName = encodeFileName(req, fileName);
+            resp.setHeader("Content-Disposition", "attachment;filename="
+                    + fileName);
             resp.resetBuffer();
 
             // 输出文件
-            OutputStream out =resp.getOutputStream();
+            OutputStream out = resp.getOutputStream();
             xwb.write(out);
             out.close();
-
-            
 
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-
-        // logger.info(source);
-        // logger.info(emotion);
-        // logger.info(topic_id);
-        // logger.info(field);
-        // logger.info(limit);
-        // logger.info(JsonUtils.toJson(merge));
-        // try {
-        // logger.info(DateFormatUtils.formatTime(DateFormatUtils.getTime(start_date,
-        // "yyyy-MM-dd"),DateFormatUtils.yyyyMMddhhmmss));
-        // } catch (ParseException e) {
-        // logger.warn(e.getMessage());
-        // }
-
-//        resp.sendRedirect("loginWeb.jsp");
     }
-    public  String encodeFileName(HttpServletRequest request,  
-            String fileName) throws UnsupportedEncodingException {  
-        String agent = request.getHeader("USER-AGENT");  
-        if (null != agent && -1 != agent.indexOf("MSIE")) {  
-            return URLEncoder.encode(fileName, "UTF-8");  
-        } else if (null != agent && -1 != agent.indexOf("Mozilla")) {  
-            return "=?UTF-8?B?"  
-                    + (new String(Base64.encodeBase64(fileName  
-                            .getBytes("UTF-8")))) + "?=";  
-        } else {  
-            return fileName;  
-        }  
+
+    public String encodeFileName(HttpServletRequest request, String fileName)
+            throws UnsupportedEncodingException {
+        String agent = request.getHeader("USER-AGENT");
+        if (null != agent && -1 != agent.indexOf("MSIE")) {
+            return URLEncoder.encode(fileName, "UTF-8");
+        } else if (null != agent && -1 != agent.indexOf("Mozilla")) {
+            return "=?UTF-8?B?"
+                    + (new String(Base64.encodeBase64(fileName
+                            .getBytes("UTF-8")))) + "?=";
+        } else {
+            return fileName;
+        }
     }
 
     private String getFieldValue(String field, Article art, String topic) {
@@ -198,7 +186,7 @@ public class ReportExportServlet extends HttpServlet {
          * 关键字 标题 摘要 来源 url 媒体 情感 topic title summary url source media sentiment
          * id url type website time emotion
          */
-    	logger.info("field:"+field);
+        logger.info("field:" + field);
         if (field.equals("topic")) {
             return topic;
         } else if (field.equals("title")) {
@@ -225,15 +213,19 @@ public class ReportExportServlet extends HttpServlet {
             return art.getWebsite();
         } else if (field.equals("sentiment")) {
             int emotion = art.getEmotion();
-            if (emotion >= 0) {
+            if (emotion > 0) {
                 return "正面";
-            } else
+            } else if (emotion < 0) {
                 return "负面";
-        } else if(field.equals("time2")) {
-        	logger.info("time" + art.getTime());
-        	return DateFormatUtils.formatTime(art.getTime(), DateFormatUtils.yyyyMMdd);
-//        	return art.getTime() + "";
-        }else
+            } else {
+                return "中立";
+            }
+        } else if (field.equals("time2")) {
+            logger.info("time" + art.getTime());
+            return DateFormatUtils.formatTime(art.getTime(),
+                    DateFormatUtils.yyyyMMdd);
+            // return art.getTime() + "";
+        } else
             return null;
 
         // return null;

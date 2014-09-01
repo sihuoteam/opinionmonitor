@@ -33,11 +33,13 @@ public class DateFormatUtils {
 
     /**
      * @param args
+     * @throws ParseException 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         logger.info(getTodayFormat(DateFormatUtils.yyyyMMddhhmmss));
         String s = "sdfsd&nbspdsfsdf";
         logger.info(s.replaceAll("&nbsp", ""));
+        logger.info(DateFormatUtils.formatTime(DateFormatUtils.getTime("2014-09-01", "yyyy-MM-dd")+24*60*60*1000, "yyyy-MM-dd HH:mm:ss"));
     }
 
 }
