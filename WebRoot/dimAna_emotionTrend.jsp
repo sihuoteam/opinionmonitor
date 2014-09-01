@@ -44,7 +44,7 @@
 	-->
 <link rel="stylesheet" type="text/css"
 	href="./css/jquery-ui.css">
-<script type="text/javascript" src="./js/dataExport/jquery.js"></script>
+<script type="text/javascript" src="./js/jquery.js"></script>
 
 <!-- Bootstrap -->
 <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -62,15 +62,15 @@
 <link rel="stylesheet" type="text/css"
 	href="./css/pager.css" />
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/sentimentTrend/jquery.js"></script>
+	src="./js/jquery.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/sentimentTrend/jquery.yii.js"></script>
+	src="./js/jquery.yii.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/sentimentTrend/jquery.ba-bbq.js"></script>
+	src="./js/jquery.ba-bbq.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/sentimentTrend/highcharts.src.js"></script>
+	src="./js/highcharts.src.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/sentimentTrend/exporting.src.js"></script>
+	src="./js/exporting.src.js"></script>
 </head>
 
 <body>
@@ -258,7 +258,7 @@
 			</div>
 			<script type="text/javascript" id="bdshare_js"
 				data="type=tools&amp;uid=0"
-				src="./js/dimensionAnalysis/sentimentTrend/bds_s_v2.js"></script>
+				src="./js/bds_s_v2.js"></script>
 			<script>
 $(function () {
     $('#dimAna_emotionTrend').highcharts({
@@ -361,15 +361,15 @@ Highcharts.setOptions({
 -->
 
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/pop.js"></script>
+			src="./js/pop.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/jquery.simInput.js"></script>
+			src="./js/jquery.simInput.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/bootstrap-dropdown.js"></script>
+			src="./js/bootstrap-dropdown.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/common.js"></script>
+			src="./js/common.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/my.js"></script>
+			src="./js/my.js"></script>
 
 		<script type="text/javascript">
   
@@ -387,10 +387,10 @@ Highcharts.setOptions({
 <![endif]-->
 
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/jquery-ui.min.js"></script>
+			src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/jquery-ui-i18n.min.js"></script>
+			src="./js/jquery-ui-i18n.min.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/sentimentTrend/jquery.yiilistview.js"></script>
+			src="./js/jquery.yiilistview.js"></script>
 </body>
 </html>

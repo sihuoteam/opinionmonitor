@@ -43,7 +43,7 @@
 	-->
 <link rel="stylesheet" type="text/css"
 	href="./css/jquery-ui.css">
-<script type="text/javascript" src="./js/dataExport/jquery.js"></script>
+<script type="text/javascript" src="./js/jquery.js"></script>
 
 <!-- Bootstrap -->
 <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -61,15 +61,15 @@
 <link rel="stylesheet" type="text/css"
 	href="./css/pager.css" />
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/dataSource/jquery.js"></script>
+	src="./js/jquery.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/dataSource/jquery.yii.js"></script>
+	src="./js/jquery.yii.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/dataSource/jquery.ba-bbq.js"></script>
+	src="./js/jquery.ba-bbq.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/dataSource/highcharts.src.js"></script>
+	src="./js/highcharts.src.js"></script>
 <script type="text/javascript"
-	src="./js/dimensionAnalysis/dataSource/exporting.src.js"></script>
+	src="./js/exporting.src.js"></script>
 </head>
 
 <body>
@@ -271,7 +271,7 @@
 		</div>
 		<script type="text/javascript" id="bdshare_js"
 			data="type=tools&amp;uid=0"
-			src="./js/dimensionAnalysis/dataSource/bds_s_v2.js"></script>
+			src="./js/bds_s_v2.js"></script>
 
 
 
@@ -326,15 +326,15 @@ Highcharts.setOptions({
 -->
 
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/pop.js"></script>
+			src="./js/pop.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/jquery.simInput.js"></script>
+			src="./js/jquery.simInput.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/bootstrap-dropdown.js"></script>
+			src="./js/bootstrap-dropdown.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/common.js"></script>
+			src="./js/common.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/my.js"></script>
+			src="./js/my.js"></script>
 
 		<script type="text/javascript">
   
@@ -352,11 +352,11 @@ Highcharts.setOptions({
 <![endif]-->
 
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/jquery-ui.min.js"></script>
+			src="./js/jquery-ui.min.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/jquery-ui-i18n.min.js"></script>
+			src="./js/jquery-ui-i18n.min.js"></script>
 		<script type="text/javascript"
-			src="./js/dimensionAnalysis/dataSource/jquery.yiilistview.js"></script>
+			src="./js/jquery.yiilistview.js"></script>
 
 		<script>
 $(function () {

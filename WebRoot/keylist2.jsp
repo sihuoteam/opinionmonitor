@@ -19,7 +19,7 @@
 	<head>
 		<title>keylist</title>
 		<link rel="stylesheet" type="text/css"
-			href="./css/sentimentSummarize/YiiTagCloud.css">
+			href="./css/YiiTagCloud.css">
 		<link rel="stylesheet" type="text/css" href="./css/login.css">
 
 		<!-- Bootstrap -->

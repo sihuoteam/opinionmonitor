@@ -23,9 +23,9 @@ String keyword = (String)session.getAttribute("keyword");
     <link rel="stylesheet" type="text/css" href="./css/sentimentMonitor/jquery-ui-timepicker-addon.css">
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <link rel="stylesheet" type="text/css" href="./css/pager.css">
-    <script type="text/javascript" src="./js/sentimentMonitor/jquery.js"></script>
-    <script type="text/javascript" src="./js/sentimentMonitor/jquery.yii.js"></script>
-    <script type="text/javascript" src="./js/sentimentMonitor/jquery.ba-bbq.js"></script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/jquery.yii.js"></script>
+    <script type="text/javascript" src="./js/jquery.ba-bbq.js"></script>
     <title>全部舆情</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
@@ -51,7 +51,7 @@ String keyword = (String)session.getAttribute("keyword");
 
 
     <link href="./css/bdsstyle.css" rel="stylesheet" type="text/css">
-    <script src="./js/sentimentMonitorles/logger.js"></script>
+    <script src="./js/logger.js"></script>
 </head>
 
 <body>
@@ -313,7 +313,7 @@ String keyword = (String)session.getAttribute("keyword");
 
 <!-- </ul> -->
 <br><div class="pager"><div id="yw0" class="page-count">  <strong class="mr20" id="total-search-count"><%=articles.size() %>条搜索结果</strong></div>
-<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" src="./js/sentimentMonitor/bds_s_v2.js"></script>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" src="./js/bds_s_v2.js"></script>
 
 <script type="text/javascript">
     document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
@@ -408,11 +408,11 @@ document.getElementById("changpage").innerHTML=strS+strC+strE+strE2
 <script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"></script>
 -->
 
-<script type="text/javascript" src="./js/sentimentMonitor/pop.js"></script>
-<script type="text/javascript" src="./js/sentimentMonitor/jquery.simInput.js"></script>
-<script type="text/javascript" src="./js/sentimentMonitor/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="./js/sentimentMonitor/common.js"></script>
-<script type="text/javascript" src="./js/sentimentMonitor/my.js"></script>
+<script type="text/javascript" src="./js/pop.js"></script>
+<script type="text/javascript" src="./js/jquery.simInput.js"></script>
+<script type="text/javascript" src="./js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/my.js"></script>
 
 <script type="text/javascript">
 
@@ -429,10 +429,10 @@ document.getElementById("changpage").innerHTML=strS+strC+strE+strE2
 
 <![endif]-->
 
-<script type="text/javascript" src="./js/sentimentMonitor/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./js/sentimentMonitor/jquery-ui-i18n.min.js"></script>
-<script type="text/javascript" src="./js/sentimentMonitor/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="./js/sentimentMonitor/jquery.yiilistview.js"></script>
+<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="./js/jquery.yiilistview.js"></script>
 <script type="text/javascript">
     /*<![CDATA[*/
     jQuery(function($) {

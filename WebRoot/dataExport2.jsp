@@ -21,7 +21,7 @@ String keyword = (String)session.getAttribute("keyword");
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
-	<script type="text/javascript" src="./js/dataExport/jquery.js"></script>
+	<script type="text/javascript" src="./js/jquery.js"></script>
 	
 	<!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -267,11 +267,11 @@ String keyword = (String)session.getAttribute("keyword");
 <script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"></script>
 -->
  
-<script type="text/javascript" src="./js/dataExport/pop.js"></script>
-<script type="text/javascript" src="./js/dataExport/jquery.simInput.js"></script>
-<script type="text/javascript" src="./js/dataExport/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="./js/dataExport/common.js"></script>
-<script type="text/javascript" src="./js/dataExport/my.js"></script>
+<script type="text/javascript" src="./js/pop.js"></script>
+<script type="text/javascript" src="./js/jquery.simInput.js"></script>
+<script type="text/javascript" src="./js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/my.js"></script>
  
 <script type="text/javascript">
    
@@ -288,8 +288,8 @@ String keyword = (String)session.getAttribute("keyword");
  
 <![endif]-->
  
-<script type="text/javascript" src="./js/dataExport/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./js/dataExport/jquery-ui-i18n.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui-i18n.min.js"></script>
 <script type="text/javascript">
 /*<![CDATA[*/
 jQuery(function($) {

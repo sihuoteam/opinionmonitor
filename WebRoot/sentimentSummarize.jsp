@@ -54,14 +54,14 @@ String keyword = (String)session.getAttribute("keyword");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="./css/sentimentSummarize/YiiTagCloud.css">
-<script type="text/javascript" src="./js/sentimentSummarize/jquery.js"></script>
+	href="./css/YiiTagCloud.css">
+<script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript"
-	src="./js/sentimentSummarize/highcharts.src.js"></script>
+	src="./js/highcharts.src.js"></script>
 <script type="text/javascript"
-	src="./js/sentimentSummarize/highcharts-more.src.js"></script>
+	src="./js/highcharts-more.src.js"></script>
 <script type="text/javascript"
-	src="./js/sentimentSummarize/exporting.src.js"></script>
+	src="./js/exporting.src.js"></script>
 <title>舆情概况</title>
 
 <meta charset="UTF-8">
@@ -786,13 +786,13 @@ String keyword = (String)session.getAttribute("keyword");
 <script type="text/javascript" src="/apps/yuqing/theme/scripts/jquery-1.8.2.min.js"></script>
 -->
 
-	<script type="text/javascript" src="./js/sentimentSummarize/pop.js"></script>
+	<script type="text/javascript" src="./js/pop.js"></script>
 	<script type="text/javascript"
-		src="./js/sentimentSummarize/jquery.simInput.js"></script>
+		src="./js/jquery.simInput.js"></script>
 	<script type="text/javascript"
-		src="./js/sentimentSummarize/bootstrap-dropdown.js"></script>
-	<script type="text/javascript" src="./js/sentimentSummarize/common.js"></script>
-	<script type="text/javascript" src="./js/sentimentSummarize/my.js"></script>
+		src="./js/bootstrap-dropdown.js"></script>
+	<script type="text/javascript" src="./js/common.js"></script>
+	<script type="text/javascript" src="./js/my.js"></script>
 
 	<script type="text/javascript">
 		$(function() {

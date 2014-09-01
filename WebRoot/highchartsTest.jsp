@@ -26,13 +26,13 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<script type="text/javascript" src="./js/sentimentSummarize/jquery.js"></script>
+<script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript"
-	src="./js/sentimentSummarize/highcharts.src.js"></script>
+	src="./js/highcharts.src.js"></script>
 <script type="text/javascript"
-	src="./js/sentimentSummarize/highcharts-more.src.js"></script>
+	src="./js/highcharts-more.src.js"></script>
 <script type="text/javascript"
-	src="./js/sentimentSummarize/exporting.src.js"></script>
+	src="./js/exporting.src.js"></script>
 
 </head>
 
