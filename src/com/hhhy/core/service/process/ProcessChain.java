@@ -19,6 +19,8 @@ public class ProcessChain {
 		if (art.getUrl().length() > 200)
 			return;
 
+		// if()
+
 		long id = -1l;
 		try {
 			id = DBUtils.isArticleExist(art.getUrl());

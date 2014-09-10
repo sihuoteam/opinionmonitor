@@ -677,6 +677,53 @@ return res;
         }
     }
 
+    private static final String WEBSITE_TABLE = "a_website";
+    public static String getExternWebSite(){
+        String sql = "select * from "+WEBSITE_TABLE;
+        List<Object[]> webs = DBOperator.selectArrayList(sql);
+        String websites = "";
+        for(Object[] web:webs){
+            websites+=(String)web[0]+";";
+        }
+        return websites;
+    }
+
+    private static final String HISTORY_TABLE = "a_history";
+    public static void insertHistoryArticle(HistoryBean history){
+        String sql = "insert into "+HISTORY_TABLE+"(ctime, title, summary, emotion, url, source,kid) values(?,?,?,?,?,?,?)";
+        DBOperator.update(sql, new Object[]{history.getCtime(), history.getTitle(), history.getSummary()
+            history.getEmotion(), history.getUrl(), history.getSource(), history.getKid()});
+    }
+
+    public static List<HistoryBean> getHistoryBeans(int kid){
+        String sql = "select * from "+HISTORY_TABLE+" where kid = "+kid;
+        return DBOperator.select(sql, new BeanListHandler<HistoryBean>(HistoryBean.class));
+    }
+
+    public static List<HistoryBean> getHistoryBeans(int kid, long begin, long end){
+        String sql = "select * from "+HISTORY_TABLE+" where kid = "+kid +" and begin>?"+" and end<"+end;
+        return DBOperator.select(sql, new BeanListHandler<HistoryBean>(HistoryBean.class), new Object[]{begin, end});
+    }
+
+
+    private static final String KEYWORDHISTORY_TABLE = "a_keywordhistory";
+    public static void addHistoryKeyword(String key, long begin, long end){
+        String sql = "insert into "+KEYWORDHISTORY_TABLE+"(key, begin, end) values(?,?,?)";
+        DBOperator.update(sql, new Object[]{key, begin, end});
+    }
+
+    public static String getHistoryKeyword(){
+        String sql = "select * from "+KEYWORDHISTORY_TABLE+" where flag=0";
+        List<HistoryKeyword> res = DBOperator.select(sql,new BeanListHandler<HistoryKeyword>(HistoryKeyword.class));
+        String t = "";
+        sql = "update "+KEYWORDHISTORY_TABLE+" set flag=1 where id=?";
+        for(HistoryKeyword item:res){
+            t+=item.getKey()+":"+item.getBegin()+":"+item.getEnd()+";";
+            DBOperator.update(sql, item.getId());
+        }
+        return t;
+    }
+
     /*************************** data export部分结束 
      * @throws IOException **************************/
 
@@ -797,7 +844,7 @@ return res;
 //        contert();
 //        logger.info(getUserArticle(58).size());
 //        logger.info(getUserArticle2(58).size());
-    	importEmotionWord();
+    	// importEmotionWord();
 //        updateUserAuxiliary(57,7,"haha");
 //        List<KeyWord> keywords = DBUtils.getAllKeyWordObj();
 //        Map<String, String> keymap = new HashMap<String, String>();

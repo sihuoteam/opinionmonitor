@@ -51,12 +51,14 @@ public class ThriftRequireHandler implements HhhyService.Iface{
 	@Override
 	public String getKeywordHistory() throws TException {
 		// TODO Auto-generated method stub
+        return DBUtils.getHistoryKeyword();
 		return null;
 	}
 
 	@Override
 	public String getUrls() throws TException {
 		// TODO Auto-generated method stub
-		return null;
+        return DBUtils.getExternWebSite();
+		// return null;
 	}
 }
