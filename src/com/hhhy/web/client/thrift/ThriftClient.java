@@ -77,13 +77,11 @@ public class ThriftClient implements HhhyService.Iface{
         try {
             this.wait(300);
         } catch (InterruptedException e1) {
-//            logger.warn(e1.getMessage());
         }
     }
 
     private void checkConnect() throws TTransportException {
         if (!transport.isOpen()) {
-//            logger.warn("transport is close, reset client.");
             reset();
         }
     }
@@ -94,12 +92,10 @@ public class ThriftClient implements HhhyService.Iface{
         int tryTime = 0;
         while (true){
             try{
-//                System.out.println("clinet:addPost");
                 client.addArticle(jsonString);
                 break;
             }catch (TException e){
                 tryTime++;
-//                logger.warn("add new item failed, " + e.getMessage());
                 handleTException(tryTime, e);
             }
         }
@@ -111,27 +107,51 @@ public class ThriftClient implements HhhyService.Iface{
         int tryTime = 0;
         while (true) {
             try {
-//                System.out.println("client:get");
                 return client.getKeywords();
             }catch (TException e){
                 tryTime++;
-//                logger.warn("getkeywords, " + e.getMessage());
                 handleTException(tryTime, e);
             }
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    @Override
+    public String getKeywordHistory() throws TException {
+        checkConnect();
+        int tryTime = 0;
+        while (true) {
+            try {
+                return client.getKeywordHistory();
+            }catch (TException e){
+                tryTime++;
+                handleTException(tryTime, e);
+            }
+        }
+    }
+
+    @Override
+    public String getUrls() throws TException {
+        checkConnect();
+        int tryTime = 0;
+        while (true) {
+            try {
+                return client.getUrls();
+            }catch (TException e){
+                tryTime++;
+                handleTException(tryTime, e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
         try {
             ThriftClient.init("localhost",12306);
             ThriftClient client = ThriftClient.getInstance();
-//            System.out.println("test start");
-            List<String> arts = getArts();
-            for(String art:arts){
-                client.addArticle(art);
-            }
-            
+            System.out.println("test start");
+            client.addArticle("test");
             System.out.println(client.getKeywords());
+            System.out.println(client.getKeywordHistory());
+            System.out.println(client.getUrls());
         } catch (TTransportException e) {
             e.printStackTrace();
         } catch (TException e) {
@@ -143,6 +163,7 @@ public class ThriftClient implements HhhyService.Iface{
         List<String> lines = FileUtils.readLines(new File("C:\\Users\\chenlingpeng\\Desktop\\myInfo.log"));
         return lines;
     }
+
 
 
 }
