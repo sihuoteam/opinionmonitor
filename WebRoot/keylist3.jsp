@@ -15,10 +15,11 @@
 %>
 
 <%
-//String path = request.getContextPath();
-    //String basePath = request.getScheme() + "://"
-    //        + request.getServerName() + ":" + request.getServerPort()
-    //        + path + "/";
+String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+String email = "email";
 List<KeyWord> keywords = new ArrayList<KeyWord>();
 KeyWord key = new KeyWord();
 key.setKeyword("测试1");
@@ -49,36 +50,40 @@ keywords.add(key2);
 	<link rel="stylesheet" href="./css/style-red.css">
 	
 		<!--  Bootstrap css-->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 		<!-- Bootstrap-->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-<!-- jQuery bootstrap.min.js  -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<!-- jQuery -->
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="./js/jquery.js"></script>
+	<!-- DataTables -->
+	<script type="text/javascript" charset="utf8" src="./js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf8" src="./js/jquery.dataTables.min.js"></script>
 
-<!-- Bootstrap JavaScript -->
-<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<style type="text/css">	
-
-</style>
+	<!-- Bootstrap JavaScript -->
+	<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<style type="text/css">	
+	
+	</style>
   </head>
   
   <body>
   <iframe frameborder="0" style="display: none;"></iframe>
   
-<div class="navbar">
-    <a class="appbrand"></a>
-    <button class="menu-toggle" type="button"></button>
-
-    <ul class="topnav pull-right inline">
-			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
-				data-placement="bottom"><i></i> <%=email %>退出</a></li>
-			
-	</ul>
-
-</div>
-  <br><br><br>
+	<div class="navbar">
+	    <a class="appbrand"></a>
+	    <button class="menu-toggle" type="button"></button>
+	
+	    <ul class="topnav pull-right inline">
+				<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
+					data-placement="bottom"><i></i> <%=email %>退出</a></li>
+				
+		</ul>
+	
+	</div>
+  	<br><br><br>
     <table id="table_id" align="center" cellspacing="10">
     <% if(keywords==null || keywords.size()==0){ %>
 			<tr>
@@ -138,5 +143,14 @@ keywords.add(key2);
        		</form>
       	</table>
     </div>
+    
+    
+    <script type="text/javascript">
+    $(document).ready( 
+    	function () {
+    		$('#table_id').DataTable();
+		} 
+	);
+    </script>
   </body>
 </html>
