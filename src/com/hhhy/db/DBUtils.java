@@ -22,10 +22,12 @@ import com.hhhy.common.utils.DateFormatUtils;
 import com.hhhy.common.utils.JsonUtils;
 import com.hhhy.db.beans.Article;
 import com.hhhy.db.beans.EmotionWord;
+import com.hhhy.db.beans.HistoryBean;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.KeyWordPage;
 import com.hhhy.db.beans.User;
 import com.hhhy.db.beans.item.Condition;
+import com.hhhy.db.beans.item.HistoryKeyword;
 import com.hhhy.db.beans.item.Pair;
 import com.hhhy.db.beans.item.SrcType;
 
@@ -678,7 +680,7 @@ return res;
     }
 
     private static final String WEBSITE_TABLE = "a_website";
-    public static String getExternWebSite(){
+    public static String getExternWebSite() throws SQLException{
         String sql = "select * from "+WEBSITE_TABLE;
         List<Object[]> webs = DBOperator.selectArrayList(sql);
         String websites = "";
@@ -689,30 +691,30 @@ return res;
     }
 
     private static final String HISTORY_TABLE = "a_history";
-    public static void insertHistoryArticle(HistoryBean history){
+    public static void insertHistoryArticle(HistoryBean history) throws SQLException{
         String sql = "insert into "+HISTORY_TABLE+"(ctime, title, summary, emotion, url, source,kid) values(?,?,?,?,?,?,?)";
-        DBOperator.update(sql, new Object[]{history.getCtime(), history.getTitle(), history.getSummary()
+        DBOperator.update(sql, new Object[]{history.getCtime(), history.getTitle(), history.getSummary(),
             history.getEmotion(), history.getUrl(), history.getSource(), history.getKid()});
     }
 
-    public static List<HistoryBean> getHistoryBeans(int kid){
+    public static List<HistoryBean> getHistoryBeans(int kid) throws SQLException{
         String sql = "select * from "+HISTORY_TABLE+" where kid = "+kid;
         return DBOperator.select(sql, new BeanListHandler<HistoryBean>(HistoryBean.class));
     }
 
-    public static List<HistoryBean> getHistoryBeans(int kid, long begin, long end){
+    public static List<HistoryBean> getHistoryBeans(int kid, long begin, long end) throws SQLException{
         String sql = "select * from "+HISTORY_TABLE+" where kid = "+kid +" and begin>?"+" and end<"+end;
         return DBOperator.select(sql, new BeanListHandler<HistoryBean>(HistoryBean.class), new Object[]{begin, end});
     }
 
 
     private static final String KEYWORDHISTORY_TABLE = "a_keywordhistory";
-    public static void addHistoryKeyword(String key, long begin, long end){
+    public static void addHistoryKeyword(String key, long begin, long end) throws SQLException{
         String sql = "insert into "+KEYWORDHISTORY_TABLE+"(key, begin, end) values(?,?,?)";
         DBOperator.update(sql, new Object[]{key, begin, end});
     }
 
-    public static String getHistoryKeyword(){
+    public static String getHistoryKeyword() throws SQLException{
         String sql = "select * from "+KEYWORDHISTORY_TABLE+" where flag=0";
         List<HistoryKeyword> res = DBOperator.select(sql,new BeanListHandler<HistoryKeyword>(HistoryKeyword.class));
         String t = "";
