@@ -11,6 +11,12 @@ public class HistoryBean{
 	private String title;
 	private String url;
 	private String source;
+	
+    @Override
+    public String toString() {
+        return "HistoryBean [ctime=" + ctime + ", title=" + title + ", url="
+                + url + "]";
+    }
     public long getId() {
         return id;
     }

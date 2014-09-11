@@ -4,7 +4,7 @@ package com.hhhy.db.beans.item;
 
 public class HistoryKeyword{
 	private long id;
-	private String key;
+	private String keyword;
 	private int flag;
 	private long begin;
 	private long end;
@@ -14,11 +14,11 @@ public class HistoryKeyword{
     public void setId(long id) {
         this.id = id;
     }
-    public String getKey() {
-        return key;
+    public String getKeyword() {
+        return keyword;
     }
-    public void setKey(String key) {
-        this.key = key;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
     public int getFlag() {
         return flag;

@@ -689,6 +689,11 @@ return res;
         }
         return websites;
     }
+    
+    public static void insertWebSite(String website) throws SQLException{
+        String sql = "insert into "+WEBSITE_TABLE+"(website) values(?)";
+        DBOperator.update(sql, new Object[]{website});
+    }
 
     private static final String HISTORY_TABLE = "a_history";
     public static void insertHistoryArticle(HistoryBean history) throws SQLException{
@@ -703,14 +708,14 @@ return res;
     }
 
     public static List<HistoryBean> getHistoryBeans(int kid, long begin, long end) throws SQLException{
-        String sql = "select * from "+HISTORY_TABLE+" where kid = "+kid +" and begin>?"+" and end<"+end;
+        String sql = "select * from "+HISTORY_TABLE+" where kid = "+kid +" and ctime>?"+" and ctime<?";
         return DBOperator.select(sql, new BeanListHandler<HistoryBean>(HistoryBean.class), new Object[]{begin, end});
     }
 
 
-    private static final String KEYWORDHISTORY_TABLE = "a_keywordhistory";
+    private static final String KEYWORDHISTORY_TABLE = "a_historykeyword";
     public static void addHistoryKeyword(String key, long begin, long end) throws SQLException{
-        String sql = "insert into "+KEYWORDHISTORY_TABLE+"(key, begin, end) values(?,?,?)";
+        String sql = "insert into "+KEYWORDHISTORY_TABLE+"(keyword, begin, end) values(?,?,?)";
         DBOperator.update(sql, new Object[]{key, begin, end});
     }
 
@@ -720,7 +725,7 @@ return res;
         String t = "";
         sql = "update "+KEYWORDHISTORY_TABLE+" set flag=1 where id=?";
         for(HistoryKeyword item:res){
-            t+=item.getKey()+":"+item.getBegin()+":"+item.getEnd()+";";
+            t+=item.getKeyword()+":"+item.getBegin()+":"+item.getEnd()+";";
             DBOperator.update(sql, item.getId());
         }
         return t;
@@ -730,6 +735,25 @@ return res;
      * @throws IOException **************************/
 
     public static void main(String[] args) throws SQLException, IOException {
+        insertWebSite("www.baidu.com");
+        logger.info(getExternWebSite());
+//        HistoryBean history = new HistoryBean();
+//        history.setCtime(12345);
+//        history.setEmotion(-1);
+//        history.setKid(2);
+//        history.setSource("baidu");
+//        history.setSummary("summary");
+//        history.setTitle("title");
+//        history.setUrl("url");
+//        insertHistoryArticle(history);
+//        history.setCtime(12347);
+//        history.setUrl("url2");
+//        insertHistoryArticle(history);
+//        logger.info(getHistoryBeans(2));
+//        logger.info(getHistoryBeans(2,1,12346));
+//        logger.info(getHistoryBeans(2,12346,111111111l));
+//        addHistoryKeyword("haha",123l,345l);
+//        logger.info(getHistoryKeyword());
 //        Map<String, String> map1 = new ConcurrentHashMap<String, String>();
 //        map1.put("1", "1");
 //        Map<String, String> map2 = new ConcurrentHashMap<String, String>(map1);
