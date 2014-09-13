@@ -26,7 +26,7 @@ String keyword = (String)session.getAttribute("keyword");
     <script type="text/javascript" src="./js/jquery.js"></script>
     <script type="text/javascript" src="./js/jquery.yii.js"></script>
     <script type="text/javascript" src="./js/jquery.ba-bbq.js"></script>
-    <title>全部舆情</title>
+    <title>历史舆情</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -120,11 +120,11 @@ String keyword = (String)session.getAttribute("keyword");
 					</ul></li>
 
 
-				<li class="menu-list menu-any  active"><a href="#" class="menu-title"><i></i><span>舆情监控</span>
+				<li class="menu-list menu-rep "><a href="monitor" class="menu-title"><i></i><span>舆情监控</span>
 				</a></li>
 				<li class="menu-list menu-rep "><a href="dataExport.jsp" class="menu-title"><i></i><span>数据报告</span>
 				</a></li>
-				<li class="menu-list menu-any"><a href="history" class="menu-title"><i></i><span>历史舆情</span></a>
+				<li class="menu-list menu-any  active"><a href="#" class="menu-title"><i></i><span>历史舆情</span></a>
 				</li>
 				<!-- <li class="menu-list menu-com "><a href="" class="menu-title"><i></i><span>对比分析</span>
 				</a></li> -->
@@ -137,8 +137,42 @@ String keyword = (String)session.getAttribute("keyword");
     <li class="color-red">全部舆情</li>
 </ul>
 <div class="innerLR">
-
-<!-- form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
+<form action="history" method="get">
+	<div class="row-fluid">
+	    <div class="search-filter-box">
+	        <div class="normal-search-box clearfix">
+	            <div class="clearfix time-opt span10">
+	                <div class="control-group form-inline">
+	                    <ul class="inline tab-small">
+	                        <li style="padding-left:0px;">自定义时间： 
+								<input id="start_date" type="text" name="start_date">
+									<!-- <a class="i-cal" href="javascript:;" id="start_date_link"></a>  -->
+								<script>
+									$(function() {
+										$("#start_date")
+												.datepicker();
+								});
+								</script> 
+								<input id="end_date" type="text"
+									name="end_date"> <!-- <a class="i-cal" href="javascript:;" id="end_date_link"> </a>  -->
+								<script>
+									$(function() {
+										$("#end_date")
+												.datepicker();
+									});
+								</script>
+							</li>
+	                    </ul>
+	                </div> 
+	            </div> 
+	            <div class="export-submit">
+				<input class="btn-red" type="submit" name="yt0" value="搜索">
+				</div>
+	        </div>
+	    </div>
+	</div>
+</form>
+<!-- <form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
     <div class="search-filter-box">
         <div class="normal-search-box clearfix">
             <div class="clearfix time-opt span10">
