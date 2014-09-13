@@ -12,7 +12,9 @@ String keyword = (String)session.getAttribute("keyword");
 %>
 
 <%
-	List<Article> articles = (List<Article>)session.getAttribute("all");
+	List<Article> articles = (List<Article>)session.getAttribute("history");
+	String start_date = (String)session.getAttribute("start_date");
+	String end_date = (String)session.getAttribute("end_date");
  %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

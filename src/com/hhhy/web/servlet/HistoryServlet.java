@@ -29,6 +29,10 @@ public class HistoryServlet extends HttpServlet {
             if(kid!=null){
             	String start_date = request.getParameter("start_date");
                 String end_date = request.getParameter("end_date");
+                if(start_date!=null && end_date!=null){
+                	request.getSession().setAttribute("start_date",start_date);
+                	request.getSession().setAttribute("end_date",end_date);
+                }
                 
                 long begin=0l;
                 long end = System.currentTimeMillis();
