@@ -27,14 +27,8 @@ public class StatisticsProcessor {
         // statisticsMediaType(art);
         String keyword = art.getKeyword();
         try {
-            // int kid = DBUtils.getKeyWordId(keyword);
-            Integer kid = keywordsCache.get(keyword);
-            if (kid == null) {
-                kid = DBUtils.getKeyWordId(keyword);
-            }
-            if (kid == null || kid < 0)
-                return;
-            keywordsCache.put(keyword, kid);
+            int kid = getKidFromCache(keyword);
+            if(kid==-1) return;
             KeyWordPage trend = new KeyWordPage();
             trend.setPid(art.getId());
             trend.setCtime(art.getTime());
@@ -53,15 +47,14 @@ public class StatisticsProcessor {
 
     }
 
-    private static void statisticsOpinionType(Article art) {
-        // TODO:
-    }
-
-    private static void statisticsSrcType(Article art) {
-        // TODO:
-    }
-
-    private static void statisticsMediaType(Article art) {
-        // TODO:
+    public static int getKidFromCache(String keyword) throws SQLException{
+    	Integer kid = keywordsCache.get(keyword);
+        if (kid == null) {
+            kid = DBUtils.getKeyWordId(keyword);
+        }
+        if (kid == null || kid <= 0)
+            return -1;
+        keywordsCache.put(keyword, kid);
+        return kid;
     }
 }

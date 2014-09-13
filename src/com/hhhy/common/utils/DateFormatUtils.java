@@ -2,6 +2,7 @@ package com.hhhy.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -29,6 +30,16 @@ public class DateFormatUtils {
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern(pattern);
         return sdf.parse(date).getTime();
+    }
+    
+    public static boolean isToday(long time){
+    	Calendar calDateA = Calendar.getInstance();
+    	calDateA.setTimeInMillis(time);
+    	Calendar calDateB = Calendar.getInstance();
+    	calDateB.setTimeInMillis(System.currentTimeMillis());
+    	return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR)
+                && calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH)
+                &&  calDateA.get(Calendar.DAY_OF_MONTH) == calDateB.get(Calendar.DAY_OF_MONTH);
     }
 
     /**

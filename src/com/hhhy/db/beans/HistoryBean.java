@@ -12,7 +12,22 @@ public class HistoryBean{
 	private String url;
 	private String source;
 	
-    @Override
+	
+	
+    public HistoryBean() {
+		super();
+	}
+    
+    
+	public HistoryBean(int kid, long ctime, String title, String url) {
+		this.kid = kid;
+		this.ctime = ctime;
+		this.title = title;
+		this.url = url;
+	}
+
+
+	@Override
     public String toString() {
         return "HistoryBean [ctime=" + ctime + ", title=" + title + ", url="
                 + url + "]";

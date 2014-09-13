@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.hhhy.common.utils.DateFormatUtils;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.Article;
 
@@ -19,7 +20,11 @@ public class ProcessChain {
 		if (art.getUrl().length() > 200)
 			return;
 
-		// if()
+		 if(!DateFormatUtils.isToday(art.getTime())){
+			 logger.info("process as history");
+			 HistoryProcessor.process(art);
+			 return;
+		 }
 
 		long id = -1l;
 		try {
