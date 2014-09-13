@@ -135,7 +135,7 @@
 
 				<li class="menu-list menu-any "><a href="monitor" class="menu-title"><i></i><span>舆情监控</span>
 				</a></li>
-				<li class="menu-list menu-rep "><a href="dataExport.jsp" class="menu-title"><i></i><span>数据报告</span>
+				<li class="menu-list menu-rep active"><a href="dataExport.jsp" class="menu-title"><i></i><span>数据报告</span>
 				</a></li>
 				<li class="menu-list menu-any "><a href="history" class="menu-title"><i></i><span>历史舆情</span></a>
 				</li>
