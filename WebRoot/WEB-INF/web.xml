@@ -205,6 +205,16 @@
 		<servlet-name>auxiliary</servlet-name>
 		<url-pattern>/auxiliary</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>historyadd</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.HistoryAddServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>historyadd</servlet-name>
+		<url-pattern>/historyadd</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet>

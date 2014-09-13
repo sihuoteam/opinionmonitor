@@ -76,7 +76,7 @@
 	<br>
 	<br>
 
-	<form action="history" method="get" align="center" cellspacing="10">
+	<form action="historyadd" method="get" align="center" cellspacing="10">
 	<div class="row-fluid">
 	    <div class="search-filter-box">
 	        <!-- div class="normal-search-box clearfix"> -->
