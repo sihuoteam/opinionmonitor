@@ -34,6 +34,8 @@ public class HistoryAddServlet extends HttpServlet {
     	
     	String start_date = request.getParameter("start_date");
         String end_date = request.getParameter("end_date");
+        request.getSession().setAttribute("start_date", start_date);
+        request.getSession().setAttribute("end_date", end_date);
         
         try {
             long start = DateFormatUtils.getTime(start_date,
@@ -42,17 +44,15 @@ public class HistoryAddServlet extends HttpServlet {
                     DateFormatUtils.yyyyMMdd2);
             end+=24*60*60*1000;
             DBUtils.addHistoryKeyword(keyword.getKeyword(), start, end);
+            request.getSession().setAttribute("setinfo", "设置成功");
         } catch (ParseException e) {
             logger.warn(e.getMessage());
+            request.getSession().setAttribute("setinfo", "设置失败");
         } catch (SQLException e) {
+        	request.getSession().setAttribute("setinfo", "设置失败");
 			e.printStackTrace();
 		}
-    	
-        
-
-        
-        
-        
+        response.sendRedirect("historyset.jsp");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

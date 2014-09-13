@@ -41,7 +41,7 @@ public class HistoryServlet extends HttpServlet {
                             DateFormatUtils.yyyyMMdd2);
                      end = DateFormatUtils.getTime(end_date,
                             DateFormatUtils.yyyyMMdd2);
-                    end+=24*60*60*1000;
+                    end+=24*60*60*1000-1;
                 } catch (ParseException e) {
                     logger.warn(e.getMessage());
                 }
@@ -53,7 +53,7 @@ public class HistoryServlet extends HttpServlet {
         } catch (SQLException e) {
             logger.warn(e.getMessage());
         }
-    	response.sendRedirect("dimAna_emotionTrend.jsp");
+    	response.sendRedirect("historyNews.jsp");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

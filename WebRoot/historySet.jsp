@@ -13,8 +13,9 @@
 	}
 	String email = (String) session.getAttribute("name");
 	//List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
-	String startTime = "123";
-	String endTime = "123";
+	String startTime = (String) session.getAttribute("start_date");
+	String endTime = (String) session.getAttribute("end_date");
+	String info = (String) session.getAttribute("setinfo");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
