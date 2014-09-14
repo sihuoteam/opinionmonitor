@@ -40,20 +40,17 @@ String keyword = (String)session.getAttribute("keyword");
 
     <!-- Theme -->
     <link rel="stylesheet" href="./css/style-red.css">
-
-    <!--[if lt IE 7]>
-    <link rel="stylesheet" href="/apps/yuqing/theme/red/css/ie6-my.css" />
-    <![endif]-->
-
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="/apps/yuqing/theme/red/css/ie6-fix.css" />
-    <![endif]-->
-
     <link rel="stylesheet" href="http://yq.adt100.com/apps/yuqing/theme/red/css/style-red-my.css">
 
 
     <link href="./css/bdsstyle.css" rel="stylesheet" type="text/css">
     <script src="./js/logger.js"></script>
+    
+    
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -136,7 +133,7 @@ String keyword = (String)session.getAttribute("keyword");
 <!--<div id="content">-->
 <ul class="breadcrumb">
     <li>您在这里：</li>
-    <li class="color-red">全部舆情</li>
+    <li class="color-red">历史舆情</li>
 </ul>
 <div class="innerLR">
 <form action="history" method="get">

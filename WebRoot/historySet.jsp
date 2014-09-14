@@ -85,7 +85,7 @@
 
 			<ul class="menu-lists">
 
-				<li class="menu-list menu-any active"><a href="#"
+				<li class="menu-list menu-any active"><a href="keylist"
 					class="menu-title"><i></i><span>关键词设置</span> </a></li>
 				<li class="menu-list menu-rep"><a href="spiderUrl"
 					class="menu-title"><i></i><span>自添加爬虫列表</span> </a></li>
