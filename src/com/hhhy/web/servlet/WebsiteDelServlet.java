@@ -13,11 +13,11 @@ import org.apache.log4j.Logger;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
 
-public class WebsiteAddServlet extends HttpServlet {
+public class WebsiteDelServlet extends HttpServlet {
     /**
      * 
      */
-    private static final Logger logger = Logger.getLogger(WebsiteAddServlet.class);
+    private static final Logger logger = Logger.getLogger(WebsiteDelServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,17 +25,15 @@ public class WebsiteAddServlet extends HttpServlet {
         if(uid==null || uid<0){
             response.sendRedirect("loginWeb.jsp");
         }
-        String website = request.getParameter("website");
+        String website = request.getParameter("uid");
         if(website!=null){
-            website = website.trim();
-            if(website!=""){
-                try{
-                    DBUtils.insertWebSite(website);
-                    List<WebSite> webs = DBUtils.getExternWebSiteList();
-                    request.getSession().setAttribute("webs",webs);
-                } catch (SQLException e) {
-                    logger.warn(e.getMessage());
-                }
+            long uid = Long.parserLong(website);
+            try{
+                DBUtils.deleteWebSite(uid);
+                List<WebSite> webs = DBUtils.getExternWebSiteList();
+                request.getSession().setAttribute("webs",webs);
+            } catch (SQLException e) {
+                logger.warn(e.getMessage());
             }
         }
         response.sendRedirect("addUrl.jsp");

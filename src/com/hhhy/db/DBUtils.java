@@ -26,6 +26,7 @@ import com.hhhy.db.beans.HistoryBean;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.KeyWordPage;
 import com.hhhy.db.beans.User;
+import com.hhhy.db.beans.WebSite;
 import com.hhhy.db.beans.item.Condition;
 import com.hhhy.db.beans.item.HistoryKeyword;
 import com.hhhy.db.beans.item.Pair;
@@ -681,7 +682,7 @@ return res;
 
     private static final String WEBSITE_TABLE = "a_website";
     public static String getExternWebSite() throws SQLException{
-        String sql = "select * from "+WEBSITE_TABLE;
+        String sql = "select website from "+WEBSITE_TABLE;
         List<Object[]> webs = DBOperator.selectArrayList(sql);
         String websites = "";
         for(Object[] web:webs){
@@ -689,10 +690,21 @@ return res;
         }
         return websites;
     }
+
+    public static List<WebSite> getExternWebSiteList() throws SQLException{
+        String sql = "select * from "+WEBSITE_TABLE;
+        List<WebSite> webs = DBOperator.select(sql, new BeanListHandler<WebSite>(WebSite.class));
+        return webs;
+    }
     
     public static void insertWebSite(String website) throws SQLException{
         String sql = "insert into "+WEBSITE_TABLE+"(website) values(?)";
         DBOperator.update(sql, new Object[]{website});
+    }
+
+    public static void deleteWebSite(long id) throws SQLException{
+        String sql = "delete from "+WEBSITE_TABLE+"where id=?";
+        DBOperator.update(sql, new Object[]{id});
     }
 
     private static final String HISTORY_TABLE = "a_history";

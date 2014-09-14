@@ -1,5 +1,5 @@
 <%@ page language="java"
-	import="java.util.*,com.hhhy.db.beans.KeyWord, com.hhhy.db.DBUtils"
+	import="java.util.*,com.hhhy.db.beans.*, com.hhhy.db.DBUtils"
 	pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -17,7 +17,7 @@
 	/* List<KeyWord> keywords = (List<KeyWord>) session
 			.getAttribute("keywords"); */
 			
-	List<String> urls = null;
+	List<WebSite> urls = (List<WebSite>) session.getAttribute("webs");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -94,7 +94,7 @@
 					if (urls == null || urls.size() == 0) {
 				%>
 				<tr>
-					<td>尚未添加关键词</td>
+					<td>尚未添加网站</td>
 
 				</tr>
 				<%
@@ -102,14 +102,14 @@
 				%>
 
 				<%
-					for (String url : urls) {
+					for (WebSite url : urls) {
 				%>
 				<tr>
-					<td><%=url%></td>
+					<td><%=url.getWebsite()%></td>
 					<td>
 						<form action="deleteUrl" method="POST">
 							<input value=删除 class="btn btn-danger" type="submit"> <input
-								type='hidden' name='kid' value="<%=url%>">
+								type='hidden' name='uid' value="<%=url.getId()%>">
 						</form></td>
 				</tr>
 				<%
@@ -124,9 +124,9 @@
 			<div align="center">
 				<h4>添加Url</h4>
 				<table cellspacing="10">
-					<form action="addUrl" method="POST">
+					<form action="addurl" method="POST">
 						<tr>
-							<td><input id="label" name="keyword" type="text">
+							<td><input id="label" name="website" type="text">
 							</td>
 							<td><input value=添加 class="btn btn-info" type="submit">
 							</td>
