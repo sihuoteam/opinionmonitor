@@ -12,7 +12,7 @@ String keyword = (String)session.getAttribute("keyword");
 %>
 
 <%
-	List<Article> articles = (List<Article>)session.getAttribute("history");
+	List<HistoryBean> articles = (List<HistoryBean>)session.getAttribute("history");
 	String start_date = (String)session.getAttribute("start_date");
 	String end_date = (String)session.getAttribute("end_date");
  %>
@@ -324,7 +324,7 @@ String keyword = (String)session.getAttribute("keyword");
 
 <!-- <ul class="m-news-filter"> -->
 
-	<% for(Article aa : articles) {
+	<% for(HistoryBean aa : articles) {
 		out.println("<ul class=\"m-news-filter\">" +
 		"<li class=\"m-news-filter-item clearfix\">" +
     "<div class=\"m-i-flag\">");
@@ -340,7 +340,7 @@ String keyword = (String)session.getAttribute("keyword");
         "<div class=\"m-news-intro \">"+
             "<div class=\"news-intro-hd\">");
             
-        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">["+aa.getWebsite()+"]" + aa.getTitle() + "</a> "+DateFormatUtils.formatTime(aa.getTime(), "yyyy-MM-dd HH:mm")+"</strong>");
+        out.println("<strong><a target=\"_blank\" href=\"" + aa.getUrl() + "\">["+aa.getSource()+"]" + aa.getTitle() + "</a> "+DateFormatUtils.formatTime(aa.getCtime(), "yyyy-MM-dd HH:mm")+"</strong>");
         out.println("</div>"+
             "<div class=\"news-intro-bd\">"+ aa.getSummary() +"</div></div></div></li></ul>");
             }

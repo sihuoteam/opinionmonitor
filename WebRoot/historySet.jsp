@@ -87,7 +87,7 @@
 
 				<li class="menu-list menu-any active"><a href="keylist"
 					class="menu-title"><i></i><span>关键词设置</span> </a></li>
-				<li class="menu-list menu-rep"><a href="spiderUrl"
+				<li class="menu-list menu-rep"><a href="spiderurl"
 					class="menu-title"><i></i><span>自添加爬虫列表</span> </a></li>
 			</ul>
 		</div>
@@ -125,7 +125,7 @@
 							</div>
 						</div>
 						<div class="export-submit">
-							<input class="btn-red" type="submit" name="sethistory" value="设置">
+							<input class="btn-red" type="submit" name="historyset" value="设置">
 						</div>
 						<!-- </div> -->
 					</div>

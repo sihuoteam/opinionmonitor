@@ -44,6 +44,8 @@ public class HistoryServlet extends HttpServlet {
                     end+=24*60*60*1000-1;
                 } catch (ParseException e) {
                     logger.warn(e.getMessage());
+                } catch (Exception e){
+                	e.printStackTrace();
                 }
                List<HistoryBean> beans  = DBUtils.getHistoryBeans(kid, begin, end);
                 logger.info("history size: dateSize: ");

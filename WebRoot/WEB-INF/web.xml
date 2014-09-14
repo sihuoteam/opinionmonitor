@@ -256,7 +256,7 @@
 		<url-pattern>/historyset</url-pattern>
 	</servlet-mapping>
 	
-	servlet>
+	<servlet>
 		<servlet-name>history</servlet-name>
 		<servlet-class>com.hhhy.web.servlet.HistoryServlet</servlet-class>
 	</servlet>
