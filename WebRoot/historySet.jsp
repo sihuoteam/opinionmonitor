@@ -133,5 +133,22 @@
 			</form>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+			/*         */
+			jQuery(function($) {
+				jQuery('#start_date').datepicker(jQuery.extend({
+					showMonthAfterYear : false
+				}, jQuery.datepicker.regional['zh_cn'], {
+					'dateFormat' : 'yy-mm-dd'
+				}));
+				jQuery('#end_date').datepicker(jQuery.extend({
+					showMonthAfterYear : false
+				}, jQuery.datepicker.regional['zh_cn'], {
+					'dateFormat' : 'yy-mm-dd'
+				}));
+			});
+			/*   */
+		</script>
 </body>
 </html>

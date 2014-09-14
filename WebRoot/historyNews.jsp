@@ -469,15 +469,32 @@ document.getElementById("changpage").innerHTML=strS+strC+strE+strE2
 <script type="text/javascript" src="./js/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="./js/jquery.yiilistview.js"></script>
 <script type="text/javascript">
+			/*         */
+			jQuery(function($) {
+				jQuery('#start_date').datepicker(jQuery.extend({
+					showMonthAfterYear : false
+				}, jQuery.datepicker.regional['zh_cn'], {
+					'dateFormat' : 'yy-mm-dd'
+				}));
+				jQuery('#end_date').datepicker(jQuery.extend({
+					showMonthAfterYear : false
+				}, jQuery.datepicker.regional['zh_cn'], {
+					'dateFormat' : 'yy-mm-dd'
+				}));
+			});
+			/*   */
+		</script>
+<script type="text/javascript">
     /*<![CDATA[*/
     jQuery(function($) {
-
+/*
         jQuery('#start_date').datetimepicker(jQuery.extend({showMonthAfterYear:false}, jQuery.datepicker.regional['en_us'], {'dateFormat':'yy-mm-dd','onClose':function(dateText, inst) {
             document.getElementById("period").value=""; this.form.submit();
         }}));
         jQuery('#end_date').datetimepicker(jQuery.extend({showMonthAfterYear:false}, jQuery.datepicker.regional['en_us'], {'dateFormat':'yy-mm-dd','onClose':function(dateText, inst) {
             document.getElementById("period").value=""; this.form.submit();
         }}));
+        */
         jQuery('body').on('click','#yt0',function(){jQuery.yii.submitForm(this,'',{});return false;});
         jQuery('body').on('change','#source',function(){jQuery.yii.submitForm(this,'',{});return false;});
         jQuery('body').on('change','#sentiment',function(){jQuery.yii.submitForm(this,'',{});return false;});
@@ -535,38 +552,9 @@ document.getElementById("changpage").innerHTML=strS+strC+strE+strE2
             <div id="share_org_summary"></div>
         </div>
         <div>
-            <!-- Baidu Button BEGIN -->
-            <%--<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">--%>
-                <%--<a class="bds_qzone" title="分享到QQ空间" href="http://yq.adt100.com/moniter/index?merge=1#"></a>--%>
-                <%--<a class="bds_tsina" title="分享到新浪微博" href="http://yq.adt100.com/moniter/index?merge=1#"></a>--%>
-                <%--<a class="bds_tqq" title="分享到腾讯微博" href="http://yq.adt100.com/moniter/index?merge=1#"></a>--%>
-                <%--<a class="bds_renren" title="分享到人人网" href="http://yq.adt100.com/moniter/index?merge=1#"></a>--%>
-                <%--<a class="bds_t163" title="分享到网易微博" href="http://yq.adt100.com/moniter/index?merge=1#"></a>--%>
-                <%--<span class="bds_more"></span>--%>
-                <%--<a class="shareCount" href="http://yq.adt100.com/moniter/index?merge=1#" title="累计分享0次">0</a>--%>
-            <%--</div>--%>
-
-            <!-- Baidu Button END -->
         </div>
     </div></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1000;"></div></div><div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" style="display: none; outline: 0px; z-index: 1000; position: absolute;" role="dialog" aria-labelledby="ui-id-3"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-id-3" class="ui-dialog-title">操作结果</span><a href="http://yq.adt100.com/moniter/index?merge=1#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div style="" id="hint_dialog" class="ui-dialog-content ui-widget-content">
     <div id="hint_result"></div></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1000;"></div></div><div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons" tabindex="-1" style="display: none; outline: 0px; z-index: 1000; position: absolute;" role="dialog" aria-labelledby="ui-id-4"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-id-4" class="ui-dialog-title">发送私信</span><a href="http://yq.adt100.com/moniter/index?merge=1#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div style="" id="transmit_dialog" class="ui-dialog-content ui-widget-content">
-    <%--<form id="transmit_form" action="http://yq.adt100.com/info/msg" method="post"><input type="hidden" name="info_id" id="minfo_id">--%>
-        <%--<div class="winbox-share">--%>
-            <%--<div class="share-content">--%>
-                <%--<strong id="morg_title"></strong>--%>
-                <%--<div id="morg_summary"></div>--%>
-            <%--</div>--%>
-            <%--<label>私信给：</label>--%>
-            <%--<div class="">--%>
-                <%--<select name="msg_to" id="msg_to">--%>
-                <%--</select>--%>
-            <%--</div>--%>
-            <%--<label>私信正文：</label>--%>
-            <%--<div class="share-input">--%>
-                <%--<textarea name="msg_content" id="msg_content"></textarea>--%>
-            <%--</div>--%>
-        <%--</div></form></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1000;"></div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">发送</span></button><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">取消</span></button></div></div></div><div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-id-5" style="display: none; outline: 0px; z-index: 1000; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-id-5" class="ui-dialog-title">历史筛选器</span><a href="http://yq.adt100.com/moniter/index?merge=1#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="history_dialog" class="ui-dialog-content ui-widget-content">--%>
-    <%--<div id="history_result"></div></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1000;"></div></div>--%>
 
 </body>
 </html>
