@@ -39,8 +39,8 @@
 	href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
  -->
- 
- <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+
+<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
 <script type="text/javascript" src="./js/jquery.js"></script>
 
 <!-- Bootstrap -->
@@ -50,7 +50,7 @@
 <!-- Theme -->
 <link rel="stylesheet" href="./css/style-red.css">
 
-<link rel="stylesheet" href="./css/style-red-my.css">	
+<link rel="stylesheet" href="./css/style-red-my.css">
 
 
 <link rel="stylesheet"
@@ -111,16 +111,16 @@
 										value="<%=startTime%>"> <!-- <a class="i-cal" href="javascript:;" id="start_date_link"></a>  -->
 										<script>
 											$(function() {
-												$("#start_date").datepicker();
+												$("#start_date").datepicker({ dateFormat: 'yy/mm/dd' });
 											});
 										</script> <input id="end_date" type="text" name="end_date"
 										value="<%=endTime%>"> <!-- <a class="i-cal" href="javascript:;" id="end_date_link"> </a>  -->
 										<script>
 											$(function() {
-												$("#end_date").datepicker();
+												$("#end_date").datepicker({ dateFormat: 'yy/mm/dd' });
 											});
-										</script>
-									</li>
+										</script> 
+										</li>
 								</ul>
 							</div>
 						</div>
@@ -133,8 +133,8 @@
 			</form>
 		</div>
 	</div>
-	
-	<script type="text/javascript">
+
+	<!-- <script type="text/javascript">
 			/*         */
 			jQuery(function($) {
 				jQuery('#start_date').datepicker(jQuery.extend({
@@ -149,6 +149,6 @@
 				}));
 			});
 			/*   */
-		</script>
+		</script> -->
 </body>
 </html>

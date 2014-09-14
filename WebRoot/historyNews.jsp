@@ -171,121 +171,7 @@ String keyword = (String)session.getAttribute("keyword");
 	    </div>
 	</div>
 </form>
-<!-- <form action="search" method="get"><input type="hidden" value="3" name="period" id="period"><input type="hidden" value="" name="author" id="author"><input type="hidden" value="" name="adv" id="adv"><input type="hidden" value="" name="imp" id="imp"><div class="row-fluid">
-    <div class="search-filter-box">
-        <div class="normal-search-box clearfix">
-            <div class="clearfix time-opt span10">
-                <div class="control-group form-inline">
-                    <ul class="inline tab-small">
-                        <li class="first ">
-                            <a class="moniter-period" href="">今日</a>            </li>
-                        <li>
-                            <a class="moniter-period" href="">昨日</a>            </li>
-                        <li class="current">
-                            <a class="moniter-period" href="">7天</a>
-                        </li>
-                        <li>
-                            <a class="moniter-period" href="">30天</a>
-                        </li>
-                        <li></li>
-                        <li style="padding-left:0px;">自定义：
-                            <input class="input-small hasDatepicker" style="width:120px;margin-right:5px;" id="start_date" name="start_date" type="text" value="2014-07-15 00:00"> - <input class="input-small hasDatepicker" style="width:120px;margin-left:5px;" id="end_date" name="end_date" type="text" value="2014-07-21 23:59">
-                        </li>
-                        <li>
-                            <div class="ez-checkbox ez-checked"><input data-toggle="checkbox" class="ez-hide" checked="checked" id="yt0" type="checkbox" value="1" name="merge"></div>合并相似文章
-                        </li>
-                    </ul>
-                </div>
-                <div class="control-group form-inline">
 
-                    <label class="control-label" for="">来源：</label>          <select class="mr20" name="source" id="source">
-                    <option value="all" selected="selected">全部</option>
-                    <option value="news">新闻</option>
-                    <option value="bbs">论坛</option>
-                    <option value="blog">博客</option>
-                    <option value="search">搜索引擎</option>
-                </select>
-
-                    <label class="control-label" for="">情感：</label>          <select class="mr20" name="sentiment" id="sentiment">
-                    <option value="all" selected="selected">全部</option>
-                    <option value="positive">正面</option>
-                    <option value="negative">负面</option>
-                    <option value="neutral">中立</option>
-                </select>
-                    <label class="control-label" for="">话题：</label>          <select class="mr20" name="topic_id" id="topic_id">
-                    <option value="" selected="selected">全部</option>
-                    <option value="996">name</option>
-                    
-                </select>
-                </div>
-            </div>
-            <div class="span2">
-                <p>
-                    <a href="javascript:;" id="show-advance-search">高级搜索</a>
-                </p>
-                <p>
-
-                    <a href="javascript:void(0);" onclick="jQuery.ajax({
-              &#39;url&#39;:&#39;/moniter/history&#39;,
-              &#39;cache&#39;:false,
-              &#39;success&#39;:function(html){
-                  $(&#39;#history_result&#39;).html(html);
-                  $(&#39;#history_dialog&#39;).dialog(&#39;open&#39;);
-                  return false;
-                }
-            });">
-                        历史筛选器
-                    </a>
-
-                </p>
-            </div>
-        </div>
-        normal
-
-        <div class="advance-search-box J-advance-search-box">
-            <div class="control-group form-horizontal">
-                <label class="control-label">搜索结果：</label>
-                <div class="controls">
-                    <div class="control-group form-inline">
-                        <p class="mb10">
-                            <label class="control-label">包含以下<strong>全部</strong>关键词：</label>
-                            <input type="text" value="" name="include" id="include">            </p>
-                        <p class="mb10">
-                            <label class="control-label">包含以下<strong>任一</strong>关键词：</label>
-                            <input type="text" value="" name="any" id="any">            </p>
-                        <p class="mb10">
-                            <label class="control-label"><strong>不包含</strong>以下关键词：</label>
-                            <input type="text" value="" name="exclude" id="exclude">            </p>
-                    </div>
-                </div>
-                <label class="control-label">关键词位置：</label>
-                <div class="controls s-radio">
-                    <span id="position"><label><div class="ez-radio ez-selected"><input data-toggle="checkbox" value="0" id="position_0" checked="checked" type="radio" name="position" class="ez-hide"></div> 不限位置</label><label><div class="ez-radio"><input data-toggle="checkbox" value="1" id="position_1" type="radio" name="position" class="ez-hide"></div> 仅限标题中</label><label><div class="ez-radio"><input data-toggle="checkbox" value="2" id="position_2" type="radio" name="position" class="ez-hide"></div> 仅限URL中</label></span>        </div>
-                
-                <div class="mb10">
-                    <label class="control-label">结果条数：</label>
-                    <div class="controls">
-                        <select name="perpage" id="perpage">
-                            <option value="10">每页10条</option>
-                            <option value="30">每页30条</option>
-                            <option value="50">每页50条</option>
-                        </select>        </div>
-                </div>
-                <div class="mb10 search-advance-btn">
-                    <label class="control-label">&nbsp;</label>
-                    <div class="controls">
-                        <input class="btn-red" type="submit" name="yt1" value="高级搜索">          </div>
-                </div>
-            </div>
-        </div>
-        <div class="toggle-advance-search"><a href="javascript:;" id="hide-advance-search">隐藏高级搜索</a></div>
-        adv
-
-
-    </div>
-
-</div>
-</form> -->
 
 <div class="row-fluid">
 <div class="span12">
@@ -297,25 +183,6 @@ String keyword = (String)session.getAttribute("keyword");
 
             <a class="moniter-period" href="">全部</a>
         </li>
-
-        <!-- <li>
-
-            <a class="moniter-period" href="">正面</a>
-        </li>
-
-        <li>
-
-            <a class="moniter-period" href="">中立</a>
-        </li>
-
-        <li>
-
-            <a class="moniter-period" href="">负面</a>
-        </li> -->
-
-
-      <!--   <li class="moniter-sort-li"><a class="i-seq desc" href=""><span>发布时间</span></a></li>
-        <li class="moniter-sort-li"><a class="i-seq" href=""><span>转载数</span></a></li> -->
     </ul>
 </div>
 <div class="widget-tab-bd">
@@ -530,8 +397,14 @@ document.getElementById("changpage").innerHTML=strS+strC+strE+strE2
 </script>
 
 
-<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons" tabindex="-1" style="display: none; outline: 0px; z-index: 1000; position: absolute;" role="dialog" aria-labelledby="ui-id-1"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span id="ui-id-1" class="ui-dialog-title">分享到邮件</span><a href="http://yq.adt100.com/moniter/index?merge=1#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div style="" id="mail_dialog" class="ui-dialog-content ui-widget-content">
-    <form id="mail_form" action="http://yq.adt100.com/info/mail" method="post">  <input type="hidden" name="info_id" id="info_id">
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable ui-dialog-buttons" tabindex="-1" style="display: none; outline: 0px; z-index: 1000; position: absolute;" role="dialog" aria-labelledby="ui-id-1">
+<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+<span id="ui-id-1" class="ui-dialog-title">分享到邮件</span>
+<a href="http://yq.adt100.com/moniter/index?merge=1#" class="ui-dialog-titlebar-close ui-corner-all" role="button">
+<span class="ui-icon ui-icon-closethick">close</span></a></div><div style="" id="mail_dialog" class="ui-dialog-content ui-widget-content">
+    <form id="mail_form" action="http://yq.adt100.com/info/mail" method="post">  
+    <input type="hidden" name="info_id" id="info_id">
         <div class="winbox-share">
             <div class="share-content">
                 <strong id="org_title"></strong>
