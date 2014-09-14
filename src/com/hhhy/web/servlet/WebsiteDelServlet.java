@@ -2,6 +2,7 @@ package com.hhhy.web.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
+import com.hhhy.db.beans.WebSite;
 
 public class WebsiteDelServlet extends HttpServlet {
     /**
@@ -27,9 +29,9 @@ public class WebsiteDelServlet extends HttpServlet {
         }
         String website = request.getParameter("uid");
         if(website!=null){
-            long uid = Long.parserLong(website);
+            long wid = Long.parseLong(website);
             try{
-                DBUtils.deleteWebSite(uid);
+                DBUtils.deleteWebSite(wid);
                 List<WebSite> webs = DBUtils.getExternWebSiteList();
                 request.getSession().setAttribute("webs",webs);
             } catch (SQLException e) {

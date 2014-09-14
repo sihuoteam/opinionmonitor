@@ -2,6 +2,7 @@ package com.hhhy.web.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
+import com.hhhy.db.beans.WebSite;
 
 public class WebsiteAddServlet extends HttpServlet {
     /**
