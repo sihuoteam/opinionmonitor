@@ -11,6 +11,7 @@
 		response.sendRedirect("./loginWeb.jsp");
 		return;
 	}
+	String name = (String) session.getAttribute("name");
 	String email = (String) session.getAttribute("name");
 	//List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
 	String startTime = (String) session.getAttribute("start_date");
@@ -30,91 +31,107 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<link rel="stylesheet" type="text/css" href="./css/key/boostrap.css">
-<link rel="stylesheet" type="text/css"
-	href="./css/key/boostrap-theme.css">
 
-<link rel="stylesheet" href="./css/style-red.css">
+<!-- <link rel="stylesheet" href="./css/style-red.css">
+<link rel="stylesheet" href="./css/style-red-my.css">
 
-<!--  Bootstrap css-->
 <link rel="stylesheet"
 	href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+ -->
+ 
+ <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+<script type="text/javascript" src="./js/jquery.js"></script>
 
-<!-- Bootstrap-->
+<!-- Bootstrap -->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
+
+<!-- Theme -->
+<link rel="stylesheet" href="./css/style-red.css">
+
+<link rel="stylesheet" href="./css/style-red-my.css">	
+
+
 <link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-<!-- jQuery bootstrap.min.js  -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-
-<!-- Bootstrap JavaScript -->
-<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<style type="text/css">
-</style>
+	href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 </head>
 
 <body>
 
 	<div class="navbar">
-		<a class="appbrand">
-			<!-- <img src="logo.jpg" alt=""
-			style="position: relative; top: 0; left: 25px;"> --> </a>
+		<a class="appbrand" href=""><img src="" alt=""
+			style="position: relative;top:0;left: 25px;"> </a>
 		<button class="menu-toggle" type="button"></button>
+
 		<ul class="topnav pull-right inline">
+
 			<li><a href="keylist" class="top-opt" data-toggle="tooltip"
-				data-placement="bottom"><i></i> 返回关键词设置</a>
+				data-placement="bottom"><i></i>设置</a>
+			</li>
+			<li><a href="loginWeb.jsp" class="top-logout"
+				data-toggle="tooltip" data-placement="bottom"><i></i> 退出</a>
 			</li>
 		</ul>
 
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<div class="wrapper">
+		<div class="hidden-phone menu" id="menu">
+			<div class="profile">
+				<span>欢迎您：</span> <a><%=name%></a>
+			</div>
 
-	<form action="historyadd" method="get" align="center" cellspacing="10">
-	<div class="row-fluid">
-	    <div class="search-filter-box">
-	        <!-- div class="normal-search-box clearfix"> -->
-	            <div class="clearfix time-opt span10">
-	                <div class="control-group form-inline">
-	                    <ul class="inline tab-small">
-	                        <li style="padding-left:0px;">设置历史舆情监控时间： 
-								<input id="start_date" type="text" name="start_date" value="<%=startTime %>">
-									<!-- <a class="i-cal" href="javascript:;" id="start_date_link"></a>  -->
-								<script>
-									$(function() {
-										$("#start_date")
-												.datepicker();
-								});
-								</script> 
-								<input id="end_date" type="text"
-									name="end_date" value="<%=endTime %>"> <!-- <a class="i-cal" href="javascript:;" id="end_date_link"> </a>  -->
-								<script>
-									$(function() {
-										$("#end_date")
-												.datepicker();
-									});
-								</script>
-							</li>
-	                    </ul>
-	                </div> 
-	            </div> 
-	            <div class="export-submit">
-				<input class="btn-red" type="submit" name="yt0" value="设置">
+			<ul class="menu-lists">
+
+				<li class="menu-list menu-any active"><a href="#"
+					class="menu-title"><i></i><span>关键词设置</span> </a></li>
+				<li class="menu-list menu-rep"><a href="spiderUrl"
+					class="menu-title"><i></i><span>自添加爬虫列表</span> </a></li>
+			</ul>
+		</div>
+		<div id="content" class="content">
+			<ul class="breadcrumb">
+				<li>您在这里：</li>
+				<li class="color-red">关键词设置/历史监控时间设置</li>
+			</ul>
+			<br> <br> <br> <br> <br> <br>
+
+			<form action="historyadd" method="get" align="center"
+				cellspacing="10">
+				<div class="row-fluid">
+					<div class="search-filter-box">
+						<!-- div class="normal-search-box clearfix"> -->
+						<div class="clearfix time-opt span10">
+							<div class="control-group form-inline">
+								<ul class="inline tab-small">
+									<li style="padding-left:0px;">设置历史舆情监控时间： <input
+										id="start_date" type="text" name="start_date"
+										value="<%=startTime%>"> <!-- <a class="i-cal" href="javascript:;" id="start_date_link"></a>  -->
+										<script>
+											$(function() {
+												$("#start_date").datepicker();
+											});
+										</script> <input id="end_date" type="text" name="end_date"
+										value="<%=endTime%>"> <!-- <a class="i-cal" href="javascript:;" id="end_date_link"> </a>  -->
+										<script>
+											$(function() {
+												$("#end_date").datepicker();
+											});
+										</script>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="export-submit">
+							<input class="btn-red" type="submit" name="sethistory" value="设置">
+						</div>
+						<!-- </div> -->
+					</div>
 				</div>
-	        <!-- </div> -->
-	    </div>
+			</form>
+		</div>
 	</div>
-</form>
-
-
-
-
 </body>
 </html>
