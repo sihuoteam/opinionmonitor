@@ -23,7 +23,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
+<%-- <base href="<%=basePath%>"> --%>
 
 <title>自添加爬虫列表</title>
 
@@ -107,7 +107,7 @@
 				<tr>
 					<td><%=url.getWebsite()%></td>
 					<td>
-						<form action="deleteUrl" method="POST">
+						<form action="delurl" method="POST">
 							<input value=删除 class="btn btn-danger" type="submit"> <input
 								type='hidden' name='uid' value="<%=url.getId()%>">
 						</form></td>

@@ -215,6 +215,46 @@
 		<servlet-name>historyadd</servlet-name>
 		<url-pattern>/historyadd</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>spiderurl</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.WebsiteShowServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>spiderurl</servlet-name>
+		<url-pattern>/spiderurl</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>addurl</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.WebsiteAddServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>addurl</servlet-name>
+		<url-pattern>/addurl</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>delurl</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.WebsiteDelServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>delurl</servlet-name>
+		<url-pattern>/delurl</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>historyset</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.HistoryAddServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>historyset</servlet-name>
+		<url-pattern>/historyset</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet>

@@ -27,13 +27,18 @@ public class HistoryAddServlet extends HttpServlet {
         if(uid==null || uid<0){
             response.sendRedirect("loginWeb.jsp");
         }
-        KeyWord keyword = (KeyWord)request.getSession().getAttribute("keyword");
-        if(keyword==null){
-            response.sendRedirect("keylist.jsp");
-        }
+        
     	
     	String start_date = request.getParameter("start_date");
         String end_date = request.getParameter("end_date");
+        if(start_date==null || end_date==null){
+        	String kid = request.getParameter("kid");
+        	request.getSession().setAttribute("start_date", DateFormatUtils.formatTime(System.currentTimeMillis(), DateFormatUtils.yyyyMMdd2));
+            request.getSession().setAttribute("end_date", DateFormatUtils.formatTime(System.currentTimeMillis(), DateFormatUtils.yyyyMMdd2));
+        	request.getSession().setAttribute("kid", Integer.parseInt(kid));
+        	response.sendRedirect("historySet.jsp");
+        	return;
+        }
         request.getSession().setAttribute("start_date", start_date);
         request.getSession().setAttribute("end_date", end_date);
         
@@ -42,8 +47,10 @@ public class HistoryAddServlet extends HttpServlet {
                     DateFormatUtils.yyyyMMdd2);
             long end = DateFormatUtils.getTime(end_date,
                     DateFormatUtils.yyyyMMdd2);
-            end+=24*60*60*1000;
-            DBUtils.addHistoryKeyword(keyword.getKeyword(), start, end);
+            end+=24*60*60*1000-1;
+            int kid = (Integer)request.getSession().getAttribute("kid");
+            String keyword = DBUtils.getKeyWordById(kid);
+            DBUtils.addHistoryKeyword(keyword, start, end);
             request.getSession().setAttribute("setinfo", "设置成功");
         } catch (ParseException e) {
             logger.warn(e.getMessage());
@@ -52,7 +59,7 @@ public class HistoryAddServlet extends HttpServlet {
         	request.getSession().setAttribute("setinfo", "设置失败");
 			e.printStackTrace();
 		}
-        response.sendRedirect("historyset.jsp");
+        response.sendRedirect("historySet.jsp");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

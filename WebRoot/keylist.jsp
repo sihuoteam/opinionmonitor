@@ -21,7 +21,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
+<%-- <base href="<%=basePath%>"> --%>
 
 <title>关键词设置</title>
 
@@ -75,7 +75,7 @@
 				<li class="menu-list menu-any active"><a href="#"
 					class="menu-title"><i></i><span>关键词设置</span> </a>
 				</li>
-				<li class="menu-list menu-rep"><a href="spiderUrl"
+				<li class="menu-list menu-rep"><a href="spiderurl"
 					class="menu-title"><i></i><span>自添加爬虫列表</span> </a>
 				</li>
 			</ul>
@@ -109,7 +109,7 @@
 					</td>
 					<td><a href="./auxiliary?kid=<%=keyword.getId()%>"> <input
 							value=附属词编辑 class="btn btn-info" type="submit"> </a></td>
-					<td><a href="./historySet?kid=<%=keyword.getId()%>"> <input
+					<td><a href="./historyset?kid=<%=keyword.getId()%>"> <input
 							value=历史时间设置 class="btn btn-info" type="submit"> </a></td>
 					<td><a href="./summarize?kid=<%=keyword.getId()%>"> <input
 							value=查看 class="btn btn-info" type="submit"> </a></td>
