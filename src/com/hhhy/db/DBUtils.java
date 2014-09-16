@@ -730,6 +730,12 @@ return res;
         String sql = "insert into "+KEYWORDHISTORY_TABLE+"(keyword, begin, end) values(?,?,?)";
         DBOperator.update(sql, new Object[]{key, begin, end});
     }
+    
+    public static HistoryKeyword getHistoryKeyword(String key) throws SQLException{
+        String sql = "select * from "+KEYWORDHISTORY_TABLE+" where keyword=?";
+        HistoryKeyword word = DBOperator.select(sql, new BeanHandler<HistoryKeyword>(HistoryKeyword.class), new Object[]{key});
+        return word;
+    }
 
     public static String getHistoryKeyword() throws SQLException{
         String sql = "select * from "+KEYWORDHISTORY_TABLE+" where flag=0";
