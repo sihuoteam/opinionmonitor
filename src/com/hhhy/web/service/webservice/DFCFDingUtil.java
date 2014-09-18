@@ -16,7 +16,8 @@ public class DFCFDingUtil {
     private static final String reg01 = ".*,(.*),(.*)\\.html";
     private static final Pattern pattern01 = Pattern.compile(reg01);
 
-    private static void test10(String url, String cont) throws IOException {
+    public static void dingtie(String url, String cont) throws IOException {
+        System.out.println("ding url: "+url+" "+cont);
         CHttpGet get = new CHttpGet("http://passport.eastmoney.com/guba/AjaxAction.ashx?cb=jQuery18309460038826800883_1411024516265&op=login&dlm=wuxiu9218%40sina.com&mm=920108&vcode=&_=1411024534921");
         Matcher match01 = pattern01.matcher(url);
         String code = null;
@@ -54,7 +55,7 @@ public class DFCFDingUtil {
      */
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
-        test10("http://guba.eastmoney.com/news,000050,122193896.html","hehe");
+        dingtie("http://guba.eastmoney.com/news,000050,122193896.html","顶");
     }
 
 }

@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.PostArt;
+import com.hhhy.web.service.webservice.DFCFDingUtil;
 
 public class DingtieDFCFServlet extends HttpServlet {
     /**
@@ -26,10 +27,10 @@ public class DingtieDFCFServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-        String title = request.getParameter("title");
-        System.out.println(URLDecoder.decode(title, "utf-8"));
+        String title = request.getParameter("url");
+        title = URLDecoder.decode(title, "utf-8");
+        DFCFDingUtil.dingtie(title, "顶");
         response.getWriter().write("OK");
-        response.getWriter().close();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

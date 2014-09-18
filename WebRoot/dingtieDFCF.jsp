@@ -78,14 +78,14 @@ String path = request.getContextPath();
 		<% for(PostArt post:posts){ %>
     	<tr>
   			<td>			
-  			<a href="<%= post.getUrl() %>>"><%=post.getTitle() %></a>
+  			<a href="<%= post.getUrl() %>"><%=post.getTitle() %></a>
   			</td>
   			
   			<td>
   			<input type="text" placeholder="在此输入顶贴内容">
   			</td>
   			<td>
-  				<button onclick="dingtie(<%=post.getUrl() %>)">点击这里</button>
+  				<button onclick=dingtie("<%=post.getUrl() %>")>点击这里</button>
   			</td>
   			
 		</tr>		
@@ -93,6 +93,7 @@ String path = request.getContextPath();
     </table>
     <script type="text/javascript">
     function dingtie(url){
+    alert("heihei");
     	$.ajax({
     	type:"post",
     	url: "dingtiedfcf",
