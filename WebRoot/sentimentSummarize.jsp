@@ -449,7 +449,7 @@ String keyword = (String)session.getAttribute("keyword");
 							<div class="widget-bd h290">
 								<div id="container" class="h220" data-highcharts-chart="0">
 									<div class="highcharts-container" id="highcharts-emotionDistributedAll"
-										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
+										style="position: relative; width: 460px; height: 290px; text-align: left; line-height: normal; z-index: 0;">
 
 									</div>
 								</div>
