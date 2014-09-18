@@ -11,8 +11,12 @@ String name = (String)session.getAttribute("name");
 Integer poscount = (Integer)session.getAttribute("poscount");
 Integer negcount = (Integer)session.getAttribute("negcount");
 Integer plaincount = (Integer)session.getAttribute("plaincount");
-plaincount++;
-if(poscount==null || negcount==null || plaincount==null)
+//plaincount++;
+
+Integer poscountToday = (Integer)session.getAttribute("poscountToday");
+Integer negcountToday = (Integer)session.getAttribute("negcountToday");
+Integer plaincountToday = (Integer)session.getAttribute("plaincountToday");
+if(poscount==null || negcount==null || plaincount==null || poscountToday==null || negcountToday==null || plaincountToday==null)
 	response.sendRedirect("./login.jsp");
 	
 String date = (String)request.getAttribute("date");//json
@@ -266,10 +270,95 @@ String keyword = (String)session.getAttribute("keyword");
 						</div>
 					</div>
 				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<div class="widget">
+							<dl class="trend-box clearfix">
+								<dt>
+									<p>
+										<img src="./images/sentimentSummarize/yuqingzongliang.png">
+									</p>
+									<!--<p class="color-green">
+                        +200%</p>-->
+								</dt>
+								<dd>
+									<h5>
+										<!-- <a href=""> -->
+										<%=poscountToday + plaincountToday + negcountToday%>
+										<!-- </a> -->
+									</h5>
+									<p>今日舆情总量</p>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="span3 mglf20">
+						<div class="widget">
+							<dl class="trend-box clearfix">
+								<dt>
+									<p>
+										<img src="./images/sentimentSummarize/zhengmian.png">
+									</p>
+									<!--<p class="color-green">
+                        +-</p>-->
+								</dt>
+								<dd>
+									<h5>
+										<!-- <a href=""> -->
+										<%=poscountToday%>
+										<!-- </a> -->
+									</h5>
+									<p>今日正面</p>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					 <div class="span3 mglf20">
+							<div class="widget">
+								<dl class="trend-box clearfix">
+									<dt>
+										<p>
+											<img src="./images/sentimentSummarize/zhongli.png">
+										</p>
+										<!--  <p class="color-green">
+                        +50%</p>-->
+									</dt>
+									<dd>
+										<h5>
+											<!-- <a href="">3</a> -->
+											<%=plaincountToday%>
+										</h5>
+										<p>今日中立</p>
+									</dd>
+								</dl>
+							</div>
+						</div> 
+					<div class="span3 mglf20">
+						<div class="widget">
+							<dl class="trend-box clearfix">
+								<dt>
+									<p>
+										<img src="./images/sentimentSummarize/fumian.png">
+									</p>
+									<!--<p class="color-green">
+                        +-</p>-->
+								</dt>
+								<dd>
+									<h5>
+										<!-- <a href=""> -->
+										<%=negcountToday%>
+										<!-- </a> -->
+									</h5>
+									<p>今日负面</p>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
 
 
 
-
+<!--  
 				<div class="row-fluid">
 					<div class="span6">
 						<div class="widget">
@@ -311,7 +400,10 @@ String keyword = (String)session.getAttribute("keyword");
 						</div>
 					</div>
 				</div>	
+				
+				-->
 				<div class="row-fluid">
+				<!-- 
 					<div class="span6">
 						<div class="widget">
 							<div class="widget-hd">
@@ -331,11 +423,30 @@ String keyword = (String)session.getAttribute("keyword");
 							</div>
 						</div>
 					</div>
-					
+				-->
+				<div class="span6">
+						<div class="widget">
+							<div class="widget-hd">
+								<h4>总体情感分布</h4>
+							</div>
+							<div class="widget-bd h290">
+								<div id="container" class="h220" data-highcharts-chart="0">
+									<div class="highcharts-container" id="highcharts-emotionDistributedAll"
+										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
+
+									</div>
+								</div>
+								<div id="today-index">
+									
+								</div>
+								<div id="yw0"></div>
+							</div>
+						</div>
+					</div>
 					<div class="span6 mglf20">
 						<div class="widget">
 							<div class="widget-hd">
-								<h4>情感分布</h4>
+								<h4>今日情感分布</h4>
 							</div>
 							<div class="widget-bd h290">
 								<div id="pie" class="h290" data-highcharts-chart="1">
@@ -669,8 +780,11 @@ String keyword = (String)session.getAttribute("keyword");
 
 				});
 
+
+
+
 				$(function() {
-					$('#highcharts-emotionDistributed')
+						$('#highcharts-emotionDistributedAll')
 							.highcharts(
 
 									{
@@ -730,6 +844,72 @@ String keyword = (String)session.getAttribute("keyword");
 													{
 														name : '负面',
 														y : <%=negcount%>,
+														url : ''
+													} ]
+										} ]
+									});
+				});
+				$(function() {
+					$('#highcharts-emotionDistributed')
+							.highcharts(
+
+									{
+										chart : {
+											renderTo : 'pie'
+										},
+										exporting : {
+											enabled : true
+										},
+										legend : {
+											borderRadius : 0
+										},
+										tooltip : {
+											borderRadius : 0
+										},
+										colors : [ '#d95455', '#979080',
+												'#4c88a2', '#83823f',
+												'#f0c189', '#40131a' ],
+										title : {
+											text : ''
+										},
+										plotOptions : {
+											pie : {
+												allowPointSelect : true,
+												cursor : 'pointer',
+												dataLabels : {
+													enabled: true,
+                    								color: '#000000',
+                    								connectorColor: '#000000',
+                   									format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+												},
+												showInLegend : true
+											},
+											series : {
+												cursor : 'pointer',
+												events : {
+													click : function(e) {
+														location.href = e.point.url;
+													}
+												}
+											}
+										},
+										series : [ {
+											type : 'pie',
+											name : '舆情数量',
+											data : [
+													{
+														name : '正面',
+														y : <%=poscountToday%>,
+														url : ''
+													},
+													{
+														name : '中立',
+														y : <%=plaincountToday%>,
+														url : ''
+													},
+													{
+														name : '负面',
+														y : <%=negcountToday%>,
 														url : ''
 													} ]
 										} ]
