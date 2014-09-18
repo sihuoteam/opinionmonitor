@@ -197,12 +197,14 @@ String keyword = (String)session.getAttribute("keyword");
                         +200%</p>-->
 								</dt>
 								<dd>
+								<a href="specmonitor?today=0&trend=0">
 									<h5>
 										<!-- <a href=""> -->
 										<%=poscount + plaincount + negcount%>
 										<!-- </a> -->
 									</h5>
 									<p>舆情总量</p>
+									</a>
 								</dd>
 							</dl>
 						</div>
@@ -218,12 +220,14 @@ String keyword = (String)session.getAttribute("keyword");
                         +-</p>-->
 								</dt>
 								<dd>
+								<a href="specmonitor?today=0&trend=1">
 									<h5>
 										<!-- <a href=""> -->
 										<%=poscount%>
 										<!-- </a> -->
 									</h5>
 									<p>正面</p>
+									</a>
 								</dd>
 							</dl>
 						</div>
@@ -239,11 +243,13 @@ String keyword = (String)session.getAttribute("keyword");
                         +50%</p>-->
 									</dt>
 									<dd>
+									<a href="specmonitor?today=0&trend=3">
 										<h5>
 											<!-- <a href="">3</a> -->
 											<%=plaincount%>
 										</h5>
 										<p>中立</p>
+										</a>
 									</dd>
 								</dl>
 							</div>
@@ -259,12 +265,14 @@ String keyword = (String)session.getAttribute("keyword");
                         +-</p>-->
 								</dt>
 								<dd>
+								<a href="specmonitor?today=0&trend=2">
 									<h5>
 										<!-- <a href=""> -->
 										<%=negcount%>
 										<!-- </a> -->
 									</h5>
 									<p>负面</p>
+									</a>
 								</dd>
 							</dl>
 						</div>
@@ -282,12 +290,14 @@ String keyword = (String)session.getAttribute("keyword");
                         +200%</p>-->
 								</dt>
 								<dd>
+								<a href="specmonitor?today=1&trend=0">
 									<h5>
 										<!-- <a href=""> -->
 										<%=poscountToday + plaincountToday + negcountToday%>
 										<!-- </a> -->
 									</h5>
 									<p>今日舆情总量</p>
+									</a>
 								</dd>
 							</dl>
 						</div>
@@ -303,12 +313,14 @@ String keyword = (String)session.getAttribute("keyword");
                         +-</p>-->
 								</dt>
 								<dd>
+								<a href="specmonitor?today=1&trend=1">
 									<h5>
 										<!-- <a href=""> -->
 										<%=poscountToday%>
 										<!-- </a> -->
 									</h5>
 									<p>今日正面</p>
+									</a>
 								</dd>
 							</dl>
 						</div>
@@ -323,12 +335,15 @@ String keyword = (String)session.getAttribute("keyword");
 										<!--  <p class="color-green">
                         +50%</p>-->
 									</dt>
+									
 									<dd>
+									<a href="specmonitor?today=1&trend=3">
 										<h5>
 											<!-- <a href="">3</a> -->
 											<%=plaincountToday%>
 										</h5>
 										<p>今日中立</p>
+										</a>
 									</dd>
 								</dl>
 							</div>
@@ -344,12 +359,14 @@ String keyword = (String)session.getAttribute("keyword");
                         +-</p>-->
 								</dt>
 								<dd>
+								<a href="specmonitor?today=1&trend=2">
 									<h5>
 										<!-- <a href=""> -->
 										<%=negcountToday%>
 										<!-- </a> -->
 									</h5>
 									<p>今日负面</p>
+									</a>
 								</dd>
 							</dl>
 						</div>
@@ -910,7 +927,7 @@ String keyword = (String)session.getAttribute("keyword");
 													{
 														name : '负面',
 														y : <%=negcountToday%>,
-														url : specmonitor?today=1&trend=2'
+														url : 'specmonitor?today=1&trend=2'
 													} ]
 										} ]
 									});
