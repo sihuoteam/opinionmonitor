@@ -276,6 +276,17 @@
 		<servlet-name>dingtiedfcf</servlet-name>
 		<url-pattern>/dingtiedfcf</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>specmonitor</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.SpecMonitorServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>specmonitor</servlet-name>
+		<url-pattern>/specmonitor</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet>

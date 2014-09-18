@@ -36,6 +36,11 @@ public class SummarizeServlet extends HttpServlet {
             request.getSession().setAttribute("poscount", counts[0]);
             request.getSession().setAttribute("negcount", counts[1]);
             request.getSession().setAttribute("plaincount", counts[2]);
+            
+            int[] counts2 = DBUtils.getTodayEmotionStatisCount(Integer.parseInt(kid));
+            request.getSession().setAttribute("poscountToday", counts2[0]);
+            request.getSession().setAttribute("negcountToday", counts2[1]);
+            request.getSession().setAttribute("plaincountToday", counts2[2]);
 
             List<Article> arts = DBUtils.getNegArticles(Integer.parseInt(kid));
             request.getSession().setAttribute("negarts", arts);
