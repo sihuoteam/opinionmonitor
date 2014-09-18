@@ -2,6 +2,7 @@ package com.hhhy.web.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -47,6 +48,7 @@ public class KeyWordAddServlet extends HttpServlet {
                 logger.info("add keyword: uid("+uid+"), keyword("+keyword+")");
 //                if(flag)
                 List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
+                Collections.sort(keyWords);
                 req.getSession().setAttribute("keywords", keyWords);
                 resp.sendRedirect("keylist.jsp");
             } catch (SQLException e) {

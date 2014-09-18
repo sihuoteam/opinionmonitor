@@ -847,7 +847,7 @@ public class DBUtils {
     public static List<HistoryBean> getHistoryBeans(int kid, long begin,
             long end) throws SQLException {
         String sql = "select * from " + HISTORY_TABLE + " where kid = " + kid
-                + " and ctime>?" + " and ctime<?";
+                + " and ctime>=?" + " and ctime<? order by ctime desc";
         return DBOperator.select(sql, new BeanListHandler<HistoryBean>(
                 HistoryBean.class), new Object[] { begin, end });
     }

@@ -2,6 +2,7 @@ package com.hhhy.web.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -50,6 +51,7 @@ public class UserLogin extends HttpServlet {
             request.getSession().setAttribute("userid", uid);
             request.getSession().setAttribute("name", username);
             List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
+            Collections.sort(keyWords);
 //            request.setAttribute("keywords", keyWords);
             request.getSession().setAttribute("keywords", keyWords);
 //            if(keyWords.size()>0)

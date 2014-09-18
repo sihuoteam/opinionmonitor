@@ -2,6 +2,7 @@ package com.hhhy.web.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,6 +33,7 @@ public class KeylistServlet extends HttpServlet {
            
             request.getSession().removeAttribute("loginerror");
             List<KeyWord> keyWords = DBUtils.getUserKeyWord(uid);
+            Collections.sort(keyWords);
             request.getSession().setAttribute("keywords", keyWords);
             response.sendRedirect("keylist.jsp");
         } catch (SQLException e) {

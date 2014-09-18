@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author chenlingpeng
  * 
  */
-public class KeyWord implements Serializable{
+public class KeyWord implements Serializable, Comparable<KeyWord>{
     private int id;
     private long uid;
     private String keyword;
@@ -46,6 +46,11 @@ public class KeyWord implements Serializable{
 
     public void setAuxiliary(String auxiliary) {
         this.auxiliary = auxiliary;
+    }
+
+    @Override
+    public int compareTo(KeyWord arg0) {
+        return arg0.getKeyword().compareTo(this.getKeyword());
     }
 
 }
