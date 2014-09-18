@@ -24,7 +24,7 @@ public class DFCFCrawler {
     private String urlBase = "http://guba.eastmoney.com";
     private List<PostArt> posts;
     
-    public void DFCFCraler(){
+    public void DFCFCrawler(){
     	posts = new ArrayList<PostArt>();
     }
     
@@ -38,12 +38,13 @@ public class DFCFCrawler {
             String s = EntityUtils.toString(getResponse.getEntity());
             Document doc = Jsoup.parse(new String(s.getBytes("ISO-8859-1"),"utf-8"));
             Elements es = doc.getElementsByClass("newlist");
-            PostArt post = new PostArt();
+//            PostArt post = new PostArt();
             for(Element e : es){
 //                System.out.println(e);
                 Elements uls = e.select("li");
                 for(Element ul : uls) {
 //                    System.out.println(ul.text());
+                	PostArt post = new PostArt();
                 	post.setTitle(ul.select("a.note").attr("title"));
                 	post.setUrl(urlBase + ul.select("a.note").attr("href"));
                 	posts.add(post);
