@@ -4,12 +4,12 @@ String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
-    Long userid = (Long) session.getAttribute("userid");
-    if (userid == null) {
-        response.sendRedirect("./loginWeb.jsp");
-        return;
-    }
-    String email = (String) session.getAttribute("name");
+    //Long userid = (Long) session.getAttribute("userid");
+    //if (userid == null) {
+    //    response.sendRedirect("./loginWeb.jsp");
+    //    return;
+   // }
+   // String email = (String) session.getAttribute("name");
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
     DFCFCrawler dfcf = new DFCFCrawler();
     dfcf.parserDFCF();
