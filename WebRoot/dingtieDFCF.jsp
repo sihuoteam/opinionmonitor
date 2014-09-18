@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils, com.hhhy.web.service.webservice.DFCFCrawler" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -11,7 +11,9 @@ String path = request.getContextPath();
     }
     String email = (String) session.getAttribute("name");
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
-    List<PostArt> posts = (List<PostArt>) session.getAttribute("DFCFPosts");
+    DFCFCrawler dfcf = new DFCFCrawler();
+    dfcf.parserDFCF();
+    List<PostArt> posts = dfcf.getPosts();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
