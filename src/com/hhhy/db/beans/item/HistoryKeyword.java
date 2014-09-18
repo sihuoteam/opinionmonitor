@@ -8,6 +8,15 @@ public class HistoryKeyword{
 	private int flag;
 	private long begin;
 	private long end;
+	private String aux;
+	
+	
+    public String getAux() {
+        return aux;
+    }
+    public void setAux(String aux) {
+        this.aux = aux;
+    }
     public long getId() {
         return id;
     }

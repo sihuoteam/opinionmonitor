@@ -79,7 +79,7 @@ public class HistoryAddServlet extends HttpServlet {
                     DateFormatUtils.yyyyMMdd2);
             end += 24 * 60 * 60 * 1000 - 1;
             int kid = (Integer) request.getSession().getAttribute("kid");
-            String keyword = DBUtils.getKeyWordById(kid);
+            KeyWord keyword = DBUtils.getKeyWordById(kid,uid);
             DBUtils.addHistoryKeyword(keyword, start, end);
             request.getSession().setAttribute("setinfo", "设置成功");
         } catch (ParseException e) {

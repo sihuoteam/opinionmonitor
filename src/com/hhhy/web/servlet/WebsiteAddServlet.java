@@ -34,6 +34,9 @@ public class WebsiteAddServlet extends HttpServlet {
                 if(website.startsWith("http://")){
                     website = website.substring(7);
                 }
+                if(website.endsWith("/")){
+                    website = website.substring(0,website.length()-1);
+                }
                 try{
                     DBUtils.insertWebSite(website);
                     List<WebSite> webs = DBUtils.getExternWebSiteList();

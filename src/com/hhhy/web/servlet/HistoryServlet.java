@@ -29,23 +29,23 @@ public class HistoryServlet extends HttpServlet {
             if(kid!=null){
             	String start_date = request.getParameter("start_date");
                 String end_date = request.getParameter("end_date");
+
+                long begin=0l;
+                long end = System.currentTimeMillis();
                 if(start_date!=null && end_date!=null){
                 	request.getSession().setAttribute("start_date",start_date);
                 	request.getSession().setAttribute("end_date",end_date);
-                }
-                
-                long begin=0l;
-                long end = System.currentTimeMillis();
-                try {
-                    begin = DateFormatUtils.getTime(start_date,
-                            DateFormatUtils.yyyyMMdd2);
-                     end = DateFormatUtils.getTime(end_date,
-                            DateFormatUtils.yyyyMMdd2);
-                    end+=24*60*60*1000-1;
-                } catch (ParseException e) {
-                    logger.warn(e.getMessage());
-                } catch (Exception e){
-                	e.printStackTrace();
+                	try {
+                        begin = DateFormatUtils.getTime(start_date,
+                                DateFormatUtils.yyyyMMdd2);
+                         end = DateFormatUtils.getTime(end_date,
+                                DateFormatUtils.yyyyMMdd2);
+                        end+=24*60*60*1000-1;
+                    } catch (ParseException e) {
+                        logger.warn(e.getMessage());
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
                List<HistoryBean> beans  = DBUtils.getHistoryBeans(kid, begin, end);
                 logger.info("history size: dateSize: ");

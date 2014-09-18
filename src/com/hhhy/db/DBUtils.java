@@ -192,6 +192,12 @@ public class DBUtils {
         if(keyword==null) return null;
         return keyword.getKeyword();
     }
+    
+    public static KeyWord getKeyWordById(int kid, long uid) throws SQLException{
+        String sql = "select * from "+KEYWORD_TABLE+ " where id=? and uid=?";
+        KeyWord keyword = DBOperator.select(sql, new BeanHandler<KeyWord>(KeyWord.class), new Object[]{kid,uid});
+        return keyword;
+    }
 
     // 涓������ㄦ�疯�����涓������抽��璇�, ��ㄦ�蜂俊���瀛����session涓�
     public static List<KeyWord> getUserKeyWord(long userid) throws SQLException {
@@ -726,9 +732,9 @@ return res;
 
 
     private static final String KEYWORDHISTORY_TABLE = "a_historykeyword";
-    public static void addHistoryKeyword(String key, long begin, long end) throws SQLException{
-        String sql = "insert into "+KEYWORDHISTORY_TABLE+"(keyword, begin, end) values(?,?,?)";
-        DBOperator.update(sql, new Object[]{key, begin, end});
+    public static void addHistoryKeyword(KeyWord key, long begin, long end) throws SQLException{
+        String sql = "insert into "+KEYWORDHISTORY_TABLE+"(keyword, aux, begin, end) values(?,?,?,?)";
+        DBOperator.update(sql, new Object[]{key.getKeyword(), key.getAuxiliary(), begin, end});
     }
     
     public static HistoryKeyword getHistoryKeyword(String key) throws SQLException{
@@ -743,7 +749,15 @@ return res;
         String t = "";
         sql = "update "+KEYWORDHISTORY_TABLE+" set flag=1 where id=?";
         for(HistoryKeyword item:res){
-            t+=item.getKeyword()+":"+item.getBegin()+":"+item.getEnd()+";";
+            String aux = item.getAux();
+            if(aux!=null){
+                String[] auxs = aux.split(";");
+                for(String tmp:auxs){
+                    t+=item.getKeyword()+":"+tmp+":"+item.getBegin()+":"+item.getEnd()+";";
+                }
+            }else{
+                t+=item.getKeyword()+"::"+item.getBegin()+":"+item.getEnd()+";";
+            }
             DBOperator.update(sql, item.getId());
         }
         return t;

@@ -68,7 +68,7 @@ String path = request.getContextPath();
     <table align="center" cellspacing="10">
     <% if(posts==null || posts.size()==0){ %>
 			<tr>
-			<td>没有帖子显示</td>
+			<td>没有帖子显示, 请尝试刷新页面</td>
 			
 			</tr>
 		<% } else{ %>
@@ -80,7 +80,7 @@ String path = request.getContextPath();
   			</td>
   			
   			<td>
-  			<input type="text" placeholder="在此输入顶贴内容">
+  			<input type="text" placeholder="在此输入顶贴内容" name="content">
   			</td>
   			<td>
   				<a href="">
