@@ -85,13 +85,24 @@ String path = request.getContextPath();
   			<input type="text" placeholder="在此输入顶贴内容">
   			</td>
   			<td>
-  				<a href="">
-  				<input value=顶该贴 class="btn btn-info" type="submit">
-  				</a>
+  				<button onclick="dingtie(<%=post.getUrl() %>)">点击这里</button>
   			</td>
   			
 		</tr>		
 		<% }} %>
     </table>
+    <script type="text/javascript">
+    function dingtie(url){
+    	$.ajax({
+    	type:"post",
+    	url: "dingtie",
+    	data: "url="+url,
+    	success: alert("success"),
+    	error: alert("fail")
+    	});
+    }
+    
+    </script>
+    
   </body>
 </html>

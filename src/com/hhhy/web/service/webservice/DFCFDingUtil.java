@@ -54,7 +54,7 @@ public class DFCFDingUtil {
      */
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
-        test10("http://guba.eastmoney.com/news,gssz,123642830.html","hehe");
+        test10("http://guba.eastmoney.com/news,000050,122193896.html","hehe");
     }
 
 }

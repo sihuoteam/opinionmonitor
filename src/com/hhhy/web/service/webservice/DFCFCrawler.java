@@ -65,5 +65,6 @@ public class DFCFCrawler {
     public static void main(String[] args) {
         DFCFCrawler dfcf = new DFCFCrawler();
         dfcf.parserDFCF();
+        System.out.println(dfcf.getPosts().size());
     }
 }
