@@ -559,10 +559,13 @@ String keyword = (String)session.getAttribute("keyword");
 
 			<!-- highcharts -->
 			<!-- emotionalNum -->
+			
 			<script>
 				/* $(function() {
 
 					$('#highcharts-emotionNum').highcharts({ */
+					
+				/*	
 				$(function() {
 					$('#highcharts-poscount').highcharts(
 
@@ -797,7 +800,7 @@ String keyword = (String)session.getAttribute("keyword");
 
 				});
 
-
+				*/
 
 
 				$(function() {
