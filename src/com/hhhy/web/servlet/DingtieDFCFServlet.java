@@ -26,11 +26,14 @@ public class DingtieDFCFServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-        String title = request.getParameter("url");
-        title = URLDecoder.decode(title, "utf-8");
-        DFCFDingUtil.dingtie(title, "顶");
-        response.getWriter().write("OK");
+        String url = request.getParameter("url");
+        url = URLDecoder.decode(url, "utf-8");
+        boolean flag = DFCFDingUtil.dingtie(url, "顶");
+        if(flag){
+            response.getWriter().write("success");
+        }else{
+            response.getWriter().write("fail");
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

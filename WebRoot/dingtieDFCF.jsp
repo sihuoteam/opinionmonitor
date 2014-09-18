@@ -93,13 +93,11 @@ String path = request.getContextPath();
     </table>
     <script type="text/javascript">
     function dingtie(url){
-    alert("heihei");
     	$.ajax({
     	type:"post",
     	url: "dingtiedfcf",
     	data: "url="+url,
-    	success: alert("success"),
-    	error: alert("fail")
+    	success: function(msg){alert(msg)},
     	});
     }
     
