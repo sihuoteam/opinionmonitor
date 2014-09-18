@@ -259,11 +259,31 @@ String keyword = (String)session.getAttribute("keyword");
 <div class="widget-tab">
 <div class="widget-tab-hd">
     <ul class="clearfix tab-hd" id="moniter-sort-move">
-
-        <li class="current">
-
-            <a class="moniter-period" href="">全部</a>
+		<li class="current">
+            <a class="moniter-period" href="specmonitor?today=1&trend=0">今天全部</a>
         </li>
+        <li class="current">
+            <a class="moniter-period" href="specmonitor?today=1&trend=1">今天正面</a>
+        </li>
+        <li class="current">
+            <a class="moniter-period" href="specmonitor?today=1&trend=3">今天中立</a>
+        </li>
+        <li class="current">
+            <a class="moniter-period" href="specmonitor?today=1&trend=2">今天负面</a>
+        </li>
+        <li class="current">
+            <a class="moniter-period" href="specmonitor?today=0&trend=0">全部</a>
+        </li>
+        <li class="current">
+            <a class="moniter-period" href="specmonitor?today=0&trend=1">全部正面</a>
+        </li>
+        <li class="current">
+            <a class="moniter-period" href="specmonitor?today=0&trend=3">全部中立</a>
+        </li>
+        <li class="current">
+            <a class="moniter-period" href="specmonitor?today=0&trend=2">全部负面</a>
+        </li>
+        
 
         <!-- <li>
 

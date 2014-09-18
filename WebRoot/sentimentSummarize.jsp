@@ -832,19 +832,19 @@ String keyword = (String)session.getAttribute("keyword");
 											name : '舆情数量',
 											data : [
 													{
-														name : '正面',
+														name : '全部正面',
 														y : <%=poscount%>,
-														url : ''
+														url : 'specmonitor?today=0&trend=1'
 													},
 													{
-														name : '中立',
+														name : '全部中立',
 														y : <%=plaincount%>,
-														url : ''
+														url : 'specmonitor?today=0&trend=3'
 													},
 													{
-														name : '负面',
+														name : '全部负面',
 														y : <%=negcount%>,
-														url : ''
+														url : 'specmonitor?today=0&trend=2'
 													} ]
 										} ]
 									});
@@ -900,17 +900,17 @@ String keyword = (String)session.getAttribute("keyword");
 													{
 														name : '正面',
 														y : <%=poscountToday%>,
-														url : ''
+														url : 'specmonitor?today=1&trend=1'
 													},
 													{
 														name : '中立',
 														y : <%=plaincountToday%>,
-														url : ''
+														url : 'specmonitor?today=1&trend=3'
 													},
 													{
 														name : '负面',
 														y : <%=negcountToday%>,
-														url : ''
+														url : specmonitor?today=1&trend=2'
 													} ]
 										} ]
 									});
