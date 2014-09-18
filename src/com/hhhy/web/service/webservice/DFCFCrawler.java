@@ -24,7 +24,7 @@ public class DFCFCrawler {
     private String urlBase = "http://guba.eastmoney.com";
     private List<PostArt> posts;
     
-    public void DFCFCrawler(){
+    public DFCFCrawler(){
     	posts = new ArrayList<PostArt>();
     }
     

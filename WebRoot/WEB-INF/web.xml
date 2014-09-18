@@ -265,6 +265,17 @@
 		<servlet-name>history</servlet-name>
 		<url-pattern>/history</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>dingtiedfcf</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.DingtieDFCFServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dingtiedfcf</servlet-name>
+		<url-pattern>/dingtiedfcf</url-pattern>
+	</servlet-mapping>
 
 
 	<servlet>

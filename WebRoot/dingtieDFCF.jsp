@@ -95,7 +95,7 @@ String path = request.getContextPath();
     function dingtie(url){
     	$.ajax({
     	type:"post",
-    	url: "dingtie",
+    	url: "dingtiedfcf",
     	data: "url="+url,
     	success: alert("success"),
     	error: alert("fail")

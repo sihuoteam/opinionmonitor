@@ -1,6 +1,7 @@
 package com.hhhy.web.servlet;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,7 +25,11 @@ public class DingtieDFCFServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<PostArt> p = null;
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        String title = request.getParameter("title");
+        System.out.println(URLDecoder.decode(title, "utf-8"));
+        response.getWriter().write("OK");
+        response.getWriter().close();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
