@@ -61,7 +61,7 @@ String path = request.getContextPath();
 
     <ul class="topnav pull-right inline">
 			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
-				data-placement="bottom"><i></i> <%=email %>退出</a></li>
+				data-placement="bottom"><i></i> <%= %>退出</a></li>
 			
 	</ul>
 
