@@ -73,8 +73,7 @@ String path = request.getContextPath();
 			<td>没有帖子显示</td>
 			
 			</tr>
-		<% } else{ %>
-		
+		<% } else{ int i=0; %>
 		<% for(PostArt post:posts){ %>
     	<tr>
   			<td>			
@@ -82,22 +81,23 @@ String path = request.getContextPath();
   			</td>
   			
   			<td>
-  			<input type="text" placeholder="在此输入顶贴内容">
+  			<input type="text" id=<%=i %> placeholder="在此输入顶贴内容">
   			</td>
   			<td>
-  				<button onclick=dingtie("<%=post.getUrl() %>")>点击这里</button>
+  				<button onclick=dingtie("<%=post.getUrl() %>",<%=i %>)>点击这里</button>
   			</td>
   			
 		</tr>		
-		<% }} %>
+		<% i++; }} %>
     </table>
     <script type="text/javascript">
-    function dingtie(url){
+    function dingtie(url, id){
+    var cont = $("#"+id).val();
     	$.ajax({
     	type:"post",
     	url: "dingtiedfcf",
-    	data: "url="+url,
-    	success: function(msg){alert(msg)},
+    	data: {url:url, content:cont},
+    	success: function(msg){alert(msg);$("#"+id).val()="";},
     	});
     }
     

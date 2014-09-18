@@ -28,7 +28,11 @@ public class DingtieDFCFServlet extends HttpServlet {
             throws ServletException, IOException {
         String url = request.getParameter("url");
         url = URLDecoder.decode(url, "utf-8");
-        boolean flag = DFCFDingUtil.dingtie(url, "顶");
+        String content = request.getParameter("content");
+        System.out.println(content);
+        content = URLDecoder.decode(content, "utf-8");
+        System.out.println(content);
+        boolean flag = DFCFDingUtil.dingtie(url, content);
         if(flag){
             response.getWriter().write("success");
         }else{
