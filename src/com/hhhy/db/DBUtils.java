@@ -754,7 +754,7 @@ return res;
 
     public static void main(String[] args) throws SQLException, IOException {
         insertWebSite("www.baidu.com");
-        logger.info(getExternWebSite());
+        logger.info(DBUtils.getHistoryKeyword());
 //        HistoryBean history = new HistoryBean();
 //        history.setCtime(12345);
 //        history.setEmotion(-1);
