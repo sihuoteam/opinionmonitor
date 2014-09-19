@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils, com.hhhy.web.service.webservice.DFCFCrawler" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils, com.hhhy.web.service.webservice.dfcf.DFCFCrawler" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -29,31 +29,34 @@ String path = request.getContextPath();
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+
 	<link rel="stylesheet" type="text/css" href="./css/key/boostrap.css">
 	<link rel="stylesheet" type="text/css" href="./css/key/boostrap-theme.css">
 	
-	<link rel="stylesheet" href="./css/style-red.css">
-	
-		<!--  Bootstrap css-->
+	<link rel="stylesheet" href="./css/style-red.css">	
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-		<!-- Bootstrap-->
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-<!-- jQuery bootstrap.min.js  -->
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-
-<!-- Bootstrap JavaScript -->
 <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <style type="text/css">	
 
 </style>
+
+	-->
+<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+<script type="text/javascript" src="./js/jquery.js"></script>
+
+<!-- Bootstrap -->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
+
+<!-- Theme -->
+<link rel="stylesheet" href="./css/style-red.css">
+
+<link rel="stylesheet" href="./css/style-red-my.css">
   </head>
   
   <body>
-  <iframe frameborder="0" style="display: none;"></iframe>
   
 <div class="navbar">
     <a class="appbrand"></a>
@@ -66,7 +69,62 @@ String path = request.getContextPath();
 	</ul>
 
 </div>
-  <br><br><br>
+  <br>
+ <div class="wrapper">
+		<!-- <div id="content" class="content"> -->
+		<div class="innerLR">
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="widget">
+						<div class="widget-hd">
+							<h4>发帖顶贴</h4>
+						</div>
+						<div class="widget-bd h290">
+							<div id="container" class="h220" data-highcharts-chart="0">
+								<div class="highcharts-container" id="highcharts-poscount"
+									style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+										font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
+									
+									<table>
+										<tr>
+											<td>题目：</td>
+											<td><input id="title" name="title" type="text"></td>
+										</tr>
+										<tr>
+											<td>发帖内容：</td>
+											<td><textarea name="contentF" id = "contentF"></td>
+										</tr>
+
+										<tr>
+											<td>顶贴内容：</td>
+											<td><textarea name="contentD" id = "contentD" placeholder="回车分隔"></td>
+										</tr>
+										<tr></tr>
+										<tr>
+											<td></td>
+											<td></td>
+											<td><a href=""> <input value=顶该贴 class="btn btn-info" type="submit"> </a></td>
+										</tr>
+									</table>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="span6 mglf20">
+					<div class="widget">
+						<div class="widget-hd">
+							<h4>首页顶贴</h4>
+						</div>
+						<div class="widget-bd h290">
+							<div id="pie" class="h290" data-highcharts-chart="1">
+								<div class="highcharts-container"
+									id="highcharts-emotionDistributed"
+									style="position: relative; width: 460px; height: 290px; text-align: left; line-height: normal; z-index: 0;">
+  
+  
     <table align="center" cellspacing="10">
     <% if(posts==null || posts.size()==0){ %>
 			<tr>
@@ -102,6 +160,14 @@ String path = request.getContextPath();
     }
     
     </script>
-    
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 		</div> -->
+	</div>  
   </body>
 </html>
