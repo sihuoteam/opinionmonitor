@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.PostArt;
-import com.hhhy.web.service.webservice.DFCFDingUtil;
+import com.hhhy.web.service.webservice.dfcf.DFCFDingUtil;
 
 public class DingtieDFCFServlet extends HttpServlet {
     /**

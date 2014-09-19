@@ -43,14 +43,14 @@ public class MessageReport {
      * @throws UnsupportedEncodingException 
      */
     public static void main(String[] args) throws UnsupportedEncodingException {
-        MessageReport.sendMessage("15210835484", "升值加薪今日大盘涨停第三方三东方闪电\n明日预测撒旦法斯蒂芬\n后天启发");
-        Article art = new Article();
-        art.setTitle("title");
-        art.setUrl("url");
-        art.setSummary("summ");
-        String content="标题: "+art.getTitle()+
-        "摘要: "+art.getSummary()+"\nURL: "+art.getUrl()+"\n"+"情感：负面\n\n\n";
-        System.out.println(content);
+        MessageReport.sendMessage("15210837731", "升值加薪");
+//        Article art = new Article();
+//        art.setTitle("title");
+//        art.setUrl("url");
+//        art.setSummary("summ");
+//        String content="标题: "+art.getTitle()+
+//        "摘要: "+art.getSummary()+"\nURL: "+art.getUrl()+"\n"+"情感：负面\n\n\n";
+//        System.out.println(content);
     }
 
 }

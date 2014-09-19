@@ -1,4 +1,4 @@
-package com.hhhy.web.service.webservice;
+package com.hhhy.web.service.webservice.dfcf;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.hhhy.db.beans.PostArt;
+import com.hhhy.web.service.webservice.HttpConnectionManager;
 
 import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
