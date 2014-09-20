@@ -1,6 +1,7 @@
 package com.hhhy.db.beans;
 
 import java.io.Serializable;
+import java.text.Collator;
 
 /**
  * 关键词类
@@ -47,10 +48,9 @@ public class KeyWord implements Serializable, Comparable<KeyWord>{
     public void setAuxiliary(String auxiliary) {
         this.auxiliary = auxiliary;
     }
-
+    
     @Override
     public int compareTo(KeyWord arg0) {
-        return arg0.getKeyword().compareTo(this.getKeyword());
+        return Collator.getInstance(java.util.Locale.CHINA).compare(this.getKeyword(), arg0.getKeyword());
     }
-
 }
