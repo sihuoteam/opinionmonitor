@@ -1,4 +1,6 @@
-<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils, com.hhhy.web.service.webservice.dfcf.DFCFCrawler" pageEncoding="utf-8"%>
+<%@ page language="java"
+	import="java.util.*,com.hhhy.db.beans.PostArt,com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.dfcf.DFCFCrawler"
+	pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -18,17 +20,17 @@ String path = request.getContextPath();
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>东方财富股吧顶贴</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
+	<head>
+		<base href="<%=basePath%>">
+
+		<title>东方财富股吧顶贴</title>
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<!--
 
 	<link rel="stylesheet" type="text/css" href="./css/key/boostrap.css">
 	<link rel="stylesheet" type="text/css" href="./css/key/boostrap-theme.css">
@@ -43,112 +45,136 @@ String path = request.getContextPath();
 </style>
 
 	-->
-<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
-<script type="text/javascript" src="./js/jquery.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+		<script type="text/javascript" src="./js/jquery.js"></script>
 
-<!-- Bootstrap -->
-<link href="./css/bootstrap.min.css" rel="stylesheet">
-<link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
 
-<!-- Theme -->
-<link rel="stylesheet" href="./css/style-red.css">
+		<!-- Theme -->
+		<link rel="stylesheet" href="./css/style-red.css">
 
-<link rel="stylesheet" href="./css/style-red-my.css">
-  </head>
-  
-  <body>
-  
-<div class="navbar">
-    <a class="appbrand"></a>
-    <button class="menu-toggle" type="button"></button>
+		<link rel="stylesheet" href="./css/style-red-my.css">
+	</head>
 
-    <ul class="topnav pull-right inline">
-			<li><a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
-				data-placement="bottom"><i></i>退出</a></li>
-			
-	</ul>
+	<body>
 
-</div>
-  <br>
- <div class="wrapper">
-		<!-- <div id="content" class="content"> -->
-		<div class="innerLR">
-			<div class="row-fluid">
-				<div class="span6">
-					<div class="widget">
-						<div class="widget-hd">
-							<h4>发帖顶贴</h4>
-						</div>
-						<div class="widget-bd h290">
-							<div id="container" class="h220" data-highcharts-chart="0">
-								<div class="highcharts-container" id="highcharts-poscount"
-									style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
-										font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
-									
-									<table>
-										<tr>
-											<td>题目：</td>
-											<td><input id="title" name="title" type="text"></td>
-										</tr>
-										<tr>
-											<td>发帖内容：</td>
-											<td><textarea name="contentF" id = "contentF"></td>
-										</tr>
+		<div class="navbar">
+			<a class="appbrand"></a>
+			<button class="menu-toggle" type="button"></button>
 
-										<tr>
-											<td>顶贴内容：</td>
-											<td><textarea name="contentD" id = "contentD" placeholder="回车分隔"></td>
-										</tr>
-										<tr></tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td><a href=""> <input value=顶该贴 class="btn btn-info" type="submit"> </a></td>
-										</tr>
-									</table>
+			<ul class="topnav pull-right inline">
+				<li>
+					<a href="loginWeb.jsp" class="top-logout" data-toggle="tooltip"
+						data-placement="bottom"><i></i>退出</a>
+				</li>
 
+			</ul>
+
+		</div>
+		<br>
+		<div class="wrapper">
+			<!-- <div id="content" class="content"> -->
+			<div class="innerLR">
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="widget">
+							<div class="widget-hd">
+								<h4>
+									发帖顶贴
+								</h4>
+							</div>
+							<div class="widget-bd h290">
+								<div id="container" class="h220" data-highcharts-chart="0">
+									<div class="highcharts-container" id="highcharts-poscount"
+										style="position: relative; overflow: hidden; width: 460px; height: 220px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
+
+										<table>
+											<tr>
+												<td>
+													题目：
+												</td>
+												<td>
+													<input id="title" name="title" type="text">
+												</td>
+											</tr>
+											<tr>
+												<td>
+													发帖内容：
+												</td>
+												<td>
+													<textarea name="contentF" id="contentF"></textarea>
+												</td>
+											</tr>
+
+											<tr>
+												<td>
+													顶贴内容：
+												</td>
+												<td>
+													<textarea name="contentD" id="contentD" placeholder="回车分隔"></textarea>
+												</td>
+											</tr>
+											<tr></tr>
+											<tr>
+												<td></td>
+												<td></td>
+												<td>
+													<a href=""> <input value=顶该贴 class="btn btn-info"
+															type="submit"> </a>
+												</td>
+											</tr>
+										</table>
+
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="span6 mglf20">
-					<div class="widget">
-						<div class="widget-hd">
-							<h4>首页顶贴</h4>
-						</div>
-						<div class="widget-bd h290">
-							<div id="pie" class="h290" data-highcharts-chart="1">
-								<div class="highcharts-container"
-									id="highcharts-emotionDistributed"
-									style="position: relative; width: 460px; height: 290px; text-align: left; line-height: normal; z-index: 0;">
-  
-  
-    <table align="center" cellspacing="10">
-    <% if(posts==null || posts.size()==0){ %>
-			<tr>
-			<td>没有帖子显示</td>
-			
-			</tr>
-		<% } else{ int i=0; %>
-		<% for(PostArt post:posts){ %>
-    	<tr>
-  			<td>			
-  			<a href="<%= post.getUrl() %>"><%=post.getTitle() %></a>
-  			</td>
-  			
-  			<td>
-  			<input type="text" id=<%=i %> placeholder="在此输入顶贴内容">
-  			</td>
-  			<td>
-  				<button onclick=dingtie("<%=post.getUrl() %>",<%=i %>)>点击这里</button>
-  			</td>
-  			
-		</tr>		
-		<% i++; }} %>
-    </table>
-    <script type="text/javascript">
+					<div class="span6 mglf20">
+						<div class="widget">
+							<div class="widget-hd">
+								<h4>
+									首页顶贴
+								</h4>
+							</div>
+							<div class="widget-bd h290">
+								<div id="pie" class="h290" data-highcharts-chart="1">
+									<div class="highcharts-container"
+										id="highcharts-emotionDistributed"
+										style="position: relative; width: 460px; height: 290px; text-align: left; line-height: normal; z-index: 0;">
+
+
+										<table align="center" cellspacing="10">
+											<% if(posts==null || posts.size()==0){ %>
+											<tr>
+												<td>
+													没有帖子显示
+												</td>
+
+											</tr>
+											<% } else{ int i=0; %>
+											<% for(PostArt post:posts){ %>
+											<tr>
+												<td>
+													<a href="<%= post.getUrl() %>"><%=post.getTitle() %></a>
+												</td>
+
+												<td>
+													<input type="text" id=<%=i %> placeholder="在此输入顶贴内容">
+												</td>
+												<td>
+													<button class="btn btn-info" onclick=dingtie("<%=post.getUrl() %>",<%=i %>)>
+														点击这里
+													</button>
+												</td>
+
+											</tr>
+											<% i++; }} %>
+										</table>
+										<script type="text/javascript">
     function dingtie(url, id){
     var cont = $("#"+id).val();
     	$.ajax({
@@ -160,14 +186,14 @@ String path = request.getContextPath();
     }
     
     </script>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- 		</div> -->
 		</div>
-		<!-- 		</div> -->
-	</div>  
-  </body>
+	</body>
 </html>
