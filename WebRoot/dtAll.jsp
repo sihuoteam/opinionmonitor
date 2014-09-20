@@ -1,5 +1,5 @@
 <%@ page language="java"
-	import="java.util.*,com.hhhy.db.beans.KeyWord, com.hhhy.db.DBUtils"
+	import="java.util.*,com.hhhy.db.beans.*, com.hhhy.db.DBUtils"
 	pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -12,15 +12,15 @@
 		return;
 	}
 	String email = (String) session.getAttribute("name"); 
+	String error = (String)session.getAttribute("stockerror");
 	//List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
 	//List<KeyWord> keywords = (List<KeyWord>) session.getAttribute("keywords");
-	List<String> shares = null;
+	List<Stock> shares = DBUtils.getStockByUser(userid);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
 
 <title>顶贴关键词设置</title>
 
@@ -93,20 +93,20 @@ Bootstrap JavaScript
 		%>
 
 		<%
-			for (String share : shares) {
+			for (Stock share : shares) {
 		%>
 		<tr>
-			<td><%=share%></td>
-			<td><a href=""> <input value=东方财富股吧 class="btn btn-info"
+			<td><%=share.getStockname() %></td>
+			<td><a href="./dingtieDFCF.jsp?sid=<%=share.getStockid() %>"> <input value=东方财富股吧 class="btn btn-info"
 					type="submit"> </a></td>
-			<td><a href=""> <input value=和讯股吧 class="btn btn-info"
+			<td><a href="./dingtieHX.jsp?sid=<%=share.getStockid() %>"> <input value=和讯股吧 class="btn btn-info"
 					type="submit"> </a></td>
-			<td><a href=""> <input value=金融界股吧 class="btn btn-info"
+			<td><a href="./dingtieJRJ.jsp?sid=<%=share.getStockid() %>"> <input value=金融界股吧 class="btn btn-info"
 					type="submit"> </a></td>
 			<td>
-				<form action="" method="POST">
+				<form action="stockdel" method="POST">
 					<input value=删除 class="btn btn-danger" type="submit"> <input
-						type='hidden' name='kid' value="<%=share%>">
+						type='hidden' name='kid' value="<%=share.getId() %>">
 				</form></td>
 		</tr>
 		<%
@@ -124,7 +124,7 @@ Bootstrap JavaScript
 	<div align="center">
 		<h4>添加关键词</h4>
 		<table cellspacing="10">
-			<form action="" method="POST">
+			<form action="stockadd" method="POST">
 				<tr>
 					<td><input id="shareName" name="shareName" type="text">
 					</td>

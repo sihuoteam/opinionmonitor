@@ -5,4 +5,8 @@ public class StringUtils{
         if(str==null || "".equals(str)) return false;
         return true;
     }
+    
+    public static boolean isNumber(String str){
+        return org.apache.commons.lang3.StringUtils.isNumeric(str);
+    }
 }

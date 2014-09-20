@@ -26,6 +26,7 @@ import com.hhhy.db.beans.EmotionWord;
 import com.hhhy.db.beans.HistoryBean;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.KeyWordPage;
+import com.hhhy.db.beans.Stock;
 import com.hhhy.db.beans.User;
 import com.hhhy.db.beans.WebSite;
 import com.hhhy.db.beans.item.Condition;
@@ -34,7 +35,6 @@ import com.hhhy.db.beans.item.Pair;
 import com.hhhy.db.beans.item.SrcType;
 
 /**
- * 瀵规�版��搴����浣����涓�浜�姝�
  * 
  * @author chenlingpeng
  * 
@@ -47,8 +47,6 @@ public class DBUtils {
     private static final String EMOTIONWORD_TABLE = "a_emotionword";
     private static final String KEYWORDPAGE_TABLE = "a_keywordpage";
     private static final String NEGWORD_TABLE = "a_negword";
-
-    // private static final String USERKEYWORD_TABLE = "a_userkeyword";
 
     public static long isArticleExist(String url) throws SQLException {
         String sql = "select * from " + ARTICLE_TABLE + " where url=?";
@@ -78,8 +76,6 @@ public class DBUtils {
         }
     }
 
-    /*************************** 璐���风�＄����ㄥ�� **************************/
-    // 涓���借��缁�create TODO
     public static long createUser(User user) throws SQLException {
         String sql = "insert into " + ADMIN_TABLE
                 + " (email, password) values(?,?)";
@@ -148,8 +144,6 @@ public class DBUtils {
         DBOperator.update(sql, new Object[] { phone, able, uid });
     }
 
-    /*************************** 璐���风�＄����ㄥ��缁���� **************************/
-
     public static List<EmotionWord> getEmotionWords() throws SQLException {
         String sql = "select * from " + EMOTIONWORD_TABLE;
         List<EmotionWord> emotionWords = DBOperator.select(sql,
@@ -167,8 +161,6 @@ public class DBUtils {
         return ret;
     }
 
-    /*************************** ��抽��璇�澶������ㄥ�� **************************/
-
     public static List<KeyWord> getAllKeyWordObj() throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE + " where uid>0";
         List<KeyWord> keywords = DBOperator.select(sql,
@@ -177,7 +169,6 @@ public class DBUtils {
     }
 
     /**
-     * ���杩������抽��璇�
      * 
      * @return
      * @throws SQLException
@@ -190,10 +181,6 @@ public class DBUtils {
         for (Object[] word : keywords) {
             keywordList.add((String) word[0]);
         }
-        // List<KeyWord> objs = getAllKeyWordObj();
-        // for(KeyWord obj:objs){
-        // keywords.add(obj.getKeyword());
-        // }
         return keywordList;
 
     }
@@ -214,7 +201,6 @@ public class DBUtils {
         return keyword;
     }
 
-    // 涓������ㄦ�疯�����涓������抽��璇�, ��ㄦ�蜂俊���瀛����session涓�
     public static List<KeyWord> getUserKeyWord(long userid) throws SQLException {
         String sql = "select * from " + KEYWORD_TABLE + " where uid=?";
         List<KeyWord> keywords = DBOperator.select(sql,
@@ -313,7 +299,7 @@ public class DBUtils {
                     Article.class), new Object[] { pageid.getPid() });
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
-                art.setContent(""); // ���瀹圭疆绌猴�����灏�瀛���ㄦ�����
+                art.setContent(""); 
                 art.setSummary("");
                 arts.add(art);
             }
@@ -333,15 +319,12 @@ public class DBUtils {
                     Article.class), new Object[] { (Long) pageid[0] });
             if (art != null && art.getTitle() != null
                     && !"".equals(art.getTitle())) {
-                // art.setContent(""); // ���瀹圭疆绌猴�����灏�瀛���ㄦ�����
-                // art.setSummary("");
                 arts.add(art);
             }
         }
         return arts;
     }
 
-    // get all articles for user(uid), should paging
     public static List<Article> getUserArticle2(long uid) throws SQLException {
         String sql = "select distinct a_keywordpage.pid from a_keywordpage inner join a_keyword on a_keyword.id=a_keywordpage.kid where a_keyword.uid=? and ctime>?";
         List<Object[]> pids = DBOperator.selectArrayList(sql, new Object[] {
@@ -456,9 +439,6 @@ public class DBUtils {
         return arts;
     }
 
-    /*************************** ��抽��璇�澶������ㄥ��缁���� **************************/
-
-    /*************************** ��抽��璇�缁�璁￠�ㄥ�� **************************/
 
     public static boolean addTrend(KeyWordPage keyWordPage) throws SQLException {
         String sql = "select count(*) from " + KEYWORDPAGE_TABLE
@@ -477,14 +457,8 @@ public class DBUtils {
         return DBOperator.update(sql, params);
     }
 
-    /**
-     * 濯�浣���ユ��缁�璁�
-     */
     public static Map<String, Integer> getMediaSourceStatis2(int kid)
             throws SQLException {
-        // String sql0 = "select website from "+KEYWORDPAGE_TABLE
-        // +" where kid=?";
-        // List<Integer> websites =
         String sql = "select website from " + KEYWORDPAGE_TABLE
                 + " where kid=?";
         List<String> websites = DBOperator
@@ -500,9 +474,6 @@ public class DBUtils {
 
     public static Map<String, Integer> getMediaSourceStatis(int kid)
             throws SQLException {
-        // String sql0 = "select website from "+KEYWORDPAGE_TABLE
-        // +" where kid=?";
-        // List<Integer> websites =
         String sql = "select website from " + KEYWORDPAGE_TABLE
                 + " where kid=?";
         // List<String> websites = DBOperator
@@ -520,7 +491,6 @@ public class DBUtils {
     }
 
     /**
-     * ��ユ��绫诲��缁�璁�
      * 
      * @param keyword
      * @return
@@ -541,7 +511,6 @@ public class DBUtils {
     }
 
     /**
-     * ��峰��姝ｈ�� deplicated?
      * 
      * @param keyword
      * @return
@@ -612,13 +581,6 @@ public class DBUtils {
         return pair;
     }
 
-    /**
-     * ��峰�� 姝ｈ��骞� ���������缁�璁￠��
-     * 
-     * @param keyword
-     * @return
-     * @throws SQLException
-     */
     public static int[] getEmotionStatisCount(int kid) throws SQLException {
         String sql = "select emotion from " + KEYWORDPAGE_TABLE
                 + " where kid=?";
@@ -664,10 +626,6 @@ public class DBUtils {
 
         return counts;
     }
-
-    /*************************** ��抽��璇�缁�璁￠�ㄥ��缁���� **************************/
-
-    /*************************** data export��ㄥ�� **************************/
 
     public static List<Article> exportData(Condition condition)
             throws SQLException {
@@ -730,11 +688,6 @@ public class DBUtils {
         }
 
         String keyword = "kid=" + kid;
-        /*
-         * for (String kid : keywords) { if (keyword.length() == 0) { keyword =
-         * "kid=" + Integer.parseInt(kid); } else { keyword += " or kid=" +
-         * Integer.parseInt(kid); } }
-         */
 
         String limit = " limit " + condition.getSize();
         String orderby = " order by ctime desc ";
@@ -763,9 +716,6 @@ public class DBUtils {
                 arts.add(art);
             }
         }
-
-        // where += " and ctime>"+start+" and ctime<"+end;
-
         return arts;
     }
 
@@ -894,21 +844,32 @@ public class DBUtils {
         }
         return t;
     }
+    
+    private static final String STOCK_TABLE = "a_stock";
+    
+    public static void addStock(String name, String number, long uid) throws SQLException{
+        String sql = "insert into "+STOCK_TABLE+"(uid,stockid,stockname) values(?,?,?)";
+        DBOperator.update(sql, new Object[]{uid, number, name});
+    }
+    
+    public static void delStock(long id) throws SQLException{
+        String sql = "delete from "+STOCK_TABLE+" where id=?";
+        DBOperator.update(sql, new Object[]{id});
+    }
+    
+    public static List<Stock> getStockByUser(long uid) throws SQLException{
+        String sql = "select * from " +STOCK_TABLE+" where uid=?";
+        return DBOperator.select(sql, new BeanListHandler<Stock>(Stock.class), new Object[]{uid});
+    }
 
-    /***************************
-     * data export��ㄥ��缁����
-     * 
-     * @throws IOException
-     *             *
-     *************************/
 
     public static void main(String[] args) throws SQLException, IOException {
         // insertWebSite("www.baidu.com");
         // logger.info(DBUtils.getHistoryKeyword());
-        int[] a = getTodayEmotionStatisCount(27);
-        logger.info(a[0]+" "+a[1]+" "+a[2]);
-        a = getEmotionStatisCount(27);
-        logger.info(a[0]+" "+a[1]+" "+a[2]);
+//        int[] a = getTodayEmotionStatisCount(27);
+//        logger.info(a[0]+" "+a[1]+" "+a[2]);
+//        a = getEmotionStatisCount(27);
+//        logger.info(a[0]+" "+a[1]+" "+a[2]);
 //        getUserArticleWithFilter(42, "0", "1");
 //        getUserArticleWithFilter(42, "1", "1");
 //        getUserArticleWithFilter(42, "0", "2");
@@ -1043,18 +1004,6 @@ public class DBUtils {
         // logger.info(JsonUtils.toJson(keymap));
     }
 
-    public static void contert() {
-        try {
-            List<String> lines = FileUtils.readLines(new File(
-                    "file/姝ｉ�㈡�����璇�璇�.txt"), "gbk");
-            FileUtils.writeLines(new File("file/姝ｉ�㈡�����璇�璇�.txt"), lines);
-            lines = FileUtils.readLines(new File("file/璐���㈡�����璇�璇�.txt"),
-                    "gbk");
-            FileUtils.writeLines(new File("file/璐���㈡�����璇�璇�.txt"), lines);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public static void contert() {}
 
 }

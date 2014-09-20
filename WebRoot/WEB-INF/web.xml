@@ -288,6 +288,26 @@
 		<url-pattern>/specmonitor</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>stockdel</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.StockDelServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>stockdel</servlet-name>
+		<url-pattern>/stockdel</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>stockadd</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.StockAddServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>stockadd</servlet-name>
+		<url-pattern>/stockadd</url-pattern>
+	</servlet-mapping>
+
 
 	<servlet>
 		<servlet-name>test</servlet-name>
