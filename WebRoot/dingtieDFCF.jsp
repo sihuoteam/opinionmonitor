@@ -13,6 +13,7 @@ String path = request.getContextPath();
    // }
    // String email = (String) session.getAttribute("name");
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
+    String number = request.getParameter("sid");
     DFCFCrawler dfcf = new DFCFCrawler();
     dfcf.parserDFCF();
     List<PostArt> posts = dfcf.getPosts();
