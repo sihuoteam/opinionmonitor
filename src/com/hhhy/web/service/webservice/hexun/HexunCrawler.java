@@ -13,14 +13,15 @@ import java.util.List;
  * Created by Ghost on 2014/9/24 0024.
  */
 public class HexunCrawler {
-    private String urlBase = "http://guba.hexun.com/";
-    private List<PostArt> posts = new ArrayList<PostArt>();
+    private static  String urlBase = "http://guba.hexun.com/";
+    
 
 
-    public List<PostArt> parseHexun(String daihao){
+    public static List<PostArt> parseHexun(String daihao){
+        List<PostArt> posts = new ArrayList<PostArt>();
         String url = urlBase+daihao+",guba.html";
         String html = GetHTML.getHtml(url,"gb2312");
-        System.out.println(html);
+//        System.out.println(html);
         Document document = Jsoup.parse(html);
         Elements dls = document.select("div#topiclist").select("dl");
         for(Element ele:dls){
@@ -32,5 +33,12 @@ public class HexunCrawler {
             }
         }
         return posts;
+    }
+    
+    public static void main(String[] args){
+        List<PostArt> posts= parseHexun("002314");
+        for(PostArt post:posts){
+            System.out.println(post.getTitle()+": "+post.getUrl());
+        }
     }
 }
