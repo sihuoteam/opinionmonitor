@@ -18,6 +18,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import chen.bupt.httpclient.utils.InputStreamUtils;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -35,7 +37,7 @@ public class GetHTML {
     private static ArrayList<String> proxy = new ArrayList<String>();
     static{
         try{
-            if (proxy.size() == 0) {
+            if (proxy.size() == -1) {
                 BufferedReader br = new BufferedReader(new FileReader("./proxy.txt"));
                 String line;
                 while ((line = br.readLine()) != null) {
