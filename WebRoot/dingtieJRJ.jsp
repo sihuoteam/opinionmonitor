@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.jrj.JRJUtils" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -10,8 +10,10 @@ String path = request.getContextPath();
         return;
     }
     String email = (String) session.getAttribute("name");
+    String number = request.getParameter("sid");
+    List<PostArt> posts = JRJUtils.getPosts(number);
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
-    List<PostArt> posts = (List<PostArt>) session.getAttribute("DFCFPosts");
+    //List<PostArt> posts = (List<PostArt>) session.getAttribute("DFCFPosts");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

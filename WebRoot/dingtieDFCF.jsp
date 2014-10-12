@@ -1,5 +1,5 @@
 <%@ page language="java"
-	import="java.util.*,com.hhhy.db.beans.PostArt,com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.dfcf.DFCFCrawler"
+	import="java.util.*,com.hhhy.db.beans.PostArt,com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.dfcf.DFCFDingUtil"
 	pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
@@ -14,9 +14,9 @@ String path = request.getContextPath();
    // String email = (String) session.getAttribute("name");
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
     String number = request.getParameter("sid");
-    DFCFCrawler dfcf = new DFCFCrawler();
-    dfcf.parserDFCF();
-    List<PostArt> posts = dfcf.getPosts();
+    //DFCFCrawler dfcf = new DFCFCrawler();
+    //dfcf.parserDFCF();
+    List<PostArt> posts = DFCFDingUtil.getPosts(number);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
