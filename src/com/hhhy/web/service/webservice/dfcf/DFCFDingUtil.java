@@ -2,11 +2,19 @@ package com.hhhy.web.service.webservice.dfcf;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import com.hhhy.db.beans.PostArt;
 
 import chen.bupt.httpclient.NormalHttpClient;
 import chen.bupt.httpclient.method.CHttpGet;
@@ -108,14 +116,38 @@ public class DFCFDingUtil {
         }
     }
 
+    public static List<PostArt> getPosts(String code) throws IOException{
+        String url = "http://guba.eastmoney.com/list,"+code+".html";
+        NormalHttpClient client = new NormalHttpClient();
+        CHttpGet httpGet = new CHttpGet(url);
+        HttpResponse response = client.sendRequest(httpGet.getHttpGet());
+        String content = InputStreamUtils.entity2String(response.getEntity());
+        List<PostArt> arts= new ArrayList<PostArt>();
+        Document doc = Jsoup.parse(content);
+        Elements eles = doc.select(".articleh");
+        for(Element ele:eles){
+            PostArt art = new PostArt();
+            String title = ele.select(".l3").select("a").attr("title");
+            String url2 = "http://guba.eastmoney.com/"+ele.select(".l3").select("a").attr("href");
+            art.setTitle(title);
+            art.setUrl(url2);
+            arts.add(art);
+        }
+        return arts;
+    }
+    
     /**
      * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
 //         dingtie("http://guba.eastmoney.com/news,cjpl,123781934.html","顶3");
-        System.out.println("=======================");
-        System.out.println(fatie("002314", "标题要长啊啊啊啊啊啊啊啊啊啊啊啊啊", "大家好"));
+//        System.out.println("=======================");
+//        System.out.println(fatie("002314", "标题要长啊啊啊啊啊啊啊啊啊啊啊啊啊2", "大家好"));
+      List<PostArt> posts= getPosts("002314");
+      for(PostArt post:posts){
+          System.out.println(post.getTitle()+": "+post.getUrl());
+      }
     }
 
 }

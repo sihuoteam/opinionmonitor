@@ -44,6 +44,8 @@ public class JRJUtils {
     
     public static boolean fatie(String title, String content, String code) throws IOException{
         NormalHttpClient client = new NormalHttpClient();
+//        DefaultHttpClient client = login("ghostghostinmatrix","password1");
+//        client.setCookieStore(null);
         CHttpPost post = new CHttpPost("http://istock.jrj.com.cn/topicaddsingle.jspa");
         post.addFormParam("anonym","");
         post.addFormParam("forumid",code);
@@ -54,8 +56,10 @@ public class JRJUtils {
         post.addFormParam("showMessage","0");
         post.addFormParam("Title",title);
         post.addFormParam("detail","");
+//        post.addFormParam("isShow","on");
         post.setUrlEncoder("GBK");
         HttpResponse respones = client.sendRequest(post.getHttpPost());
+//        HttpResponse respones = client.execute(post.getHttpPost());
         System.out.println(ResponseUtils.getResponseStatus(respones));
 //        System.out.println(ResponseUtils.getRedirectionURL(respones));
         System.out.println(InputStreamUtils.entity2String(respones.getEntity(), "GBK"));
@@ -122,11 +126,13 @@ public class JRJUtils {
     }
     
     public static void main(String[] args) throws IOException{
+//        DefaultHttpClient client = login("ghostghostinmatrix2","password1");
+        fatie("雅致股份不错title222","content","002314");
 //        dingtie("http://istock.jrj.com.cn/article,002314,26765324.html","哈哈对");
-        List<PostArt> posts= getPosts("002314");
-        for(PostArt post:posts){
-            System.out.println(post.getTitle()+": "+post.getUrl());
-        }
+//        List<PostArt> posts= getPosts("002314");
+//        for(PostArt post:posts){
+//            System.out.println(post.getTitle()+": "+post.getUrl());
+//        }
     }
 
 }
