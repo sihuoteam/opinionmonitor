@@ -86,7 +86,7 @@
 		<div id="content" class="content">
 			<ul class="breadcrumb">
 				<li>您在这里：</li>
-				<li class="color-red">设置/关键词设置</li>
+				<li class="color-red">设置/自添加爬虫列表</li>
 			</ul>
 			<br> <br> <br>
 			<table align="center" cellspacing="10">
