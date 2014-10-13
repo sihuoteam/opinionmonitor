@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.hhhy.db.beans.PostArt, com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.hexun.HexunCrawler" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -10,8 +10,10 @@ String path = request.getContextPath();
         return;
     }
     String email = (String) session.getAttribute("name");
+    String number = request.getParameter("sid");
+    List<PostArt> posts = HexunCrawler.parseHexun(number);
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
-    List<PostArt> posts = (List<PostArt>) session.getAttribute("DFCFPosts");
+    //List<PostArt> posts = (List<PostArt>) session.getAttribute("DFCFPosts");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -19,7 +21,7 @@ String path = request.getContextPath();
   <head>
     <base href="<%=basePath%>">
     
-    <title>新浪股吧顶贴</title>
+    <title>和讯股吧顶贴</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -54,8 +56,7 @@ String path = request.getContextPath();
   <iframe frameborder="0" style="display: none;"></iframe>
   
 <div class="navbar">
-    <a class="appbrand" align="center" href=""><img src="./pic/hhhy.png" width="130" alt=""
-			style="position: relative;top:0;"> </a>
+    <a class="appbrand"></a>
     <button class="menu-toggle" type="button"></button>
 
     <ul class="topnav pull-right inline">
@@ -69,7 +70,7 @@ String path = request.getContextPath();
     <table align="center" cellspacing="10">
     <% if(posts==null || posts.size()==0){ %>
 			<tr>
-			<td>没有帖子显示, 请尝试刷新页面</td>
+			<td>没有帖子显示</td>
 			
 			</tr>
 		<% } else{ %>
@@ -81,7 +82,7 @@ String path = request.getContextPath();
   			</td>
   			
   			<td>
-  			<input type="text" placeholder="在此输入顶贴内容" name="content">
+  			<input type="text" placeholder="在此输入顶贴内容">
   			</td>
   			<td>
   				<a href="">
