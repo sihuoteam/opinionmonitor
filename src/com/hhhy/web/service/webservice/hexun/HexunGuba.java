@@ -227,6 +227,6 @@ public class HexunGuba {
     public static void main(String[] args) throws IOException {
 //        System.out.println(HexunGubaHuiTie("http://guba.hexun.com/d/19704376,guba.html", "c欢迎各位朋友加入 75266565 投资理财交流群，群信息发布时间为9:00-21:00.请各位朋友届时准时关注，锁定本群、锁定财富！各位朋友有什么投资投资方面的问题都可以随时咨询。祝各位工作生活愉快，投资理财长虹，获利多多！"));
 
-        System.out.println(HexunGubFatie("c顶七星电子", "y很有潜力，顶啊！！","002371"));
+//        System.out.println(HexunGubFatie("c顶七星电子", "y很有潜力，顶啊！！","002371"));
     }
 }
