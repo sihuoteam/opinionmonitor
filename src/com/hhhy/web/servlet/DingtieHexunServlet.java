@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +15,7 @@ import com.hhhy.web.service.webservice.hexun.HexunGuba;
 /**
  * Created by Ghost on 2014/9/24 0024.
  */
-public class DingtieHexunServlet {
+public class DingtieHexunServlet extends HttpServlet {
     private static final Logger logger = Logger
             .getLogger(DingtieHexunServlet.class);
 
@@ -23,7 +24,7 @@ public class DingtieHexunServlet {
         String url = request.getParameter("url");
         url = URLDecoder.decode(url, "utf-8");
         String content = request.getParameter("content");
-        System.out.println(content);
+        System.out.println("content"+content);
         content = URLDecoder.decode(content, "utf-8");
         System.out.println(content);
         boolean flag = HexunGuba.HexunGubaHuiTie(url, content);

@@ -16,6 +16,7 @@ import com.hhhy.db.DBUtils;
 import com.hhhy.db.beans.KeyWord;
 import com.hhhy.db.beans.PostArt;
 import com.hhhy.web.service.webservice.dfcf.DFCFDingUtil;
+import com.hhhy.web.service.webservice.hexun.HexunGuba;
 
 public class FatieHexunServlet extends HttpServlet {
     /**
@@ -26,13 +27,16 @@ public class FatieHexunServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = request.getParameter("url");
-        url = URLDecoder.decode(url, "utf-8");
+        String title = request.getParameter("title");
+        title = URLDecoder.decode(title, "utf-8");
         String content = request.getParameter("content");
-        System.out.println(content);
+//        System.out.println(content);
         content = URLDecoder.decode(content, "utf-8");
-        System.out.println(content);
-        boolean flag = DFCFDingUtil.dingtie(url, content);
+//        System.out.println(content);
+        String number = request.getParameter("number");
+        number = URLDecoder.decode(number, "utf-8");
+        boolean flag = HexunGuba.HexunGubFatie(title, content, number);
+//        boolean flag = DFCFDingUtil.dingtie(url, content);
         if(flag){
             response.getWriter().write("success");
         }else{

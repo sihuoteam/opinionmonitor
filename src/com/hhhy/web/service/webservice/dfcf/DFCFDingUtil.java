@@ -77,6 +77,9 @@ public class DFCFDingUtil {
 
     public static boolean fatie(String number, String title, String content)
             throws IOException {
+        System.out.println(number);
+        System.out.println(title);
+        System.out.println(content);
         NormalHttpClient client = login("wuxiu9218@sina.com","920108");
         CHttpPost post = new CHttpPost("http://guba.eastmoney.com/action.aspx");
         // NormalHttpClient client = new NormalHttpClient();
@@ -143,11 +146,11 @@ public class DFCFDingUtil {
     public static void main(String[] args) throws IOException {
 //         dingtie("http://guba.eastmoney.com/news,cjpl,123781934.html","顶3");
 //        System.out.println("=======================");
-//        System.out.println(fatie("002314", "标题要长啊啊啊啊啊啊啊啊啊啊啊啊啊2", "大家好"));
-      List<PostArt> posts= getPosts("002314");
-      for(PostArt post:posts){
-          System.out.println(post.getTitle()+": "+post.getUrl());
-      }
+        System.out.println(fatie("002314", "标题要长啊啊啊啊啊啊啊啊啊啊啊啊啊22", "大家好"));
+//      List<PostArt> posts= getPosts("002314");
+//      for(PostArt post:posts){
+//          System.out.println(post.getTitle()+": "+post.getUrl());
+//      }
     }
 
 }

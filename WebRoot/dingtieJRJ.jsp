@@ -111,8 +111,10 @@
 							<tr>
 								<td></td>
 								<td></td>
-								<td><a href=""> <input value=顶该贴 class="btn btn-info"
-										type="submit"> </a></td>
+								<td>
+								<button class="btn btn-info" onclick=fatie("<%=number %>")>
+						点击这里</button>
+						</td>
 							</tr>
 						</table>
 
@@ -169,6 +171,17 @@
     	url: "dingtiejrj",
     	data: {url:url, content:cont},
     	success: function(msg){alert(msg);$("#"+id).val()="";},
+    	});
+    }
+    
+    function fatie(number){
+    var title = $("#title").val();
+    var content = $("#contentF").val();
+    	$.ajax({
+    	type:"post",
+    	url: "fatiejrj",
+    	data: {title:title, content:content, number: number},
+    	success: function(msg){alert(msg);$("#head").val()="";$("#contentF").val()=""},
     	});
     }
     
