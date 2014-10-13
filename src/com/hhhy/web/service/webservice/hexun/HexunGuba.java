@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
  * Created by Ghost on 2014/9/18 0018.
  */
 public class HexunGuba {
-    String url;
     private static HttpGet setHttpGet(String url){
         HttpGet httpGet = null;
         httpGet = new HttpGet(url);
@@ -63,16 +62,16 @@ public class HexunGuba {
         }
         return httpPost;
     }
-    public boolean HexunGubaHuiTie(String username, String password, String tiebaID, String tieziID, String huifu) throws IOException {
+    public static boolean HexunGubaHuiTie(String tarUrl, String huifu) throws IOException {
 
-        url = "https://reg.hexun.com/login.aspx";
+        String url = "https://reg.hexun.com/login.aspx";
         DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 
         HashMap<String, String> params = new HashMap<String, String>();
 
         params.put("LoginStateAuto","on");
-        params.put("TextBoxPassword",password);
-        params.put("TextBoxUserName",username);
+        params.put("TextBoxPassword","19901109abc");
+        params.put("TextBoxUserName","ghostinmatrix");
         params.put("fromhost","guba.hexun.com");
         params.put("gourl","on");
         params.put("hiddenReferrer","http://guba.hexun.com/");
@@ -102,7 +101,7 @@ public class HexunGuba {
 
         String postUrl = "http://guba.hexun.com/PostComment.aspx";
         HashMap<String,String> params2 = new HashMap<String, String>();
-        String targetUrl = "http://guba.hexun.com/"+tiebaID+",guba,"+tieziID+".html";
+        String targetUrl = tarUrl;//"http://guba.hexun.com/"+tiebaID+",guba,"+tieziID+".html";
         String[] articleIds = targetUrl.split(",");
         int len = articleIds.length;
         String articleId = articleIds[len-1].replace(".html","");
@@ -129,16 +128,16 @@ public class HexunGuba {
             return false;
     }
 
-    public boolean HexunGubFatie(String username, String password,String tiebaID, String title, String content) throws IOException {
+    public static boolean HexunGubFatie(String title, String content, String tiebaID) throws IOException {
 
-        url = "https://reg.hexun.com/login.aspx";
+        String url = "https://reg.hexun.com/login.aspx";
         DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 
         HashMap<String, String> params = new HashMap<String, String>();
 
         params.put("LoginStateAuto","on");
-        params.put("TextBoxPassword",password);
-        params.put("TextBoxUserName",username);
+        params.put("TextBoxPassword","19901109abc");
+        params.put("TextBoxUserName","ghostinmatrix");
         params.put("fromhost","guba.hexun.com");
         params.put("gourl","on");
         params.put("hiddenReferrer","http://guba.hexun.com/");
@@ -208,10 +207,7 @@ public class HexunGuba {
     }
 
     public static void main(String[] args) throws IOException {
-        HexunGuba e = new HexunGuba();
-
-        e.HexunGubaHuiTie("ghostinmatrix", "19901109abc", "601607", "19492488", "强势顶！");
-        e.HexunGubFatie("ghostinmatrix","19901109abc", "002371","顶七星电子y", "y很有潜力，顶啊！！");
-
+        HexunGubaHuiTie("", "强势顶！");
+        HexunGubFatie("顶七星电子y", "y很有潜力，顶啊！！","002371");
     }
 }
