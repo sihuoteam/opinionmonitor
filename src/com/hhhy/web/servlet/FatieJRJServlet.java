@@ -2,21 +2,27 @@ package com.hhhy.web.servlet;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.hhhy.web.service.webservice.hexun.HexunGuba;
+import com.hhhy.db.DBUtils;
+import com.hhhy.db.beans.KeyWord;
+import com.hhhy.db.beans.PostArt;
+import com.hhhy.web.service.webservice.dfcf.DFCFDingUtil;
 
-/**
- * Created by Ghost on 2014/9/24 0024.
- */
-public class DingtieHexunServlet {
+public class FatieJRJServlet extends HttpServlet {
+    /**
+     * 
+     */
     private static final Logger logger = Logger
-            .getLogger(DingtieHexunServlet.class);
+            .getLogger(FatieJRJServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,11 +32,10 @@ public class DingtieHexunServlet {
         System.out.println(content);
         content = URLDecoder.decode(content, "utf-8");
         System.out.println(content);
-        boolean flag = HexunGuba.HexunGubaHuiTie(url, content);
-//        boolean flag = HexunGuba.dingtie(url, content);
-        if (flag) {
+        boolean flag = DFCFDingUtil.dingtie(url, content);
+        if(flag){
             response.getWriter().write("success");
-        } else {
+        }else{
             response.getWriter().write("fail");
         }
     }
@@ -40,4 +45,5 @@ public class DingtieHexunServlet {
         // response.sendRedirect("error.jsp");
         doGet(request, response);
     }
+
 }

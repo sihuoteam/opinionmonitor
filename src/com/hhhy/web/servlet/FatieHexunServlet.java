@@ -1,37 +1,49 @@
 package com.hhhy.web.servlet;
 
-import com.hhhy.web.service.webservice.hexun.HexunGuba;
-
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.net.URLDecoder;
+import java.sql.SQLException;
+import java.util.List;
 
-/**
- * Created by Ghost on 2014/9/24 0024.
- */
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+import com.hhhy.db.DBUtils;
+import com.hhhy.db.beans.KeyWord;
+import com.hhhy.db.beans.PostArt;
+import com.hhhy.web.service.webservice.dfcf.DFCFDingUtil;
+
 public class FatieHexunServlet extends HttpServlet {
+    /**
+     * 
+     */
+    private static final Logger logger = Logger
+            .getLogger(FatieHexunServlet.class);
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = (String) request.getParameter("url");
-        String content =(String) request.getParameter("content");
-        String title =(String) request.getParameter("title");
-
-        String regex = "http://guba.hexun.com/(\\d+),guba";
-        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(url);
-        if(matcher.find()){
-            String tiebaID = matcher.group(1);
-
-            HexunGuba hexunGuba = new HexunGuba();
-
-            boolean rst = hexunGuba.HexunGubFatie(username, password, tiebaID, title, content);
-            if(rst)
-                response.getWriter().write("success");
-            else
-                response.getWriter().write("failed, fatie failed!")
-        }
-        else{
-            response.getWriter().write("failed, didn't find tiebaID");
+        String url = request.getParameter("url");
+        url = URLDecoder.decode(url, "utf-8");
+        String content = request.getParameter("content");
+        System.out.println(content);
+        content = URLDecoder.decode(content, "utf-8");
+        System.out.println(content);
+        boolean flag = DFCFDingUtil.dingtie(url, content);
+        if(flag){
+            response.getWriter().write("success");
+        }else{
+            response.getWriter().write("fail");
         }
     }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // response.sendRedirect("error.jsp");
+        doGet(request, response);
+    }
+
 }

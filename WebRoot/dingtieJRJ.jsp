@@ -1,5 +1,5 @@
 <%@ page language="java"
-	import="java.util.*,com.hhhy.db.beans.PostArt,com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.dfcf.DFCFDingUtil"
+	import="java.util.*,com.hhhy.db.beans.PostArt,com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.jrj.JRJUtils"
 	pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -16,7 +16,7 @@
     String number = request.getParameter("sid");
     //DFCFCrawler dfcf = new DFCFCrawler();
     //dfcf.parserDFCF();
-    List<PostArt> posts = DFCFDingUtil.getPosts(number);
+    List<PostArt> posts = JRJUtils.getPosts(number);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -162,7 +162,7 @@
     var cont = $("#"+id).val();
     	$.ajax({
     	type:"post",
-    	url: "dingtiedfcf",
+    	url: "dingtiejrj",
     	data: {url:url, content:cont},
     	success: function(msg){alert(msg);$("#"+id).val()="";},
     	});

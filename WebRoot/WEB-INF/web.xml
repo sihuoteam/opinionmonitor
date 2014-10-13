@@ -277,6 +277,60 @@
 		<url-pattern>/dingtiedfcf</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>dingtiehexun</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.DingtieHexunServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dingtiehexun</servlet-name>
+		<url-pattern>/dingtiehexun</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>dingtiejrj</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.DingtieJRJServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dingtiejrj</servlet-name>
+		<url-pattern>/dingtiejrj</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<!--  -->
+	
+	<servlet>
+		<servlet-name>fatiedfcf</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.FatieDFCFServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fatiedfcf</servlet-name>
+		<url-pattern>/fatiedfcf</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>fatiehexun</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.FatieHexunServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fatiehexun</servlet-name>
+		<url-pattern>/fatiehexun</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>fatiejrj</servlet-name>
+		<servlet-class>com.hhhy.web.servlet.FatieJRJServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fatiejrj</servlet-name>
+		<url-pattern>/fatiejrj</url-pattern>
+	</servlet-mapping>
+	
 	
 	<servlet>
 		<servlet-name>specmonitor</servlet-name>

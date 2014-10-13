@@ -1,5 +1,5 @@
 <%@ page language="java"
-	import="java.util.*,com.hhhy.db.beans.PostArt,com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.dfcf.DFCFDingUtil"
+	import="java.util.*,com.hhhy.db.beans.PostArt,com.hhhy.db.DBUtils,com.hhhy.web.service.webservice.hexun.HexunCrawler"
 	pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
@@ -15,8 +15,9 @@
     //List<KeyWord> keywords = DBUtils.getUserKeyWord(userid);
     String number = request.getParameter("sid");
     //DFCFCrawler dfcf = new DFCFCrawler();
-    //dfcf.parserDFCF();
-    List<PostArt> posts = DFCFDingUtil.getPosts(number);
+    //dfcf.parserDFCF();HexunCrawler
+    //HexunCrawler.
+    List<PostArt> posts = HexunCrawler.parseHexun(number);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -162,9 +163,9 @@
     var cont = $("#"+id).val();
     	$.ajax({
     	type:"post",
-    	url: "dingtiedfcf",
+    	url: "dingtiehexun",
     	data: {url:url, content:cont},
-    	success: function(msg){alert(msg);$("#"+id).val()="";},
+    	success: function(msg){alert(msg);$("#"+id).val()="";}
     	});
     }
     
