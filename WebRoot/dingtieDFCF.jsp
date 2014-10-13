@@ -104,16 +104,13 @@
 						style="resize:none"></textarea>
 				</td>
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
+			
+			<!-- <tr>
 				<td>顶贴内容：</td>
 				<td><textarea name="contentD" id="contentD" placeholder="回车分隔"
 						rows="6" style="resize:none"></textarea>
 				</td>
-			</tr>
+			</tr> -->
 
 
 			<tr>

@@ -67,6 +67,10 @@
 		<button class="menu-toggle" type="button"></button>
 
 		<ul class="topnav pull-right inline">
+		<li><a href="dtAll.jsp">顶贴</a>
+			<li><a href="keylist" class="top-opt" data-toggle="tooltip"
+				data-placement="bottom"><i></i>设置</a>
+			</li>
 			<li><a href="loginWeb.jsp" class="top-logout"
 				data-toggle="tooltip" data-placement="bottom"><i></i>退出</a></li>
 
@@ -96,12 +100,12 @@
 								<td>发帖内容：</td>
 								<td><textarea name="contentF" id="contentF" rows ="3" style="resize:none"></textarea></td>
 							</tr>
-							<tr><td> </td><td></td></tr>
+							<!-- <tr><td> </td><td></td></tr>
 							<tr>
 								<td>顶贴内容：</td>
 								<td><textarea name="contentD" id="contentD"
 										placeholder="回车分隔" rows ="6" style="resize:none"></textarea></td>
-							</tr>
+							</tr> -->
 							
 							
 							<tr>
