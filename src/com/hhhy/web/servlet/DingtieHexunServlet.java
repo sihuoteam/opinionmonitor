@@ -23,10 +23,11 @@ public class DingtieHexunServlet extends HttpServlet {
             throws ServletException, IOException {
         String url = request.getParameter("url");
         url = URLDecoder.decode(url, "utf-8");
+        System.out.println("url"+url);
         String content = request.getParameter("content");
         System.out.println("content"+content);
         content = URLDecoder.decode(content, "utf-8");
-        System.out.println(content);
+//        System.out.println(content);
         boolean flag = HexunGuba.HexunGubaHuiTie(url, content);
 //        boolean flag = HexunGuba.dingtie(url, content);
         if (flag) {
