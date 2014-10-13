@@ -63,6 +63,7 @@ public class HexunGuba {
         return httpPost;
     }
     public static boolean HexunGubaHuiTie(String tarUrl, String huifu) throws IOException {
+/*
 
         String url = "https://reg.hexun.com/login.aspx";
         DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
@@ -97,14 +98,31 @@ public class HexunGuba {
             System.out.println(cookie1.getValue());
             System.out.println("-----------------------------");
         }
+*/
 
 
         String postUrl = "http://guba.hexun.com/PostComment.aspx";
         HashMap<String,String> params2 = new HashMap<String, String>();
         String targetUrl = tarUrl;//"http://guba.hexun.com/"+tiebaID+",guba,"+tieziID+".html";
-        String[] articleIds = targetUrl.split(",");
-        int len = articleIds.length;
-        String articleId = articleIds[len-1].replace(".html","");
+        String articleId;
+        if(targetUrl.contains("/d/")){
+            String tmp = targetUrl.substring(targetUrl.indexOf("/d/"),targetUrl.indexOf(",guba"));
+            String regex = "(\\d+)";
+            Pattern pattern = Pattern.compile(regex,Pattern.MULTILINE);
+            Matcher matcher = pattern.matcher(tmp);
+            if(matcher.find()){
+                articleId = matcher.group(1);
+                System.out.println(articleId);
+            }
+            else
+                return false;
+        }
+        else{
+            String[] articleIds = targetUrl.split(",");
+            int len = articleIds.length;
+            articleId = articleIds[len-1].replace(".html","");
+        }
+
         params2.put("AQuote","0");
         params2.put("content", huifu);
         params2.put("ArticleID",articleId);
@@ -119,7 +137,7 @@ public class HexunGuba {
 
         HttpPost httpPost2 = postForm(postUrl,params2,headParams2);
         DefaultHttpClient defaultHttpClient1 = new DefaultHttpClient();
-        defaultHttpClient1.setCookieStore(cookie);
+        //defaultHttpClient1.setCookieStore(cookie);
         HttpResponse response = defaultHttpClient1.execute(httpPost2);
         int code2 = response.getStatusLine().getStatusCode();
         if(code2==200)
@@ -130,7 +148,7 @@ public class HexunGuba {
 
     public static boolean HexunGubFatie(String title, String content, String tiebaID) throws IOException {
 
-        String url = "https://reg.hexun.com/login.aspx";
+        /*String url = "https://reg.hexun.com/login.aspx";
         DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 
         HashMap<String, String> params = new HashMap<String, String>();
@@ -165,10 +183,10 @@ public class HexunGuba {
         }
 
 
-
+*/
         String getTopicIdUrl = "http://guba.hexun.com/search/ResultAll.aspx?sw="+tiebaID;
 
-        String html = GetHTML.getHtml(getTopicIdUrl,"gb2312");
+        String html = GetHTML.getHtml(getTopicIdUrl, "gb2312");
         String regex = "TopicID=(\\d+)";
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(html);
@@ -195,7 +213,7 @@ public class HexunGuba {
 
             HttpPost httpPost2 = postForm(postUrl,params2,headParams2);
             DefaultHttpClient defaultHttpClient1 = new DefaultHttpClient();
-            defaultHttpClient1.setCookieStore(cookie);
+//            defaultHttpClient1.setCookieStore(cookie);
             HttpResponse response = defaultHttpClient1.execute(httpPost2);
             int code2 = response.getStatusLine().getStatusCode();
             if(code2==200){
@@ -207,7 +225,8 @@ public class HexunGuba {
     }
 
     public static void main(String[] args) throws IOException {
-        HexunGubaHuiTie("", "强势顶！");
-        HexunGubFatie("顶七星电子y", "y很有潜力，顶啊！！","002371");
+//        System.out.println(HexunGubaHuiTie("http://guba.hexun.com/d/19704376,guba.html", "c欢迎各位朋友加入 75266565 投资理财交流群，群信息发布时间为9:00-21:00.请各位朋友届时准时关注，锁定本群、锁定财富！各位朋友有什么投资投资方面的问题都可以随时咨询。祝各位工作生活愉快，投资理财长虹，获利多多！"));
+
+        System.out.println(HexunGubFatie("c顶七星电子", "y很有潜力，顶啊！！","002371"));
     }
 }
