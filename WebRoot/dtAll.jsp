@@ -127,9 +127,9 @@ Bootstrap JavaScript
 		<table cellspacing="10">
 			<form action="stockadd" method="POST">
 				<tr>
-					<td><input id="shareName" name="shareName" type="text">
+					<td><input id="shareName" name="shareName" type="text" placeholder="股票名称">
 					</td>
-					<td><input id="shareNum" name="shareNum" type="text">
+					<td><input id="shareNum" name="shareNum" type="text" placeholder="股票代码">
 					</td>
 					<td><input value=添加 class="btn btn-info" type="submit">
 					</td>
