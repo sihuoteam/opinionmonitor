@@ -71,6 +71,10 @@ Bootstrap JavaScript
 		<button class="menu-toggle" type="button"></button>
 
 		<ul class="topnav pull-right inline">
+		<li><a href="dtAll.jsp">顶贴</a></li>
+		<li><a href="keylist" class="top-opt" data-toggle="tooltip"
+				data-placement="bottom"><i></i>设置</a>
+			</li>
 			<li><a href="loginWeb.jsp" class="top-logout"
 				data-toggle="tooltip" data-placement="bottom"><i></i> <%=email%>退出</a>
 			</li>
