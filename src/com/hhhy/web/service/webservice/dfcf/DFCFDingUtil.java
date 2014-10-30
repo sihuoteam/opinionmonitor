@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Random;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -25,8 +26,16 @@ import chen.bupt.httpclient.utils.ResponseUtils;
 public class DFCFDingUtil {
     private static final String reg01 = ".*,(.*),(.*)\\.html";
     private static final Pattern pattern01 = Pattern.compile(reg01);
+    private static Random r = new Random();
 
-    private static NormalHttpClient login(String username, String psw) throws IOException {
+    private static String[] usernames = {"wuxiu9218@sina.com","haihaitaotao","15568411120","1330493726@qq.com"};
+    private static String[] psws = {"920108","115haihaitaotao","cai317903131","cai317903131"};
+
+    private static NormalHttpClient login() throws IOException {
+        int ranInd = r.nextInt(4);
+        String username = usernames[ranInd];
+        String psw = psws[ranInd];
+
         username = URLEncoder.encode(username, "utf-8");
         psw = URLEncoder.encode(psw, "utf-8");
         System.out.println(username);
@@ -51,7 +60,7 @@ public class DFCFDingUtil {
         }
         if (code == null || topic_id == null)
             return false;
-        NormalHttpClient client = login("wuxiu9218@sina.com","920108");
+        NormalHttpClient client = login();
 
         CHttpPost post = new CHttpPost("http://guba.eastmoney.com/action.aspx");
         post.addHeader("Host", "guba.eastmoney.com");
@@ -80,7 +89,7 @@ public class DFCFDingUtil {
         System.out.println(number);
         System.out.println(title);
         System.out.println(content);
-        NormalHttpClient client = login("wuxiu9218@sina.com","920108");
+        NormalHttpClient client = login();
         CHttpPost post = new CHttpPost("http://guba.eastmoney.com/action.aspx");
         // NormalHttpClient client = new NormalHttpClient();
         String host = "guba.eastmoney.com";
